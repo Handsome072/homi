@@ -1,6 +1,7 @@
 import { PropertyCard } from '../components/PropertyCard';
 import { PropertyCarousel } from '../components/PropertyCarousel';
 import { SearchBar } from '../components/SearchBar';
+import { useAuth } from '../context/AuthContext';
 
 interface HomeProps {
   isScrolled: boolean;
@@ -9,6 +10,48 @@ interface HomeProps {
 }
 
 export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
+  const { isAuthenticated } = useAuth();
+
+  // Données pour "Annonces consultées récemment" (Recently Viewed Properties)
+  const recentlyViewedProperties = [
+    {
+      image: "https://images.unsplash.com/photo-1663756915301-2ba688e078cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBhcGFydG1lbnQlMjBsaXZpbmclMjByb29tfGVufDF8fHx8MTc2NzU5NjExMHww&ixlib=rb-4.1.0&q=80&w=1080",
+      title: "Appartement moderne · Paris",
+      location: "Hôte particulier",
+      date: "",
+      price: "250 € pour 2 nuits",
+      rating: 4.95,
+      badge: 'favorite' as const
+    },
+    {
+      image: "https://images.unsplash.com/photo-1638454668466-e8dbd5462f20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBhcGFydG1lbnQlMjBpbnRlcmlvcnxlbnwxfHx8fDE3Njc1MzY5NTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      title: "Studio luxueux · Lyon",
+      location: "Hôte professionnel",
+      date: "",
+      price: "180 € pour 2 nuits",
+      rating: 4.88,
+      badge: 'favorite' as const
+    },
+    {
+      image: "https://images.unsplash.com/photo-1593696140826-c58b021acf8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBob3VzZSUyMGludGVyaW9yfGVufDF8fHx8MTc2NzU5OTA1OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      title: "Maison entière · Marseille",
+      location: "Hôte particulier",
+      date: "",
+      price: "320 € pour 2 nuits",
+      rating: 5.0,
+      badge: 'favorite' as const
+    },
+    {
+      image: "https://images.unsplash.com/photo-1610343958761-ca16e472130e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcGFydG1lbnQlMjBjaXR5JTIwdmlld3xlbnwxfHx8fDE3Njc2MjEwNTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      title: "Loft avec vue · Nice",
+      location: "Hôte particulier",
+      date: "",
+      price: "210 € pour 2 nuits",
+      rating: 4.92,
+      badge: 'favorite' as const
+    }
+  ];
+
   // Données pour "Logements populaires · Paris"
   const parisProperties = [
     {
@@ -752,133 +795,147 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       {!isScrolled && <SearchBar onSearch={onSearch} />}
 
       <main className="pb-12">
+        {/* Annonces consultées récemment - Only visible when authenticated */}
+        {isAuthenticated && (
+          <PropertyCarousel
+            title="Annonces consultées récemment"
+            showMoreLink={true}
+          >
+            {recentlyViewedProperties.map((property, index) => (
+              <div key={index} className="w-[16.25rem]">
+                <PropertyCard {...property} onClick={onPropertyClick} />
+              </div>
+            ))}
+          </PropertyCarousel>
+        )}
+
         {/* Logements populaires · Paris */}
-        <PropertyCarousel 
-          title="Logements populaires · Paris" 
+        <PropertyCarousel
+          title="Logements populaires · Paris"
           showMoreLink={true}
         >
           {parisProperties.map((property, index) => (
-            <div key={index} className="w-[280px] sm:w-[300px] lg:w-[320px]">
+            <div key={index} className="max-w-[11.4375rem] w-full">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
 
         {/* Hôtels à la une (Madrid) */}
-        <PropertyCarousel 
-          title="Hôtels à la une (Madrid)" 
+        <PropertyCarousel
+          title="Hôtels à la une (Madrid)"
           showMoreLink={true}
         >
           {madridHotels.map((property, index) => (
-            <div key={index} className="w-[280px] sm:w-[300px] lg:w-[320px]">
+            <div key={index} className="max-w-[11.4375rem] w-full">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
 
         {/* Logements disponibles le mois prochain · Londres */}
-        <PropertyCarousel 
-          title="Logements disponibles le mois prochain · Londres" 
+        <PropertyCarousel
+          title="Logements disponibles le mois prochain · Londres"
           showMoreLink={true}
         >
           {londonProperties.map((property, index) => (
-            <div key={index} className="w-[280px] sm:w-[300px] lg:w-[320px]">
+            <div key={index} className="max-w-[11.4375rem] w-full">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
 
         {/* Logements  Riyad */}
-        <PropertyCarousel 
-          title="Logements · Riyad" 
+        <PropertyCarousel
+          title="Logements · Riyad"
           showMoreLink={true}
         >
           {riyadProperties.map((property, index) => (
-            <div key={index} className="w-[280px] sm:w-[300px] lg:w-[320px]">
+            <div key={index} className="max-w-[11.4375rem] w-full">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
 
         {/* Logements disponibles le mois prochain · Dubaï */}
-        <PropertyCarousel 
-          title="Logements disponibles le mois prochain · Dubaï" 
+        <PropertyCarousel
+          title="Logements disponibles le mois prochain · Dubaï"
           showMoreLink={true}
         >
           {dubaiProperties.map((property, index) => (
-            <div key={index} className="w-[280px] sm:w-[300px] lg:w-[320px]">
+            <div key={index} className="max-w-[11.4375rem] w-full">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
 
         {/* Logements · Madrid */}
-        <PropertyCarousel 
-          title="Logements · Madrid" 
+        <PropertyCarousel
+          title="Logements · Madrid"
           showMoreLink={true}
         >
           {madridApartments.map((property, index) => (
-            <div key={index} className="w-[280px] sm:w-[300px] lg:w-[320px]">
+            <div key={index} className="max-w-[11.4375rem] w-full">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
 
         {/* Logements disponibles le mois prochain · Rome */}
-        <PropertyCarousel 
-          title="Logements disponibles le mois prochain · Rome" 
+        <PropertyCarousel
+          title="Logements disponibles le mois prochain · Rome"
           showMoreLink={true}
         >
           {romeProperties.map((property, index) => (
-            <div key={index} className="w-[280px] sm:w-[300px] lg:w-[320px]">
+            <div key={index} className="max-w-[11.4375rem] w-full">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
 
         {/* Logements · Milan */}
-        <PropertyCarousel 
-          title="Logements · Milan" 
+        <PropertyCarousel
+          title="Logements · Milan"
           showMoreLink={true}
         >
           {milanProperties.map((property, index) => (
-            <div key={index} className="w-[280px] sm:w-[300px] lg:w-[320px]">
+            <div key={index} className="max-w-[11.4375rem] w-full">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
 
         {/* Logements à découvrir · Budapest */}
-        <PropertyCarousel 
-          title="Logements à découvrir · Budapest" 
+        <PropertyCarousel
+          title="Logements à découvrir · Budapest"
           showMoreLink={true}
         >
           {budapestProperties.map((property, index) => (
-            <div key={index} className="w-[280px] sm:w-[300px] lg:w-[320px]">
+            <div key={index} className="max-w-[11.4375rem] w-full">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
 
         {/* Logements populaires · Barcelone */}
-        <PropertyCarousel 
-          title="Logements populaires · Barcelone" 
+        <PropertyCarousel
+          title="Logements populaires · Barcelone"
           showMoreLink={true}
         >
           {barcelonaProperties.map((property, index) => (
-            <div key={index} className="w-[280px] sm:w-[300px] lg:w-[320px]">
+            <div key={index} className="max-w-[11.4375rem] w-full">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
 
         {/* Logements · Le Cap */}
-        <PropertyCarousel 
-          title="Logements · Le Cap" 
+        <PropertyCarousel
+          title="Logements · Le Cap"
           showMoreLink={true}
         >
           {capeTownProperties.map((property, index) => (
-            <div key={index} className="w-[280px] sm:w-[300px] lg:w-[320px]">
+            <div key={index} className="max-w-[11.4375rem] w-full">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
