@@ -2,9 +2,13 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Heart, Share, Star, ChevronRight } from 'lucide-react';
 import { ReservationDetail } from '../components/ReservationDetail';
+import { HeaderRightMenu } from '../components/HeaderRightMenu';
+import { LanguageModal } from '../components/LanguageModal';
+import { BecomeHostModal } from '../components/BecomeHostModal';
+import { AuthModal } from '../components/AuthModal';
 
 interface ClientSpaceProps {
-  onNavigate?: (page: 'logements') => void;
+  onNavigate?: (page: 'logements' | 'messages' | 'client-space') => void;
 }
 
 export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
@@ -26,6 +30,12 @@ export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
   const [addingEmergencyContact, setAddingEmergencyContact] = useState(false);
   const [updatingPassword, setUpdatingPassword] = useState(false);
   const [showDeactivateModal, setShowDeactivateModal] = useState(false);
+
+  // Header dropdown states
+  const [showMenuDropdown, setShowMenuDropdown] = useState(false);
+  const [showLanguageModal, setShowLanguageModal] = useState(false);
+  const [showBecomeHostModal, setShowBecomeHostModal] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   // Si on affiche le détail de la réservation
   if (showReservationDetail) {
@@ -578,39 +588,44 @@ export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
   }
 
   return (
+    <>
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="border-b border-gray-200 px-6 lg:px-20 py-5 flex items-center justify-between">
-        <button 
+      <header className="border-b border-gray-200 px-6 lg:px-20 py-4 flex items-center justify-between">
+        {/* Logo */}
+        <button
           onClick={() => onNavigate?.('logements')}
-          className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+          className="flex items-center gap-1 flex-shrink-0 hover:opacity-80 transition-opacity duration-200"
         >
-          <svg width="102" height="32" viewBox="0 0 102 32" fill="none">
-            <path d="M16 0C7.163 0 0 7.163 0 16C0 24.837 7.163 32 16 32C24.837 32 32 24.837 32 16C32 7.163 24.837 0 16 0ZM16 29C8.832 29 3 23.168 3 16C3 8.832 8.832 3 16 3C23.168 3 29 8.832 29 16C29 23.168 23.168 29 16 29Z" fill="#059669"/>
-            <path d="M16 8C11.582 8 8 11.582 8 16C8 20.418 11.582 24 16 24C20.418 24 24 20.418 24 16C24 11.582 20.418 8 16 8ZM16 21C13.239 21 11 18.761 11 16C11 13.239 13.239 11 16 11C18.761 11 21 13.239 21 16C21 18.761 18.761 21 16 21Z" fill="#059669"/>
+          <svg
+            className="w-8 h-8"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M16 1.5C11.5 1.5 7.5 4 5.5 7.5C3.5 11 3 15 4.5 19C6 23 9.5 26.5 13 28.5C14 29 15 29.5 16 29.5C17 29.5 18 29 19 28.5C22.5 26.5 26 23 27.5 19C29 15 28.5 11 26.5 7.5C24.5 4 20.5 1.5 16 1.5ZM16 20C13.8 20 12 18.2 12 16C12 13.8 13.8 12 16 12C18.2 12 20 13.8 20 16C20 18.2 18.2 20 16 20Z"
+              fill="#10B981"
+            />
           </svg>
-        </button>
-        
-        <div className="flex items-center gap-4">
-          <button 
-            className="px-4 py-2 hover:bg-gray-100 rounded-full transition-colors text-sm"
+          <span
+            className="text-[#10B981] text-xl ml-1 hidden sm:block"
             style={{ fontWeight: 600 }}
           >
-            Devenir hôte
-          </button>
-          
-          <button className="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-white">
-            {user?.name.charAt(0).toUpperCase() || 'A'}
-          </button>
-          
-          <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <line x1="3" y1="12" x2="21" y2="12" strokeWidth="2" strokeLinecap="round"/>
-              <line x1="3" y1="6" x2="21" y2="6" strokeWidth="2" strokeLinecap="round"/>
-              <line x1="3" y1="18" x2="21" y2="18" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-          </button>
-        </div>
+            HOMIQIO
+          </span>
+        </button>
+
+        {/* Right Menu with Hamburger Dropdown */}
+        <HeaderRightMenu
+          showMenuDropdown={showMenuDropdown}
+          setShowMenuDropdown={setShowMenuDropdown}
+          setShowLanguageModal={setShowLanguageModal}
+          setShowBecomeHostModal={setShowBecomeHostModal}
+          setShowAuthModal={setShowAuthModal}
+          onClientSpaceClick={() => {}}
+          onMessagesClick={() => onNavigate?.('messages')}
+        />
       </header>
 
       <div className="flex">
@@ -2390,5 +2405,28 @@ export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
         </div>
       )}
     </div>
+
+    {/* Modals */}
+    {showLanguageModal && (
+      <LanguageModal
+        isOpen={showLanguageModal}
+        onClose={() => setShowLanguageModal(false)}
+      />
+    )}
+
+    {showBecomeHostModal && (
+      <BecomeHostModal
+        isOpen={showBecomeHostModal}
+        onClose={() => setShowBecomeHostModal(false)}
+      />
+    )}
+
+    {showAuthModal && (
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+      />
+    )}
+    </>
   );
 }

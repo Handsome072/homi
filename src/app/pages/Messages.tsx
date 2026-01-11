@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import { Search, Settings, Send, Archive, PlaneTakeoff, X } from 'lucide-react';
+import { HeaderRightMenu } from '../components/HeaderRightMenu';
+import { LanguageModal } from '../components/LanguageModal';
+import { BecomeHostModal } from '../components/BecomeHostModal';
+import { AuthModal } from '../components/AuthModal';
 
 interface Conversation {
   id: string;
@@ -26,6 +30,12 @@ export function Messages({ onNavigate }: { onNavigate?: (page: string) => void }
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
   const [feedbackText, setFeedbackText] = useState('');
   const [reportProblem, setReportProblem] = useState(false);
+
+  // Header dropdown states
+  const [showMenuDropdown, setShowMenuDropdown] = useState(false);
+  const [showLanguageModal, setShowLanguageModal] = useState(false);
+  const [showBecomeHostModal, setShowBecomeHostModal] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   // Mock conversations
   const conversations: Conversation[] = [
@@ -97,34 +107,44 @@ export function Messages({ onNavigate }: { onNavigate?: (page: string) => void }
   const hasMessages = conversations.length > 0;
 
   return (
+    <>
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="border-b border-gray-200 px-6 lg:px-20 py-5 flex items-center justify-between">
-        <div className="flex items-center gap-8">
-          <button 
-            onClick={() => onNavigate?.('home')}
-            className="cursor-pointer"
+      <header className="border-b border-gray-200 px-6 lg:px-20 py-4 flex items-center justify-between">
+        {/* Logo */}
+        <button
+          onClick={() => onNavigate?.('home')}
+          className="flex items-center gap-1 flex-shrink-0 hover:opacity-80 transition-opacity duration-200"
+        >
+          <svg
+            className="w-8 h-8"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <svg width="102" height="32" viewBox="0 0 102 32" fill="none">
-              <path d="M16.2838 1.0259C15.2392 -0.342786 13.1936 -0.342786 12.1471 1.0259L0.538988 16.2548C-0.363614 17.4414 0.463226 19.1385 1.96183 19.1385H3.81972V30.2548C3.81972 31.2173 4.60218 32 5.56467 32H11.1796C12.1421 32 12.9245 31.2173 12.9245 30.2548V21.3782H15.5046V30.2548C15.5046 31.2173 16.2871 32 17.2496 32H22.8663C23.8288 32 24.6112 31.2173 24.6112 30.2548V19.1385H26.4691C27.9677 19.1385 28.7945 17.4396 27.8919 16.2548L16.2838 1.0259Z" fill="#10B981"/>
-              <text x="35" y="24" fill="#222222" fontSize="24" fontWeight="600" fontFamily="system-ui, -apple-system, sans-serif">HOMIQIO</text>
-            </svg>
-          </button>
-        </div>
+            <path
+              d="M16 1.5C11.5 1.5 7.5 4 5.5 7.5C3.5 11 3 15 4.5 19C6 23 9.5 26.5 13 28.5C14 29 15 29.5 16 29.5C17 29.5 18 29 19 28.5C22.5 26.5 26 23 27.5 19C29 15 28.5 11 26.5 7.5C24.5 4 20.5 1.5 16 1.5ZM16 20C13.8 20 12 18.2 12 16C12 13.8 13.8 12 16 12C18.2 12 20 13.8 20 16C20 18.2 18.2 20 16 20Z"
+              fill="#10B981"
+            />
+          </svg>
+          <span
+            className="text-[#10B981] text-xl ml-1 hidden sm:block"
+            style={{ fontWeight: 600 }}
+          >
+            HOMIQIO
+          </span>
+        </button>
 
-        <div className="flex items-center gap-4">
-          <span className="text-sm" style={{ fontWeight: 500, color: '#222222' }}>Devenir hôte</span>
-          <button className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white">
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-          </button>
-          <button className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center">
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
+        {/* Right Menu with Hamburger Dropdown */}
+        <HeaderRightMenu
+          showMenuDropdown={showMenuDropdown}
+          setShowMenuDropdown={setShowMenuDropdown}
+          setShowLanguageModal={setShowLanguageModal}
+          setShowBecomeHostModal={setShowBecomeHostModal}
+          setShowAuthModal={setShowAuthModal}
+          onClientSpaceClick={() => onNavigate?.('client-space')}
+          onMessagesClick={() => onNavigate?.('messages')}
+        />
       </header>
 
       {/* Messages Content */}
@@ -469,5 +489,28 @@ export function Messages({ onNavigate }: { onNavigate?: (page: string) => void }
         </div>
       )}
     </div>
+
+    {/* Modals */}
+    {showLanguageModal && (
+      <LanguageModal
+        isOpen={showLanguageModal}
+        onClose={() => setShowLanguageModal(false)}
+      />
+    )}
+
+    {showBecomeHostModal && (
+      <BecomeHostModal
+        isOpen={showBecomeHostModal}
+        onClose={() => setShowBecomeHostModal(false)}
+      />
+    )}
+
+    {showAuthModal && (
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+      />
+    )}
+    </>
   );
 }
