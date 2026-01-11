@@ -1,5 +1,5 @@
 import { Globe } from "lucide-react";
-import logo from "figma:asset/71ec6463a41bb19e85fad23a7af09392bb3b16a7.png";
+import logo from "figma:asset/footer.png";
 
 export function Footer() {
   return (
