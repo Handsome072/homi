@@ -43,11 +43,11 @@ export function ExperienceCard({
         />
         
         {/* Bouton favori */}
-        <button 
+        <button
           onClick={handleFavoriteClick}
-          className="absolute top-3 right-3 p-2 hover:scale-110 transition-transform z-10"
+          className="absolute top-3 right-3 hover:scale-110 transition-transform z-10"
         >
-          <Heart 
+          <Heart
             className={`w-6 h-6 ${isFavorite ? 'fill-[#10B981] text-[#10B981]' : 'fill-black/50 text-white'} stroke-2`}
           />
         </button>

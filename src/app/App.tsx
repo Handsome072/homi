@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, MutableRefObject } from 'react';
-import { BrowserRouter, Routes, Route, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, useNavigate, useSearchParams, Navigate } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { Home } from './pages/Home';
@@ -10,10 +10,18 @@ import { ExperienceDetails } from './pages/ExperienceDetails';
 import { ServiceDetails } from './pages/ServiceDetails';
 import { BookingRequest } from './pages/BookingRequest';
 import { SearchResults } from './pages/SearchResults';
-import { ClientSpace } from './pages/ClientSpace';
 import { Messages } from './pages/Messages';
 import { ReservationDetailPage } from './pages/ReservationDetailPage';
 import { AuthProvider } from './context/AuthContext';
+import {
+  ClientSpaceLayout,
+  ReservationsSection,
+  SecuritySection,
+  ProfileSection,
+  NotificationsSection,
+  PaymentsSection,
+  LanguagesSection,
+} from './pages/client-space';
 
 // Scroll management hook
 function useScrollManagement() {
@@ -156,8 +164,16 @@ function AppLayout() {
         <Route path="/booking" element={<BookingRequest />} />
         <Route path="/search" element={<SearchResults />} />
         <Route path="/client-space" element={
-          <ClientSpace onNavigate={(page) => navigate(`/${page === 'logements' ? '' : page}`)} />
-        } />
+          <ClientSpaceLayout onNavigate={(page) => navigate(`/${page === 'logements' ? '' : page}`)} />
+        }>
+          <Route index element={<Navigate to="/client-space/reservations" replace />} />
+          <Route path="reservations" element={<ReservationsSection />} />
+          <Route path="security" element={<SecuritySection />} />
+          <Route path="profile" element={<ProfileSection />} />
+          <Route path="notifications" element={<NotificationsSection />} />
+          <Route path="payments" element={<PaymentsSection />} />
+          <Route path="languages" element={<LanguagesSection />} />
+        </Route>
         <Route path="/client-space/reservations/:reservationId" element={
           <ReservationDetailPage />
         } />
