@@ -12,6 +12,7 @@ import { BookingRequest } from './pages/BookingRequest';
 import { SearchResults } from './pages/SearchResults';
 import { ClientSpace } from './pages/ClientSpace';
 import { Messages } from './pages/Messages';
+import { ReservationDetailPage } from './pages/ReservationDetailPage';
 import { AuthProvider } from './context/AuthContext';
 
 // Scroll management hook
@@ -156,6 +157,9 @@ function AppLayout() {
         <Route path="/search" element={<SearchResults />} />
         <Route path="/client-space" element={
           <ClientSpace onNavigate={(page) => navigate(`/${page === 'logements' ? '' : page}`)} />
+        } />
+        <Route path="/client-space/reservations/:reservationId" element={
+          <ReservationDetailPage />
         } />
         <Route path="/messages" element={
           <Messages onNavigate={(page) => navigate(`/${page === 'home' ? '' : page}`)} />

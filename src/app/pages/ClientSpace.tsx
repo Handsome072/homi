@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { ReservationDetail } from '../components/ReservationDetail';
 import { HeaderRightMenu } from '../components/HeaderRightMenu';
@@ -11,6 +12,7 @@ interface ClientSpaceProps {
 }
 
 export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const [activeSection, setActiveSection] = useState<'reservations' | 'profile' | 'security' | 'notifications' | 'payments' | 'languages'>('reservations');
   const [showReservationDetail, setShowReservationDetail] = useState(false);
@@ -614,29 +616,14 @@ export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
       </header>
 
       <div className="flex">
-        {/* Sidebar - Agrandie */}
-        <aside className="w-[360px] border-r border-gray-200 min-h-[calc(100vh-73px)] px-16 py-12">
+        {/* Sidebar - Agrandie - Sticky */}
+        <aside className="w-[360px] border-r border-gray-200 h-[calc(100vh-73px)] sticky top-[73px] px-16 py-12 overflow-y-auto">
           <h1 className="text-2xl mb-10 font-semibold text-foreground">
             Espace client
           </h1>
-          
-          <nav className="space-y-5">
-            <button
-              onClick={() => setActiveSection('reservations')}
-              className={`w-full flex items-center gap-4 text-left transition-colors ${
-                activeSection === 'reservations' 
-                  ? '' 
-                  : 'opacity-60 hover:opacity-100'
-              }`}
-            >
-              <svg className="w-9 h-9 text-gray-700 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-              </svg>
-              <span className={`text-base text-foreground ${activeSection === 'reservations' ? 'font-semibold' : 'font-normal'}`}>
-                Mes réservations
-              </span>
-            </button>
 
+          <nav className="space-y-5">
+            {/* 1. Informations personnelles */}
             <button
               onClick={() => setActiveSection('profile')}
               className={`w-full flex items-center gap-4 text-left transition-colors ${
@@ -653,6 +640,7 @@ export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
               </span>
             </button>
 
+            {/* 2. Connexion et sécurité */}
             <button
               onClick={() => setActiveSection('security')}
               className={`w-full flex items-center gap-4 text-left transition-colors ${
@@ -669,6 +657,24 @@ export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
               </span>
             </button>
 
+            {/* 3. Mes réservations */}
+            <button
+              onClick={() => setActiveSection('reservations')}
+              className={`w-full flex items-center gap-4 text-left transition-colors ${
+                activeSection === 'reservations'
+                  ? ''
+                  : 'opacity-60 hover:opacity-100'
+              }`}
+            >
+              <svg className="w-9 h-9 text-gray-700 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+              </svg>
+              <span className={`text-base text-foreground ${activeSection === 'reservations' ? 'font-semibold' : 'font-normal'}`}>
+                Mes réservations
+              </span>
+            </button>
+
+            {/* 4. Notifications */}
             <button
               onClick={() => setActiveSection('notifications')}
               className={`w-full flex items-center gap-4 text-left transition-colors ${
@@ -685,6 +691,7 @@ export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
               </span>
             </button>
 
+            {/* 5. Paiements */}
             <button
               onClick={() => setActiveSection('payments')}
               className={`w-full flex items-center gap-4 text-left transition-colors ${
@@ -701,6 +708,7 @@ export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
               </span>
             </button>
 
+            {/* 6. Langues et devise */}
             <button
               onClick={() => setActiveSection('languages')}
               className={`w-full flex items-center gap-4 text-left transition-colors ${
@@ -737,7 +745,7 @@ export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
                 
                 <div
                   className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 flex gap-6 cursor-pointer hover:shadow-md transition-shadow"
-                  onClick={() => setShowReservationDetail(true)}
+                  onClick={() => navigate('/client-space/reservations/res-001')}
                 >
                   <img
                     src="https://images.unsplash.com/photo-1638454668466-e8dbd5462f20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBhcGFydG1lbnQlMjBpbnRlcmlvcnxlbnwxfHx8fDE3Njc1MzY5NTF8MA&ixlib=rb-4.1.0&q=80&w=1080"

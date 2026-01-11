@@ -1,19 +1,32 @@
 import { Heart, Share, Star, ChevronRight, X } from 'lucide-react';
 import { useState } from 'react';
+import { ImageGallery } from './ImageGallery';
 
 interface ReservationDetailProps {
   onClose: () => void;
+  reservationId?: string;
 }
 
-export function ReservationDetail({ onClose }: ReservationDetailProps) {
+export function ReservationDetail({ onClose, reservationId }: ReservationDetailProps) {
   const [showCancelPopup, setShowCancelPopup] = useState(false);
   const [isCancelled, setIsCancelled] = useState(false);
+
+  const images = [
+    'https://images.unsplash.com/photo-1737305457496-dc7503cdde1e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBzdHVkaW8lMjBhcGFydG1lbnQlMjBpbnRlcmlvcnxlbnwxfHx8fDE3Njc3NjY1NTN8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    'https://images.unsplash.com/photo-1612419299101-6c294dc2901d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3p5JTIwYXBhcnRtZW50JTIwbGl2aW5nJTIwcm9vbXxlbnwxfHx8fDE3Njc2ODYxNDN8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    'https://images.unsplash.com/photo-1737467016100-68cd7759d93c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcGFydG1lbnQlMjBiZWRyb29tJTIwY29tZm9ydGFibGV8ZW58MXx8fHwxNzY3NzY2NTU0fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    'https://images.unsplash.com/photo-1597497522150-2f50bffea452?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBraXRjaGVuJTIwYXBhcnRtZW50fGVufDF8fHx8MTc2NzczMDQyNXww&ixlib=rb-4.1.0&q=80&w=1080',
+    'https://images.unsplash.com/photo-1757439402224-56c48352f719?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYXRocm9vbSUyMGFwYXJ0bWVudCUyMG1vZGVybnxlbnwxfHx8fDE3Njc3NjY1NTV8MA&ixlib=rb-4.1.0&q=80&w=1080',
+  ];
+
+  // reservationId can be used to fetch specific reservation data
+  console.log('Reservation ID:', reservationId);
 
   return (
     <>
       {/* Cancel Reservation Popup */}
       {showCancelPopup && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-gray-900 bg-opacity-30 backdrop-blur-sm">
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-sm">
           <div className="bg-white rounded-2xl p-8 max-w-xl w-full mx-4 relative">
             <button
               onClick={() => setShowCancelPopup(false)}
@@ -113,63 +126,10 @@ export function ReservationDetail({ onClose }: ReservationDetailProps) {
 
         {/* Gallery Grid */}
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-20 mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-2 rounded-xl overflow-hidden h-[300px] md:h-[400px] relative">
-            {/* Large image */}
-            <div className="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-l-xl">
-              <img
-                src="https://images.unsplash.com/photo-1737305457496-dc7503cdde1e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBzdHVkaW8lMjBhcGFydG1lbnQlMjBpbnRlcmlvcnxlbnwxfHx8fDE3Njc3NjY1NTN8MA&ixlib=rb-4.1.0&q=80&w=1080"
-                alt="Property main"
-                className="w-full h-full object-cover cursor-pointer transition-all"
-              />
-            </div>
-
-            {/* Small images */}
-            <div className="hidden md:block relative group overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1612419299101-6c294dc2901d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3p5JTIwYXBhcnRtZW50JTIwbGl2aW5nJTIwcm9vbXxlbnwxfHx8fDE3Njc2ODYxNDN8MA&ixlib=rb-4.1.0&q=80&w=1080"
-                alt="Property 2"
-                className="w-full h-full object-cover cursor-pointer transition-all"
-              />
-            </div>
-            
-            <div className="hidden md:block relative group overflow-hidden rounded-tr-xl">
-              <img
-                src="https://images.unsplash.com/photo-1737467016100-68cd7759d93c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcGFydG1lbnQlMjBiZWRyb29tJTIwY29tZm9ydGFibGV8ZW58MXx8fHwxNzY3NzY2NTU0fDA&ixlib=rb-4.1.0&q=80&w=1080"
-                alt="Property 3"
-                className="w-full h-full object-cover cursor-pointer transition-all"
-              />
-            </div>
-            
-            <div className="hidden md:block relative group overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1597497522150-2f50bffea452?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBraXRjaGVuJTIwYXBhcnRtZW50fGVufDF8fHx8MTc2NzczMDQyNXww&ixlib=rb-4.1.0&q=80&w=1080"
-                alt="Property 4"
-                className="w-full h-full object-cover cursor-pointer transition-all"
-              />
-            </div>
-            
-            <div className="hidden md:block relative group overflow-hidden rounded-br-xl">
-              <img
-                src="https://images.unsplash.com/photo-1757439402224-56c48352f719?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYXRocm9vbSUyMGFwYXJ0bWVudCUyMG1vZGVybnxlbnwxfHx8fDE3Njc3NjY1NTV8MA&ixlib=rb-4.1.0&q=80&w=1080"
-                alt="Property 5"
-                className="w-full h-full object-cover cursor-pointer transition-all"
-              />
-            </div>
-
-            {/* Show all photos button */}
-            <button
-              className="absolute bottom-4 right-4 bg-white px-5 py-2.5 rounded-lg shadow-md hover:shadow-lg transition-shadow flex items-center gap-2"
-              style={{ fontWeight: 600, fontSize: '13px', color: '#4A5B8C', letterSpacing: '0.5px' }}
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="2" y="2" width="5" height="5" />
-                <rect x="9" y="2" width="5" height="5" />
-                <rect x="2" y="9" width="5" height="5" />
-                <rect x="9" y="9" width="5" height="5" />
-              </svg>
-              AFFICHER TOUTES LES PHOTOS
-            </button>
-          </div>
+          <ImageGallery
+            images={images}
+            showFavoriteButton={false}
+          />
         </div>
 
         {/* Content */}

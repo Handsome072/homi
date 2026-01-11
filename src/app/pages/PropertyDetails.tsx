@@ -1,19 +1,17 @@
-import { Heart, Share, Star, ChevronRight, X, ChevronLeft } from 'lucide-react';
-import { useState, useEffect, useRef } from 'react';
+import { Heart, Share, Star, ChevronRight, X } from 'lucide-react';
+import { useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
+import { ImageGallery } from '../components/ImageGallery';
 
 export function PropertyDetails() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [searchParams] = useSearchParams();
-  const [showAllPhotos, setShowAllPhotos] = useState(false);
   const [activeTab, setActiveTab] = useState('photos');
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const images = [
     'https://images.unsplash.com/photo-1737305457496-dc7503cdde1e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBzdHVkaW8lMjBhcGFydG1lbnQlMjBpbnRlcmlvcnxlbnwxfHx8fDE3Njc3NjY1NTN8MA&ixlib=rb-4.1.0&q=80&w=1080',
@@ -28,132 +26,8 @@ export function PropertyDetails() {
     'https://images.unsplash.com/photo-1758448511533-e1502259fff6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcGFydG1lbnQlMjBlbnRyYW5jZSUyMGhhbGx3YXl8ZW58MXx8fHwxNzY3ODc0OTYyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
   ];
 
-  const handlePreviousImage = () => {
-    setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  };
-
-  const handleNextImage = () => {
-    setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-  };
-
-  const openGallery = (index: number) => {
-    setCurrentImageIndex(index);
-    setShowAllPhotos(true);
-  };
-
-  // Scroll to selected image when gallery opens
-  useEffect(() => {
-    if (showAllPhotos && imageRefs.current[currentImageIndex]) {
-      setTimeout(() => {
-        imageRefs.current[currentImageIndex]?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-        });
-      }, 100);
-    }
-  }, [showAllPhotos, currentImageIndex]);
-
   return (
     <>
-      {/* Photo Gallery Modal */}
-      {showAllPhotos && (
-        <div className="fixed inset-0 z-[100] bg-white">
-          {/* Header */}
-          <div className="sticky top-0 bg-white z-10 px-6 py-4 flex items-center justify-between border-b border-gray-200">
-            <button
-              onClick={() => setShowAllPhotos(false)}
-              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <div className="flex items-center gap-4">
-              {/* Partager Button */}
-              <button className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
-                <Share className="w-4 h-4" />
-                <span className="text-sm underline" style={{ fontWeight: 600 }}>Partager</span>
-              </button>
-              {/* Enregistrer Button */}
-              <button 
-                onClick={() => setIsFavorite(!isFavorite)}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                <Heart className={`w-4 h-4 ${isFavorite ? 'fill-[#10B981] text-[#10B981]' : ''}`} />
-                <span className="text-sm underline" style={{ fontWeight: 600 }}>Enregistrer</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Gallery Grid */}
-          <div className="h-[calc(100vh-73px)] overflow-y-auto bg-white">
-            <div className="max-w-[630px] mx-auto px-6 py-8">
-              <div className="space-y-2">
-                {/* Image 1 - Full width */}
-                <div ref={(el) => (imageRefs.current[0] = el)} className="relative group overflow-hidden cursor-pointer">
-                  <img src={images[0]} alt="Photo 1" className="w-full h-auto" />
-                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                </div>
-
-                {/* Images 2 & 3 - Side by side */}
-                <div className="grid grid-cols-2 gap-2 h-[280px]">
-                  <div ref={(el) => (imageRefs.current[1] = el)} className="relative group overflow-hidden cursor-pointer">
-                    <img src={images[1]} alt="Photo 2" className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                  </div>
-                  <div ref={(el) => (imageRefs.current[2] = el)} className="relative group overflow-hidden cursor-pointer">
-                    <img src={images[2]} alt="Photo 3" className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                  </div>
-                </div>
-
-                {/* Image 4 - Full width */}
-                <div ref={(el) => (imageRefs.current[3] = el)} className="relative group overflow-hidden cursor-pointer">
-                  <img src={images[3]} alt="Photo 4" className="w-full h-auto" />
-                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                </div>
-
-                {/* Images 5 & 6 - Side by side */}
-                <div className="grid grid-cols-2 gap-2 h-[280px]">
-                  <div ref={(el) => (imageRefs.current[4] = el)} className="relative group overflow-hidden cursor-pointer">
-                    <img src={images[4]} alt="Photo 5" className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                  </div>
-                  <div ref={(el) => (imageRefs.current[5] = el)} className="relative group overflow-hidden cursor-pointer">
-                    <img src={images[5]} alt="Photo 6" className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                  </div>
-                </div>
-
-                {/* Image 7 - Full width */}
-                <div ref={(el) => (imageRefs.current[6] = el)} className="relative group overflow-hidden cursor-pointer">
-                  <img src={images[6]} alt="Photo 7" className="w-full h-auto" />
-                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                </div>
-
-                {/* Images 8 & 9 - Side by side */}
-                <div className="grid grid-cols-2 gap-2 h-[280px]">
-                  <div ref={(el) => (imageRefs.current[7] = el)} className="relative group overflow-hidden cursor-pointer">
-                    <img src={images[7]} alt="Photo 8" className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                  </div>
-                  <div ref={(el) => (imageRefs.current[8] = el)} className="relative group overflow-hidden cursor-pointer">
-                    <img src={images[8]} alt="Photo 9" className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                  </div>
-                </div>
-
-                {/* Image 10 - Full width */}
-                {images.length > 9 && (
-                  <div ref={(el) => (imageRefs.current[9] = el)} className="relative group overflow-hidden cursor-pointer">
-                    <img src={images[9]} alt="Photo 10" className="w-full h-auto" />
-                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Header */}
       <Header currentPage="logements" onNavigate={() => navigate('/')} isScrolled={true} onSearch={() => {}} />
 
@@ -185,43 +59,12 @@ export function PropertyDetails() {
 
         {/* Gallery Grid */}
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-20">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-2 rounded-2xl overflow-hidden h-[300px] md:h-[400px] relative">
-            {/* Large image */}
-            <div className="md:col-span-2 md:row-span-2 relative group overflow-hidden">
-              <img
-                src={images[0]}
-                alt="Property main"
-                className="w-full h-full object-cover cursor-pointer transition-all"
-                onClick={() => openGallery(0)}
-              />
-              <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity pointer-events-none"></div>
-            </div>
-
-            {/* Small images */}
-            {images.slice(1, 5).map((img, index) => (
-              <div key={index} className="hidden md:block relative group overflow-hidden">
-                <img
-                  src={img}
-                  alt={`Property ${index + 2}`}
-                  className="w-full h-full object-cover cursor-pointer transition-all"
-                  onClick={() => openGallery(index + 1)}
-                />
-                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity pointer-events-none"></div>
-              </div>
-            ))}
-
-            {/* Show all photos button */}
-            <button
-              onClick={() => openGallery(0)}
-              className="absolute bottom-4 right-4 bg-white px-4 py-2 rounded-lg border border-gray-900 hover:bg-gray-50 transition-colors flex items-center gap-2"
-              style={{ fontWeight: 600, fontSize: '14px' }}
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                <path d="M3 3h4v4H3V3zm6 0h4v4H9V3zM3 9h4v4H3V9zm6 0h4v4H9V9z" />
-              </svg>
-              Afficher toutes les photos
-            </button>
-          </div>
+          <ImageGallery
+            images={images}
+            showFavoriteButton={true}
+            isFavorite={isFavorite}
+            onFavoriteToggle={() => setIsFavorite(!isFavorite)}
+          />
 
           {/* Content Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mt-12 pb-16">
