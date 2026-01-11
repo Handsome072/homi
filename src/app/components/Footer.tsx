@@ -209,14 +209,7 @@ export function Footer() {
                   Investisseurs
                 </a>
               </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-sm text-gray-700 hover:underline"
-                >
-                  Cartes cadeaux
-                </a>
-              </li>
+         
               <li>
                 <a
                   href="#"

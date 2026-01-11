@@ -672,11 +672,7 @@ export function SearchResults() {
                       Investisseurs
                     </a>
                   </li>
-                  <li>
-                    <a href="#" className="text-[14px] hover:underline" style={{ color: '#222222' }}>
-                      Cartes cadeaux
-                    </a>
-                  </li>
+             
                   <li>
                     <a href="#" className="text-[14px] hover:underline" style={{ color: '#222222' }}>
                       Séjours d'urgence Airbnb.org

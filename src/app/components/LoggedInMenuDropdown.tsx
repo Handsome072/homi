@@ -116,11 +116,6 @@ export function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLan
       {/* Divider */}
       <div className="w-[240px] h-px bg-gray-200 my-2 mx-auto"></div>
 
-      {/* Paramètres du compte */}
-      <button className="w-full px-8 py-3 hover:bg-gray-50 transition-colors flex items-center gap-3 text-left">
-        <Settings className="w-5 h-5 text-gray-700" />
-        <span className="text-sm">Paramètres du compte</span>
-      </button>
 
       {/* Langues et devise */}
       <button className="w-full px-8 py-3 hover:bg-gray-50 transition-colors flex items-center gap-3 text-left" onClick={onLanguageClick}>
@@ -167,11 +162,6 @@ export function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLan
       {/* Trouver un co-hôte */}
       <button className="w-full px-8 py-3 hover:bg-gray-50 transition-colors text-left">
         <span className="text-sm">Trouver un co-hôte</span>
-      </button>
-
-      {/* Cartes cadeaux */}
-      <button className="w-full px-8 py-3 hover:bg-gray-50 transition-colors text-left">
-        <span className="text-sm">Cartes cadeaux</span>
       </button>
 
       {/* Divider */}

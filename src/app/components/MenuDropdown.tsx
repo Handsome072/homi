@@ -81,11 +81,6 @@ export function MenuDropdown({ isOpen, onClose, onAuthClick }: MenuDropdownProps
         <span className="text-sm px-4">Trouver un co-hôte</span>
       </button>
 
-      {/* Cartes cadeaux */}
-      <button className="w-full px-4 py-3 hover:bg-gray-50 transition-colors text-left">
-        <span className="text-sm px-4">Cartes cadeaux</span>
-      </button>
-
           {/* Divider */}
       <div className="w-[240px] h-px bg-gray-200 my-2 mx-auto"></div>
 
