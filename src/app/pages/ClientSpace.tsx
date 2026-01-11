@@ -727,36 +727,26 @@ export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
                 <h2 className="text-xl font-semibold" style={{ color: '#4A5B8C' }}>
                   Mes réservations
                 </h2>
-                <button 
-                  className="px-5 py-2.5 border-2 rounded-lg text-sm hover:bg-gray-50 transition-colors bg-white"
-                  style={{ 
-                    fontWeight: 600,
-                    color: '#E8664D',
-                    borderColor: '#E8664D'
-                  }}
-                >
-                  SE DÉCONNECTER
-                </button>
               </div>
 
               {/* RÉSERVATION(S) FUTURE(S) */}
               <div className="mb-8">
-                <h3 className="text-xs mb-4 font-bold tracking-wide" style={{ color: '#E8664D' }}>
+                <h3 className="text-xs mb-4 font-bold tracking-wide" style={{ color: '#10B981' }}>
                   RÉSERVATION(S) FUTURE(S)
                 </h3>
                 
-                <div 
+                <div
                   className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 flex gap-6 cursor-pointer hover:shadow-md transition-shadow"
                   onClick={() => setShowReservationDetail(true)}
                 >
-                  <img 
-                    src="https://images.unsplash.com/photo-1663756915301-2ba688e078cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBhcGFydG1lbnQlMjBsaXZpbmclMjByb29tfGVufDF8fHx8MTc2ODA1NDQ3OXww&ixlib=rb-4.1.0&q=80&w=1080"
+                  <img
+                    src="https://images.unsplash.com/photo-1638454668466-e8dbd5462f20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBhcGFydG1lbnQlMjBpbnRlcmlvcnxlbnwxfHx8fDE3Njc1MzY5NTF8MA&ixlib=rb-4.1.0&q=80&w=1080"
                     alt="Appartement"
                     className="w-56 h-40 object-cover rounded-xl flex-shrink-0"
                   />
                   
                   <div className="flex-1">
-                    <h4 className="text-lg mb-2 font-medium italic" style={{ color: '#E8664D' }}>
+                    <h4 className="text-lg mb-2 font-medium italic" style={{ color: '#10B981' }}>
                       Appartement T2
                     </h4>
                     <p className="text-sm text-gray-500 mb-4">
@@ -810,9 +800,9 @@ export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
                   </div>
                   
                   <div className="flex flex-col items-end gap-3">
-                    <div 
+                    <div
                       className="rounded-lg px-6 py-4 flex flex-col items-center min-w-[180px]"
-                      style={{ backgroundColor: '#E8664D' }}
+                      style={{ backgroundColor: '#10B981' }}
                     >
                       <div className="flex items-center gap-2 mb-1">
                         <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -823,12 +813,12 @@ export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
                       <span className="text-3xl text-white" style={{ fontWeight: 700 }}>700 €</span>
                     </div>
                     
-                    <button 
+                    <button
                       className="px-6 py-2.5 border-2 rounded-lg text-sm hover:bg-gray-50 transition-colors bg-white w-full"
-                      style={{ 
+                      style={{
                         fontWeight: 600,
-                        color: '#E8664D',
-                        borderColor: '#E8664D'
+                        color: '#10B981',
+                        borderColor: '#10B981'
                       }}
                     >
                       ANNULER
@@ -844,10 +834,14 @@ export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
                 </h3>
                 
                 <div className="space-y-4">
-                  {[1, 2, 3].map((item) => (
-                    <div key={item} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 flex gap-6">
-                      <img 
-                        src="https://images.unsplash.com/photo-1663756915301-2ba688e078cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBhcGFydG1lbnQlMjBsaXZpbmclMjByb29tfGVufDF8fHx8MTc2ODA1NDQ3OXww&ixlib=rb-4.1.0&q=80&w=1080"
+                  {[
+                    "https://images.unsplash.com/photo-1667153653404-11bc88130b5d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3p5JTIwYmVkcm9vbSUyMGhvdGVsfGVufDF8fHx8MTc2NzYxNjkyNnww&ixlib=rb-4.1.0&q=80&w=1080",
+                    "https://images.unsplash.com/photo-1593696140826-c58b021acf8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBob3VzZSUyMGludGVyaW9yfGVufDF8fHx8MTc2NzU5OTA1OHww&ixlib=rb-4.1.0&q=80&w=1080",
+                    "https://images.unsplash.com/photo-1765775635143-6462630748ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBob3RlbCUyMHJvb218ZW58MXx8fHwxNzY3NTEwODU4fDA&ixlib=rb-4.1.0&q=80&w=1080"
+                  ].map((imageUrl, index) => (
+                    <div key={index} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 flex gap-6">
+                      <img
+                        src={imageUrl}
                         alt="Appartement"
                         className="w-56 h-40 object-cover rounded-xl flex-shrink-0"
                       />
@@ -932,8 +926,8 @@ export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
                 </h3>
                 
                 <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 flex gap-6">
-                  <img 
-                    src="https://images.unsplash.com/photo-1663756915301-2ba688e078cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBhcGFydG1lbnQlMjBsaXZpbmclMjByb29tfGVufDF8fHx8MTc2ODA1NDQ3OXww&ixlib=rb-4.1.0&q=80&w=1080"
+                  <img
+                    src="https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBob3RlbCUyMGxvYmJ5fGVufDF8fHx8MTc2NzYwMTQyOXww&ixlib=rb-4.1.0&q=80&w=1080"
                     alt="Appartement"
                     className="w-56 h-40 object-cover rounded-xl flex-shrink-0"
                   />
