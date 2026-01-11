@@ -1,6 +1,10 @@
 import { useState, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Heart, Star, ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
+import { FiltersModal } from '../components/FiltersModal';
+import { SearchBar } from '../components/SearchBar';
+import { MenuDropdown } from '../components/MenuDropdown';
+import { BecomeHostModal } from '../components/BecomeHostModal';
 
 interface Property {
   id: number;
@@ -314,7 +318,27 @@ export function SearchResults() {
   const navigate = useNavigate();
   const [urlSearchParams] = useSearchParams();
   const [hoveredProperty, setHoveredProperty] = useState<number | null>(null);
+  const [showSearchOverlay, setShowSearchOverlay] = useState(false);
+  const [showFiltersModal, setShowFiltersModal] = useState(false);
+  const [showMenuDropdown, setShowMenuDropdown] = useState(false);
+  const [showBecomeHostModal, setShowBecomeHostModal] = useState(false);
   const mapRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+
+  // Handle search from overlay
+  const handleSearch = (params: any) => {
+    const searchQuery = new URLSearchParams({
+      destination: params.destination || '',
+      checkIn: params.checkInDate?.toISOString() || '',
+      checkOut: params.checkOutDate?.toISOString() || '',
+      adults: params.guestsCount?.adults?.toString() || '0',
+      children: params.guestsCount?.children?.toString() || '0',
+      babies: params.guestsCount?.babies?.toString() || '0',
+      pets: params.guestsCount?.pets?.toString() || '0',
+    });
+    navigate(`/search?${searchQuery.toString()}`);
+    setShowSearchOverlay(false);
+  };
 
   // Parse search params from URL
   const searchParams = {
@@ -384,9 +408,13 @@ export function SearchResults() {
               </span>
             </button>
 
-            {/* Right side placeholder */}
+            {/* Right side menu */}
             <div className="flex items-center gap-4">
-              <button className="text-sm px-4 py-2 hover:bg-gray-50 rounded-full transition-colors" style={{ fontWeight: 600 }}>
+              <button
+                onClick={() => setShowBecomeHostModal(true)}
+                className="text-sm px-4 py-2 hover:bg-gray-50 rounded-full transition-colors"
+                style={{ fontWeight: 600 }}
+              >
                 Devenir hôte
               </button>
               <button className="w-10 h-10 rounded-full hover:bg-gray-50 flex items-center justify-center transition-colors">
@@ -395,15 +423,24 @@ export function SearchResults() {
                   <path d="M3 8H13M8 3C6.5 4.5 6 6 6 8C6 10 6.5 11.5 8 13M8 3C9.5 4.5 10 6 10 8C10 10 9.5 11.5 8 13" stroke="#222222" strokeWidth="1.5"/>
                 </svg>
               </button>
-              <button className="flex items-center gap-2 px-3 py-2 border border-gray-300 rounded-full hover:shadow-md transition-shadow">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M2 4H14M2 8H14M2 12H14" stroke="#222222" strokeWidth="1.5" strokeLinecap="round"/>
-                </svg>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="12" r="11" fill="#717171"/>
-                  <path d="M12 2C14.21 2 16 3.79 16 6C16 8.21 14.21 10 12 10C9.79 10 8 8.21 8 6C8 3.79 9.79 2 12 2ZM12 22C7.03 22 3 19.42 3 16.25C3 13.08 7.03 10.5 12 10.5C16.97 10.5 21 13.08 21 16.25C21 19.42 16.97 22 12 22Z" fill="#FFF"/>
-                </svg>
-              </button>
+              <div className="relative">
+                <button
+                  onClick={() => setShowMenuDropdown(!showMenuDropdown)}
+                  className="flex items-center gap-2 px-3 py-2 border border-gray-300 rounded-full hover:shadow-md transition-shadow"
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M2 4H14M2 8H14M2 12H14" stroke="#222222" strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="11" fill="#717171"/>
+                    <path d="M12 2C14.21 2 16 3.79 16 6C16 8.21 14.21 10 12 10C9.79 10 8 8.21 8 6C8 3.79 9.79 2 12 2ZM12 22C7.03 22 3 19.42 3 16.25C3 13.08 7.03 10.5 12 10.5C16.97 10.5 21 13.08 21 16.25C21 19.42 16.97 22 12 22Z" fill="#FFF"/>
+                  </svg>
+                </button>
+                <MenuDropdown
+                  isOpen={showMenuDropdown}
+                  onClose={() => setShowMenuDropdown(false)}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -414,7 +451,9 @@ export function SearchResults() {
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             {/* Compact search info */}
-            <button className="flex items-center border border-gray-200 rounded-full shadow-sm hover:shadow-md transition-shadow bg-white pl-6 pr-2 py-2">
+            <button
+              onClick={() => setShowSearchOverlay(true)}
+              className="flex items-center border border-gray-200 rounded-full shadow-sm hover:shadow-md transition-shadow bg-white pl-6 pr-2 py-2">
               <div className="flex items-center gap-3">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M13.5 6.5V14.5H10V11C10 10.4477 9.55228 10 9 10H7C6.44772 10 6 10.4477 6 11V14.5H2.5V6.5" stroke="#222222" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -447,7 +486,10 @@ export function SearchResults() {
           </div>
 
           {/* Filters button */}
-          <button className="flex items-center gap-2 px-4 py-2.5 border border-gray-300 rounded-xl hover:border-gray-400 transition-colors">
+          <button
+            onClick={() => setShowFiltersModal(true)}
+            className="flex items-center gap-2 px-4 py-2.5 border border-gray-300 rounded-xl hover:border-gray-400 transition-colors"
+          >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1.5 4H14.5M3.5 8H12.5M6 12H10" stroke="#222222" strokeWidth="1.5" strokeLinecap="round"/>
             </svg>
@@ -781,6 +823,84 @@ export function SearchResults() {
           </div>
         </div>
       </div>
+
+      {/* Search Overlay */}
+      {showSearchOverlay && (
+        <div className="fixed inset-0 z-[60] border-none" onClick={() => setShowSearchOverlay(false)}>
+          {/* Overlay background */}
+          <div
+            className="absolute inset-0 bg-black/50"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+          />
+
+          {/* Content */}
+          <div
+            className="relative bg-white"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header within overlay */}
+            <header ref={headerRef} className="border-b border-gray-200">
+              <div className="px-4 sm:px-6 lg:px-20 py-4">
+                <div className="flex items-center justify-between">
+                  {/* Logo */}
+                  <button
+                    onClick={() => navigate('/')}
+                    className="flex items-center gap-1 flex-shrink-0 hover:opacity-80 transition-opacity duration-200"
+                  >
+                    <svg
+                      className="w-8 h-8"
+                      viewBox="0 0 32 32"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M16 1.5C11.5 1.5 7.5 4 5.5 7.5C3.5 11 3 15 4.5 19C6 23 9.5 26.5 13 28.5C14 29 15 29.5 16 29.5C17 29.5 18 29 19 28.5C22.5 26.5 26 23 27.5 19C29 15 28.5 11 26.5 7.5C24.5 4 20.5 1.5 16 1.5ZM16 20C13.8 20 12 18.2 12 16C12 13.8 13.8 12 16 12C18.2 12 20 13.8 20 16C20 18.2 18.2 20 16 20Z"
+                        fill="#10B981"
+                      />
+                    </svg>
+                    <span
+                      className="text-[#10B981] text-xl ml-1 hidden sm:block"
+                      style={{ fontWeight: 600 }}
+                    >
+                      HOMIQIO
+                    </span>
+                  </button>
+
+                  {/* Close button */}
+                  <button
+                    onClick={() => setShowSearchOverlay(false)}
+                    className="text-sm px-4 py-2 hover:bg-gray-50 rounded-full transition-colors"
+                    style={{ fontWeight: 600 }}
+                  >
+                    Fermer
+                  </button>
+                </div>
+              </div>
+            </header>
+
+            {/* Search bar */}
+            <div className="bg-white">
+              <SearchBar onSearch={handleSearch} />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Filters Modal */}
+      <FiltersModal
+        isOpen={showFiltersModal}
+        onClose={() => setShowFiltersModal(false)}
+        onApplyFilters={(filters) => {
+          console.log('Applied filters:', filters);
+          // TODO: Apply filters to search results
+        }}
+      />
+
+      {/* Become Host Modal */}
+      <BecomeHostModal
+        isOpen={showBecomeHostModal}
+        onClose={() => setShowBecomeHostModal(false)}
+      />
     </div>
   );
 }
