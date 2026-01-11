@@ -50,9 +50,31 @@ export function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLan
   return (
     <div
       ref={dropdownRef}
-      className="absolute top-full right-0 mt-2 bg-white rounded-xl shadow-xl w-60 py-2 z-50"
-      style={{ minWidth: '300px' }}
+      className="absolute top-full right-0 mt-2 bg-white rounded-xl shadow-xl w-60 z-50 max-h-[calc(100vh-100px)] sm:max-h-[calc(100vh-120px)] md:max-h-[600px] overflow-y-auto"
+      style={{
+        minWidth: '300px',
+        WebkitOverflowScrolling: 'touch', // Smooth scrolling on iOS
+        scrollbarWidth: 'thin', // Firefox
+        scrollbarColor: '#d1d5db transparent', // Firefox
+      }}
     >
+      <style>{`
+        /* Custom scrollbar for Webkit browsers (Chrome, Safari, Edge) */
+        .absolute.top-full.right-0::-webkit-scrollbar {
+          width: 6px;
+        }
+        .absolute.top-full.right-0::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .absolute.top-full.right-0::-webkit-scrollbar-thumb {
+          background-color: #d1d5db;
+          border-radius: 3px;
+        }
+        .absolute.top-full.right-0::-webkit-scrollbar-thumb:hover {
+          background-color: #9ca3af;
+        }
+      `}</style>
+      <div className="py-2">
       {/* Favoris */}
       <button className="w-full px-8 py-3 hover:bg-gray-50 transition-colors flex items-center gap-3 text-left">
         <Heart className="w-5 h-5 text-gray-700" />
@@ -156,12 +178,13 @@ export function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLan
       <div className="w-[240px] h-px bg-gray-200 my-2 mx-auto"></div>
 
       {/* Déconnexion */}
-      <button 
+      <button
         className="w-full px-8 py-3 hover:bg-gray-50 transition-colors text-left"
         onClick={handleLogout}
       >
         <span className="text-sm">Déconnexion</span>
       </button>
+      </div>
     </div>
   );
 }
