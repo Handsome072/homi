@@ -1,13 +1,12 @@
 import { Heart, Share, Star, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { ExperienceCard } from '../components/ExperienceCard';
 
-interface ExperienceDetailsProps {
-  onBack: () => void;
-}
-
-export function ExperienceDetails({ onBack }: ExperienceDetailsProps) {
+export function ExperienceDetails() {
+  const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
   const [showAllPhotos, setShowAllPhotos] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -106,7 +105,7 @@ export function ExperienceDetails({ onBack }: ExperienceDetailsProps) {
 
       {/* Header */}
       <div className="bg-white">
-        <Header currentPage="experiences" onNavigate={onBack} isScrolled={true} />
+        <Header currentPage="experiences" onNavigate={() => navigate('/experiences')} isScrolled={true} onSearch={() => {}} />
 
         {/* Hero Section - Photo Grid + Info */}
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-20 pt-6">

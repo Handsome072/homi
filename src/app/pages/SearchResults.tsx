@@ -1,21 +1,6 @@
 import { useState, useRef } from 'react';
-import { Heart, Star, ChevronLeft, ChevronRight, MapPin, Search } from 'lucide-react';
-
-interface SearchResultsProps {
-  onBack: () => void;
-  onNavigate: (page: 'logements' | 'experiences' | 'services') => void;
-  searchParams: {
-    destination: string;
-    checkInDate: Date | null;
-    checkOutDate: Date | null;
-    guestsCount: {
-      adults: number;
-      children: number;
-      babies: number;
-      pets: number;
-    };
-  };
-}
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Heart, Star, ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
 
 interface Property {
   id: number;
@@ -325,9 +310,24 @@ function PropertyCard({ property }: { property: Property }) {
   );
 }
 
-export function SearchResults({ onBack, onNavigate, searchParams }: SearchResultsProps) {
+export function SearchResults() {
+  const navigate = useNavigate();
+  const [urlSearchParams] = useSearchParams();
   const [hoveredProperty, setHoveredProperty] = useState<number | null>(null);
   const mapRef = useRef<HTMLDivElement>(null);
+
+  // Parse search params from URL
+  const searchParams = {
+    destination: urlSearchParams.get('destination') || '',
+    checkInDate: urlSearchParams.get('checkIn') ? new Date(urlSearchParams.get('checkIn')!) : null,
+    checkOutDate: urlSearchParams.get('checkOut') ? new Date(urlSearchParams.get('checkOut')!) : null,
+    guestsCount: {
+      adults: parseInt(urlSearchParams.get('adults') || '0'),
+      children: parseInt(urlSearchParams.get('children') || '0'),
+      babies: parseInt(urlSearchParams.get('babies') || '0'),
+      pets: parseInt(urlSearchParams.get('pets') || '0'),
+    }
+  };
 
   const formatDateRange = () => {
     if (!searchParams.checkInDate) return 'Dates flexibles';
@@ -336,11 +336,11 @@ export function SearchResults({ onBack, onNavigate, searchParams }: SearchResult
       'janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin',
       'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.',
     ];
-    
+
     const checkInStr = `${searchParams.checkInDate.getDate()} ${monthNames[searchParams.checkInDate.getMonth()]}`;
-    
+
     if (!searchParams.checkOutDate) return checkInStr;
-    
+
     const checkOutStr = `${searchParams.checkOutDate.getDate()} ${monthNames[searchParams.checkOutDate.getMonth()]}`;
     return `${checkInStr} - ${checkOutStr}`;
   };
@@ -362,7 +362,7 @@ export function SearchResults({ onBack, onNavigate, searchParams }: SearchResult
           <div className="flex items-center justify-between">
             {/* Logo */}
             <button
-              onClick={onBack}
+              onClick={() => navigate('/')}
               className="flex items-center gap-1 flex-shrink-0 hover:opacity-80 transition-opacity duration-200"
             >
               <svg

@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 
 interface HomeProps {
   isScrolled: boolean;
-  onPropertyClick: () => void;
+  onPropertyClick: (id?: string) => void;
   onSearch?: (params: any) => void;
 }
 

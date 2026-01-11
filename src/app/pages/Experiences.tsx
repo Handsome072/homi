@@ -4,7 +4,7 @@ import { ExperienceSearchBar } from '../components/ExperienceSearchBar';
 
 interface ExperiencesProps {
   isScrolled: boolean;
-  onExperienceClick?: () => void;
+  onExperienceClick?: (id?: string) => void;
 }
 
 export function Experiences({ isScrolled, onExperienceClick }: ExperiencesProps) {

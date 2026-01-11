@@ -1,13 +1,12 @@
 import { Share, Heart } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Header } from '../components/Header';
 import hostImage from 'figma:asset/e3976b1bc92d8f8d8ca826b101f4aad1cab84db6.png';
 
-interface ServiceDetailsProps {
-  onBack: () => void;
-}
-
-export function ServiceDetails({ onBack }: ServiceDetailsProps) {
+export function ServiceDetails() {
+  const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
   const [isFavorite, setIsFavorite] = useState(false);
 
   const serviceOptions = [
@@ -83,7 +82,7 @@ export function ServiceDetails({ onBack }: ServiceDetailsProps) {
     <>
       {/* Header */}
       <div className="bg-white">
-        <Header currentPage="services" onNavigate={onBack} isScrolled={true} />
+        <Header currentPage="services" onNavigate={() => navigate('/services')} isScrolled={true} onSearch={() => {}} />
 
         {/* Main Content */}
         <div className="max-w-[1120px] mx-auto px-6 md:px-10 lg:px-20 pt-8 pb-12">

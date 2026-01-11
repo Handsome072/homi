@@ -5,7 +5,7 @@ import { ServiceSearchBar } from '../components/ServiceSearchBar';
 
 interface ServicesProps {
   isScrolled: boolean;
-  onServiceClick?: () => void;
+  onServiceClick?: (id?: string) => void;
 }
 
 export function Services({ isScrolled, onServiceClick }: ServicesProps) {

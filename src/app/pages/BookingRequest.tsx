@@ -1,27 +1,35 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Star } from 'lucide-react';
 
-interface BookingRequestProps {
-  onBack: () => void;
-  bookingData?: {
-    title: string;
-    image: string;
-    rating: number;
-    location: string;
-    checkIn: string;
-    checkOut: string;
-    guests: number;
-    nights: number;
-    pricePerNight: number;
-  };
+interface BookingData {
+  title: string;
+  image: string;
+  rating: number;
+  location: string;
+  checkIn: string;
+  checkOut: string;
+  guests: number;
+  nights: number;
+  pricePerNight: number;
 }
 
-export function BookingRequest({ onBack, bookingData }: BookingRequestProps) {
+export function BookingRequest() {
+  const navigate = useNavigate();
   const [paymentTiming, setPaymentTiming] = useState<'now' | 'later'>('now');
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'paypal' | 'googlepay'>('card');
   const [message, setMessage] = useState('');
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [editingStep, setEditingStep] = useState<number | null>(null);
+  const [bookingData, setBookingData] = useState<BookingData | null>(null);
+
+  // Load booking data from sessionStorage
+  useEffect(() => {
+    const storedData = sessionStorage.getItem('bookingData');
+    if (storedData) {
+      setBookingData(JSON.parse(storedData));
+    }
+  }, []);
 
   // Default data si aucune donnée n'est passée
   const data = bookingData || {
@@ -80,7 +88,7 @@ export function BookingRequest({ onBack, bookingData }: BookingRequestProps) {
           <div>
             <div className="flex items-center gap-8 -ml-20">
             {/* Back Button */}
-            <button onClick={onBack} className="flex items-center gap-2 mb-8 hover:underline bg-gray-100 p-4 rounded-full">
+            <button onClick={() => navigate(-1)} className="flex items-center gap-2 mb-8 hover:underline bg-gray-100 p-4 rounded-full">
               <ArrowLeft className="w-5 h-5" />
             </button>
 

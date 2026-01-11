@@ -1,14 +1,13 @@
 import { Heart, Share, Star, ChevronRight, X, ChevronLeft } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 
-interface PropertyDetailsProps {
-  onBack: () => void;
-  onBook?: (data: any) => void;
-}
-
-export function PropertyDetails({ onBack, onBook }: PropertyDetailsProps) {
+export function PropertyDetails() {
+  const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
+  const [searchParams] = useSearchParams();
   const [showAllPhotos, setShowAllPhotos] = useState(false);
   const [activeTab, setActiveTab] = useState('photos');
   const [showFullDescription, setShowFullDescription] = useState(false);
@@ -156,7 +155,7 @@ export function PropertyDetails({ onBack, onBook }: PropertyDetailsProps) {
       )}
 
       {/* Header */}
-      <Header currentPage="logements" onNavigate={onBack} isScrolled={true} />
+      <Header currentPage="logements" onNavigate={() => navigate('/')} isScrolled={true} onSearch={() => {}} />
 
       {/* Main Content */}
       <div className="bg-white min-h-screen">
@@ -657,21 +656,26 @@ export function PropertyDetails({ onBack, onBook }: PropertyDetailsProps) {
                   </div>
 
                   {/* Reserve button */}
-                  <button 
-                    onClick={() => onBook?.({
-                      title: "Superbe studio de 15m² au calme tout confort",
-                      image: images[0],
-                      rating: 4.96,
-                      location: "Coup de cœur voyageurs",
-                      checkIn: "3-4",
-                      checkOut: "avr. 2026",
-                      guests: 1,
-                      nights: 2,
-                      pricePerNight: 87.56
-                    })}
+                  <button
+                    onClick={() => {
+                      const bookingData = {
+                        title: "Superbe studio de 15m² au calme tout confort",
+                        image: images[0],
+                        rating: 4.96,
+                        location: "Coup de cœur voyageurs",
+                        checkIn: "3-4",
+                        checkOut: "avr. 2026",
+                        guests: 1,
+                        nights: 2,
+                        pricePerNight: 87.56
+                      };
+                      // Store booking data in sessionStorage for the booking page
+                      sessionStorage.setItem('bookingData', JSON.stringify(bookingData));
+                      navigate('/booking');
+                    }}
                     className="w-full py-3 rounded-full text-white text-base mb-4 transition-colors hover:opacity-90"
-                    style={{ 
-                      fontWeight: 600, 
+                    style={{
+                      fontWeight: 600,
                       background: 'linear-gradient(to right, #059669 0%, #10B981 50%, #047857 100%)'
                     }}
                   >

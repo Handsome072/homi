@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, MutableRefObject } from 'react';
+import { BrowserRouter, Routes, Route, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { Home } from './pages/Home';
@@ -13,20 +14,37 @@ import { ClientSpace } from './pages/ClientSpace';
 import { Messages } from './pages/Messages';
 import { AuthProvider } from './context/AuthContext';
 
-export default function App() {
-  const [currentPage, setCurrentPage] = useState<'logements' | 'experiences' | 'services' | 'property-details' | 'experience-details' | 'service-details' | 'booking-request' | 'search-results' | 'client-space' | 'messages'>('logements');
-  const [isScrolled, setIsScrolled] = useState(false);
-  const headerRef = useRef<HTMLElement>(null);
-  const [bookingData, setBookingData] = useState<any>(null);
-  const [searchParams, setSearchParams] = useState<any>(null);
+// Scroll management hook
+function useScrollManagement() {
+  const location = useLocation();
   const scrollListenerEnabled = useRef(true);
+
+  useEffect(() => {
+    // Scroll to top on route change
+    scrollListenerEnabled.current = false;
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
+    // Re-enable after a short delay
+    const timer = setTimeout(() => {
+      scrollListenerEnabled.current = true;
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
+
+  return scrollListenerEnabled;
+}
+
+// Scroll state hook
+function useScrollState(scrollListenerEnabled: MutableRefObject<boolean>) {
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       if (!scrollListenerEnabled.current) return;
-      
+
       const scrollY = window.scrollY;
-      
+
       setIsScrolled((prevScrolled) => {
         // Hysteresis: large gap to prevent flickering
         // Switch to compact when scrollY > 120
@@ -42,106 +60,119 @@ export default function App() {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [scrollListenerEnabled]);
 
-  const handleNavigate = (page: 'logements' | 'experiences' | 'services' | 'property-details' | 'experience-details' | 'service-details' | 'booking-request' | 'search-results' | 'client-space' | 'messages', data?: any) => {
-    setCurrentPage(page);
-    if (data) {
-      setBookingData(data);
-    }
-    
-    // Disable scroll listener during navigation
-    scrollListenerEnabled.current = false;
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    setIsScrolled(false);
-    
-    // Re-enable after a short delay
-    setTimeout(() => {
-      scrollListenerEnabled.current = true;
-    }, 100);
+  return isScrolled;
+}
+
+// Main App Layout Component
+function AppLayout() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const headerRef = useRef<HTMLElement>(null);
+  const scrollListenerEnabled = useScrollManagement();
+  const isScrolled = useScrollState(scrollListenerEnabled);
+
+  // Determine current page from location
+  const getCurrentPage = (): 'logements' | 'experiences' | 'services' => {
+    if (location.pathname.startsWith('/experiences')) return 'experiences';
+    if (location.pathname.startsWith('/services')) return 'services';
+    return 'logements';
   };
 
-  const handleBackToHome = () => {
-    setCurrentPage('logements');
-    scrollListenerEnabled.current = false;
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    setIsScrolled(false);
-    setTimeout(() => {
-      scrollListenerEnabled.current = true;
-    }, 100);
+  // Check if header should be shown
+  const shouldShowHeader = () => {
+    const hiddenPaths = [
+      '/property/',
+      '/experience/',
+      '/service/',
+      '/booking',
+      '/search',
+      '/client-space',
+      '/messages'
+    ];
+    return !hiddenPaths.some(path => location.pathname.startsWith(path));
   };
 
-  const handleBackToExperiences = () => {
-    setCurrentPage('experiences');
-    scrollListenerEnabled.current = false;
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    setIsScrolled(false);
-    setTimeout(() => {
-      scrollListenerEnabled.current = true;
-    }, 100);
-  };
+  // Check if footer should be shown
+  const shouldShowFooter = shouldShowHeader;
 
-  const handleBackToServices = () => {
-    setCurrentPage('services');
-    scrollListenerEnabled.current = false;
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    setIsScrolled(false);
-    setTimeout(() => {
-      scrollListenerEnabled.current = true;
-    }, 100);
-  };
-
-  const handleBackToPropertyDetails = () => {
-    setCurrentPage('property-details');
-    scrollListenerEnabled.current = false;
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    setTimeout(() => {
-      scrollListenerEnabled.current = true;
-    }, 100);
-  };
-
+  // Handle search
   const handleSearch = (params: any) => {
-    setSearchParams(params);
-    setCurrentPage('search-results');
-    scrollListenerEnabled.current = false;
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    setIsScrolled(false);
-    setTimeout(() => {
-      scrollListenerEnabled.current = true;
-    }, 100);
+    const searchQuery = new URLSearchParams({
+      destination: params.destination || '',
+      checkIn: params.checkInDate?.toISOString() || '',
+      checkOut: params.checkOutDate?.toISOString() || '',
+      adults: params.guestsCount?.adults?.toString() || '0',
+      children: params.guestsCount?.children?.toString() || '0',
+      babies: params.guestsCount?.babies?.toString() || '0',
+      pets: params.guestsCount?.pets?.toString() || '0',
+    });
+    navigate(`/search?${searchQuery.toString()}`);
   };
 
   return (
-    <AuthProvider>
-      <div className="min-h-screen bg-white">
-        {currentPage !== 'property-details' && currentPage !== 'experience-details' && currentPage !== 'service-details' && currentPage !== 'booking-request' && currentPage !== 'search-results' && currentPage !== 'client-space' && currentPage !== 'messages' && (
-          <Header 
-            ref={headerRef} 
-            currentPage={currentPage} 
-            onNavigate={handleNavigate} 
-            isScrolled={isScrolled} 
+    <div className="min-h-screen bg-white">
+      {shouldShowHeader() && (
+        <Header
+          ref={headerRef}
+          currentPage={getCurrentPage()}
+          onNavigate={(page) => navigate(`/${page === 'logements' ? '' : page}`)}
+          isScrolled={isScrolled}
+          onSearch={handleSearch}
+          onClientSpaceClick={() => navigate('/client-space')}
+        />
+      )}
+
+      <Routes>
+        <Route path="/" element={
+          <Home
+            isScrolled={isScrolled}
+            onPropertyClick={(id?: string) => navigate(id ? `/property/${id}` : '/property/1')}
             onSearch={handleSearch}
-            onClientSpaceClick={() => handleNavigate('client-space')}
           />
-        )}
-        
-        {currentPage === 'logements' && <Home isScrolled={isScrolled} onPropertyClick={() => handleNavigate('property-details')} onSearch={handleSearch} />}
-        {currentPage === 'experiences' && <Experiences isScrolled={isScrolled} onExperienceClick={() => handleNavigate('experience-details')} />}
-        {currentPage === 'services' && <Services isScrolled={isScrolled} onServiceClick={() => handleNavigate('service-details')} />}
-        {currentPage === 'property-details' && <PropertyDetails onBack={handleBackToHome} onBook={(data) => handleNavigate('booking-request', data)} />}
-        {currentPage === 'experience-details' && <ExperienceDetails onBack={handleBackToExperiences} />}
-        {currentPage === 'service-details' && <ServiceDetails onBack={handleBackToServices} />}
-        {currentPage === 'booking-request' && <BookingRequest onBack={handleBackToPropertyDetails} bookingData={bookingData} />}
-        {currentPage === 'search-results' && searchParams && <SearchResults onBack={handleBackToHome} onNavigate={handleNavigate} searchParams={searchParams} />}
-        {currentPage === 'client-space' && <ClientSpace onNavigate={handleNavigate} />}
-        {currentPage === 'messages' && <Messages onNavigate={handleNavigate} />}
-        
-        {currentPage !== 'property-details' && currentPage !== 'experience-details' && currentPage !== 'service-details' && currentPage !== 'booking-request' && currentPage !== 'search-results' && currentPage !== 'client-space' && currentPage !== 'messages' && <Footer />}
-      </div>
-    </AuthProvider>
+        } />
+        <Route path="/experiences" element={
+          <Experiences
+            isScrolled={isScrolled}
+            onExperienceClick={(id?: string) => navigate(id ? `/experience/${id}` : '/experience/1')}
+          />
+        } />
+        <Route path="/services" element={
+          <Services
+            isScrolled={isScrolled}
+            onServiceClick={(id?: string) => navigate(id ? `/service/${id}` : '/service/1')}
+          />
+        } />
+        <Route path="/property/:id?" element={<PropertyDetails />} />
+        <Route path="/experience/:id?" element={<ExperienceDetails />} />
+        <Route path="/service/:id?" element={<ServiceDetails />} />
+        <Route path="/booking" element={<BookingRequest />} />
+        <Route path="/search" element={<SearchResults />} />
+        <Route path="/client-space" element={
+          <ClientSpace onNavigate={(page) => navigate(`/${page === 'logements' ? '' : page}`)} />
+        } />
+        <Route path="/messages" element={
+          <Messages onNavigate={(page) => navigate(`/${page === 'home' ? '' : page}`)} />
+        } />
+      </Routes>
+
+      {shouldShowFooter() && <Footer />}
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <AppLayout />
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
