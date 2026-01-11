@@ -54,7 +54,7 @@ export function PropertyCarousel({ title, subtitle, children, showMoreLink = tru
 
   return (
     <section className="relative py-8">
-      <div className="px-4 sm:px-6 lg:px-20">
+      <div className="px-4 sm:px-6 lg:px-12">
         <div className="flex items-center justify-between mb-6">
           <div>
             <div className="flex items-center gap-2">

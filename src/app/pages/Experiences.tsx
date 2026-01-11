@@ -8,7 +8,7 @@ interface ExperiencesProps {
 }
 
 export function Experiences({ isScrolled, onExperienceClick }: ExperiencesProps) {
-  // Airbnb Originals - Organisées par des hôtes d'exception
+  // HOMIQIO Originals - Organisées par des hôtes d'exception
   const originalsExperiences = [
     {
       image: "https://images.unsplash.com/photo-1761839256547-0a1cd11b6dfb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhdGhsZXRlJTIwdHJhaW5pbmclMjBzcG9ydHN8ZW58MXx8fHwxNzY3ODYxOTA4fDA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -382,21 +382,21 @@ export function Experiences({ isScrolled, onExperienceClick }: ExperiencesProps)
       {!isScrolled && <ExperienceSearchBar />}
 
       <main className="pb-12">
-        {/* Airbnb Originals */}
-        <PropertyCarousel 
-          title="Airbnb Originals" 
+        {/* HOMIQIO Originals */}
+        <PropertyCarousel
+          title="HOMIQIO Originals"
           subtitle="Organisées par des hôtes d'exception"
           showMoreLink={true}
         >
           {originalsExperiences.map((experience, index) => (
-            <div key={index} className="w-[280px] sm:w-[300px] lg:w-[320px]">
+            <div key={index} className="w-[300px] sm:w-[320px] lg:w-[350px]">
               <ExperienceCard {...experience} onClick={onExperienceClick} />
             </div>
           ))}
         </PropertyCarousel>
 
         {/* Section: Populaires auprès d'autres voyageurs */}
-        <div className="px-4 sm:px-6 lg:px-20 mb-8">
+        <div className="px-4 sm:px-6 lg:px-12 mb-8">
           <h2 className="text-2xl md:text-3xl" style={{ fontWeight: 600 }}>
             Populaires auprès d'autres voyageurs
           </h2>
@@ -408,7 +408,7 @@ export function Experiences({ isScrolled, onExperienceClick }: ExperiencesProps)
           showMoreLink={true}
         >
           {popularExperiences.map((experience, index) => (
-            <div key={index} className="w-[280px] sm:w-[300px] lg:w-[320px]">
+            <div key={index} className="w-[300px] sm:w-[320px] lg:w-[350px]">
               <ExperienceCard {...experience} onClick={onExperienceClick} />
             </div>
           ))}
@@ -420,7 +420,7 @@ export function Experiences({ isScrolled, onExperienceClick }: ExperiencesProps)
           showMoreLink={true}
         >
           {londonExperiences.map((experience, index) => (
-            <div key={index} className="w-[280px] sm:w-[300px] lg:w-[320px]">
+            <div key={index} className="w-[300px] sm:w-[320px] lg:w-[350px]">
               <ExperienceCard {...experience} onClick={onExperienceClick} />
             </div>
           ))}
@@ -432,7 +432,7 @@ export function Experiences({ isScrolled, onExperienceClick }: ExperiencesProps)
           showMoreLink={true}
         >
           {dubaiExperiences.map((experience, index) => (
-            <div key={index} className="w-[280px] sm:w-[300px] lg:w-[320px]">
+            <div key={index} className="w-[300px] sm:w-[320px] lg:w-[350px]">
               <ExperienceCard {...experience} onClick={onExperienceClick} />
             </div>
           ))}
@@ -444,7 +444,7 @@ export function Experiences({ isScrolled, onExperienceClick }: ExperiencesProps)
           showMoreLink={true}
         >
           {madridExperiences.map((experience, index) => (
-            <div key={index} className="w-[280px] sm:w-[300px] lg:w-[320px]">
+            <div key={index} className="w-[300px] sm:w-[320px] lg:w-[350px]">
               <ExperienceCard {...experience} onClick={onExperienceClick} />
             </div>
           ))}
@@ -456,7 +456,7 @@ export function Experiences({ isScrolled, onExperienceClick }: ExperiencesProps)
           showMoreLink={true}
         >
           {romeExperiences.map((experience, index) => (
-            <div key={index} className="w-[280px] sm:w-[300px] lg:w-[320px]">
+            <div key={index} className="w-[300px] sm:w-[320px] lg:w-[350px]">
               <ExperienceCard {...experience} onClick={onExperienceClick} />
             </div>
           ))}

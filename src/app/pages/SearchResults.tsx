@@ -3,8 +3,10 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Heart, Star, ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
 import { FiltersModal } from '../components/FiltersModal';
 import { SearchBar } from '../components/SearchBar';
-import { MenuDropdown } from '../components/MenuDropdown';
+import { HeaderRightMenu } from '../components/HeaderRightMenu';
 import { BecomeHostModal } from '../components/BecomeHostModal';
+import { LanguageModal } from '../components/LanguageModal';
+import { AuthModal } from '../components/AuthModal';
 
 interface Property {
   id: number;
@@ -322,6 +324,8 @@ export function SearchResults() {
   const [showFiltersModal, setShowFiltersModal] = useState(false);
   const [showMenuDropdown, setShowMenuDropdown] = useState(false);
   const [showBecomeHostModal, setShowBecomeHostModal] = useState(false);
+  const [showLanguageModal, setShowLanguageModal] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const mapRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
 
@@ -409,39 +413,15 @@ export function SearchResults() {
             </button>
 
             {/* Right side menu */}
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => setShowBecomeHostModal(true)}
-                className="text-sm px-4 py-2 hover:bg-gray-50 rounded-full transition-colors"
-                style={{ fontWeight: 600 }}
-              >
-                Devenir hôte
-              </button>
-              <button className="w-10 h-10 rounded-full hover:bg-gray-50 flex items-center justify-center transition-colors">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <circle cx="8" cy="8" r="7" stroke="#222222" strokeWidth="1.5"/>
-                  <path d="M3 8H13M8 3C6.5 4.5 6 6 6 8C6 10 6.5 11.5 8 13M8 3C9.5 4.5 10 6 10 8C10 10 9.5 11.5 8 13" stroke="#222222" strokeWidth="1.5"/>
-                </svg>
-              </button>
-              <div className="relative">
-                <button
-                  onClick={() => setShowMenuDropdown(!showMenuDropdown)}
-                  className="flex items-center gap-2 px-3 py-2 border border-gray-300 rounded-full hover:shadow-md transition-shadow"
-                >
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M2 4H14M2 8H14M2 12H14" stroke="#222222" strokeWidth="1.5" strokeLinecap="round"/>
-                  </svg>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <circle cx="12" cy="12" r="11" fill="#717171"/>
-                    <path d="M12 2C14.21 2 16 3.79 16 6C16 8.21 14.21 10 12 10C9.79 10 8 8.21 8 6C8 3.79 9.79 2 12 2ZM12 22C7.03 22 3 19.42 3 16.25C3 13.08 7.03 10.5 12 10.5C16.97 10.5 21 13.08 21 16.25C21 19.42 16.97 22 12 22Z" fill="#FFF"/>
-                  </svg>
-                </button>
-                <MenuDropdown
-                  isOpen={showMenuDropdown}
-                  onClose={() => setShowMenuDropdown(false)}
-                />
-              </div>
-            </div>
+            <HeaderRightMenu
+              showMenuDropdown={showMenuDropdown}
+              setShowMenuDropdown={setShowMenuDropdown}
+              setShowLanguageModal={setShowLanguageModal}
+              setShowBecomeHostModal={setShowBecomeHostModal}
+              setShowAuthModal={setShowAuthModal}
+              onClientSpaceClick={() => navigate('/client-space')}
+              onMessagesClick={() => navigate('/messages')}
+            />
           </div>
         </div>
       </header>
@@ -637,17 +617,17 @@ export function SearchResults() {
                 <ul className="space-y-3">
                   <li>
                     <a href="#" className="text-[14px] hover:underline" style={{ color: '#222222' }}>
-                      Mettez votre logement sur Airbnb
+                      Mettez votre logement sur HOMIQIO
                     </a>
                   </li>
                   <li>
                     <a href="#" className="text-[14px] hover:underline" style={{ color: '#222222' }}>
-                      Proposez votre expérience sur Airbnb
+                      Proposez votre expérience sur HOMIQIO
                     </a>
                   </li>
                   <li>
                     <a href="#" className="text-[14px] hover:underline" style={{ color: '#222222' }}>
-                      Proposez votre service sur Airbnb
+                      Proposez votre service sur HOMIQIO
                     </a>
                   </li>
                   <li>
@@ -688,10 +668,10 @@ export function SearchResults() {
                 </ul>
               </div>
 
-              {/* Airbnb */}
+              {/* HOMIQIO */}
               <div>
                 <h3 className="text-[14px] mb-4" style={{ fontWeight: 600, color: '#222222' }}>
-                  Airbnb
+                  HOMIQIO
                 </h3>
                 <ul className="space-y-3">
                   <li>
@@ -717,7 +697,7 @@ export function SearchResults() {
              
                   <li>
                     <a href="#" className="text-[14px] hover:underline" style={{ color: '#222222' }}>
-                      Séjours d'urgence Airbnb.org
+                      Séjours d'urgence HOMIQIO.org
                     </a>
                   </li>
                 </ul>
@@ -901,6 +881,22 @@ export function SearchResults() {
         isOpen={showBecomeHostModal}
         onClose={() => setShowBecomeHostModal(false)}
       />
+
+      {/* Language Modal */}
+      {showLanguageModal && (
+        <LanguageModal
+          isOpen={showLanguageModal}
+          onClose={() => setShowLanguageModal(false)}
+        />
+      )}
+
+      {/* Auth Modal */}
+      {showAuthModal && (
+        <AuthModal
+          isOpen={showAuthModal}
+          onClose={() => setShowAuthModal(false)}
+        />
+      )}
     </div>
   );
 }

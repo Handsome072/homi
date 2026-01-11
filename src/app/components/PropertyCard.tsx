@@ -41,18 +41,18 @@ export function PropertyCard({
           alt={title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
-        <button 
+        <button
           onClick={handleFavoriteClick}
-          className="absolute top-3 right-3 p-2 hover:scale-110 transition-transform z-10"
+          className="absolute top-3 right-3 hover:scale-110 transition-transform z-10"
         >
-          <Heart 
+          <Heart
             className={`w-6 h-6 ${isFavorite ? 'fill-[#10B981] text-[#10B981]' : 'fill-black/50 text-white'} stroke-2`}
           />
         </button>
         {badge && (
           <div className="absolute top-3 left-3 bg-white px-3 py-1 rounded-full shadow-sm">
             <span className="text-xs" style={{ fontWeight: 600 }}>
-              {badge === 'favorite' ? 'Coup de cœur voyageurs' : 'NOUVEAU'}
+              {badge === 'favorite' ? 'Coup de cœur' : 'NOUVEAU'}
             </span>
           </div>
         )}

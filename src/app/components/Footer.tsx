@@ -168,7 +168,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Airbnb */}
+          {/* HOMIQIO */}
           <div>
             <h3
               className="text-sm mb-4"

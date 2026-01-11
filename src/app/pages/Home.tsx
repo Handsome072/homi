@@ -802,7 +802,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
             showMoreLink={true}
           >
             {recentlyViewedProperties.map((property, index) => (
-              <div key={index} className="w-[16.25rem]">
+              <div key={index} className="w-[18rem]">
                 <PropertyCard {...property} onClick={onPropertyClick} />
               </div>
             ))}
@@ -815,7 +815,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
           showMoreLink={true}
         >
           {parisProperties.map((property, index) => (
-            <div key={index} className="max-w-[11.4375rem] w-full">
+            <div key={index} className="w-[14rem]">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
@@ -827,7 +827,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
           showMoreLink={true}
         >
           {madridHotels.map((property, index) => (
-            <div key={index} className="max-w-[11.4375rem] w-full">
+            <div key={index} className="w-[14rem]">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
@@ -839,7 +839,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
           showMoreLink={true}
         >
           {londonProperties.map((property, index) => (
-            <div key={index} className="max-w-[11.4375rem] w-full">
+            <div key={index} className="w-[14rem]">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
@@ -851,7 +851,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
           showMoreLink={true}
         >
           {riyadProperties.map((property, index) => (
-            <div key={index} className="max-w-[11.4375rem] w-full">
+            <div key={index} className="w-[14rem]">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
@@ -863,7 +863,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
           showMoreLink={true}
         >
           {dubaiProperties.map((property, index) => (
-            <div key={index} className="max-w-[11.4375rem] w-full">
+            <div key={index} className="w-[14rem]">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
@@ -875,7 +875,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
           showMoreLink={true}
         >
           {madridApartments.map((property, index) => (
-            <div key={index} className="max-w-[11.4375rem] w-full">
+            <div key={index} className="w-[14rem]">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
@@ -887,7 +887,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
           showMoreLink={true}
         >
           {romeProperties.map((property, index) => (
-            <div key={index} className="max-w-[11.4375rem] w-full">
+            <div key={index} className="w-[14rem]">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
@@ -899,7 +899,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
           showMoreLink={true}
         >
           {milanProperties.map((property, index) => (
-            <div key={index} className="max-w-[11.4375rem] w-full">
+            <div key={index} className="w-[14rem]">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
@@ -911,7 +911,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
           showMoreLink={true}
         >
           {budapestProperties.map((property, index) => (
-            <div key={index} className="max-w-[11.4375rem] w-full">
+            <div key={index} className="w-[14rem]">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
@@ -923,7 +923,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
           showMoreLink={true}
         >
           {barcelonaProperties.map((property, index) => (
-            <div key={index} className="max-w-[11.4375rem] w-full">
+            <div key={index} className="w-[14rem]">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
@@ -935,7 +935,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
           showMoreLink={true}
         >
           {capeTownProperties.map((property, index) => (
-            <div key={index} className="max-w-[11.4375rem] w-full">
+            <div key={index} className="w-[14rem]">
               <PropertyCard {...property} onClick={onPropertyClick} />
             </div>
           ))}
