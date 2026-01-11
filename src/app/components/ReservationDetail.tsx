@@ -1,4 +1,4 @@
-import { Heart, Share, Star, ChevronRight, X } from 'lucide-react';
+import { Heart, Share, X } from 'lucide-react';
 import { useState } from 'react';
 import { ImageGallery } from './ImageGallery';
 
@@ -30,36 +30,36 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
           <div className="bg-white rounded-2xl p-8 max-w-xl w-full mx-4 relative">
             <button
               onClick={() => setShowCancelPopup(false)}
-              className="absolute top-6 right-6 w-8 h-8 rounded-full border-2 border-red-400 text-red-400 flex items-center justify-center hover:bg-red-50 transition-colors"
+              className="absolute top-6 right-6 w-8 h-8 rounded-full border-2 border-destructive text-destructive flex items-center justify-center hover:bg-red-50 transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <h2 className="text-3xl mb-6" style={{ fontWeight: 500, color: '#4A5B8C', fontStyle: 'italic' }}>
+            <h2 className="text-3xl mb-6 font-semibold text-foreground">
               Annuler votre réservation
             </h2>
 
             <div className="mb-6">
-              <h3 className="text-xs mb-4" style={{ fontWeight: 700, color: '#E8664D', letterSpacing: '0.5px' }}>
+              <h3 className="text-xs mb-4 font-bold tracking-wide text-[#10B981]">
                 DÉTAILS DE REMBOURSEMENT
               </h3>
 
               <div className="space-y-3">
                 <div className="flex items-center justify-between py-3 border-b border-gray-200">
-                  <span className="text-base" style={{ fontWeight: 600, color: '#4A5B8C' }}>
+                  <span className="text-base font-semibold text-foreground">
                     Frais de réservation
                   </span>
-                  <span className="text-base" style={{ fontWeight: 600, color: '#4A5B8C' }}>
+                  <span className="text-base font-semibold text-foreground">
                     580€
                   </span>
                 </div>
 
-                <div className="bg-[#3D5278] rounded-lg p-6">
+                <div className="bg-[#10B981] rounded-lg p-6">
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-base text-white" style={{ fontWeight: 600 }}>
+                    <span className="text-base text-white font-semibold">
                       Remboursement
                     </span>
-                    <span className="text-base text-white" style={{ fontWeight: 600 }}>
+                    <span className="text-base text-white font-semibold">
                       290€
                     </span>
                   </div>
@@ -71,21 +71,16 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
               </div>
             </div>
 
-            <p className="text-sm text-gray-500 mb-6">
+            <p className="text-sm text-muted-foreground mb-6">
               Vous recevrez un email de confirmation d'annulation de votre réservation.
             </p>
 
-            <button 
+            <button
               onClick={() => {
                 setIsCancelled(true);
                 setShowCancelPopup(false);
               }}
-              className="w-full px-6 py-3 border-2 rounded-lg text-base hover:bg-red-50 transition-colors bg-white"
-              style={{ 
-                fontWeight: 600,
-                color: '#E8664D',
-                borderColor: '#E8664D'
-              }}
+              className="w-full px-6 py-3 border-2 border-destructive text-destructive rounded-lg text-base hover:bg-red-50 transition-colors bg-white font-semibold"
             >
               ANNULER LA RÉSERVATION
             </button>
@@ -102,24 +97,24 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
             className="flex items-center gap-2 hover:opacity-80 transition-opacity"
           >
             <X className="w-5 h-5" />
-            <span className="text-sm" style={{ fontWeight: 600 }}>Retour</span>
+            <span className="text-sm font-semibold">Retour</span>
           </button>
-          
+
           <div className="flex items-center gap-4">
             <button className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
               <Share className="w-4 h-4" />
-              <span className="text-sm underline" style={{ fontWeight: 600 }}>Partager</span>
+              <span className="text-sm underline font-semibold">Partager</span>
             </button>
             <button className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
               <Heart className="w-4 h-4" />
-              <span className="text-sm underline" style={{ fontWeight: 600 }}>Enregistrer</span>
+              <span className="text-sm underline font-semibold">Enregistrer</span>
             </button>
           </div>
         </div>
 
         {/* Title Section */}
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-20 pt-6">
-          <h1 className="text-2xl md:text-3xl mb-4" style={{ fontWeight: 600 }}>
+          <h1 className="text-2xl md:text-3xl mb-4 font-semibold">
             Studio aux Portes de Paris
           </h1>
         </div>
@@ -140,24 +135,24 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
               <div className="lg:col-span-2 space-y-10">
                 {/* Réservation confirmée / annulée */}
                 <div className="border-b border-gray-200 pb-10">
-                  <h2 className="text-3xl mb-4" style={{ fontWeight: 500, color: '#4A5B8C', fontStyle: 'italic' }}>
+                  <h2 className="text-2xl md:text-3xl mb-4 font-semibold text-foreground">
                     {isCancelled ? 'Réservation annulée' : 'Réservation confirmée'}
                   </h2>
 
                   {isCancelled ? (
                     <div className="mb-6">
-                      <p className="text-sm text-gray-600 leading-relaxed">
+                      <p className="text-sm text-muted-foreground leading-relaxed">
                         Nous restons à votre disposition si vous souhaitez effectuer une nouvelle réservation ou obtenir de l'aide. N'hésitez pas à{' '}
-                        <span className="underline cursor-pointer" style={{ fontWeight: 600 }}>nous contacter</span> pour toute question.
+                        <span className="underline cursor-pointer font-semibold text-foreground">nous contacter</span> pour toute question.
                       </p>
                     </div>
                   ) : (
                     <>
                       <div className="mb-6">
-                        <p className="text-sm mb-3" style={{ color: '#E8664D' }}>
-                          <span style={{ fontWeight: 600 }}>Un email de confirmation de votre réservation vous a été envoyé.</span>
+                        <p className="text-sm mb-3 text-[#10B981] font-semibold">
+                          Un email de confirmation de votre réservation vous a été envoyé.
                         </p>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-muted-foreground">
                           Cher(e) James Bond, nous sommes ravis de vous informer que votre réservation a été confirmée avec succès aux dates suivantes :
                         </p>
                       </div>
@@ -165,36 +160,36 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
                       <div className="grid grid-cols-2 gap-4 mb-6">
                         <div className="border border-gray-200 rounded-lg p-4">
                           <div className="flex items-center gap-2 mb-2">
-                            <svg className="w-4 h-4 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                            <svg className="w-4 h-4 text-[#10B981]" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                             </svg>
-                            <span className="text-xs" style={{ fontWeight: 600, color: '#E8664D', letterSpacing: '0.5px' }}>
+                            <span className="text-xs font-bold tracking-wide text-[#10B981]">
                               DATE D'ARRIVÉE
                             </span>
                           </div>
-                          <p className="text-2xl mb-1" style={{ fontWeight: 500, color: '#4A5B8C', fontStyle: 'italic' }}>
+                          <p className="text-xl md:text-2xl mb-1 font-medium text-foreground">
                             Lun. 15 Sept. 2024
                           </p>
-                          <p className="text-sm text-gray-500">15:00 - 21:00</p>
+                          <p className="text-sm text-muted-foreground">15:00 - 21:00</p>
                         </div>
 
                         <div className="border border-gray-200 rounded-lg p-4">
                           <div className="flex items-center gap-2 mb-2">
-                            <svg className="w-4 h-4 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                            <svg className="w-4 h-4 text-[#10B981]" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                             </svg>
-                            <span className="text-xs" style={{ fontWeight: 600, color: '#E8664D', letterSpacing: '0.5px' }}>
+                            <span className="text-xs font-bold tracking-wide text-[#10B981]">
                               DATE DE DÉPART
                             </span>
                           </div>
-                          <p className="text-2xl mb-1" style={{ fontWeight: 500, color: '#4A5B8C', fontStyle: 'italic' }}>
+                          <p className="text-xl md:text-2xl mb-1 font-medium text-foreground">
                             Ven. 19 Sept. 2024
                           </p>
-                          <p className="text-sm text-gray-500">11:00</p>
+                          <p className="text-sm text-muted-foreground">11:00</p>
                         </div>
                       </div>
 
-                      <button className="flex items-center gap-2 text-sm" style={{ color: '#E8664D', fontWeight: 600 }}>
+                      <button className="flex items-center gap-2 text-sm text-[#10B981] font-semibold">
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                         </svg>
@@ -206,47 +201,47 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
 
                 {/* Services supplémentaires réservés */}
                 <div className="border-b border-gray-200 pb-10">
-                  <h2 className="text-3xl mb-6" style={{ fontWeight: 500, color: '#4A5B8C', fontStyle: 'italic' }}>
+                  <h2 className="text-xl md:text-2xl mb-6 font-semibold text-foreground">
                     Services supplémentaires réservés
                   </h2>
 
                   <div className="space-y-4 mb-6">
                     <div className="flex gap-4">
                       <div className="flex-shrink-0">
-                        <svg className="w-12 h-12 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="w-12 h-12 text-[#10B981]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-lg mb-2" style={{ fontWeight: 600, color: '#4A5B8C' }}>
+                        <h3 className="text-lg mb-2 font-semibold text-foreground">
                           Ménage ponctuel
                         </h3>
-                        <p className="text-sm text-gray-600 leading-relaxed">
+                        <p className="text-sm text-muted-foreground leading-relaxed">
                           Lorem ipsum dolor sit amet consectetur. Elit turpis id volutpat vitae. Vulputate mauris eu dignissim quis a nunc lorem. Consectetur viverra scelerisque nam. Consecte{' '}
-                          <span className="text-red-400 underline cursor-pointer" style={{ fontWeight: 600 }}>Voir plus</span>
+                          <span className="text-[#10B981] underline cursor-pointer font-semibold">Voir plus</span>
                         </p>
                       </div>
                     </div>
 
                     <div className="flex gap-4">
                       <div className="flex-shrink-0">
-                        <svg className="w-12 h-12 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="w-12 h-12 text-[#10B981]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
                         </svg>
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-lg mb-2" style={{ fontWeight: 600, color: '#4A5B8C' }}>
+                        <h3 className="text-lg mb-2 font-semibold text-foreground">
                           Parking [Type de parking]
                         </h3>
-                        <p className="text-sm text-gray-600 leading-relaxed">
+                        <p className="text-sm text-muted-foreground leading-relaxed">
                           Lorem ipsum dolor sit amet consectetur. Elit turpis id volutpat vitae. Vulputate mauris eu dignissim quis a nunc lorem. Consectetur viverra scelerisque nam. Consecte{' '}
-                          <span className="text-red-400 underline cursor-pointer" style={{ fontWeight: 600 }}>Voir plus</span>
+                          <span className="text-[#10B981] underline cursor-pointer font-semibold">Voir plus</span>
                         </p>
                       </div>
                     </div>
                   </div>
 
-                  <button className="flex items-center gap-2 text-sm" style={{ color: '#E8664D', fontWeight: 600 }}>
+                  <button className="flex items-center gap-2 text-sm text-[#10B981] font-semibold">
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                     </svg>
@@ -256,14 +251,14 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
 
                 {/* Détails du prix */}
                 <div className="border-b border-gray-200 pb-10">
-                  <h2 className="text-3xl mb-6" style={{ fontWeight: 500, color: '#4A5B8C', fontStyle: 'italic' }}>
+                  <h2 className="text-xl md:text-2xl mb-6 font-semibold text-foreground">
                     Détails du prix
                   </h2>
 
                   {/* Frais de réservation */}
                   <div className="mb-6">
                     <button className="flex items-center justify-between w-full mb-4">
-                      <span className="text-xs" style={{ fontWeight: 700, color: '#E8664D', letterSpacing: '0.5px' }}>
+                      <span className="text-xs font-bold tracking-wide text-[#10B981]">
                         FRAIS DE RÉSERVATION
                       </span>
                       <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -273,14 +268,14 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
 
                     <div className="space-y-3 mb-4">
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-700">Arrhes</span>
-                        <span className="text-gray-700">500€</span>
+                        <span className="text-foreground">Arrhes</span>
+                        <span className="text-foreground">500€</span>
                       </div>
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-700">Services ponctuels</span>
-                        <span className="text-gray-700">80€</span>
+                        <span className="text-foreground">Services ponctuels</span>
+                        <span className="text-foreground">80€</span>
                       </div>
-                      <div className="pl-4 flex items-center justify-between text-sm text-gray-500">
+                      <div className="pl-4 flex items-center justify-between text-sm text-muted-foreground">
                         <span>Ménage hebdomadaire</span>
                         <span>40€</span>
                       </div>
@@ -288,10 +283,10 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
 
                     <div className="border-t border-gray-200 pt-4">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-lg" style={{ fontWeight: 600, color: '#E8664D' }}>Total</span>
-                        <span className="text-lg" style={{ fontWeight: 600, color: '#E8664D' }}>580€</span>
+                        <span className="text-lg font-semibold text-[#10B981]">Total</span>
+                        <span className="text-lg font-semibold text-[#10B981]">580€</span>
                       </div>
-                      <div className="flex items-center justify-between text-sm text-gray-500">
+                      <div className="flex items-center justify-between text-sm text-muted-foreground">
                         <span>Dont TVA</span>
                         <span>54,66 €</span>
                       </div>
@@ -301,7 +296,7 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
                   {/* Frais récurrents */}
                   <div>
                     <button className="flex items-center justify-between w-full mb-4">
-                      <span className="text-xs" style={{ fontWeight: 700, color: '#E8664D', letterSpacing: '0.5px' }}>
+                      <span className="text-xs font-bold tracking-wide text-[#10B981]">
                         FRAIS RÉCURRENTS
                       </span>
                       <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -311,18 +306,18 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
 
                     <div className="space-y-3 mb-4">
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-700">Loyer</span>
-                        <span className="text-gray-700">500€ par mois</span>
+                        <span className="text-foreground">Loyer</span>
+                        <span className="text-foreground">500€ par mois</span>
                       </div>
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-700">3 occupants</span>
-                        <span className="text-gray-700">200€ par mois</span>
+                        <span className="text-foreground">3 occupants</span>
+                        <span className="text-foreground">200€ par mois</span>
                       </div>
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-700">Services supplémentaires</span>
-                        <span className="text-gray-700">40€ par mois</span>
+                        <span className="text-foreground">Services supplémentaires</span>
+                        <span className="text-foreground">40€ par mois</span>
                       </div>
-                      <div className="pl-4 flex items-center justify-between text-sm text-gray-500">
+                      <div className="pl-4 flex items-center justify-between text-sm text-muted-foreground">
                         <span>Ménage hebdomadaire</span>
                         <span>40€ par mois</span>
                       </div>
@@ -330,10 +325,10 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
 
                     <div className="border-t border-gray-200 pt-4">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-lg" style={{ fontWeight: 600, color: '#E8664D' }}>Total</span>
-                        <span className="text-lg" style={{ fontWeight: 600, color: '#E8664D' }}>740€ par mois</span>
+                        <span className="text-lg font-semibold text-[#10B981]">Total</span>
+                        <span className="text-lg font-semibold text-[#10B981]">740€ par mois</span>
                       </div>
-                      <div className="flex items-center justify-between text-sm text-gray-500">
+                      <div className="flex items-center justify-between text-sm text-muted-foreground">
                         <span>Dont TVA</span>
                         <span>54,66 €</span>
                       </div>
@@ -347,12 +342,12 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
                 <div className="space-y-6">
                   {/* Appartement T2 Card */}
                   <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
-                    <h2 className="text-2xl mb-5" style={{ fontWeight: 500, color: '#4A5B8C', fontStyle: 'italic' }}>
+                    <h2 className="text-xl md:text-2xl mb-5 font-semibold text-foreground">
                       Appartement T2
                     </h2>
 
                     <div className="flex flex-wrap gap-3 mb-6">
-                      <div className="flex items-center gap-1.5 px-3 py-2 bg-gray-50 rounded-lg text-sm text-gray-700">
+                      <div className="flex items-center gap-1.5 px-3 py-2 bg-gray-50 rounded-lg text-sm text-foreground">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -360,35 +355,35 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
                         <span>Croix Verte</span>
                       </div>
 
-                      <div className="flex items-center gap-1.5 px-3 py-2 bg-gray-50 rounded-lg text-sm text-gray-700">
+                      <div className="flex items-center gap-1.5 px-3 py-2 bg-gray-50 rounded-lg text-sm text-foreground">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12h18M3 6h18M3 18h18" />
                         </svg>
                         <span>2</span>
                       </div>
 
-                      <div className="flex items-center gap-1.5 px-3 py-2 bg-gray-50 rounded-lg text-sm text-gray-700">
+                      <div className="flex items-center gap-1.5 px-3 py-2 bg-gray-50 rounded-lg text-sm text-foreground">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
                         </svg>
                         <span>1</span>
                       </div>
 
-                      <div className="flex items-center gap-1.5 px-3 py-2 bg-gray-50 rounded-lg text-sm text-gray-700">
+                      <div className="flex items-center gap-1.5 px-3 py-2 bg-gray-50 rounded-lg text-sm text-foreground">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V6a2 2 0 012-2h12a2 2 0 012 2v2m-16 0h16m-16 0v10a2 2 0 002 2h12a2 2 0 002-2V8m-16 0h16" />
                         </svg>
                         <span>42m2</span>
                       </div>
 
-                      <div className="flex items-center gap-1.5 px-3 py-2 bg-gray-50 rounded-lg text-sm text-gray-700">
+                      <div className="flex items-center gap-1.5 px-3 py-2 bg-gray-50 rounded-lg text-sm text-foreground">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                         </svg>
                         <span>T2</span>
                       </div>
 
-                      <div className="flex items-center gap-1.5 px-3 py-2 bg-gray-50 rounded-lg text-sm text-gray-700">
+                      <div className="flex items-center gap-1.5 px-3 py-2 bg-gray-50 rounded-lg text-sm text-foreground">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
@@ -396,10 +391,7 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
                       </div>
                     </div>
 
-                    <button 
-                      className="flex items-center gap-2 text-sm"
-                      style={{ color: '#E8664D', fontWeight: 600 }}
-                    >
+                    <button className="flex items-center gap-2 text-sm text-[#10B981] font-semibold">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -410,11 +402,11 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
 
                   {/* Conditions d'annulation Card */}
                   <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sticky top-24">
-                    <h2 className="text-2xl mb-6" style={{ fontWeight: 500, color: '#4A5B8C', fontStyle: 'italic' }}>
+                    <h2 className="text-xl md:text-2xl mb-6 font-semibold text-foreground">
                       Conditions d'annulation
                     </h2>
 
-                    <ul className="space-y-4 mb-6 text-sm leading-relaxed" style={{ color: '#6B7280' }}>
+                    <ul className="space-y-4 mb-6 text-sm leading-relaxed text-muted-foreground">
                       <li className="flex gap-2">
                         <span>•</span>
                         <span>Annulation plus de 30 jours avant arrivée du client : restitution intégrale du montant du séjour</span>
@@ -429,14 +421,9 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
                       </li>
                     </ul>
 
-                    <button 
+                    <button
                       onClick={() => setShowCancelPopup(true)}
-                      className="w-full px-6 py-3 border-2 rounded-lg text-sm hover:bg-red-50 transition-colors bg-white flex items-center justify-center gap-2"
-                      style={{ 
-                        fontWeight: 600,
-                        color: '#E8664D',
-                        borderColor: '#E8664D'
-                      }}
+                      className="w-full px-6 py-3 border-2 border-destructive text-destructive rounded-lg text-sm hover:bg-red-50 transition-colors bg-white flex items-center justify-center gap-2 font-semibold"
                     >
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
