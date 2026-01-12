@@ -1,5 +1,5 @@
-import { Heart, Share, ChevronLeft } from 'lucide-react';
-import { useState, useEffect, useRef } from 'react';
+import { Heart, Share, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 interface ImageGalleryProps {
   images: string[];
@@ -8,123 +8,175 @@ interface ImageGalleryProps {
   onFavoriteToggle?: () => void;
 }
 
-export function ImageGallery({ 
-  images, 
+export function ImageGallery({
+  images,
   showFavoriteButton = true,
   isFavorite = false,
-  onFavoriteToggle 
+  onFavoriteToggle
 }: ImageGalleryProps) {
   const [showAllPhotos, setShowAllPhotos] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
 
   const openGallery = (index: number) => {
     setCurrentImageIndex(index);
     setShowAllPhotos(true);
   };
 
-  // Scroll to selected image when gallery opens
-  useEffect(() => {
-    if (showAllPhotos && imageRefs.current[currentImageIndex]) {
-      setTimeout(() => {
-        imageRefs.current[currentImageIndex]?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-        });
-      }, 100);
-    }
-  }, [showAllPhotos, currentImageIndex]);
+  const closeGallery = () => {
+    setShowAllPhotos(false);
+  };
 
-  // Helper function to render an image in the modal gallery
-  const renderModalImage = (index: number, isFullWidth: boolean) => {
-    if (index >= images.length) return null;
-    return (
-      <div 
-        ref={(el) => (imageRefs.current[index] = el)} 
-        className="relative group overflow-hidden cursor-pointer"
-      >
-        <img 
-          src={images[index]} 
-          alt={`Photo ${index + 1}`} 
-          className={isFullWidth ? "w-full h-auto" : "w-full h-full object-cover"} 
-        />
-        <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity"></div>
-      </div>
-    );
+  const goToNextImage = useCallback(() => {
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  }, [images.length]);
+
+  const goToPreviousImage = useCallback(() => {
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  }, [images.length]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (!showAllPhotos) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') {
+        goToNextImage();
+      } else if (e.key === 'ArrowLeft') {
+        goToPreviousImage();
+      } else if (e.key === 'Escape') {
+        closeGallery();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showAllPhotos, goToNextImage, goToPreviousImage]);
+
+  // Touch/swipe gesture handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current === null || touchEndX.current === null) return;
+
+    const diff = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50;
+
+    if (Math.abs(diff) > minSwipeDistance) {
+      if (diff > 0) {
+        // Swiped left - go to next
+        goToNextImage();
+      } else {
+        // Swiped right - go to previous
+        goToPreviousImage();
+      }
+    }
+
+    touchStartX.current = null;
+    touchEndX.current = null;
   };
 
   return (
     <>
-      {/* Photo Gallery Modal */}
+      {/* Photo Gallery Carousel Modal */}
       {showAllPhotos && (
-        <div className="fixed inset-0 z-[100] bg-white">
+        <div className="fixed inset-0 z-[100] bg-black">
           {/* Header */}
-          <div className="sticky top-0 bg-white z-10 px-6 py-4 flex items-center justify-between border-b border-gray-200">
+          <div className="absolute top-0 left-0 right-0 bg-gradient-to-b from-black/60 to-transparent z-20 px-6 py-4 flex items-center justify-between">
             <button
-              onClick={() => setShowAllPhotos(false)}
-              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+              onClick={closeGallery}
+              className="flex items-center gap-2 text-white hover:opacity-80 transition-opacity"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <X className="w-6 h-6" />
             </button>
+
+            {/* Image Counter */}
+            <div className="text-white font-semibold text-base">
+              {currentImageIndex + 1} / {images.length}
+            </div>
+
             <div className="flex items-center gap-4">
               {/* Partager Button */}
-              <button className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+              <button className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 transition-colors text-white">
                 <Share className="w-4 h-4" />
-                <span className="text-sm underline" style={{ fontWeight: 600 }}>Partager</span>
+                <span className="text-sm underline hidden sm:inline" style={{ fontWeight: 600 }}>Partager</span>
               </button>
               {/* Enregistrer Button */}
               {showFavoriteButton && (
-                <button 
+                <button
                   onClick={onFavoriteToggle}
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 transition-colors text-white"
                 >
                   <Heart className={`w-4 h-4 ${isFavorite ? 'fill-[#5EC6D8] text-[#5EC6D8]' : ''}`} />
-                  <span className="text-sm underline" style={{ fontWeight: 600 }}>Enregistrer</span>
+                  <span className="text-sm underline hidden sm:inline" style={{ fontWeight: 600 }}>Enregistrer</span>
                 </button>
               )}
             </div>
           </div>
 
-          {/* Gallery Grid */}
-          <div className="h-[calc(100vh-73px)] overflow-y-auto bg-white">
-            <div className="max-w-[630px] mx-auto px-6 py-8">
-              <div className="space-y-2">
-                {/* Image 1 - Full width */}
-                {renderModalImage(0, true)}
+          {/* Carousel Content */}
+          <div
+            className="h-full flex items-center justify-center px-4 sm:px-16"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            {/* Previous Button */}
+            <button
+              onClick={goToPreviousImage}
+              className="absolute left-2 sm:left-6 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-105"
+              aria-label="Image précédente"
+            >
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-gray-800" />
+            </button>
 
-                {/* Images 2 & 3 - Side by side */}
-                {images.length > 1 && (
-                  <div className="grid grid-cols-2 gap-2 h-[280px]">
-                    {renderModalImage(1, false)}
-                    {renderModalImage(2, false)}
-                  </div>
-                )}
+            {/* Main Image */}
+            <div className="max-w-full max-h-full flex items-center justify-center">
+              <img
+                src={images[currentImageIndex]}
+                alt={`Photo ${currentImageIndex + 1}`}
+                className="max-w-full max-h-[80vh] object-contain rounded-lg select-none"
+                draggable={false}
+              />
+            </div>
 
-                {/* Image 4 - Full width */}
-                {renderModalImage(3, true)}
+            {/* Next Button */}
+            <button
+              onClick={goToNextImage}
+              className="absolute right-2 sm:right-6 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-105"
+              aria-label="Image suivante"
+            >
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-gray-800" />
+            </button>
+          </div>
 
-                {/* Images 5 & 6 - Side by side */}
-                {images.length > 4 && (
-                  <div className="grid grid-cols-2 gap-2 h-[280px]">
-                    {renderModalImage(4, false)}
-                    {renderModalImage(5, false)}
-                  </div>
-                )}
-
-                {/* Image 7 - Full width */}
-                {renderModalImage(6, true)}
-
-                {/* Images 8 & 9 - Side by side */}
-                {images.length > 7 && (
-                  <div className="grid grid-cols-2 gap-2 h-[280px]">
-                    {renderModalImage(7, false)}
-                    {renderModalImage(8, false)}
-                  </div>
-                )}
-
-                {/* Image 10 - Full width */}
-                {images.length > 9 && renderModalImage(9, true)}
-              </div>
+          {/* Thumbnail Navigation */}
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent z-20 px-6 py-4">
+            <div className="flex justify-center gap-2 overflow-x-auto max-w-full pb-2">
+              {images.map((img, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentImageIndex(index)}
+                  className={`flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 rounded-lg overflow-hidden border-2 transition-all ${
+                    index === currentImageIndex
+                      ? 'border-white scale-110'
+                      : 'border-transparent opacity-60 hover:opacity-100'
+                  }`}
+                >
+                  <img
+                    src={img}
+                    alt={`Miniature ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </button>
+              ))}
             </div>
           </div>
         </div>
