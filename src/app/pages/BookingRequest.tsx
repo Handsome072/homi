@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Star } from 'lucide-react';
+import { ArrowLeft, Star, Calendar, Users, Minus, Plus } from 'lucide-react';
+import logo from 'figma:asset/logo.png';
 
 interface BookingData {
   title: string;
@@ -9,10 +10,44 @@ interface BookingData {
   location: string;
   checkIn: string;
   checkOut: string;
+  checkInDate?: string;
+  checkOutDate?: string;
   guests: number;
   nights: number;
   pricePerNight: number;
+  maxGuests?: number;
+  additionalGuestFee?: number;
+  baseGuests?: number;
 }
+
+// Tax rate for calculation (10% of subtotal)
+const TAX_RATE = 0.10;
+// Default additional guest fee per night
+const DEFAULT_ADDITIONAL_GUEST_FEE = 15.00;
+const DEFAULT_BASE_GUESTS = 1;
+
+// Helper function to calculate nights between two dates
+const calculateNights = (checkInDate: Date, checkOutDate: Date): number => {
+  const timeDiff = checkOutDate.getTime() - checkInDate.getTime();
+  return Math.max(1, Math.ceil(timeDiff / (1000 * 60 * 60 * 24)));
+};
+
+// Helper function to format date for display
+const formatDateForDisplay = (date: Date): string => {
+  const day = date.getDate();
+  const months = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+  return `${day} ${month} ${year}`;
+};
+
+// Helper function to format date for input
+const formatDateForInput = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
 
 export function BookingRequest() {
   const navigate = useNavigate();
@@ -23,11 +58,54 @@ export function BookingRequest() {
   const [editingStep, setEditingStep] = useState<number | null>(null);
   const [bookingData, setBookingData] = useState<BookingData | null>(null);
 
+  // Editable booking details
+  const [editingDates, setEditingDates] = useState(false);
+  const [editingGuests, setEditingGuests] = useState(false);
+  const [checkInDate, setCheckInDate] = useState<Date>(new Date());
+  const [checkOutDate, setCheckOutDate] = useState<Date>(new Date());
+  const [guestCount, setGuestCount] = useState(1);
+  const [maxGuests, setMaxGuests] = useState(10);
+  const [additionalGuestFee, setAdditionalGuestFee] = useState(DEFAULT_ADDITIONAL_GUEST_FEE);
+  const [baseGuests, setBaseGuests] = useState(DEFAULT_BASE_GUESTS);
+
   // Load booking data from sessionStorage
   useEffect(() => {
     const storedData = sessionStorage.getItem('bookingData');
     if (storedData) {
-      setBookingData(JSON.parse(storedData));
+      const parsed = JSON.parse(storedData);
+      setBookingData(parsed);
+
+      // Initialize editable state from parsed data
+      if (parsed.checkInDate) {
+        setCheckInDate(new Date(parsed.checkInDate));
+      } else {
+        // Default: today
+        const defaultCheckIn = new Date();
+        defaultCheckIn.setDate(defaultCheckIn.getDate() + 1);
+        setCheckInDate(defaultCheckIn);
+      }
+
+      if (parsed.checkOutDate) {
+        setCheckOutDate(new Date(parsed.checkOutDate));
+      } else {
+        // Default: tomorrow + nights
+        const defaultCheckOut = new Date();
+        defaultCheckOut.setDate(defaultCheckOut.getDate() + 1 + (parsed.nights || 2));
+        setCheckOutDate(defaultCheckOut);
+      }
+
+      setGuestCount(parsed.guests || 1);
+      setMaxGuests(parsed.maxGuests || 10);
+      setAdditionalGuestFee(parsed.additionalGuestFee ?? DEFAULT_ADDITIONAL_GUEST_FEE);
+      setBaseGuests(parsed.baseGuests ?? DEFAULT_BASE_GUESTS);
+    } else {
+      // Set default dates if no stored data
+      const defaultCheckIn = new Date();
+      defaultCheckIn.setDate(defaultCheckIn.getDate() + 1);
+      const defaultCheckOut = new Date();
+      defaultCheckOut.setDate(defaultCheckOut.getDate() + 3);
+      setCheckInDate(defaultCheckIn);
+      setCheckOutDate(defaultCheckOut);
     }
   }, []);
 
@@ -41,12 +119,57 @@ export function BookingRequest() {
     checkOut: "avr. 2026",
     guests: 1,
     nights: 2,
-    pricePerNight: 87.56
+    pricePerNight: 87.56,
+    maxGuests: 10,
+    additionalGuestFee: DEFAULT_ADDITIONAL_GUEST_FEE,
+    baseGuests: DEFAULT_BASE_GUESTS
   };
 
-  const subtotal = data.nights * data.pricePerNight;
-  const taxes = 18.99;
-  const total = subtotal + taxes;
+  // Calculate nights from dates
+  const nights = useMemo(() => calculateNights(checkInDate, checkOutDate), [checkInDate, checkOutDate]);
+
+  // Dynamic price calculation with guest fees
+  const basePrice = useMemo(() => nights * data.pricePerNight, [nights, data.pricePerNight]);
+  const extraGuestFee = useMemo(() => {
+    const extraGuests = Math.max(0, guestCount - baseGuests);
+    return extraGuests * additionalGuestFee * nights;
+  }, [guestCount, baseGuests, additionalGuestFee, nights]);
+  const subtotal = useMemo(() => basePrice + extraGuestFee, [basePrice, extraGuestFee]);
+  const taxes = useMemo(() => subtotal * TAX_RATE, [subtotal]);
+  const total = useMemo(() => subtotal + taxes, [subtotal, taxes]);
+
+  // Handle date changes
+  const handleCheckInChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newDate = new Date(e.target.value);
+    setCheckInDate(newDate);
+    // Ensure checkout is at least 1 day after check-in
+    if (newDate >= checkOutDate) {
+      const newCheckout = new Date(newDate);
+      newCheckout.setDate(newCheckout.getDate() + 1);
+      setCheckOutDate(newCheckout);
+    }
+  };
+
+  const handleCheckOutChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newDate = new Date(e.target.value);
+    // Ensure checkout is after check-in
+    if (newDate > checkInDate) {
+      setCheckOutDate(newDate);
+    }
+  };
+
+  // Handle guest count changes
+  const incrementGuests = () => {
+    if (guestCount < maxGuests) {
+      setGuestCount(guestCount + 1);
+    }
+  };
+
+  const decrementGuests = () => {
+    if (guestCount > 1) {
+      setGuestCount(guestCount - 1);
+    }
+  };
 
   const isStepCompleted = (step: number) => completedSteps.includes(step);
   const isStepEditable = (step: number) => {
@@ -72,12 +195,16 @@ export function BookingRequest() {
       <header className="border-b border-gray-200 sticky top-0 bg-white z-50">
         <div className="max-w-[1480px] mx-auto px-6 md:px-10 lg:px-20 py-5">
           <div className="flex items-center justify-center">
-            <div className="flex items-center gap-1">
-              <svg className="w-8 h-8 text-[#5EC6D8]" viewBox="0 0 32 32" fill="currentColor">
-                <path d="M16 1c2 0 3.46.96 4.75 3.27L23.7 9.8l5.82-.84c2.17-.32 3.77.18 4.43 2.28.65 2.1-.13 3.77-1.87 5.18l-4.45 3.63L29.2 25c1.1 1.92 1.1 3.78-.4 5.08-1.48 1.3-3.25 1.18-5.04-.17l-4.76-3.43-4.76 3.43c-1.8 1.35-3.56 1.47-5.04.17-1.5-1.3-1.5-3.16-.4-5.08l1.56-4.95L5.92 16.4c-1.74-1.4-2.52-3.08-1.87-5.18.66-2.1 2.26-2.6 4.43-2.28l5.82.84 2.95-5.53C18.54 1.96 20 1 22 1h-6z"/>
-              </svg>
-              <span className="text-[#5EC6D8] text-xl ml-1" style={{ fontWeight: 600 }}>HOMIQIO</span>
-            </div>
+            <button
+              onClick={() => navigate('/')}
+              className="flex items-center gap-1 hover:opacity-80 transition-opacity duration-200"
+            >
+              <img
+                src={logo}
+                alt="HOMIQIO Logo"
+                className="w-[150px] h-auto"
+              />
+            </button>
           </div>
         </div>
       </header>
@@ -481,25 +608,123 @@ export function BookingRequest() {
               </div>
 
               {/* Dates */}
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <h4 className="text-base" style={{ fontWeight: 600 }}>Dates</h4>
-                  <p className="text-sm text-gray-700">{data.checkIn}-{data.checkOut}</p>
+              <div className="mb-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="text-base" style={{ fontWeight: 600 }}>Dates</h4>
+                    {!editingDates && (
+                      <p className="text-sm text-gray-700">
+                        {formatDateForDisplay(checkInDate)} - {formatDateForDisplay(checkOutDate)}
+                      </p>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => setEditingDates(!editingDates)}
+                    className="text-base underline"
+                    style={{ fontWeight: 600 }}
+                  >
+                    {editingDates ? 'Fermer' : 'Modifier'}
+                  </button>
                 </div>
-                <button className="text-base underline" style={{ fontWeight: 600 }}>
-                  Modifier
-                </button>
+
+                {/* Date editing panel */}
+                {editingDates && (
+                  <div className="mt-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm text-gray-600 mb-1">Arrivée</label>
+                        <div className="relative">
+                          <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                          <input
+                            type="date"
+                            value={formatDateForInput(checkInDate)}
+                            min={formatDateForInput(new Date())}
+                            onChange={handleCheckInChange}
+                            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-sm text-gray-600 mb-1">Départ</label>
+                        <div className="relative">
+                          <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                          <input
+                            type="date"
+                            value={formatDateForInput(checkOutDate)}
+                            min={formatDateForInput(new Date(checkInDate.getTime() + 86400000))}
+                            onChange={handleCheckOutChange}
+                            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between pt-2 border-t border-gray-200">
+                        <span className="text-sm text-gray-600">Nombre de nuits</span>
+                        <span className="text-sm" style={{ fontWeight: 600 }}>{nights} nuit{nights > 1 ? 's' : ''}</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Guests */}
-              <div className="flex items-center justify-between mb-6 pb-6 border-b border-gray-200">
-                <div>
-                  <h4 className="text-base" style={{ fontWeight: 600 }}>Voyageurs</h4>
-                  <p className="text-sm text-gray-700">{data.guests} adulte</p>
+              <div className="mb-6 pb-6 border-b border-gray-200">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="text-base" style={{ fontWeight: 600 }}>Voyageurs</h4>
+                    {!editingGuests && (
+                      <p className="text-sm text-gray-700">{guestCount} voyageur{guestCount > 1 ? 's' : ''}</p>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => setEditingGuests(!editingGuests)}
+                    className="text-base underline"
+                    style={{ fontWeight: 600 }}
+                  >
+                    {editingGuests ? 'Fermer' : 'Modifier'}
+                  </button>
                 </div>
-                <button className="text-base underline" style={{ fontWeight: 600 }}>
-                  Modifier
-                </button>
+
+                {/* Guest editing panel */}
+                {editingGuests && (
+                  <div className="mt-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Users className="w-4 h-4 text-gray-600" />
+                        <span className="text-sm">Voyageurs</span>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <button
+                          onClick={decrementGuests}
+                          disabled={guestCount <= 1}
+                          className={`w-8 h-8 flex items-center justify-center rounded-full border ${
+                            guestCount <= 1
+                              ? 'border-gray-200 text-gray-300 cursor-not-allowed'
+                              : 'border-gray-400 text-gray-600 hover:border-gray-900 hover:text-gray-900'
+                          }`}
+                        >
+                          <Minus className="w-4 h-4" />
+                        </button>
+                        <span className="text-base w-8 text-center" style={{ fontWeight: 600 }}>{guestCount}</span>
+                        <button
+                          onClick={incrementGuests}
+                          disabled={guestCount >= maxGuests}
+                          className={`w-8 h-8 flex items-center justify-center rounded-full border ${
+                            guestCount >= maxGuests
+                              ? 'border-gray-200 text-gray-300 cursor-not-allowed'
+                              : 'border-gray-400 text-gray-600 hover:border-gray-900 hover:text-gray-900'
+                          }`}
+                        >
+                          <Plus className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                    {guestCount >= maxGuests && (
+                      <p className="text-xs text-gray-500 mt-2">
+                        Ce logement accepte {maxGuests} voyageurs maximum
+                      </p>
+                    )}
+                  </div>
+                )}
               </div>
 
               {/* Price breakdown */}
@@ -508,11 +733,17 @@ export function BookingRequest() {
               </h4>
               <div className="space-y-3 mb-6 pb-6 border-b border-gray-200">
                 <div className="flex items-center justify-between text-base">
-                  <span className="underline">{data.nights} nuits x ${data.pricePerNight.toFixed(2)}</span>
-                  <span>${subtotal.toFixed(2)}</span>
+                  <span className="underline">{nights} nuit{nights > 1 ? 's' : ''} x ${data.pricePerNight.toFixed(2)}</span>
+                  <span>${basePrice.toFixed(2)}</span>
                 </div>
+                {extraGuestFee > 0 && (
+                  <div className="flex items-center justify-between text-base">
+                    <span className="underline">Frais voyageurs supp. ({guestCount - baseGuests} × ${additionalGuestFee.toFixed(2)}/nuit)</span>
+                    <span>${extraGuestFee.toFixed(2)}</span>
+                  </div>
+                )}
                 <div className="flex items-center justify-between text-base">
-                  <span className="underline">Taxes</span>
+                  <span className="underline">Taxes ({(TAX_RATE * 100).toFixed(0)}%)</span>
                   <span>${taxes.toFixed(2)}</span>
                 </div>
               </div>

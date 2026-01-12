@@ -1,9 +1,46 @@
-import { Heart, Share, Star, ChevronRight, X } from 'lucide-react';
-import { useState } from 'react';
+import { Heart, Share, Star, ChevronRight, X, ChevronDown, Minus, Plus, Calendar } from 'lucide-react';
+import { useState, useMemo } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { ImageGallery } from '../components/ImageGallery';
+
+// Tax rate for calculation (10% of subtotal)
+const TAX_RATE = 0.10;
+// Additional guest fee per night (for guests beyond base occupancy)
+const ADDITIONAL_GUEST_FEE = 15.00;
+const BASE_GUESTS = 1;
+
+// Helper function to calculate nights between two dates
+const calculateNights = (checkInDate: Date, checkOutDate: Date): number => {
+  const timeDiff = checkOutDate.getTime() - checkInDate.getTime();
+  return Math.max(1, Math.ceil(timeDiff / (1000 * 60 * 60 * 24)));
+};
+
+// Helper function to format date for display (French format)
+const formatDateForDisplay = (date: Date): string => {
+  const day = date.getDate();
+  const months = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+  return `${day} ${month} ${year}`;
+};
+
+// Helper function to format date for input field display (DD/MM/YYYY)
+const formatDateForInputDisplay = (date: Date): string => {
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+};
+
+// Helper function to format date for HTML date input
+const formatDateForInput = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
 
 export function PropertyDetails() {
   const navigate = useNavigate();
@@ -12,6 +49,80 @@ export function PropertyDetails() {
   const [activeTab, setActiveTab] = useState('photos');
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+
+  // Property configuration
+  const pricePerNight = 87.56;
+  const maxGuests = 2;
+
+  // Initialize dates (default: tomorrow to day after tomorrow + 1)
+  const getDefaultCheckIn = () => {
+    const date = new Date();
+    date.setDate(date.getDate() + 1);
+    date.setHours(0, 0, 0, 0);
+    return date;
+  };
+
+  const getDefaultCheckOut = () => {
+    const date = new Date();
+    date.setDate(date.getDate() + 3);
+    date.setHours(0, 0, 0, 0);
+    return date;
+  };
+
+  // Editable state for reservation
+  const [checkInDate, setCheckInDate] = useState<Date>(getDefaultCheckIn);
+  const [checkOutDate, setCheckOutDate] = useState<Date>(getDefaultCheckOut);
+  const [guestCount, setGuestCount] = useState(1);
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showGuestPicker, setShowGuestPicker] = useState(false);
+
+  // Calculate nights dynamically
+  const nights = useMemo(() => calculateNights(checkInDate, checkOutDate), [checkInDate, checkOutDate]);
+
+  // Dynamic price calculation
+  const basePrice = useMemo(() => nights * pricePerNight, [nights, pricePerNight]);
+  const additionalGuestFee = useMemo(() => {
+    const extraGuests = Math.max(0, guestCount - BASE_GUESTS);
+    return extraGuests * ADDITIONAL_GUEST_FEE * nights;
+  }, [guestCount, nights]);
+  const subtotal = useMemo(() => basePrice + additionalGuestFee, [basePrice, additionalGuestFee]);
+  const taxes = useMemo(() => subtotal * TAX_RATE, [subtotal]);
+  const total = useMemo(() => subtotal + taxes, [subtotal, taxes]);
+
+  // Handle date changes
+  const handleCheckInChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newDate = new Date(e.target.value);
+    newDate.setHours(0, 0, 0, 0);
+    setCheckInDate(newDate);
+    // Ensure checkout is at least 1 day after check-in
+    if (newDate >= checkOutDate) {
+      const newCheckout = new Date(newDate);
+      newCheckout.setDate(newCheckout.getDate() + 1);
+      setCheckOutDate(newCheckout);
+    }
+  };
+
+  const handleCheckOutChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newDate = new Date(e.target.value);
+    newDate.setHours(0, 0, 0, 0);
+    // Ensure checkout is after check-in
+    if (newDate > checkInDate) {
+      setCheckOutDate(newDate);
+    }
+  };
+
+  // Handle guest count changes
+  const incrementGuests = () => {
+    if (guestCount < maxGuests) {
+      setGuestCount(guestCount + 1);
+    }
+  };
+
+  const decrementGuests = () => {
+    if (guestCount > 1) {
+      setGuestCount(guestCount - 1);
+    }
+  };
 
   const images = [
     'https://images.unsplash.com/photo-1737305457496-dc7503cdde1e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBzdHVkaW8lMjBhcGFydG1lbnQlMjBpbnRlcmlvcnxlbnwxfHx8fDE3Njc3NjY1NTN8MA&ixlib=rb-4.1.0&q=80&w=1080',
@@ -459,8 +570,8 @@ export function PropertyDetails() {
                 <div className="border border-gray-200 rounded-2xl p-6 shadow-xl">
                   {/* Price */}
                   <div className="flex items-baseline gap-1 mb-4">
-                    <span className="text-2xl" style={{ fontWeight: 600 }}>$199</span>
-                    <span className="text-base text-gray-600">pour 2 nuits</span>
+                    <span className="text-2xl" style={{ fontWeight: 600 }}>${total.toFixed(2)}</span>
+                    <span className="text-base text-gray-600">pour {nights} nuit{nights > 1 ? 's' : ''}</span>
                   </div>
 
                   {/* Rare badge */}
@@ -477,25 +588,128 @@ export function PropertyDetails() {
                     </div>
                   </div>
 
-                  {/* Date inputs */}
-                  <div className="border border-gray-300 rounded-lg mb-4">
+                  {/* Date and Guest inputs */}
+                  <div className="border border-gray-300 rounded-lg mb-4 relative">
                     <div className="grid grid-cols-2 divide-x divide-gray-300">
-                      <div className="p-3">
+                      <div
+                        className="p-3 cursor-pointer hover:bg-gray-50 transition-colors"
+                        onClick={() => { setShowDatePicker(!showDatePicker); setShowGuestPicker(false); }}
+                      >
                         <label className="text-xs block mb-1" style={{ fontWeight: 600 }}>ARRIVÉE</label>
-                        <input type="text" value="03/04/2026" readOnly className="text-sm w-full outline-none" />
+                        <div className="text-sm w-full flex items-center justify-between">
+                          <span>{formatDateForInputDisplay(checkInDate)}</span>
+                          <Calendar className="w-3.5 h-3.5 text-gray-400" />
+                        </div>
                       </div>
-                      <div className="p-3">
+                      <div
+                        className="p-3 cursor-pointer hover:bg-gray-50 transition-colors"
+                        onClick={() => { setShowDatePicker(!showDatePicker); setShowGuestPicker(false); }}
+                      >
                         <label className="text-xs block mb-1" style={{ fontWeight: 600 }}>DÉPART</label>
-                        <input type="text" value="05/04/2026" readOnly className="text-sm w-full outline-none" />
+                        <div className="text-sm w-full flex items-center justify-between">
+                          <span>{formatDateForInputDisplay(checkOutDate)}</span>
+                          <Calendar className="w-3.5 h-3.5 text-gray-400" />
+                        </div>
                       </div>
                     </div>
-                    <div className="border-t border-gray-300 p-3">
+                    <div
+                      className="border-t border-gray-300 p-3 cursor-pointer hover:bg-gray-50 transition-colors"
+                      onClick={() => { setShowGuestPicker(!showGuestPicker); setShowDatePicker(false); }}
+                    >
                       <label className="text-xs block mb-1" style={{ fontWeight: 600 }}>VOYAGEURS</label>
-                      <button className="text-sm w-full text-left flex items-center justify-between">
-                        <span>1 voyageur</span>
-                        <ChevronRight className="w-4 h-4" />
-                      </button>
+                      <div className="text-sm w-full text-left flex items-center justify-between">
+                        <span>{guestCount} voyageur{guestCount > 1 ? 's' : ''}</span>
+                        <ChevronDown className={`w-4 h-4 transition-transform ${showGuestPicker ? 'rotate-180' : ''}`} />
+                      </div>
                     </div>
+
+                    {/* Date picker dropdown */}
+                    {showDatePicker && (
+                      <div className="absolute top-full left-0 right-0 mt-2 p-4 bg-white border border-gray-200 rounded-xl shadow-xl z-10">
+                        <div className="space-y-4">
+                          <div>
+                            <label className="block text-sm text-gray-600 mb-1" style={{ fontWeight: 600 }}>Arrivée</label>
+                            <input
+                              type="date"
+                              value={formatDateForInput(checkInDate)}
+                              min={formatDateForInput(new Date())}
+                              onChange={handleCheckInChange}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5EC6D8] text-sm"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm text-gray-600 mb-1" style={{ fontWeight: 600 }}>Départ</label>
+                            <input
+                              type="date"
+                              value={formatDateForInput(checkOutDate)}
+                              min={formatDateForInput(new Date(checkInDate.getTime() + 86400000))}
+                              onChange={handleCheckOutChange}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5EC6D8] text-sm"
+                            />
+                          </div>
+                          <div className="flex items-center justify-between pt-2 border-t border-gray-200">
+                            <span className="text-sm text-gray-600">Nombre de nuits</span>
+                            <span className="text-sm" style={{ fontWeight: 600 }}>{nights} nuit{nights > 1 ? 's' : ''}</span>
+                          </div>
+                          <button
+                            onClick={() => setShowDatePicker(false)}
+                            className="w-full py-2 bg-gray-900 text-white rounded-lg text-sm hover:bg-gray-800 transition-colors"
+                            style={{ fontWeight: 600 }}
+                          >
+                            Appliquer
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Guest picker dropdown */}
+                    {showGuestPicker && (
+                      <div className="absolute top-full left-0 right-0 mt-2 p-4 bg-white border border-gray-200 rounded-xl shadow-xl z-10">
+                        <div className="flex items-center justify-between mb-4">
+                          <div>
+                            <span className="text-sm" style={{ fontWeight: 600 }}>Voyageurs</span>
+                            <p className="text-xs text-gray-500">Maximum {maxGuests} voyageurs</p>
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <button
+                              onClick={decrementGuests}
+                              disabled={guestCount <= 1}
+                              className={`w-8 h-8 flex items-center justify-center rounded-full border ${
+                                guestCount <= 1
+                                  ? 'border-gray-200 text-gray-300 cursor-not-allowed'
+                                  : 'border-gray-400 text-gray-600 hover:border-gray-900 hover:text-gray-900'
+                              }`}
+                            >
+                              <Minus className="w-4 h-4" />
+                            </button>
+                            <span className="text-base w-8 text-center" style={{ fontWeight: 600 }}>{guestCount}</span>
+                            <button
+                              onClick={incrementGuests}
+                              disabled={guestCount >= maxGuests}
+                              className={`w-8 h-8 flex items-center justify-center rounded-full border ${
+                                guestCount >= maxGuests
+                                  ? 'border-gray-200 text-gray-300 cursor-not-allowed'
+                                  : 'border-gray-400 text-gray-600 hover:border-gray-900 hover:text-gray-900'
+                              }`}
+                            >
+                              <Plus className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </div>
+                        {additionalGuestFee > 0 && (
+                          <p className="text-xs text-gray-500 mb-4">
+                            Frais supplémentaires de ${ADDITIONAL_GUEST_FEE.toFixed(2)}/nuit par voyageur additionnel
+                          </p>
+                        )}
+                        <button
+                          onClick={() => setShowGuestPicker(false)}
+                          className="w-full py-2 bg-gray-900 text-white rounded-lg text-sm hover:bg-gray-800 transition-colors"
+                          style={{ fontWeight: 600 }}
+                        >
+                          Appliquer
+                        </button>
+                      </div>
+                    )}
                   </div>
 
                   {/* Reserve button */}
@@ -506,11 +720,16 @@ export function PropertyDetails() {
                         image: images[0],
                         rating: 4.96,
                         location: "Coup de cœur voyageurs",
-                        checkIn: "3-4",
-                        checkOut: "avr. 2026",
-                        guests: 1,
-                        nights: 2,
-                        pricePerNight: 87.56
+                        checkIn: formatDateForDisplay(checkInDate),
+                        checkOut: formatDateForDisplay(checkOutDate),
+                        checkInDate: checkInDate.toISOString(),
+                        checkOutDate: checkOutDate.toISOString(),
+                        guests: guestCount,
+                        nights: nights,
+                        pricePerNight: pricePerNight,
+                        maxGuests: maxGuests,
+                        additionalGuestFee: ADDITIONAL_GUEST_FEE,
+                        baseGuests: BASE_GUESTS
                       };
                       // Store booking data in sessionStorage for the booking page
                       sessionStorage.setItem('bookingData', JSON.stringify(bookingData));
@@ -528,6 +747,30 @@ export function PropertyDetails() {
                   <p className="text-center text-sm text-gray-600 mb-4">
                     Aucun montant ne vous sera débité pour le moment
                   </p>
+
+                  {/* Price breakdown */}
+                  <div className="space-y-2 pb-4 border-b border-gray-200">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="underline">${pricePerNight.toFixed(2)} x {nights} nuit{nights > 1 ? 's' : ''}</span>
+                      <span>${basePrice.toFixed(2)}</span>
+                    </div>
+                    {additionalGuestFee > 0 && (
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="underline">Frais voyageurs supp.</span>
+                        <span>${additionalGuestFee.toFixed(2)}</span>
+                      </div>
+                    )}
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="underline">Taxes ({(TAX_RATE * 100).toFixed(0)}%)</span>
+                      <span>${taxes.toFixed(2)}</span>
+                    </div>
+                  </div>
+
+                  {/* Total */}
+                  <div className="flex items-center justify-between py-4">
+                    <span className="text-base" style={{ fontWeight: 600 }}>Total</span>
+                    <span className="text-base" style={{ fontWeight: 600 }}>${total.toFixed(2)}</span>
+                  </div>
 
                   {/* Cancellation policy */}
                   <div className="text-center pt-4 border-t border-gray-200">
