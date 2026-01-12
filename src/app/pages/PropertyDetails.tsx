@@ -749,13 +749,17 @@ export function PropertyDetails() {
 
           {/* Map */}
           <div className="relative w-full h-[480px] rounded-xl overflow-hidden mb-6">
-            <img 
-              src="https://images.unsplash.com/photo-1736117705005-84a38031251e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwYXJpcyUyMG1hcCUyMGxvY2F0aW9ufGVufDF8fHx8MTc2Nzc3MDQ2OHww&ixlib=rb-4.1.0&q=80&w=1080"
-              alt="Map location"
-              className="w-full h-full object-cover"
+            {/* Google Maps iframe */}
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d83998.95410694685!2d2.2769953!3d48.8588443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sParis%2C%20France!5e0!3m2!1sen!2sus!4v1704067200000!5m2!1sen!2sus"
+              className="w-full h-full border-0"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Property location map"
             />
             {/* Map overlay center pin */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
               <div className="bg-gray-900 text-white rounded-full p-4 shadow-lg">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
@@ -764,7 +768,7 @@ export function PropertyDetails() {
             </div>
 
             {/* Map controls */}
-            <div className="absolute top-4 right-4 flex flex-col gap-2">
+            <div className="absolute top-4 right-4 flex flex-col gap-2 z-10">
               <button className="bg-white p-3 rounded-lg shadow-md hover:bg-gray-50">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
@@ -783,7 +787,7 @@ export function PropertyDetails() {
             </div>
 
             {/* View toggle overlay */}
-            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2 z-10">
               <span>Vous pouvez basculer entre la vue par défaut et la vue satellite.</span>
               <button className="hover:opacity-80">
                 <X className="w-4 h-4" />
@@ -791,10 +795,10 @@ export function PropertyDetails() {
             </div>
 
             {/* Google attribution */}
-            <div className="absolute bottom-2 left-2 bg-white px-2 py-1 rounded text-xs text-gray-600">
+            <div className="absolute bottom-2 left-2 bg-white px-2 py-1 rounded text-xs text-gray-600 z-10">
               © Google
             </div>
-            <div className="absolute bottom-2 right-2 text-xs text-gray-600 bg-white px-2 py-1 rounded">
+            <div className="absolute bottom-2 right-2 text-xs text-gray-600 bg-white px-2 py-1 rounded z-10">
               500 m
             </div>
           </div>
