@@ -394,7 +394,7 @@ export function Experiences({ isScrolled, onExperienceClick }: ExperiencesProps)
         >
           {originalsExperiences.map((experience, index) => (
             <div key={index} className="w-[300px] sm:w-[320px] lg:w-[350px]">
-              <ExperienceCard {...experience} onClick={onExperienceClick} />
+              <ExperienceCard {...experience} id={`original-${index + 1}`} onClick={onExperienceClick} />
             </div>
           ))}
         </PropertyCarousel>
@@ -419,7 +419,7 @@ export function Experiences({ isScrolled, onExperienceClick }: ExperiencesProps)
         >
           {popularExperiences.map((experience, index) => (
             <div key={index} className="w-[300px] sm:w-[320px] lg:w-[350px]">
-              <ExperienceCard {...experience} onClick={onExperienceClick} />
+              <ExperienceCard {...experience} id={`paris-exp-${index + 1}`} onClick={onExperienceClick} />
             </div>
           ))}
         </PropertyCarousel>
@@ -431,7 +431,7 @@ export function Experiences({ isScrolled, onExperienceClick }: ExperiencesProps)
         >
           {londonExperiences.map((experience, index) => (
             <div key={index} className="w-[300px] sm:w-[320px] lg:w-[350px]">
-              <ExperienceCard {...experience} onClick={onExperienceClick} />
+              <ExperienceCard {...experience} id={`london-exp-${index + 1}`} onClick={onExperienceClick} />
             </div>
           ))}
         </PropertyCarousel>
@@ -443,7 +443,7 @@ export function Experiences({ isScrolled, onExperienceClick }: ExperiencesProps)
         >
           {dubaiExperiences.map((experience, index) => (
             <div key={index} className="w-[300px] sm:w-[320px] lg:w-[350px]">
-              <ExperienceCard {...experience} onClick={onExperienceClick} />
+              <ExperienceCard {...experience} id={`dubai-exp-${index + 1}`} onClick={onExperienceClick} />
             </div>
           ))}
         </PropertyCarousel>
@@ -455,7 +455,7 @@ export function Experiences({ isScrolled, onExperienceClick }: ExperiencesProps)
         >
           {madridExperiences.map((experience, index) => (
             <div key={index} className="w-[300px] sm:w-[320px] lg:w-[350px]">
-              <ExperienceCard {...experience} onClick={onExperienceClick} />
+              <ExperienceCard {...experience} id={`madrid-exp-${index + 1}`} onClick={onExperienceClick} />
             </div>
           ))}
         </PropertyCarousel>
@@ -467,7 +467,7 @@ export function Experiences({ isScrolled, onExperienceClick }: ExperiencesProps)
         >
           {romeExperiences.map((experience, index) => (
             <div key={index} className="w-[300px] sm:w-[320px] lg:w-[350px]">
-              <ExperienceCard {...experience} onClick={onExperienceClick} />
+              <ExperienceCard {...experience} id={`rome-exp-${index + 1}`} onClick={onExperienceClick} />
             </div>
           ))}
         </PropertyCarousel>

@@ -2,6 +2,7 @@ import { Heart } from 'lucide-react';
 import { useState } from 'react';
 
 interface PropertyCardProps {
+  id?: string;
   image: string;
   title: string;
   location: string;
@@ -11,15 +12,16 @@ interface PropertyCardProps {
   badge?: 'favorite' | 'new';
   guests?: string;
   beds?: string;
-  onClick?: () => void;
+  onClick?: (id?: string) => void;
 }
 
-export function PropertyCard({ 
-  image, 
-  title, 
-  location, 
-  date, 
-  price, 
+export function PropertyCard({
+  id,
+  image,
+  title,
+  location,
+  date,
+  price,
   rating,
   badge,
   guests,
@@ -33,8 +35,14 @@ export function PropertyCard({
     setIsFavorite(!isFavorite);
   };
 
+  const handleClick = () => {
+    if (onClick) {
+      onClick(id);
+    }
+  };
+
   return (
-    <div className="group cursor-pointer flex-shrink-0 w-full" onClick={onClick}>
+    <div className="group cursor-pointer flex-shrink-0 w-full" onClick={handleClick}>
       <div className="relative aspect-square rounded-xl overflow-hidden mb-3">
         <img 
           src={image} 

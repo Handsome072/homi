@@ -181,7 +181,7 @@ export function Services({ isScrolled, onServiceClick }: ServicesProps) {
         >
           {chefsPrivesSection.map((service, index) => (
             <div key={index} className="w-[300px] sm:w-[320px] lg:w-[350px]">
-              <ServiceCard {...service} onClick={onServiceClick} />
+              <ServiceCard {...service} id={`chef-${index + 1}`} onClick={onServiceClick} />
             </div>
           ))}
         </PropertyCarousel>
@@ -194,7 +194,7 @@ export function Services({ isScrolled, onServiceClick }: ServicesProps) {
         >
           {coachingServices.map((service, index) => (
             <div key={index} className="w-[300px] sm:w-[320px] lg:w-[350px]">
-              <ServiceCard {...service} onClick={onServiceClick} />
+              <ServiceCard {...service} id={`coaching-${index + 1}`} onClick={onServiceClick} />
             </div>
           ))}
         </PropertyCarousel>
@@ -206,7 +206,7 @@ export function Services({ isScrolled, onServiceClick }: ServicesProps) {
         >
           {massageServices.map((service, index) => (
             <div key={index} className="w-[300px] sm:w-[320px] lg:w-[350px]">
-              <ServiceCard {...service} onClick={onServiceClick} />
+              <ServiceCard {...service} id={`massage-${index + 1}`} onClick={onServiceClick} />
             </div>
           ))}
         </PropertyCarousel>

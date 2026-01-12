@@ -2,6 +2,7 @@ import { Heart } from 'lucide-react';
 import { useState } from 'react';
 
 interface ExperienceCardProps {
+  id?: string;
   image: string;
   badge?: 'Populaire' | 'Originals';
   title: string;
@@ -11,15 +12,16 @@ interface ExperienceCardProps {
   time?: string;
   availablePlaces?: number;
   availableDate?: string;
-  onClick?: () => void;
+  onClick?: (id?: string) => void;
 }
 
-export function ExperienceCard({ 
-  image, 
+export function ExperienceCard({
+  id,
+  image,
   badge,
-  title, 
-  host, 
-  price, 
+  title,
+  host,
+  price,
   rating,
   time,
   availablePlaces,
@@ -33,8 +35,14 @@ export function ExperienceCard({
     setIsFavorite(!isFavorite);
   };
 
+  const handleClick = () => {
+    if (onClick) {
+      onClick(id);
+    }
+  };
+
   return (
-    <div className="group cursor-pointer flex-shrink-0 w-full" onClick={onClick}>
+    <div className="group cursor-pointer flex-shrink-0 w-full" onClick={handleClick}>
       <div className="relative aspect-square rounded-xl overflow-hidden mb-3">
         <img 
           src={image} 

@@ -803,7 +803,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
           >
             {recentlyViewedProperties.map((property, index) => (
               <div key={index} className="w-[18rem]">
-                <PropertyCard {...property} onClick={onPropertyClick} />
+                <PropertyCard {...property} id={`recent-${index + 1}`} onClick={onPropertyClick} />
               </div>
             ))}
           </PropertyCarousel>
@@ -816,7 +816,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
         >
           {parisProperties.map((property, index) => (
             <div key={index} className="w-[14rem]">
-              <PropertyCard {...property} onClick={onPropertyClick} />
+              <PropertyCard {...property} id={`paris-${index + 1}`} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
@@ -828,7 +828,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
         >
           {madridHotels.map((property, index) => (
             <div key={index} className="w-[14rem]">
-              <PropertyCard {...property} onClick={onPropertyClick} />
+              <PropertyCard {...property} id={`madrid-hotel-${index + 1}`} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
@@ -840,7 +840,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
         >
           {londonProperties.map((property, index) => (
             <div key={index} className="w-[14rem]">
-              <PropertyCard {...property} onClick={onPropertyClick} />
+              <PropertyCard {...property} id={`london-${index + 1}`} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
@@ -852,7 +852,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
         >
           {riyadProperties.map((property, index) => (
             <div key={index} className="w-[14rem]">
-              <PropertyCard {...property} onClick={onPropertyClick} />
+              <PropertyCard {...property} id={`riyad-${index + 1}`} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
@@ -864,7 +864,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
         >
           {dubaiProperties.map((property, index) => (
             <div key={index} className="w-[14rem]">
-              <PropertyCard {...property} onClick={onPropertyClick} />
+              <PropertyCard {...property} id={`dubai-${index + 1}`} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
@@ -876,7 +876,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
         >
           {madridApartments.map((property, index) => (
             <div key={index} className="w-[14rem]">
-              <PropertyCard {...property} onClick={onPropertyClick} />
+              <PropertyCard {...property} id={`madrid-apt-${index + 1}`} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
@@ -888,7 +888,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
         >
           {romeProperties.map((property, index) => (
             <div key={index} className="w-[14rem]">
-              <PropertyCard {...property} onClick={onPropertyClick} />
+              <PropertyCard {...property} id={`rome-${index + 1}`} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
@@ -900,7 +900,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
         >
           {milanProperties.map((property, index) => (
             <div key={index} className="w-[14rem]">
-              <PropertyCard {...property} onClick={onPropertyClick} />
+              <PropertyCard {...property} id={`milan-${index + 1}`} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
@@ -912,7 +912,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
         >
           {budapestProperties.map((property, index) => (
             <div key={index} className="w-[14rem]">
-              <PropertyCard {...property} onClick={onPropertyClick} />
+              <PropertyCard {...property} id={`budapest-${index + 1}`} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
@@ -924,7 +924,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
         >
           {barcelonaProperties.map((property, index) => (
             <div key={index} className="w-[14rem]">
-              <PropertyCard {...property} onClick={onPropertyClick} />
+              <PropertyCard {...property} id={`barcelona-${index + 1}`} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
@@ -936,7 +936,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
         >
           {capeTownProperties.map((property, index) => (
             <div key={index} className="w-[14rem]">
-              <PropertyCard {...property} onClick={onPropertyClick} />
+              <PropertyCard {...property} id={`capetown-${index + 1}`} onClick={onPropertyClick} />
             </div>
           ))}
         </PropertyCarousel>
