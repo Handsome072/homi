@@ -1,5 +1,5 @@
 import { Globe } from "lucide-react";
-import logo from "figma:asset/footer.png";
+import logo from "figma:asset/logo.png";
 
 export function Footer() {
   return (
@@ -225,7 +225,7 @@ export function Footer() {
             <img
               src={logo}
               alt="HOMIQIO Logo"
-              className="h-12 w-12"
+              className="w-[150px] h-auto"
             />
 
             <div className="text-sm text-gray-500 leading-relaxed">
