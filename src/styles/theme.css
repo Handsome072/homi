@@ -217,4 +217,63 @@
     scrollbar-width: thin;
     scrollbar-color: #d1d5db transparent;
   }
+
+  /* React Slick fade slider customizations */
+  .slick-slider {
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  .slick-slide {
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+
+  .slick-slide.slick-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Smooth fade during drag/scroll interactions */
+  .slick-slider.slick-sliding .slick-slide {
+    transition: opacity 0.3s ease-out;
+  }
+
+  .slick-track {
+    display: flex;
+    align-items: center;
+    cursor: grab;
+  }
+
+  .slick-track:active {
+    cursor: grabbing;
+  }
+
+  /* Ensure slider takes full width in modal */
+  .slick-list {
+    overflow: hidden;
+  }
+
+  /* Remove default slick arrow styles (we use custom buttons) */
+  .slick-prev,
+  .slick-next {
+    display: none !important;
+  }
+
+  /* Focus outline removal for slider slides */
+  .slick-slide:focus {
+    outline: none;
+  }
+
+  .slick-slide > div {
+    outline: none;
+  }
+
+  /* Smooth image transitions during scroll/swipe */
+  .slick-slide img {
+    transition: transform 0.3s ease-out;
+  }
 }

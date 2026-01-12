@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { Heart, Star, ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
+import { Heart, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { FiltersModal } from '../components/FiltersModal';
 import { SearchBar } from '../components/SearchBar';
 import { HeaderRightMenu } from '../components/HeaderRightMenu';
@@ -320,14 +320,12 @@ function PropertyCard({ property }: { property: Property }) {
 export function SearchResults() {
   const navigate = useNavigate();
   const [urlSearchParams] = useSearchParams();
-  const [hoveredProperty, setHoveredProperty] = useState<number | null>(null);
   const [showSearchOverlay, setShowSearchOverlay] = useState(false);
   const [showFiltersModal, setShowFiltersModal] = useState(false);
   const [showMenuDropdown, setShowMenuDropdown] = useState(false);
   const [showBecomeHostModal, setShowBecomeHostModal] = useState(false);
   const [showLanguageModal, setShowLanguageModal] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const mapRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
 
   // Handle search from overlay
@@ -470,20 +468,14 @@ export function SearchResults() {
       </div>
 
       {/* Main content */}
-      <div className="flex">
-        {/* Results grid */}
-        <div className="flex-1 px-4 sm:px-6 lg:px-20 py-6">
+      <div className="px-4 sm:px-6 lg:px-20 py-6">
           <p className="text-[14px] mb-6" style={{ color: '#717171' }}>
             {searchParams.destination || 'Bangkok'} : Plus de 1000 logements
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10">
             {properties.map((property) => (
-              <div
-                key={property.id}
-                onMouseEnter={() => setHoveredProperty(property.id)}
-                onMouseLeave={() => setHoveredProperty(null)}
-              >
+              <div key={property.id}>
                 <PropertyCard property={property} />
               </div>
             ))}
@@ -551,9 +543,9 @@ export function SearchResults() {
             </button>
           </div>
 
-          {/* Footer */}
-          <footer className="border-t border-gray-200 bg-gray-50 py-12">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        {/* Footer */}
+        <footer className="border-t border-gray-200 bg-gray-50 py-12 -mx-4 sm:-mx-6 lg:-mx-20 px-4 sm:px-6 lg:px-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
               {/* Assistance */}
               <div>
                 <h3 className="text-[14px] mb-4" style={{ fontWeight: 600, color: '#222222' }}>
@@ -732,65 +724,10 @@ export function SearchResults() {
                       <path d="M9 0C4.02943 0 0 4.02943 0 9C0 13.9706 4.02943 18 9 18C13.9706 18 18 13.9706 18 9C18 4.02943 13.9706 0 9 0ZM13.5 6.75C13.5071 6.87857 13.5071 7.00714 13.5071 7.13571C13.5071 10.5857 10.9286 14.5714 6.21429 14.5714C4.74643 14.5714 3.38571 14.1429 2.25 13.3929C2.45357 13.4143 2.65714 13.4286 2.87143 13.4286C4.07143 13.4286 5.17857 12.9857 6.05357 12.2357C4.92857 12.2143 3.97857 11.4571 3.66429 10.4143C3.81429 10.4357 3.96429 10.4571 4.11429 10.4571C4.32857 10.4571 4.54286 10.4286 4.74643 10.3714C3.65357 10.1357 2.82857 9.15 2.82857 7.97143V7.94286C3.16071 8.12143 3.53571 8.23929 3.93214 8.25C3.27857 7.80714 2.83929 7.05 2.83929 6.18214C2.83929 5.72143 2.96786 5.30357 3.19286 4.94786C4.34286 6.41571 6.07143 7.41429 8.03571 7.53214C7.99286 7.35357 7.97143 7.175 7.97143 6.98571C7.97143 5.64286 9.06429 4.53929 10.4286 4.53929C11.1214 4.53929 11.7536 4.83214 12.1929 5.30357C12.7393 5.19643 13.2643 4.98214 13.7321 4.69286C13.5536 5.27143 13.1643 5.72143 12.6536 5.99786C13.1429 5.94643 13.6179 5.81071 14.0571 5.61071C13.7321 6.07143 13.3214 6.46786 13.5 6.75Z" fill="#222222"/>
                     </svg>
                   </a>
-                </div>
               </div>
             </div>
-          </footer>
-        </div>
-
-        {/* Map */}
-        <div className="hidden xl:block w-1/2 sticky top-[140px] h-[calc(100vh-140px)]">
-          <div ref={mapRef} className="w-full h-full bg-gray-100 relative">
-            {/* Map placeholder with markers */}
-            <img
-              src="https://images.unsplash.com/photo-1590393820812-8a2ed3ece96f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaXR5JTIwbWFwJTIwYWVyaWFsJTIwdmlld3xlbnwxfHx8fDE3Njc4NTcyNzd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-              alt="Map"
-              className="w-full h-full object-cover"
-            />
-            
-            {/* Price markers */}
-            {properties.map((property) => (
-              <div
-                key={property.id}
-                className={`absolute cursor-pointer transition-all ${
-                  hoveredProperty === property.id ? 'z-20 scale-110' : 'z-10'
-                }`}
-                style={{
-                  left: `${((property.lng - 100.48) / 0.15) * 100}%`,
-                  top: `${((13.78 - property.lat) / 0.08) * 100}%`,
-                  transform: 'translate(-50%, -50%)',
-                }}
-              >
-                <div
-                  className={`px-3 py-1.5 rounded-full text-[14px] transition-all ${
-                    hoveredProperty === property.id
-                      ? 'bg-gray-900 text-white scale-110'
-                      : 'bg-white text-gray-900 border border-gray-300 hover:scale-105'
-                  }`}
-                  style={{ fontWeight: 600, boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}
-                >
-                  {property.price} €
-                </div>
-              </div>
-            ))}
-
-            {/* Map controls */}
-            <div className="absolute bottom-6 right-6 flex flex-col gap-2">
-              <button className="w-10 h-10 bg-white rounded-lg shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors">
-                <span className="text-2xl text-gray-700">+</span>
-              </button>
-              <button className="w-10 h-10 bg-white rounded-lg shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors">
-                <span className="text-2xl text-gray-700">−</span>
-              </button>
-            </div>
-
-            {/* Show list button */}
-            <button className="absolute bottom-6 left-1/2 -translate-x-1/2 px-5 py-3 bg-gray-900 text-white rounded-full text-[14px] hover:bg-gray-800 transition-colors shadow-lg flex items-center gap-2" style={{ fontWeight: 600 }}>
-              <MapPin className="w-4 h-4" />
-              Afficher la liste
-            </button>
           </div>
-        </div>
+        </footer>
       </div>
 
       {/* Search Overlay */}

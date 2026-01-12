@@ -124,6 +124,7 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
           <ImageGallery
             images={images}
             showFavoriteButton={false}
+            useFadeSlider={true}
           />
         </div>
 

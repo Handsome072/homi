@@ -1,23 +1,28 @@
 import { Heart, Share, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { useState, useEffect, useRef, useCallback } from 'react';
+import Slider from 'react-slick';
+import type { Settings as SlickSettings } from 'react-slick';
 
 interface ImageGalleryProps {
   images: string[];
   showFavoriteButton?: boolean;
   isFavorite?: boolean;
   onFavoriteToggle?: () => void;
+  useFadeSlider?: boolean; // Enable fade animation slider mode
 }
 
 export function ImageGallery({
   images,
   showFavoriteButton = true,
   isFavorite = false,
-  onFavoriteToggle
+  onFavoriteToggle,
+  useFadeSlider = false
 }: ImageGalleryProps) {
   const [showAllPhotos, setShowAllPhotos] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
+  const sliderRef = useRef<Slider | null>(null);
 
   const openGallery = (index: number) => {
     setCurrentImageIndex(index);
@@ -29,12 +34,20 @@ export function ImageGallery({
   };
 
   const goToNextImage = useCallback(() => {
-    setCurrentImageIndex((prev) => (prev + 1) % images.length);
-  }, [images.length]);
+    if (useFadeSlider && sliderRef.current) {
+      sliderRef.current.slickNext();
+    } else {
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    }
+  }, [images.length, useFadeSlider]);
 
   const goToPreviousImage = useCallback(() => {
-    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
-  }, [images.length]);
+    if (useFadeSlider && sliderRef.current) {
+      sliderRef.current.slickPrev();
+    } else {
+      setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+    }
+  }, [images.length, useFadeSlider]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -54,16 +67,19 @@ export function ImageGallery({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [showAllPhotos, goToNextImage, goToPreviousImage]);
 
-  // Touch/swipe gesture handlers
+  // Touch/swipe gesture handlers (for non-slider mode)
   const handleTouchStart = (e: React.TouchEvent) => {
+    if (useFadeSlider) return; // Let slider handle touch
     touchStartX.current = e.touches[0].clientX;
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
+    if (useFadeSlider) return;
     touchEndX.current = e.touches[0].clientX;
   };
 
   const handleTouchEnd = () => {
+    if (useFadeSlider) return;
     if (touchStartX.current === null || touchEndX.current === null) return;
 
     const diff = touchStartX.current - touchEndX.current;
@@ -82,6 +98,38 @@ export function ImageGallery({
     touchStartX.current = null;
     touchEndX.current = null;
   };
+
+  // React Slick settings for fade animation with scroll/swipe support
+  const sliderSettings: SlickSettings = {
+    dots: false,
+    fade: true,
+    infinite: true,
+    speed: 400,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    cssEase: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    adaptiveHeight: false,
+    initialSlide: currentImageIndex,
+    beforeChange: (_current: number, next: number) => setCurrentImageIndex(next),
+    swipe: true,
+    swipeToSlide: true,
+    touchThreshold: 5, // Lower threshold for more responsive swipe detection
+    touchMove: true,
+    draggable: true, // Enable mouse drag for desktop scroll-like interaction
+    useCSS: true,
+    useTransform: true,
+    waitForAnimate: false, // Allow rapid transitions during scroll
+    accessibility: true,
+    lazyLoad: 'progressive' as const,
+  };
+
+  // Sync slider with thumbnail selection
+  useEffect(() => {
+    if (useFadeSlider && sliderRef.current && showAllPhotos) {
+      sliderRef.current.slickGoTo(currentImageIndex, false);
+    }
+  }, [currentImageIndex, useFadeSlider, showAllPhotos]);
 
   return (
     <>
@@ -137,15 +185,34 @@ export function ImageGallery({
               <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-gray-800" />
             </button>
 
-            {/* Main Image */}
-            <div className="max-w-full max-h-full flex items-center justify-center">
-              <img
-                src={images[currentImageIndex]}
-                alt={`Photo ${currentImageIndex + 1}`}
-                className="max-w-full max-h-[80vh] object-contain rounded-lg select-none"
-                draggable={false}
-              />
-            </div>
+            {/* Main Image - Fade Slider or Static */}
+            {useFadeSlider ? (
+              <div className="w-full max-w-[90vw] md:max-w-[80vw] lg:max-w-[70vw] mx-auto">
+                <Slider ref={sliderRef} {...sliderSettings}>
+                  {images.map((image, index) => (
+                    <div key={index} className="outline-none">
+                      <div className="flex items-center justify-center h-[80vh]">
+                        <img
+                          src={image}
+                          alt={`Photo ${index + 1}`}
+                          className="max-w-full max-h-[80vh] object-contain rounded-lg select-none"
+                          draggable={false}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </Slider>
+              </div>
+            ) : (
+              <div className="max-w-full max-h-full flex items-center justify-center">
+                <img
+                  src={images[currentImageIndex]}
+                  alt={`Photo ${currentImageIndex + 1}`}
+                  className="max-w-full max-h-[80vh] object-contain rounded-lg select-none"
+                  draggable={false}
+                />
+              </div>
+            )}
 
             {/* Next Button */}
             <button

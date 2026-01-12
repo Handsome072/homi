@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useRef, useState, useEffect } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 interface PropertyCarouselProps {
   title: string;
@@ -10,8 +11,12 @@ interface PropertyCarouselProps {
 
 export function PropertyCarousel({ title, subtitle, children, showMoreLink = true }: PropertyCarouselProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+
+  // Intersection Observer for scroll-based animations
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px 0px" });
 
   const checkScroll = () => {
     const container = scrollContainerRef.current;
@@ -53,7 +58,13 @@ export function PropertyCarousel({ title, subtitle, children, showMoreLink = tru
   };
 
   return (
-    <section className="relative py-8">
+    <motion.section
+      ref={sectionRef}
+      className="relative py-8"
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <div className="px-4 sm:px-6 lg:px-12">
         <div className="flex items-center justify-between mb-6">
           <div>
@@ -61,17 +72,17 @@ export function PropertyCarousel({ title, subtitle, children, showMoreLink = tru
               <h2 className="text-2xl" style={{ fontWeight: 600 }}>{title}</h2>
               {showMoreLink && (
                 <button className="p-2 rounded-full text-sm text-gray-700 bg-gray-100 hover:underline flex items-center gap-1">
-                  <svg 
-                    viewBox="0 0 18 18" 
+                  <svg
+                    viewBox="0 0 18 18"
                     className="w-3 h-3"
-                    fill="none" 
+                    fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <path 
-                      d="M9 1.5L16.5 9L9 16.5M16.5 9H1.5" 
-                      stroke="currentColor" 
-                      strokeWidth="2" 
-                      strokeLinecap="round" 
+                    <path
+                      d="M9 1.5L16.5 9L9 16.5M16.5 9H1.5"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
                       strokeLinejoin="round"
                     />
                   </svg>
@@ -102,7 +113,7 @@ export function PropertyCarousel({ title, subtitle, children, showMoreLink = tru
           </div>
         </div>
 
-        <div 
+        <div
           ref={scrollContainerRef}
           className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
@@ -110,6 +121,6 @@ export function PropertyCarousel({ title, subtitle, children, showMoreLink = tru
           {children}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

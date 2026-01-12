@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { ExperienceCard } from '../components/ExperienceCard';
 import { PropertyCarousel } from '../components/PropertyCarousel';
 import { ExperienceSearchBar } from '../components/ExperienceSearchBar';
@@ -8,6 +10,8 @@ interface ExperiencesProps {
 }
 
 export function Experiences({ isScrolled, onExperienceClick }: ExperiencesProps) {
+  const sectionTitleRef = useRef<HTMLDivElement>(null);
+  const isSectionInView = useInView(sectionTitleRef, { once: true, margin: "-100px 0px" });
   // HOMIQIO Originals - Organisées par des hôtes d'exception
   const originalsExperiences = [
     {
@@ -396,11 +400,17 @@ export function Experiences({ isScrolled, onExperienceClick }: ExperiencesProps)
         </PropertyCarousel>
 
         {/* Section: Populaires auprès d'autres voyageurs */}
-        <div className="px-4 sm:px-6 lg:px-12 mb-8">
+        <motion.div
+          ref={sectionTitleRef}
+          className="px-4 sm:px-6 lg:px-12 mb-8"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isSectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <h2 className="text-2xl md:text-3xl" style={{ fontWeight: 600 }}>
             Populaires auprès d'autres voyageurs
           </h2>
-        </div>
+        </motion.div>
 
         {/* Expériences · Paris */}
         <PropertyCarousel 
