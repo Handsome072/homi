@@ -50,7 +50,7 @@ export function PropertyDetails() {
                 onClick={() => setIsFavorite(!isFavorite)}
                 className="flex items-center gap-2 px-3 py-2 rounded-lg transition-colors"
               >
-                <Heart className={`w-4 h-4 ${isFavorite ? 'fill-[#10B981] text-[#10B981]' : ''}`} />
+                <Heart className={`w-4 h-4 ${isFavorite ? 'fill-[#5EC6D8] text-[#5EC6D8]' : ''}`} />
                 <span className="text-sm underline" style={{ fontWeight: 600 }}>Enregistrer</span>
               </button>
             </div>
@@ -519,7 +519,7 @@ export function PropertyDetails() {
                     className="w-full py-3 rounded-full text-white text-base mb-4 transition-colors hover:opacity-90"
                     style={{
                       fontWeight: 600,
-                      background: 'linear-gradient(to right, #059669 0%, #10B981 50%, #047857 100%)'
+                      background: 'linear-gradient(to right, #4FA7C9 0%, #5EC6D8 50%, #4FA7C9 100%)'
                     }}
                   >
                     Réserver
@@ -819,7 +819,7 @@ export function PropertyDetails() {
                       alt="Jérémy"
                       className="w-24 h-24 rounded-full object-cover"
                     />
-                    <div className="absolute bottom-0 right-0 bg-[#10B981] rounded-full p-2.5">
+                    <div className="absolute bottom-0 right-0 bg-[#5EC6D8] rounded-full p-2.5">
                       <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
@@ -896,7 +896,7 @@ export function PropertyDetails() {
 
               <div className="flex items-start gap-3 pt-4 border-t border-gray-200">
                 <div className="flex-shrink-0">
-                  <svg className="w-6 h-6 text-[#10B981]" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6 text-[#5EC6D8]" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 11c-.55 0-1-.45-1-1V8c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1zm1 4h-2v-2h2v2z"/>
                   </svg>
                 </div>

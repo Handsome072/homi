@@ -80,7 +80,7 @@ export function ProfileSection() {
             <div className="flex-1">
               <h4 className={`text-base mb-1 font-semibold ${getFieldDisabledStyle(editingPreferredName)}`}>Prénom d'usage</h4>
               {!editingPreferredName ? (
-                <p className={`text-sm ${isAnyEditing ? 'text-black opacity-40' : 'text-[#10B981]'}`}>Information non fournie</p>
+                <p className={`text-sm ${isAnyEditing ? 'text-black opacity-40' : 'text-[#5EC6D8]'}`}>Information non fournie</p>
               ) : (
                 <p className="text-sm text-black opacity-60">
                   Voici comment votre prénom s'affichera pour les hôtes et les voyageurs.{' '}
@@ -202,7 +202,7 @@ export function ProfileSection() {
           <div className="flex items-center justify-between">
             <div className="flex-1">
               <h4 className={`text-base mb-1 font-semibold ${getFieldDisabledStyle(addingResidentialAddress)}`}>Adresse résidentielle</h4>
-              <p className={`text-sm ${isAnyEditing && !addingResidentialAddress ? 'text-black opacity-40' : 'text-[#10B981]'}`}>Information non fournie</p>
+              <p className={`text-sm ${isAnyEditing && !addingResidentialAddress ? 'text-black opacity-40' : 'text-[#5EC6D8]'}`}>Information non fournie</p>
             </div>
             {!isAnyEditing && (
               <button onClick={() => setAddingResidentialAddress(true)} className="text-sm underline flex-shrink-0 ml-4 font-semibold text-black">
@@ -249,7 +249,7 @@ export function ProfileSection() {
           <div className="flex items-center justify-between">
             <div className="flex-1">
               <h4 className={`text-base mb-1 font-semibold ${getFieldDisabledStyle(addingPostalAddress)}`}>Adresse postale</h4>
-              <p className={`text-sm ${isAnyEditing && !addingPostalAddress ? 'text-black opacity-40' : 'text-[#10B981]'}`}>Information non fournie</p>
+              <p className={`text-sm ${isAnyEditing && !addingPostalAddress ? 'text-black opacity-40' : 'text-[#5EC6D8]'}`}>Information non fournie</p>
             </div>
             {!isAnyEditing && (
               <button onClick={() => setAddingPostalAddress(true)} className="text-sm underline flex-shrink-0 ml-4 font-semibold text-black">
@@ -298,7 +298,7 @@ export function ProfileSection() {
             <div className="flex-1">
               <h4 className={`text-base mb-1 font-semibold ${getFieldDisabledStyle(addingEmergencyContact)}`}>Numéros d'urgence</h4>
               {!addingEmergencyContact ? (
-                <p className={`text-sm ${isAnyEditing ? 'text-black opacity-40' : 'text-[#10B981]'}`}>Information non fournie</p>
+                <p className={`text-sm ${isAnyEditing ? 'text-black opacity-40' : 'text-[#5EC6D8]'}`}>Information non fournie</p>
               ) : (
                 <p className="text-sm text-black opacity-60">Un contact de confiance que nous pourrons appeler en cas d'urgence.</p>
               )}

@@ -431,11 +431,11 @@ export function ExperienceDetails() {
                         <span className="text-base text-gray-900" style={{ fontWeight: 600 }}> À partir de 26 €</span>
                         <span className="text-gray-600 text-xs">par voyageur</span>
                       </div>
-                      <p className="text-xs" style={{ color: '#059669', fontWeight: 600 }}>
+                      <p className="text-xs" style={{ color: '#5EC6D8', fontWeight: 600 }}>
                         Annulation gratuite
                       </p>
                     </div>
-                    <button className="px-6 py-3 rounded-full text-white text-base hover:shadow-lg transition-all whitespace-nowrap" style={{ backgroundColor: '#059669', fontWeight: 600 }}>
+                    <button className="px-6 py-3 rounded-full text-white text-base hover:shadow-lg transition-all whitespace-nowrap" style={{ backgroundColor: '#5EC6D8', fontWeight: 600 }}>
                       Voir les dates
                     </button>
                   </div>
@@ -451,7 +451,7 @@ export function ExperienceDetails() {
                           </p>
                           <p className="text-xs text-gray-600">14:30 – 17:00</p>
                         </div>
-                        <p className="text-xs" style={{ color: '#059669', fontWeight: 600 }}>
+                        <p className="text-xs" style={{ color: '#5EC6D8', fontWeight: 600 }}>
                           3 places disponibles
                         </p>
                       </div>
@@ -466,7 +466,7 @@ export function ExperienceDetails() {
                           </p>
                           <p className="text-xs text-gray-600">14:30 – 17:00</p>
                         </div>
-                        <p className="text-xs" style={{ color: '#059669', fontWeight: 600 }}>
+                        <p className="text-xs" style={{ color: '#5EC6D8', fontWeight: 600 }}>
                           7 places disponibles
                         </p>
                       </div>
@@ -481,7 +481,7 @@ export function ExperienceDetails() {
                           </p>
                           <p className="text-xs text-gray-600">14:30 – 17:00</p>
                         </div>
-                        <p className="text-xs" style={{ color: '#059669', fontWeight: 600 }}>
+                        <p className="text-xs" style={{ color: '#5EC6D8', fontWeight: 600 }}>
                           4 places disponibles
                         </p>
                       </div>

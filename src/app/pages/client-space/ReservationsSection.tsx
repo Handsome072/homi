@@ -11,7 +11,7 @@ export function ReservationsSection() {
 
       {/* RÉSERVATION(S) FUTURE(S) */}
       <div className="mb-8">
-        <h3 className="text-xs mb-4 font-bold tracking-wide text-[#10B981]">RÉSERVATION(S) FUTURE(S)</h3>
+        <h3 className="text-xs mb-4 font-bold tracking-wide text-[#5EC6D8]">RÉSERVATION(S) FUTURE(S)</h3>
 
         <div
           className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 flex gap-6 cursor-pointer hover:shadow-md transition-shadow"
@@ -24,7 +24,7 @@ export function ReservationsSection() {
           />
 
           <div className="flex-1">
-            <h4 className="text-lg mb-2 font-medium text-[#10B981]">Appartement T2</h4>
+            <h4 className="text-lg mb-2 font-medium text-[#5EC6D8]">Appartement T2</h4>
             <p className="text-sm text-black mb-4">
               Date d'arrivée : <span className="font-semibold">03/09/2024</span> |{' '}
               <span className="font-semibold">1 occupant</span>
@@ -72,7 +72,7 @@ export function ReservationsSection() {
           </div>
 
           <div className="flex flex-col items-end gap-3">
-            <div className="rounded-lg px-6 py-4 flex flex-col items-center min-w-[180px] bg-[#10B981]">
+            <div className="rounded-lg px-6 py-4 flex flex-col items-center min-w-[180px] bg-[#5EC6D8]">
               <div className="flex items-center gap-2 mb-1">
                 <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
@@ -82,7 +82,7 @@ export function ReservationsSection() {
               <span className="text-3xl text-white font-bold">700 €</span>
             </div>
 
-            <button className="px-6 py-2.5 border-2 rounded-lg text-sm hover:bg-gray-50 transition-colors bg-white w-full font-semibold text-[#10B981] border-[#10B981]">
+            <button className="px-6 py-2.5 border-2 rounded-lg text-sm hover:bg-gray-50 transition-colors bg-white w-full font-semibold text-[#5EC6D8] border-[#5EC6D8]">
               ANNULER
             </button>
           </div>

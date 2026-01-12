@@ -251,9 +251,9 @@ export function DatePicker({ onClose, onDatesChange }: DatePickerProps) {
                 </feMerge>
               </filter>
               <linearGradient id="pinkGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style={{ stopColor: '#047857', stopOpacity: 1 }} />
-                <stop offset="50%" style={{ stopColor: '#10B981', stopOpacity: 1 }} />
-                <stop offset="100%" style={{ stopColor: '#059669', stopOpacity: 1 }} />
+                <stop offset="0%" style={{ stopColor: '#4FA7C9', stopOpacity: 1 }} />
+                <stop offset="50%" style={{ stopColor: '#5EC6D8', stopOpacity: 1 }} />
+                <stop offset="100%" style={{ stopColor: '#7EDFE1', stopOpacity: 1 }} />
               </linearGradient>
               <filter id="glow">
                 <feGaussianBlur stdDeviation="8" result="coloredBlur"/>

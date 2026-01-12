@@ -498,8 +498,8 @@ export function SearchBar({ onSearch }: { onSearch?: (params: any) => void }) {
                     showDestinations ||
                     showDatePicker ||
                     showGuestsPicker
-                      ? "#059669"
-                      : "#10B981",
+                      ? "#4FA7C9"
+                      : "#5EC6D8",
                   padding:
                     showDestinations ||
                     showDatePicker ||
@@ -698,8 +698,8 @@ export function CompactSearchBar({ currentPage, onOpen }: { currentPage: 'logeme
         
         {/* Bouton de recherche */}
         <div className="ml-auto flex-shrink-0">
-          <div 
-            className="bg-[#10B981] text-white p-2.5 rounded-full"
+          <div
+            className="bg-[#5EC6D8] text-white p-2.5 rounded-full"
             aria-label="Rechercher"
           >
             <Search className="w-3.5 h-3.5" />

@@ -169,9 +169,9 @@ export function ServiceDetails() {
                   <div className="text-sm text-gray-600">par voyageur</div>
                   <div className="text-sm text-gray-600">Annulation gratuite</div>
                 </div>
-                <button 
+                <button
                   className="px-6 py-3 rounded-full text-white text-base hover:shadow-lg transition-all"
-                  style={{ backgroundColor: '#059669', fontWeight: 600 }}
+                  style={{ backgroundColor: '#5EC6D8', fontWeight: 600 }}
                 >
                   Voir les dates
                 </button>

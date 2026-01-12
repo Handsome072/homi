@@ -54,7 +54,7 @@ export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
             onClick={() => setVerificationStep('none')}
             className="flex items-center gap-2 hover:opacity-80 transition-opacity"
           >
-            <svg width="102" height="32" viewBox="0 0 102 32" fill="#10B981">
+            <svg width="102" height="32" viewBox="0 0 102 32" fill="#5EC6D8">
               <path d="M13.7 11.9a6.6 6.6 0 0 0-5.1-2.4C4.7 9.5 1.7 12.5 1.7 16.3c0 3.8 3 6.8 6.9 6.8 2 0 3.8-.7 5.1-2.4v2h3V10h-3v1.9zm-4.4 8.7c-2.5 0-4.4-2-4.4-4.3 0-2.3 2-4.3 4.4-4.3s4.4 2 4.4 4.3c0 2.4-2 4.3-4.4 4.3zM20.7 10h3v13h-3V10zm1.5-4.5c1 0 1.9.8 1.9 1.9s-.8 1.9-1.9 1.9-1.9-.8-1.9-1.9.8-1.9 1.9-1.9zM28.7 10h3v1.5c.9-1 2.3-1.8 3.9-1.8v3.2c-.2 0-.4-.1-.7-.1-1.3 0-2.5.6-3.2 1.4V23h-3V10zM44.2 9.5c2.1 0 3.9.8 5.1 2.4V3.5h3V23h-3v-2c-1.3 1.6-3.1 2.4-5.1 2.4-3.8 0-6.9-3-6.9-6.8 0-3.9 3.1-7.1 6.9-7.1zm.6 11.1c2.5 0 4.4-2 4.4-4.3 0-2.3-2-4.3-4.4-4.3s-4.4 2-4.4 4.3c0 2.4 1.9 4.3 4.4 4.3zM61.5 9.5c2 0 3.8.7 5.1 2.4V10h3v13h-3v-2c-1.3 1.6-3.1 2.4-5.1 2.4-3.8 0-6.9-3-6.9-6.8 0-3.9 3.1-7.1 6.9-7.1zm.6 11.1c2.5 0 4.4-2 4.4-4.3 0-2.3-2-4.3-4.4-4.3s-4.4 2-4.4 4.3c0 2.4 1.9 4.3 4.4 4.3zM80.3 9.5c2 0 3.8.7 5.1 2.4V10h3v13h-3v-2c-1.3 1.6-3.1 2.4-5.1 2.4-3.8 0-6.9-3-6.9-6.8 0-3.9 3.1-7.1 6.9-7.1zm.6 11.1c2.5 0 4.4-2 4.4-4.3 0-2.3-2-4.3-4.4-4.3s-4.4 2-4.4 4.3c0 2.4 1.9 4.3 4.4 4.3z"/>
             </svg>
           </button>
@@ -729,7 +729,7 @@ export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
 
               {/* RÉSERVATION(S) FUTURE(S) */}
               <div className="mb-8">
-                <h3 className="text-xs mb-4 font-bold tracking-wide" style={{ color: '#10B981' }}>
+                <h3 className="text-xs mb-4 font-bold tracking-wide" style={{ color: '#5EC6D8' }}>
                   RÉSERVATION(S) FUTURE(S)
                 </h3>
                 
@@ -744,7 +744,7 @@ export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
                   />
                   
                   <div className="flex-1">
-                    <h4 className="text-lg mb-2 font-medium italic" style={{ color: '#10B981' }}>
+                    <h4 className="text-lg mb-2 font-medium italic" style={{ color: '#5EC6D8' }}>
                       Appartement T2
                     </h4>
                     <p className="text-sm text-gray-500 mb-4">
@@ -800,7 +800,7 @@ export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
                   <div className="flex flex-col items-end gap-3">
                     <div
                       className="rounded-lg px-6 py-4 flex flex-col items-center min-w-[180px]"
-                      style={{ backgroundColor: '#10B981' }}
+                      style={{ backgroundColor: '#5EC6D8' }}
                     >
                       <div className="flex items-center gap-2 mb-1">
                         <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -810,13 +810,13 @@ export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
                       </div>
                       <span className="text-3xl text-white" style={{ fontWeight: 700 }}>700 €</span>
                     </div>
-                    
+
                     <button
                       className="px-6 py-2.5 border-2 rounded-lg text-sm hover:bg-gray-50 transition-colors bg-white w-full"
                       style={{
                         fontWeight: 600,
-                        color: '#10B981',
-                        borderColor: '#10B981'
+                        color: '#5EC6D8',
+                        borderColor: '#5EC6D8'
                       }}
                     >
                       ANNULER

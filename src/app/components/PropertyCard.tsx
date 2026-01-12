@@ -46,7 +46,7 @@ export function PropertyCard({
           className="absolute top-3 right-3 hover:scale-110 transition-transform z-10"
         >
           <Heart
-            className={`w-6 h-6 ${isFavorite ? 'fill-[#10B981] text-[#10B981]' : 'fill-black/50 text-white'} stroke-2`}
+            className={`w-6 h-6 ${isFavorite ? 'fill-[#5EC6D8] text-[#5EC6D8]' : 'fill-black/50 text-white'} stroke-2`}
           />
         </button>
         {badge && (

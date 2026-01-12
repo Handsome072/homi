@@ -132,14 +132,7 @@ export function Footer() {
                   Forum de la communauté
                 </a>
               </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-sm text-gray-700 hover:underline"
-                >
-                  Hébergement responsable
-                </a>
-              </li>
+            
               <li>
                 <a
                   href="#"
@@ -157,14 +150,7 @@ export function Footer() {
                   Trouver un co-hôte
                 </a>
               </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-sm text-gray-700 hover:underline"
-                >
-                  Parrainer un hôte
-                </a>
-              </li>
+          
             </ul>
           </div>
 
@@ -240,7 +226,7 @@ export function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             {/* Left - Copyright & Links */}
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 text-sm text-gray-700">
-              <span>© 2026 HOMIQIO, Inc.</span>
+              <span>© 2026 HOMIQIO</span>
               <span className="hidden md:inline text-gray-400">
                 ·
               </span>
