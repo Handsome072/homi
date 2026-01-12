@@ -263,7 +263,7 @@ export function ExperienceSearchBar() {
               <button
                 className="absolute right-2 top-1/2 -translate-y-1/2 text-white rounded-full transition-all flex items-center gap-2"
                 style={{
-                  backgroundColor: "#4FA7C9",
+                  backgroundColor: "#1E3A5F",
                   padding:
                     showDestinations ||
                     showDatePicker ||
@@ -342,7 +342,7 @@ export function CompactExperienceSearchBar() {
             <button className="text-sm text-gray-500 hover:underline">
               Ajouter des voyageurs
             </button>
-            <div className="ml-auto bg-[#5EC6D8] hover:bg-[#4FA7C9] text-white p-2 rounded-full transition-colors">
+            <div className="ml-auto bg-[#1E3A5F] hover:bg-[#162d4a] text-white p-2 rounded-full transition-colors">
               <Search className="w-4 h-4" />
             </div>
           </div>

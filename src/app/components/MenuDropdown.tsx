@@ -6,9 +6,10 @@ interface MenuDropdownProps {
   isOpen: boolean;
   onClose: () => void;
   onAuthClick?: () => void;
+  onBecomeHostClick?: () => void;
 }
 
-export function MenuDropdown({ isOpen, onClose, onAuthClick }: MenuDropdownProps) {
+export function MenuDropdown({ isOpen, onClose, onAuthClick, onBecomeHostClick }: MenuDropdownProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -52,7 +53,10 @@ export function MenuDropdown({ isOpen, onClose, onAuthClick }: MenuDropdownProps
       <div className="w-[240px] h-px bg-gray-200 my-2 mx-auto"></div>
 
       {/* Devenir hôte avec illustration */}
-      <button className="w-full px-4 py-3 hover:bg-gray-50 transition-colors text-left">
+      <button
+        className="w-full px-4 py-3 hover:bg-gray-50 transition-colors text-left"
+        onClick={onBecomeHostClick}
+      >
         <div className="flex items-start justify-between gap-3  px-4">
           <div className="flex-1">
             <div className="text-sm mb-1" style={{ fontWeight: 600 }}>
@@ -62,26 +66,15 @@ export function MenuDropdown({ isOpen, onClose, onAuthClick }: MenuDropdownProps
               Devenir hôte et gagner des revenus supplémentaires, c'est facile.
             </div>
           </div>
-          <img 
-            src={hostIllustration} 
-            alt="Illustration hôte" 
+          <img
+            src={hostIllustration}
+            alt="Illustration hôte"
             className="w-12 h-12 object-contain flex-shrink-0"
           />
         </div>
       </button>
-         {/* Divider */}
-      <div className="w-[240px] h-px bg-gray-200 my-2 mx-auto"></div>
-      {/* Parrainer un hôte */}
-      <button className="w-full px-4 py-3 hover:bg-gray-50 transition-colors text-left">
-        <span className="text-sm px-4">Parrainer un hôte</span>
-      </button>
 
-      {/* Trouver un co-hôte */}
-      <button className="w-full px-4 py-3 hover:bg-gray-50 transition-colors text-left">
-        <span className="text-sm px-4">Trouver un co-hôte</span>
-      </button>
-
-          {/* Divider */}
+      {/* Divider */}
       <div className="w-[240px] h-px bg-gray-200 my-2 mx-auto"></div>
 
       {/* Se connecter ou s'inscrire */}

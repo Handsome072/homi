@@ -563,7 +563,7 @@ export function BookingRequest() {
                   )}
 
                   {paymentMethod === 'card' && (
-                    <button className="w-full bg-[#5EC6D8] text-white rounded-lg py-4 flex items-center justify-center gap-2 hover:bg-[#4FA7C9] transition-colors text-base" style={{ fontWeight: 600 }}>
+                    <button className="w-full bg-[#1E3A5F] text-white rounded-lg py-4 flex items-center justify-center gap-2 hover:bg-[#162d4a] transition-colors text-base" style={{ fontWeight: 600 }}>
                       Confirmer et payer
                     </button>
                   )}

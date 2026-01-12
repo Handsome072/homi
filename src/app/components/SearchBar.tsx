@@ -494,12 +494,7 @@ export function SearchBar({ onSearch }: { onSearch?: (params: any) => void }) {
                 className="absolute right-2 top-1/2 -translate-y-1/2 text-white rounded-full transition-all flex items-center gap-2"
                 onClick={handleSearchClick}
                 style={{
-                  backgroundColor:
-                    showDestinations ||
-                    showDatePicker ||
-                    showGuestsPicker
-                      ? "#4FA7C9"
-                      : "#5EC6D8",
+                  backgroundColor: "#1E3A5F",
                   padding:
                     showDestinations ||
                     showDatePicker ||
@@ -699,7 +694,7 @@ export function CompactSearchBar({ currentPage, onOpen }: { currentPage: 'logeme
         {/* Bouton de recherche */}
         <div className="ml-auto flex-shrink-0">
           <div
-            className="bg-[#5EC6D8] text-white p-2.5 rounded-full"
+            className="bg-[#1E3A5F] text-white p-2.5 rounded-full"
             aria-label="Rechercher"
           >
             <Search className="w-3.5 h-3.5" />

@@ -162,7 +162,7 @@ export function ImageGallery({
                   onClick={onFavoriteToggle}
                   className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 transition-colors text-white"
                 >
-                  <Heart className={`w-4 h-4 ${isFavorite ? 'fill-[#5EC6D8] text-[#5EC6D8]' : ''}`} />
+                  <Heart className={`w-4 h-4 ${isFavorite ? 'fill-[#1E3A5F] text-[#1E3A5F]' : ''}`} />
                   <span className="text-sm underline hidden sm:inline" style={{ fontWeight: 600 }}>Enregistrer</span>
                 </button>
               )}

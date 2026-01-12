@@ -182,7 +182,7 @@ export function FiltersModal({ isOpen, onClose, onApplyFilters }: FiltersModalPr
                 Fourchette de prix
               </h3>
               {(filters.priceMin > MIN_PRICE || filters.priceMax < MAX_PRICE) && (
-                <span className="text-xs font-medium text-[#5EC6D8] bg-[#5EC6D8]/10 px-2 py-1 rounded-full">
+                <span className="text-xs font-medium text-[#1E3A5F] bg-[#1E3A5F]/10 px-2 py-1 rounded-full">
                   Filtre actif
                 </span>
               )}
@@ -195,7 +195,7 @@ export function FiltersModal({ isOpen, onClose, onApplyFilters }: FiltersModalPr
             <div className="relative mb-8">
               <div className="h-2 bg-gray-100 rounded-full">
                 <div
-                  className="absolute h-2 bg-gradient-to-r from-[#4FA7C9] to-[#5EC6D8] rounded-full transition-all duration-200"
+                  className="absolute h-2 bg-gradient-to-r from-[#162d4a] to-[#1E3A5F] rounded-full transition-all duration-200"
                   style={{
                     left: `${(filters.priceMin / MAX_PRICE) * 100}%`,
                     right: `${100 - (filters.priceMax / MAX_PRICE) * 100}%`
@@ -216,7 +216,7 @@ export function FiltersModal({ isOpen, onClose, onApplyFilters }: FiltersModalPr
                   Minimum
                 </label>
                 <div className="relative group">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-medium text-gray-400 group-focus-within:text-[#5EC6D8] transition-colors">€</span>
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-medium text-gray-400 group-focus-within:text-[#1E3A5F] transition-colors">€</span>
                   <input
                     type="number"
                     value={filters.priceMin}
@@ -227,7 +227,7 @@ export function FiltersModal({ isOpen, onClose, onApplyFilters }: FiltersModalPr
                     min={MIN_PRICE}
                     max={filters.priceMax - PRICE_STEP}
                     step={PRICE_STEP}
-                    className="w-full pl-10 pr-4 py-3.5 border-2 border-gray-200 rounded-xl text-sm font-medium text-gray-900 focus:outline-none focus:border-[#5EC6D8] focus:ring-4 focus:ring-[#5EC6D8]/10 transition-all duration-200"
+                    className="w-full pl-10 pr-4 py-3.5 border-2 border-gray-200 rounded-xl text-sm font-medium text-gray-900 focus:outline-none focus:border-[#1E3A5F] focus:ring-4 focus:ring-[#1E3A5F]/10 transition-all duration-200"
                   />
                 </div>
               </div>
@@ -239,7 +239,7 @@ export function FiltersModal({ isOpen, onClose, onApplyFilters }: FiltersModalPr
                   Maximum
                 </label>
                 <div className="relative group">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-medium text-gray-400 group-focus-within:text-[#5EC6D8] transition-colors">€</span>
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-medium text-gray-400 group-focus-within:text-[#1E3A5F] transition-colors">€</span>
                   <input
                     type="number"
                     value={filters.priceMax}
@@ -250,7 +250,7 @@ export function FiltersModal({ isOpen, onClose, onApplyFilters }: FiltersModalPr
                     min={filters.priceMin + PRICE_STEP}
                     max={MAX_PRICE}
                     step={PRICE_STEP}
-                    className="w-full pl-10 pr-4 py-3.5 border-2 border-gray-200 rounded-xl text-sm font-medium text-gray-900 focus:outline-none focus:border-[#5EC6D8] focus:ring-4 focus:ring-[#5EC6D8]/10 transition-all duration-200"
+                    className="w-full pl-10 pr-4 py-3.5 border-2 border-gray-200 rounded-xl text-sm font-medium text-gray-900 focus:outline-none focus:border-[#1E3A5F] focus:ring-4 focus:ring-[#1E3A5F]/10 transition-all duration-200"
                   />
                 </div>
               </div>
@@ -266,7 +266,7 @@ export function FiltersModal({ isOpen, onClose, onApplyFilters }: FiltersModalPr
                 Chambres et lits
               </h3>
               {(filters.bedrooms > 0 || filters.beds > 0 || filters.bathrooms > 0) && (
-                <span className="text-xs font-medium text-[#5EC6D8] bg-[#5EC6D8]/10 px-2 py-1 rounded-full">
+                <span className="text-xs font-medium text-[#1E3A5F] bg-[#1E3A5F]/10 px-2 py-1 rounded-full">
                   {filters.bedrooms + filters.beds + filters.bathrooms > 1 ? 'Filtres actifs' : 'Filtre actif'}
                 </span>
               )}
@@ -283,7 +283,7 @@ export function FiltersModal({ isOpen, onClose, onApplyFilters }: FiltersModalPr
                 <div
                   key={key}
                   className={`flex items-center justify-between p-4 rounded-2xl transition-all duration-200 ${
-                    filters[key] > 0 ? 'bg-[#5EC6D8]/5 border-2 border-[#5EC6D8]/20' : 'bg-gray-50 border-2 border-transparent'
+                    filters[key] > 0 ? 'bg-[#1E3A5F]/5 border-2 border-[#1E3A5F]/20' : 'bg-gray-50 border-2 border-transparent'
                   }`}
                 >
                   <div className="flex-1">
@@ -297,7 +297,7 @@ export function FiltersModal({ isOpen, onClose, onApplyFilters }: FiltersModalPr
                       className={`w-10 h-10 flex items-center justify-center rounded-full border-2 transition-all duration-200 ${
                         filters[key] === 0
                           ? 'border-gray-200 text-gray-300 cursor-not-allowed'
-                          : 'border-gray-300 text-gray-600 hover:border-[#5EC6D8] hover:text-[#5EC6D8] hover:bg-[#5EC6D8]/5 active:scale-95'
+                          : 'border-gray-300 text-gray-600 hover:border-[#1E3A5F] hover:text-[#1E3A5F] hover:bg-[#1E3A5F]/5 active:scale-95'
                       }`}
                       aria-label={`Diminuer ${label}`}
                     >
@@ -312,7 +312,7 @@ export function FiltersModal({ isOpen, onClose, onApplyFilters }: FiltersModalPr
                       className={`w-10 h-10 flex items-center justify-center rounded-full border-2 transition-all duration-200 ${
                         filters[key] >= 8
                           ? 'border-gray-200 text-gray-300 cursor-not-allowed'
-                          : 'border-gray-300 text-gray-600 hover:border-[#5EC6D8] hover:text-[#5EC6D8] hover:bg-[#5EC6D8]/5 active:scale-95'
+                          : 'border-gray-300 text-gray-600 hover:border-[#1E3A5F] hover:text-[#1E3A5F] hover:bg-[#1E3A5F]/5 active:scale-95'
                       }`}
                       aria-label={`Augmenter ${label}`}
                     >
@@ -333,7 +333,7 @@ export function FiltersModal({ isOpen, onClose, onApplyFilters }: FiltersModalPr
                 Type de logement
               </h3>
               {filters.propertyTypes.length > 0 && (
-                <span className="text-xs font-medium text-[#5EC6D8] bg-[#5EC6D8]/10 px-2 py-1 rounded-full">
+                <span className="text-xs font-medium text-[#1E3A5F] bg-[#1E3A5F]/10 px-2 py-1 rounded-full">
                   {filters.propertyTypes.length} sélectionné{filters.propertyTypes.length > 1 ? 's' : ''}
                 </span>
               )}
@@ -350,18 +350,18 @@ export function FiltersModal({ isOpen, onClose, onApplyFilters }: FiltersModalPr
                     onClick={() => togglePropertyType(id)}
                     className={`relative flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] ${
                       isSelected
-                        ? 'border-[#5EC6D8] bg-[#5EC6D8]/5 shadow-sm'
+                        ? 'border-[#1E3A5F] bg-[#1E3A5F]/5 shadow-sm'
                         : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50'
                     }`}
                     aria-pressed={isSelected}
                   >
                     {isSelected && (
-                      <div className="absolute top-2 right-2 w-5 h-5 bg-[#5EC6D8] rounded-full flex items-center justify-center">
+                      <div className="absolute top-2 right-2 w-5 h-5 bg-[#1E3A5F] rounded-full flex items-center justify-center">
                         <Check className="w-3 h-3 text-white" />
                       </div>
                     )}
-                    <Icon className={`w-7 h-7 transition-colors ${isSelected ? 'text-[#5EC6D8]' : 'text-gray-500'}`} />
-                    <span className={`text-sm font-medium transition-colors ${isSelected ? 'text-[#5EC6D8]' : 'text-gray-700'}`}>
+                    <Icon className={`w-7 h-7 transition-colors ${isSelected ? 'text-[#1E3A5F]' : 'text-gray-500'}`} />
+                    <span className={`text-sm font-medium transition-colors ${isSelected ? 'text-[#1E3A5F]' : 'text-gray-700'}`}>
                       {label}
                     </span>
                   </button>
@@ -379,7 +379,7 @@ export function FiltersModal({ isOpen, onClose, onApplyFilters }: FiltersModalPr
                 Équipements
               </h3>
               {filters.amenities.length > 0 && (
-                <span className="text-xs font-medium text-[#5EC6D8] bg-[#5EC6D8]/10 px-2 py-1 rounded-full">
+                <span className="text-xs font-medium text-[#1E3A5F] bg-[#1E3A5F]/10 px-2 py-1 rounded-full">
                   {filters.amenities.length} sélectionné{filters.amenities.length > 1 ? 's' : ''}
                 </span>
               )}
@@ -396,21 +396,21 @@ export function FiltersModal({ isOpen, onClose, onApplyFilters }: FiltersModalPr
                     onClick={() => toggleAmenity(id)}
                     className={`relative flex items-center gap-3 p-4 rounded-2xl border-2 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] ${
                       isSelected
-                        ? 'border-[#5EC6D8] bg-[#5EC6D8]/5 shadow-sm'
+                        ? 'border-[#1E3A5F] bg-[#1E3A5F]/5 shadow-sm'
                         : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50'
                     }`}
                     aria-pressed={isSelected}
                   >
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
-                      isSelected ? 'bg-[#5EC6D8]/20' : 'bg-gray-100'
+                      isSelected ? 'bg-[#1E3A5F]/20' : 'bg-gray-100'
                     }`}>
-                      <Icon className={`w-5 h-5 transition-colors ${isSelected ? 'text-[#5EC6D8]' : 'text-gray-500'}`} />
+                      <Icon className={`w-5 h-5 transition-colors ${isSelected ? 'text-[#1E3A5F]' : 'text-gray-500'}`} />
                     </div>
-                    <span className={`text-sm font-medium transition-colors ${isSelected ? 'text-[#5EC6D8]' : 'text-gray-700'}`}>
+                    <span className={`text-sm font-medium transition-colors ${isSelected ? 'text-[#1E3A5F]' : 'text-gray-700'}`}>
                       {label}
                     </span>
                     {isSelected && (
-                      <div className="absolute top-2 right-2 w-5 h-5 bg-[#5EC6D8] rounded-full flex items-center justify-center">
+                      <div className="absolute top-2 right-2 w-5 h-5 bg-[#1E3A5F] rounded-full flex items-center justify-center">
                         <Check className="w-3 h-3 text-white" />
                       </div>
                     )}
@@ -438,7 +438,7 @@ export function FiltersModal({ isOpen, onClose, onApplyFilters }: FiltersModalPr
             onClick={handleApply}
             className="px-8 py-3.5 text-white rounded-xl text-sm font-semibold transition-all duration-200 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
             style={{
-              background: 'linear-gradient(135deg, #4FA7C9 0%, #5EC6D8 100%)'
+              backgroundColor: '#1E3A5F'
             }}
           >
             Afficher les logements

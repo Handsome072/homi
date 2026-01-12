@@ -171,7 +171,7 @@ export function ServiceDetails() {
                 </div>
                 <button
                   className="px-6 py-3 rounded-full text-white text-base hover:shadow-lg transition-all"
-                  style={{ backgroundColor: '#5EC6D8', fontWeight: 600 }}
+                  style={{ backgroundColor: '#1E3A5F', fontWeight: 600 }}
                 >
                   Voir les dates
                 </button>

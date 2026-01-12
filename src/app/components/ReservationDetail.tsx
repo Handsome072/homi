@@ -40,7 +40,7 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
             </h2>
 
             <div className="mb-6">
-              <h3 className="text-xs mb-4 font-bold tracking-wide text-[#5EC6D8]">
+              <h3 className="text-xs mb-4 font-bold tracking-wide text-[#1E3A5F]">
                 DÉTAILS DE REMBOURSEMENT
               </h3>
 
@@ -54,7 +54,7 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
                   </span>
                 </div>
 
-                <div className="bg-[#5EC6D8] rounded-lg p-6">
+                <div className="bg-[#1E3A5F] rounded-lg p-6">
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-base text-white font-semibold">
                       Remboursement
@@ -150,7 +150,7 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
                   ) : (
                     <>
                       <div className="mb-6">
-                        <p className="text-sm mb-3 text-[#5EC6D8] font-semibold">
+                        <p className="text-sm mb-3 text-[#1E3A5F] font-semibold">
                           Un email de confirmation de votre réservation vous a été envoyé.
                         </p>
                         <p className="text-sm text-muted-foreground">
@@ -161,10 +161,10 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
                       <div className="grid grid-cols-2 gap-4 mb-6">
                         <div className="border border-gray-200 rounded-lg p-4">
                           <div className="flex items-center gap-2 mb-2">
-                            <svg className="w-4 h-4 text-[#5EC6D8]" fill="currentColor" viewBox="0 0 20 20">
+                            <svg className="w-4 h-4 text-[#1E3A5F]" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                             </svg>
-                            <span className="text-xs font-bold tracking-wide text-[#5EC6D8]">
+                            <span className="text-xs font-bold tracking-wide text-[#1E3A5F]">
                               DATE D'ARRIVÉE
                             </span>
                           </div>
@@ -176,10 +176,10 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
 
                         <div className="border border-gray-200 rounded-lg p-4">
                           <div className="flex items-center gap-2 mb-2">
-                            <svg className="w-4 h-4 text-[#5EC6D8]" fill="currentColor" viewBox="0 0 20 20">
+                            <svg className="w-4 h-4 text-[#1E3A5F]" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                             </svg>
-                            <span className="text-xs font-bold tracking-wide text-[#5EC6D8]">
+                            <span className="text-xs font-bold tracking-wide text-[#1E3A5F]">
                               DATE DE DÉPART
                             </span>
                           </div>
@@ -190,7 +190,7 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
                         </div>
                       </div>
 
-                      <button className="flex items-center gap-2 text-sm text-[#5EC6D8] font-semibold">
+                      <button className="flex items-center gap-2 text-sm text-[#1E3A5F] font-semibold">
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                         </svg>
@@ -209,7 +209,7 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
                   <div className="space-y-4 mb-6">
                     <div className="flex gap-4">
                       <div className="flex-shrink-0">
-                        <svg className="w-12 h-12 text-[#5EC6D8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="w-12 h-12 text-[#1E3A5F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                       </div>
@@ -219,14 +219,14 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
                         </h3>
                         <p className="text-sm text-muted-foreground leading-relaxed">
                           Lorem ipsum dolor sit amet consectetur. Elit turpis id volutpat vitae. Vulputate mauris eu dignissim quis a nunc lorem. Consectetur viverra scelerisque nam. Consecte{' '}
-                          <span className="text-[#5EC6D8] underline cursor-pointer font-semibold">Voir plus</span>
+                          <span className="text-[#1E3A5F] underline cursor-pointer font-semibold">Voir plus</span>
                         </p>
                       </div>
                     </div>
 
                     <div className="flex gap-4">
                       <div className="flex-shrink-0">
-                        <svg className="w-12 h-12 text-[#5EC6D8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="w-12 h-12 text-[#1E3A5F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
                         </svg>
                       </div>
@@ -236,13 +236,13 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
                         </h3>
                         <p className="text-sm text-muted-foreground leading-relaxed">
                           Lorem ipsum dolor sit amet consectetur. Elit turpis id volutpat vitae. Vulputate mauris eu dignissim quis a nunc lorem. Consectetur viverra scelerisque nam. Consecte{' '}
-                          <span className="text-[#5EC6D8] underline cursor-pointer font-semibold">Voir plus</span>
+                          <span className="text-[#1E3A5F] underline cursor-pointer font-semibold">Voir plus</span>
                         </p>
                       </div>
                     </div>
                   </div>
 
-                  <button className="flex items-center gap-2 text-sm text-[#5EC6D8] font-semibold">
+                  <button className="flex items-center gap-2 text-sm text-[#1E3A5F] font-semibold">
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                     </svg>
@@ -259,7 +259,7 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
                   {/* Frais de réservation */}
                   <div className="mb-6">
                     <button className="flex items-center justify-between w-full mb-4">
-                      <span className="text-xs font-bold tracking-wide text-[#5EC6D8]">
+                      <span className="text-xs font-bold tracking-wide text-[#1E3A5F]">
                         FRAIS DE RÉSERVATION
                       </span>
                       <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -284,8 +284,8 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
 
                     <div className="border-t border-gray-200 pt-4">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-lg font-semibold text-[#5EC6D8]">Total</span>
-                        <span className="text-lg font-semibold text-[#5EC6D8]">580€</span>
+                        <span className="text-lg font-semibold text-[#1E3A5F]">Total</span>
+                        <span className="text-lg font-semibold text-[#1E3A5F]">580€</span>
                       </div>
                       <div className="flex items-center justify-between text-sm text-muted-foreground">
                         <span>Dont TVA</span>
@@ -297,7 +297,7 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
                   {/* Frais récurrents */}
                   <div>
                     <button className="flex items-center justify-between w-full mb-4">
-                      <span className="text-xs font-bold tracking-wide text-[#5EC6D8]">
+                      <span className="text-xs font-bold tracking-wide text-[#1E3A5F]">
                         FRAIS RÉCURRENTS
                       </span>
                       <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -326,8 +326,8 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
 
                     <div className="border-t border-gray-200 pt-4">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-lg font-semibold text-[#5EC6D8]">Total</span>
-                        <span className="text-lg font-semibold text-[#5EC6D8]">740€ par mois</span>
+                        <span className="text-lg font-semibold text-[#1E3A5F]">Total</span>
+                        <span className="text-lg font-semibold text-[#1E3A5F]">740€ par mois</span>
                       </div>
                       <div className="flex items-center justify-between text-sm text-muted-foreground">
                         <span>Dont TVA</span>
@@ -392,7 +392,7 @@ export function ReservationDetail({ onClose, reservationId }: ReservationDetailP
                       </div>
                     </div>
 
-                    <button className="flex items-center gap-2 text-sm text-[#5EC6D8] font-semibold">
+                    <button className="flex items-center gap-2 text-sm text-[#1E3A5F] font-semibold">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />

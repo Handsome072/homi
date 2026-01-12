@@ -94,6 +94,10 @@ export function HeaderRightMenu({
               setShowMenuDropdown(false);
               setShowAuthModal(true);
             }}
+            onBecomeHostClick={() => {
+              setShowMenuDropdown(false);
+              setShowBecomeHostModal(true);
+            }}
           />
         )}
       </div>

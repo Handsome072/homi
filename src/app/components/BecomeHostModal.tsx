@@ -114,7 +114,7 @@ export function BecomeHostModal({
                     y="38"
                     width="12"
                     height="18"
-                    fill="#5EC6D8"
+                    fill="#1E3A5F"
                   />
                   <circle
                     cx="20"
@@ -151,7 +151,7 @@ export function BecomeHostModal({
                     cy="28"
                     rx="16"
                     ry="20"
-                    fill="#5EC6D8"
+                    fill="#1E3A5F"
                   />
                   <path
                     d="M24 44 L28 28 L36 28 L40 44 Z"
@@ -234,7 +234,7 @@ export function BecomeHostModal({
                     cx="40"
                     cy="24"
                     r="3"
-                    fill="#5EC6D8"
+                    fill="#1E3A5F"
                   />
                 </svg>
               </div>

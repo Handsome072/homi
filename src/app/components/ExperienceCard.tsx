@@ -56,7 +56,7 @@ export function ExperienceCard({
           className="absolute top-3 right-3 hover:scale-110 transition-transform z-10"
         >
           <Heart
-            className={`w-6 h-6 ${isFavorite ? 'fill-[#5EC6D8] text-[#5EC6D8]' : 'fill-black/50 text-white'} stroke-2`}
+            className={`w-6 h-6 ${isFavorite ? 'fill-[#1E3A5F] text-[#1E3A5F]' : 'fill-black/50 text-white'} stroke-2`}
           />
         </button>
 
@@ -67,7 +67,7 @@ export function ExperienceCard({
           }`}>
             {badge === 'Originals' && (
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 2L9.5 6.5L14 8L9.5 9.5L8 14L6.5 9.5L2 8L6.5 6.5L8 2Z" fill="#5EC6D8"/>
+                <path d="M8 2L9.5 6.5L14 8L9.5 9.5L8 14L6.5 9.5L2 8L6.5 6.5L8 2Z" fill="#1E3A5F"/>
               </svg>
             )}
             <span className="text-xs" style={{ fontWeight: 600 }}>{badge}</span>
@@ -76,7 +76,7 @@ export function ExperienceCard({
 
         {/* Badge de places disponibles */}
         {availablePlaces && availableDate && (
-          <div className="absolute top-3 left-3 bg-[#5EC6D8] text-white px-3 py-1 rounded-md shadow-sm">
+          <div className="absolute top-3 left-3 bg-[#1E3A5F] text-white px-3 py-1 rounded-md shadow-sm">
             <span className="text-xs" style={{ fontWeight: 600 }}>
               {availablePlaces} {availablePlaces === 1 ? 'place disponible' : 'places disponibles'}
             </span>

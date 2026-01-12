@@ -1,4 +1,4 @@
-import { Heart, Globe, MessageSquare, User, Settings, HelpCircle } from 'lucide-react';
+import { Heart, Globe, MessageSquare, User, HelpCircle } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import hostIllustration from 'figma:asset/38ec71431adff7f609dab055e5554ab5c0ee6be7.png';
 import { useAuth } from '../context/AuthContext';
@@ -133,7 +133,7 @@ export function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLan
       <div className="w-[240px] h-px bg-gray-200 my-2 mx-auto"></div>
 
       {/* Devenir hôte avec illustration */}
-      <button 
+      <button
         className="w-full px-4 py-3 hover:bg-gray-50 transition-colors text-left"
         onClick={onBecomeHostClick}
       >
@@ -146,22 +146,12 @@ export function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLan
               Devenir hôte et gagner des revenus supplémentaires, c'est facile.
             </div>
           </div>
-          <img 
-            src={hostIllustration} 
-            alt="Illustration hôte" 
+          <img
+            src={hostIllustration}
+            alt="Illustration hôte"
             className="w-12 h-12 object-contain flex-shrink-0"
           />
         </div>
-      </button>
-
-      {/* Parrainer un hôte */}
-      <button className="w-full px-8 py-3 hover:bg-gray-50 transition-colors text-left">
-        <span className="text-sm">Parrainer un hôte</span>
-      </button>
-
-      {/* Trouver un co-hôte */}
-      <button className="w-full px-8 py-3 hover:bg-gray-50 transition-colors text-left">
-        <span className="text-sm">Trouver un co-hôte</span>
       </button>
 
       {/* Divider */}
