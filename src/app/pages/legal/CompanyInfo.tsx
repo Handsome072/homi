@@ -1,7 +1,8 @@
-import { Search, ArrowUp } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LegalFooter } from '../../components/LegalFooter';
+import { LegalHeader } from '../../components/LegalHeader';
 
 export function CompanyInfo() {
   const navigate = useNavigate();
@@ -23,63 +24,7 @@ export function CompanyInfo() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
-        <div className="px-6 lg:px-20 py-4">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <button
-              onClick={() => navigate('/')}
-              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-            >
-              <svg
-                className="w-8 h-8"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="16" cy="16" r="14" stroke="#1E3A5F" strokeWidth="2" fill="none" />
-                <text x="16" y="21" textAnchor="middle" fontSize="16" fontWeight="600" fill="#1E3A5F">?</text>
-              </svg>
-              <span className="text-base" style={{ fontWeight: 600, color: '#222222' }}>
-                Centre d'aide
-              </span>
-            </button>
-
-            {/* Search bar */}
-            <div className="hidden md:flex items-center flex-1 max-w-md mx-8">
-              <div className="relative w-full">
-                <input
-                  type="text"
-                  placeholder="Rechercher des guides pratiq..."
-                  className="w-full pl-4 pr-12 py-2.5 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]"
-                />
-                <button className="absolute right-1 top-1/2 -translate-y-1/2 w-9 h-9 bg-[#1E3A5F] rounded-full flex items-center justify-center">
-                  <Search className="w-4 h-4 text-white" />
-                </button>
-              </div>
-            </div>
-
-            {/* Right icons */}
-            <div className="flex items-center gap-3">
-              <button className="w-10 h-10 rounded-full hover:bg-gray-50 flex items-center justify-center transition-colors">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <circle cx="8" cy="8" r="7" stroke="#222222" strokeWidth="1.5" />
-                  <path d="M3 8H13M8 3C6.5 4.5 6 6 6 8C6 10 6.5 11.5 8 13M8 3C9.5 4.5 10 6 10 8C10 10 9.5 11.5 8 13" stroke="#222222" strokeWidth="1.5" />
-                </svg>
-              </button>
-              <button className="flex items-center gap-2 px-3 py-2 border border-gray-300 rounded-full hover:shadow-md transition-shadow">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M2 4H14M2 8H14M2 12H14" stroke="#222222" strokeWidth="1.5" strokeLinecap="round" />
-                </svg>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="12" r="11" fill="#717171" />
-                  <path d="M12 2C14.21 2 16 3.79 16 6C16 8.21 14.21 10 12 10C9.79 10 8 8.21 8 6C8 3.79 9.79 2 12 2ZM12 22C7.03 22 3 19.42 3 16.25C3 13.08 7.03 10.5 12 10.5C16.97 10.5 21 13.08 21 16.25C21 19.42 16.97 22 12 22Z" fill="#FFF" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+      <LegalHeader />
 
       {/* Main content */}
       <div className="px-6 lg:px-20 py-12">

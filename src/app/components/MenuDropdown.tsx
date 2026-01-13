@@ -78,12 +78,15 @@ export function MenuDropdown({ isOpen, onClose, onAuthClick, onBecomeHostClick }
       <div className="w-[240px] h-px bg-gray-200 my-2 mx-auto"></div>
 
       {/* Se connecter ou s'inscrire */}
-      <button 
-        className="w-full px-4 py-3 hover:bg-gray-50 transition-colors text-left"
-        onClick={onAuthClick}
-      >
-        <span className="text-sm px-4">Se connecter ou s'inscrire</span>
-      </button>
+      <div className="px-4 py-3">
+        <button
+          className="w-full py-3 rounded-lg transition-colors text-center text-white hover:opacity-90"
+          style={{ backgroundColor: 'black' }}
+          onClick={onAuthClick}
+        >
+          <span className="text-sm font-medium">Se connecter ou s'inscrire</span>
+        </button>
+      </div>
     </div>
   );
 }
