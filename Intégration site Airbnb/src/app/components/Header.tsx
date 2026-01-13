@@ -12,7 +12,7 @@ import { useAuth } from "../context/AuthContext";
 interface HeaderProps {
   currentPage: "logements" | "experiences" | "services";
   onNavigate: (
-    page: "logements" | "experiences" | "services" | "messages",
+    page: "logements" | "experiences" | "services" | "messages" | "host-onboarding",
   ) => void;
   isScrolled: boolean;
   onSearch: (params: any) => void;
@@ -143,6 +143,12 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(
           <BecomeHostModal
             isOpen={showBecomeHostModal}
             onClose={() => setShowBecomeHostModal(false)}
+            onSelectOption={(option) => {
+              if (option === 'logement') {
+                onNavigate('host-onboarding');
+              }
+              // Pour l'instant, les autres options ne font rien
+            }}
           />
         )}
 

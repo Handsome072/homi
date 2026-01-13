@@ -15,10 +15,11 @@ import { Privacy } from './pages/Privacy';
 import { TermsOfService } from './pages/TermsOfService';
 import { HowItWorks } from './pages/HowItWorks';
 import { CompanyInfo } from './pages/CompanyInfo';
+import { HostOnboarding } from './pages/HostOnboarding';
 import { AuthProvider } from './context/AuthContext';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'logements' | 'experiences' | 'services' | 'property-details' | 'experience-details' | 'service-details' | 'booking-request' | 'search-results' | 'client-space' | 'messages' | 'privacy' | 'terms' | 'how-it-works' | 'company-info'>('logements');
+  const [currentPage, setCurrentPage] = useState<'logements' | 'experiences' | 'services' | 'property-details' | 'experience-details' | 'service-details' | 'booking-request' | 'search-results' | 'client-space' | 'messages' | 'privacy' | 'terms' | 'how-it-works' | 'company-info' | 'host-onboarding'>('logements');
   const [isScrolled, setIsScrolled] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const [bookingData, setBookingData] = useState<any>(null);
@@ -52,7 +53,7 @@ export default function App() {
     };
   }, []);
 
-  const handleNavigate = (page: 'logements' | 'experiences' | 'services' | 'property-details' | 'experience-details' | 'service-details' | 'booking-request' | 'search-results' | 'client-space' | 'messages' | 'privacy' | 'terms' | 'how-it-works' | 'company-info', data?: any) => {
+  const handleNavigate = (page: 'logements' | 'experiences' | 'services' | 'property-details' | 'experience-details' | 'service-details' | 'booking-request' | 'search-results' | 'client-space' | 'messages' | 'privacy' | 'terms' | 'how-it-works' | 'company-info' | 'host-onboarding', data?: any) => {
     setCurrentPage(page);
     if (data) {
       setBookingData(data);
@@ -122,7 +123,7 @@ export default function App() {
   return (
     <AuthProvider>
       <div className="min-h-screen bg-white">
-        {currentPage !== 'property-details' && currentPage !== 'experience-details' && currentPage !== 'service-details' && currentPage !== 'booking-request' && currentPage !== 'search-results' && currentPage !== 'client-space' && currentPage !== 'messages' && currentPage !== 'privacy' && currentPage !== 'terms' && currentPage !== 'how-it-works' && currentPage !== 'company-info' && (
+        {currentPage !== 'property-details' && currentPage !== 'experience-details' && currentPage !== 'service-details' && currentPage !== 'booking-request' && currentPage !== 'search-results' && currentPage !== 'client-space' && currentPage !== 'messages' && currentPage !== 'privacy' && currentPage !== 'terms' && currentPage !== 'how-it-works' && currentPage !== 'company-info' && currentPage !== 'host-onboarding' && (
           <Header 
             ref={headerRef} 
             currentPage={currentPage} 
@@ -147,8 +148,9 @@ export default function App() {
         {currentPage === 'terms' && <TermsOfService onNavigate={handleNavigate} />}
         {currentPage === 'how-it-works' && <HowItWorks onNavigate={handleNavigate} />}
         {currentPage === 'company-info' && <CompanyInfo onNavigate={handleNavigate} />}
+        {currentPage === 'host-onboarding' && <HostOnboarding onNavigate={handleNavigate} />}
         
-        {currentPage !== 'property-details' && currentPage !== 'experience-details' && currentPage !== 'service-details' && currentPage !== 'booking-request' && currentPage !== 'search-results' && currentPage !== 'client-space' && currentPage !== 'messages' && currentPage !== 'privacy' && currentPage !== 'terms' && currentPage !== 'how-it-works' && currentPage !== 'company-info' && <Footer onNavigate={handleNavigate} />}
+        {currentPage !== 'property-details' && currentPage !== 'experience-details' && currentPage !== 'service-details' && currentPage !== 'booking-request' && currentPage !== 'search-results' && currentPage !== 'client-space' && currentPage !== 'messages' && currentPage !== 'privacy' && currentPage !== 'terms' && currentPage !== 'how-it-works' && currentPage !== 'company-info' && currentPage !== 'host-onboarding' && <Footer onNavigate={handleNavigate} />}
       </div>
     </AuthProvider>
   );

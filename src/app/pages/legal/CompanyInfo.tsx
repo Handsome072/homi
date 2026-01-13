@@ -1,11 +1,9 @@
 import { ArrowUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { LegalFooter } from '../../components/LegalFooter';
 import { LegalHeader } from '../../components/LegalHeader';
 
 export function CompanyInfo() {
-  const navigate = useNavigate();
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
@@ -30,145 +28,130 @@ export function CompanyInfo() {
       <div className="px-6 lg:px-20 py-12">
         <div className="max-w-[800px] mx-auto">
           <h1 className="text-[32px] mb-10" style={{ fontWeight: 600, color: '#222222', lineHeight: '1.3' }}>
-            Mentions légales
+            MENTIONS LÉGALES
           </h1>
 
+          <p className="text-base mb-8" style={{ color: '#222222', lineHeight: '1.6' }}>
+            Conformément aux dispositions de la loi n°2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN), il est précisé aux utilisateurs du site HOMIQIO l'identité des différents intervenants dans le cadre de sa réalisation et de son exploitation.
+          </p>
+
           {/* Content sections */}
-          <div className="space-y-6 text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
-            {/* Section 1 */}
+          <div className="space-y-8 text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+            {/* Section 1 - Éditeur */}
             <section>
-              <p className="mb-4" style={{ fontWeight: 600 }}>
-                Fournisseur du site web et interlocuteur unique des destinataires du service conformément à l'article 12 du DSA :
-              </p>
-              <p className="mb-4">HOMIQIO Ireland UC, private unlimited company</p>
-
-              <div className="mb-4">
-                <p style={{ fontWeight: 600 }}>Siège social :</p>
-                <p>8 Hanover Quay</p>
-                <p>Dublin 2, D02 W5P2</p>
-                <p>Irlande</p>
-              </div>
-
-              <p className="mb-2">
-                <strong>Numéro de TVA intracommunautaire :</strong> IE9827384L
-              </p>
-              <p className="mb-2">
-                <strong>Numéro d'immatriculation :</strong> (Registre du commerce irlandais) IE 511825
-              </p>
-              <p className="mb-2">
-                <strong>Capital social :</strong> il n'existe pas d'équivalent à la notion du droit français de « capital social » en droit des sociétés irlandais.
-              </p>
-              <p className="mb-4">
-                <strong>Conseil d'administration :</strong> Killian Pattwell, Andrea Finnegan, Richard Lombard
-              </p>
-            </section>
-
-            {/* Section 2 */}
-            <section>
-              <p style={{ fontWeight: 600 }}>Nous contacter :</p>
-              <p className="mb-1">
-                <strong>Adresse e-mail :</strong>{' '}
-                <a href="mailto:terms@homiqio.com" className="text-[#10B981] underline hover:opacity-80">
-                  terms@homiqio.com
-                </a>
-              </p>
-              <p className="mb-4">
-                <strong>Assistance HOMIQIO :</strong>{' '}
-                <a href="https://www.homiqio.fr/help/contact_us" className="text-[#10B981] underline hover:opacity-80">
-                  https://www.homiqio.fr/help/contact_us
-                </a>
-              </p>
-
-              <p className="mb-4">
-                HOMIQIO Ireland UC agit en qualité d'intermédiaire technique et n'intervient pas dans le choix des contenus mis en ligne par ses utilisateurs. Plus d'informations dans nos{' '}
-                <button onClick={() => navigate('/terms')} className="text-[#10B981] underline hover:opacity-80">
-                  Conditions de service
-                </button>
-              </p>
-
-              <p className="mb-4">
-                <strong>Prestataire technique (hébergeur du site web) :</strong> HOMIQIO utilise les services cloud d'Amazon Web Services pour héberger son site web. Le siège social d'Amazon Web Services est situé à l'adresse suivante : Amazon Web Services, Inc, 410 Terry Avenue North Seattle, WA 98109-5210, États-Unis.
-              </p>
-
-              <p className="mb-6">
-                Veuillez noter qu'HOMIQIO Ireland UC ne s'engage pas à passer par un dispositif alternatif de résolution des litiges avec les consommateurs, et n'est pas tenu de le faire.
-              </p>
-            </section>
-
-            {/* Section 3 */}
-            <section className="pt-6 border-t border-gray-200">
-              <p className="mb-4" style={{ fontWeight: 600 }}>
-                Partie contractante relative aux services de paiement destinés aux utilisateurs dont le lieu de résidence se trouve au Royaume-Uni, en Suisse ou en Russie :
-              </p>
-              <div className="mb-4">
-                <p>HOMIQIO Payments UK Ltd.</p>
-                <p>280 Bishopsgate</p>
-                <p>Londres</p>
-                <p>EC2M 4AG</p>
-                <p>Royaume-Uni</p>
-              </div>
-
-              <p className="mb-2">
-                <strong>Numéro de l'entreprise :</strong> 09392688
-              </p>
-              <p className="mb-4">
-                <strong>Conseil d'administration :</strong> Quent Rickerby, Bart Rubin, David Coleman
-              </p>
-              <p className="mb-6">
-                HOMIQIO Payments UK Ltd. est autorisé et régulé par l'Autorité de bonne conduite financière (Financial Conduct Authority) en tant qu'établissement de monnaie électronique sous la référence 900596.
-              </p>
-            </section>
-
-            {/* Section 4 */}
-            <section className="pt-6 border-t border-gray-200">
-              <p className="mb-4" style={{ fontWeight: 600 }}>
-                Partie contractante relative aux services de paiement destinés aux utilisateurs dont le lieu de résidence se trouve dans l'Espace économique européen :
-              </p>
-              <div className="mb-4">
-                <p>HOMIQIO Payments Luxembourg S.A.</p>
-                <p>4, rue Henri Schnadt</p>
-                <p>L-2530 Luxembourg</p>
-                <p>Luxembourg</p>
-              </div>
-
-              <p className="mb-2">
-                <strong>Numéro de l'entreprise :</strong> B230618
-              </p>
-              <p className="mb-4">
-                <strong>Conseil d'administration :</strong> Thomas Belousek, Marc Hemmerling, Bart Rubin, Amit Singh
-              </p>
-              <p className="mb-6">
-                HOMIQIO Payments Luxembourg S.A. est autorisée et régulée par la Commission de Surveillance du Secteur Financier (« CSSF ») sous le numéro de référence Z21.
-              </p>
-            </section>
-
-            {/* Section 5 */}
-            <section className="pt-6 border-t border-gray-200">
-              <h2 className="text-lg mb-4" style={{ fontWeight: 600 }}>
-                Informations sur l'interlocuteur des autorités de l'UE dans le cadre du règlement sur les services numériques
+              <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                1. Éditeur du site
               </h2>
-              <p className="mb-6">
-                Interlocuteur unique pour les autorités des États membres, la Commission européenne et le conseil d'administration conformément à l'article 11 du règlement :{' '}
-                <a href="mailto:dsa-authorities@homiqio.com" className="text-[#10B981] underline hover:opacity-80">
-                  dsa-authorities@homiqio.com
-                </a>
-                . Veuillez vous assurer que les communications sont faites en anglais ou accompagnées d'une traduction en anglais.
-              </p>
+              <p className="mb-4">Le site HOMIQIO est édité et exploité par :</p>
+              <div className="mb-4">
+                <p style={{ fontWeight: 600 }}>WANDERLATE SASU</p>
+                <p>Société par actions simplifiée unipersonnelle au capital de 250 000 €</p>
+                <p>Siège social : Bureau 3, 2 place Jean V, 44000 Nantes, France</p>
+                <p>Immatriculée au Registre du Commerce et des Sociétés de Nantes sous le numéro 991 607 656</p>
+                <p>SIREN : 991 607 656</p>
+                <p>TVA intracommunautaire : FR14991607656</p>
+              </div>
+              <p>HOMIQIO est une marque commerciale exploitée par WANDERLATE SASU.</p>
             </section>
 
-            {/* Section 6 */}
-            <section className="pt-6 border-t border-gray-200">
-              <h2 className="text-lg mb-4" style={{ fontWeight: 600 }}>
-                Informations sur le nombre mensuel moyen de destinataires actifs dans l'Union européenne :
+            {/* Section 2 - Hébergement */}
+            <section>
+              <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                2. Hébergement du site
+              </h2>
+              <p className="mb-4">Le site est hébergé par :</p>
+              <div className="mb-4">
+                <p><strong>Nom de l'hébergeur :</strong> o2switch.</p>
+                <p><strong>Adresse de l'hébergeur :</strong> Chemin des Pardiaux, 63000 Clermont-Ferrand, France.</p>
+                <p><strong>Numéro de téléphone :</strong> 04 44 44 60 40 (assistance technique).</p>
+                <p><strong>Contact email :</strong> support@o2switch.fr (support technique).</p>
+              </div>
+            </section>
+
+            {/* Section 3 - Objet */}
+            <section>
+              <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                3. Objet de la plateforme
               </h2>
               <p className="mb-4">
-                En vertu de l'article 24, paragraphe 2, du règlement sur les services numériques, les plateformes en ligne sont tenues de publier des « informations sur le nombre mensuel moyen de destinataires actifs du service dans l'Union » avant le 17 février 2023, et tous les six mois par la suite.
-              </p>
-              <p className="mb-4">
-                Conformément aux dispositions du règlement, y compris le Considérant 77, nous avons calculé que notre nombre mensuel moyen de destinataires actifs dans l'Union européenne pour la période du 1 févr. – 31 juil. 2025 s'élève à environ 41.7M.
+                HOMIQIO est une plateforme de réservation en ligne permettant la mise en relation entre des utilisateurs et des hébergeurs professionnels ou particuliers pour la réservation d'hébergements touristiques.
               </p>
               <p>
-                Nous continuerons à suivre toute évolution et publierons tous les six mois des informations sur le nombre mensuel moyen de destinataires actifs de notre service dans l'Union européenne, conformément à l'article 24, paragraphe 2, du règlement.
+                HOMIQIO intervient exclusivement en qualité de plateforme intermédiaire de réservation et n'est ni propriétaire, ni exploitant des hébergements proposés, sauf mention contraire explicite.
+              </p>
+            </section>
+
+            {/* Section 4 - Responsabilité */}
+            <section>
+              <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                4. Responsabilité
+              </h2>
+              <p className="mb-4">
+                WANDERLATE SASU, exploitant de la plateforme HOMIQIO, s'efforce d'assurer l'exactitude et la mise à jour des informations diffusées sur le site. Toutefois, elle ne saurait être tenue responsable :
+              </p>
+              <ul className="mb-4 pl-6">
+                <li style={{ listStyleType: 'disc' }}>des erreurs, omissions ou inexactitudes des contenus fournis par les hébergeurs,</li>
+                <li style={{ listStyleType: 'disc' }}>des indisponibilités temporaires du site,</li>
+                <li style={{ listStyleType: 'disc' }}>de l'exécution ou de la qualité des prestations fournies par les hébergeurs.</li>
+              </ul>
+              <p>La responsabilité de WANDERLATE SASU est strictement limitée à son rôle d'intermédiaire technique et commercial.</p>
+            </section>
+
+            {/* Section 5 - Propriété intellectuelle */}
+            <section>
+              <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                5. Propriété intellectuelle
+              </h2>
+              <p className="mb-4">
+                L'ensemble des éléments constituant le site HOMIQIO (textes, graphismes, logos, marques, interfaces, bases de données, structure générale) est protégé par le droit de la propriété intellectuelle.
+              </p>
+              <p>
+                Toute reproduction, représentation, modification ou exploitation, totale ou partielle, sans autorisation écrite préalable de WANDERLATE SASU, est strictement interdite.
+              </p>
+            </section>
+
+            {/* Section 6 - Données personnelles */}
+            <section>
+              <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                6. Données personnelles
+              </h2>
+              <p className="mb-4">
+                Les données personnelles collectées via la plateforme HOMIQIO sont traitées conformément à la réglementation en vigueur, notamment le Règlement Général sur la Protection des Données (RGPD).
+              </p>
+              <p className="mb-4">
+                Les utilisateurs disposent d'un droit d'accès, de rectification, d'effacement, de limitation et d'opposition concernant leurs données personnelles.
+              </p>
+              <p>
+                Toute demande peut être adressée via la plateforme ou à l'adresse suivante :{' '}
+                <a href="mailto:contact@homiqio.com" className="text-[#10B981] underline hover:opacity-80">
+                  contact@homiqio.com
+                </a>
+              </p>
+            </section>
+
+            {/* Section 7 - Cookies */}
+            <section>
+              <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                7. Cookies
+              </h2>
+              <p className="mb-4">
+                Le site HOMIQIO utilise des cookies et technologies similaires afin d'améliorer l'expérience utilisateur, mesurer l'audience et sécuriser les services.
+              </p>
+              <p>
+                L'utilisateur peut paramétrer ses préférences en matière de cookies à tout moment via les outils mis à disposition sur le site.
+              </p>
+            </section>
+
+            {/* Section 8 - Droit applicable */}
+            <section>
+              <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                8. Droit applicable
+              </h2>
+              <p className="mb-4">
+                Les présentes mentions légales sont soumises au droit français.
+              </p>
+              <p>
+                Tout litige relatif à l'utilisation du site relève de la compétence exclusive des tribunaux français territorialement compétents.
               </p>
             </section>
           </div>

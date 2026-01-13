@@ -1,5 +1,5 @@
 import { X } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface BecomeHostModalProps {
   isOpen: boolean;
@@ -15,6 +15,7 @@ export function BecomeHostModal({
   onSelectOption,
 }: BecomeHostModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
+  const [selectedOption, setSelectedOption] = useState<"logement" | "experience" | "service" | null>(null);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -31,13 +32,24 @@ export function BecomeHostModal({
     };
   }, [isOpen, onClose]);
 
+  // Reset selection when modal closes
+  useEffect(() => {
+    if (!isOpen) {
+      setSelectedOption(null);
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const handleOptionClick = (
     option: "logement" | "experience" | "service",
   ) => {
-    if (onSelectOption) {
-      onSelectOption(option);
+    setSelectedOption(option);
+  };
+
+  const handleNextClick = () => {
+    if (selectedOption && onSelectOption) {
+      onSelectOption(selectedOption);
     }
     onClose();
   };
@@ -80,7 +92,9 @@ export function BecomeHostModal({
             {/* Logement */}
             <button
               onClick={() => handleOptionClick("logement")}
-              className="flex flex-col items-center justify-center p-8 border-2 border-gray-200 rounded-xl cursor-pointer"
+              className={`flex flex-col items-center justify-center p-8 border-2 rounded-xl cursor-pointer transition-all ${
+                selectedOption === 'logement' ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-400'
+              }`}
             >
               <div className="mb-6">
                 <svg
@@ -135,7 +149,9 @@ export function BecomeHostModal({
             {/* Expérience */}
             <button
               onClick={() => handleOptionClick("experience")}
-              className="flex flex-col items-center justify-center p-8 border-2 border-gray-200 rounded-xl cursor-pointer"
+              className={`flex flex-col items-center justify-center p-8 border-2 rounded-xl cursor-pointer transition-all ${
+                selectedOption === 'experience' ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-400'
+              }`}
             >
               <div className="mb-6">
                 <svg
@@ -203,7 +219,9 @@ export function BecomeHostModal({
             {/* Service */}
             <button
               onClick={() => handleOptionClick("service")}
-              className="flex flex-col items-center justify-center p-8 border-2 border-gray-200 rounded-xl cursor-pointer group"
+              className={`flex flex-col items-center justify-center p-8 border-2 rounded-xl cursor-pointer transition-all ${
+                selectedOption === 'service' ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-400'
+              }`}
             >
               <div className="mb-6">
                 <svg
@@ -251,8 +269,13 @@ export function BecomeHostModal({
             {/* Footer with Next button */}
             <div className="flex justify-end pt-6 pb-4 px-6 ">
               <button
-                onClick={onClose}
-                className="px-6 py-3 bg-gray-900 text-white rounded-lg text-sm"
+                onClick={handleNextClick}
+                disabled={!selectedOption}
+                className={`px-6 py-3 rounded-lg text-sm transition-opacity ${
+                  selectedOption 
+                    ? 'bg-gray-900 text-white hover:opacity-90' 
+                    : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                }`}
                 style={{ fontWeight: 600 }}
               >
                 Suivant

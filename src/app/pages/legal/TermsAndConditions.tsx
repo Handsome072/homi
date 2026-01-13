@@ -52,123 +52,771 @@ export function TermsAndConditions() {
               </p>
 
               <h1 className="text-[32px] mb-8" style={{ fontWeight: 600, color: '#222222', lineHeight: '1.2' }}>
-                Conditions de Service
+                Conditions Générales d'Utilisation
               </h1>
 
-              {/* Warning Box */}
-              <div className="mb-8 p-4 rounded-lg border border-[#F7E5D3] bg-[#FFF8F0]">
-                <div className="flex gap-3">
-                  <div className="flex-shrink-0 mt-1">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M8 1L15 14H1L8 1Z" fill="#B4690E" />
-                      <path d="M8 6V9M8 11V12" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-                    </svg>
-                  </div>
-                  <div className="text-sm leading-relaxed" style={{ color: '#222222' }}>
-                    Si votre pays de résidence ou d'établissement se trouve dans l'Espace économique européen (« EEE »), en Suisse ou au Royaume-Uni, les{' '}
-                    <a href="#" className="underline">
-                      Conditions de service pour les utilisateurs européens
-                    </a>{' '}
-                    s'appliquent à vous.
-                    <br />
-                    Si votre pays de résidence ou d'établissement se trouve en dehors de l'EEE, de la Suisse, de l'Australie et du Royaume-Uni, les{' '}
-                    <a href="#" className="underline">
-                      Conditions de service pour les utilisateurs situés en dehors de l'EEE, du Royaume-Uni et de l'Australie
-                    </a>{' '}
-                    s'appliquent à vous.
-                    <br />
-                    Si votre pays de résidence ou d'établissement est l'Australie, les{' '}
-                    <a href="#" className="underline">
-                      Conditions de service pour les utilisateurs australiens
-                    </a>{' '}
-                    s'appliquent à vous.
-                  </div>
+              {/* CGU - Conditions Générales d'Utilisation */}
+              <section className="mb-8">
+                <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                  ARTICLE 1 – IDENTITÉ DE L'EXPLOITANT
+                </h2>
+                <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  La plateforme HOMIQIO est exploitée par :
+                </p>
+                <div className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  <p style={{ fontWeight: 600 }}>WANDERLATE SASU</p>
+                  <p>Société par actions simplifiée unipersonnelle au capital de 250 000 €</p>
+                  <p>Siège social : Bureau 3, 2 place Jean V, 44000 Nantes, France</p>
+                  <p>RCS Nantes : 991 607 656</p>
+                  <p>TVA intracommunautaire : FR14991607656</p>
                 </div>
+                <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  HOMIQIO est une marque commerciale exploitée par WANDERLATE SASU.
+                </p>
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                  ARTICLE 2 – OBJET DES CGU
+                </h2>
+                <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  Les présentes Conditions Générales d'Utilisation ont pour objet de définir les modalités et conditions d'accès, de navigation et d'utilisation de la plateforme HOMIQIO.
+                </p>
+                <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  Toute utilisation de la plateforme implique l'acceptation pleine, entière et sans réserve des présentes CGU par l'utilisateur.
+                </p>
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                  ARTICLE 3 – DÉFINITIONS
+                </h2>
+                <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  Aux fins des présentes CGU, les termes suivants ont la signification ci-dessous :
+                </p>
+                <ul className="pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  <li style={{ listStyleType: 'disc' }}><strong>Plateforme :</strong> le site internet, l'application mobile et les services numériques HOMIQIO</li>
+                  <li style={{ listStyleType: 'disc' }}><strong>Utilisateur :</strong> toute personne accédant à la plateforme</li>
+                  <li style={{ listStyleType: 'disc' }}><strong>Client :</strong> utilisateur effectuant une réservation</li>
+                  <li style={{ listStyleType: 'disc' }}><strong>Hébergeur :</strong> professionnel ou particulier proposant un hébergement via la plateforme</li>
+                  <li style={{ listStyleType: 'disc' }}><strong>Compte :</strong> espace personnel créé par l'utilisateur</li>
+                  <li style={{ listStyleType: 'disc' }}><strong>Société :</strong> WANDERLATE SASU</li>
+                </ul>
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                  ARTICLE 4 – ACCÈS À LA PLATEFORME
+                </h2>
+                <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  L'accès à la plateforme est gratuit.
+                </p>
+                <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  Certaines fonctionnalités, notamment la réservation d'hébergements, nécessitent la création d'un compte utilisateur et la fourniture d'informations exactes, à jour et complètes.
+                </p>
+                <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  La Société se réserve le droit de refuser l'accès à tout utilisateur ne respectant pas les présentes CGU.
+                </p>
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                  ARTICLE 5 – CRÉATION ET GESTION DU COMPTE
+                </h2>
+                <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  L'utilisateur est responsable :
+                </p>
+                <ul className="mb-4 pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  <li style={{ listStyleType: 'disc' }}>de l'exactitude des informations fournies,</li>
+                  <li style={{ listStyleType: 'disc' }}>de la confidentialité de ses identifiants,</li>
+                  <li style={{ listStyleType: 'disc' }}>de toute activité effectuée via son compte.</li>
+                </ul>
+                <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  Toute utilisation frauduleuse ou non autorisée devra être signalée sans délai à la Société.
+                </p>
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                  ARTICLE 6 – DESCRIPTION DES SERVICES
+                </h2>
+                <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  HOMIQIO est une plateforme de réservation en ligne permettant la mise en relation entre des utilisateurs et des hébergeurs.
+                </p>
+                <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  La Société agit exclusivement en qualité d'intermédiaire technique et commercial.
+                </p>
+                <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  La Société :
+                </p>
+                <ul className="pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  <li style={{ listStyleType: 'disc' }}>n'est pas propriétaire des hébergements,</li>
+                  <li style={{ listStyleType: 'disc' }}>n'exploite pas les établissements proposés,</li>
+                  <li style={{ listStyleType: 'disc' }}>n'intervient pas dans l'exécution matérielle des séjours.</li>
+                </ul>
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                  ARTICLE 7 – RÔLE ET LIMITATION DE RESPONSABILITÉ
+                </h2>
+                <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  La responsabilité de WANDERLATE SASU est strictement limitée à son rôle de plateforme.
+                </p>
+                <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  La Société ne saurait être tenue responsable :
+                </p>
+                <ul className="mb-4 pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  <li style={{ listStyleType: 'disc' }}>de la qualité, conformité ou sécurité des hébergements,</li>
+                  <li style={{ listStyleType: 'disc' }}>des annulations, modifications ou litiges imputables aux hébergeurs,</li>
+                  <li style={{ listStyleType: 'disc' }}>des dommages directs ou indirects subis lors du séjour.</li>
+                </ul>
+                <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  Tout litige relatif à l'hébergement concerne exclusivement le client et l'hébergeur.
+                </p>
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                  ARTICLE 8 – PROCESSUS DE RÉSERVATION
+                </h2>
+                <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  Les modalités de réservation, de paiement, d'annulation et de remboursement sont définies dans les Conditions Générales de Réservation, accessibles sur la plateforme et acceptées lors de la réservation.
+                </p>
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                  ARTICLE 9 – COMPORTEMENT DES UTILISATEURS
+                </h2>
+                <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  L'utilisateur s'engage à :
+                </p>
+                <ul className="mb-4 pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  <li style={{ listStyleType: 'disc' }}>utiliser la plateforme de manière loyale et conforme à la loi,</li>
+                  <li style={{ listStyleType: 'disc' }}>ne pas porter atteinte aux droits de la Société ou de tiers,</li>
+                  <li style={{ listStyleType: 'disc' }}>ne pas utiliser la plateforme à des fins frauduleuses ou illicites.</li>
+                </ul>
+                <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  Tout manquement pourra entraîner la suspension ou la suppression du compte.
+                </p>
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                  ARTICLE 10 – SUSPENSION ET RÉSILIATION DU COMPTE
+                </h2>
+                <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  La Société se réserve le droit de suspendre ou résilier un compte utilisateur, sans préavis, en cas :
+                </p>
+                <ul className="pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  <li style={{ listStyleType: 'disc' }}>de violation des CGU,</li>
+                  <li style={{ listStyleType: 'disc' }}>de fraude avérée ou suspectée,</li>
+                  <li style={{ listStyleType: 'disc' }}>d'atteinte à la sécurité ou à l'image de la plateforme.</li>
+                </ul>
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                  ARTICLE 11 – PROPRIÉTÉ INTELLECTUELLE
+                </h2>
+                <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  L'ensemble des éléments composant la plateforme HOMIQIO (textes, marques, logos, interfaces, bases de données, architecture, code) est protégé par les lois relatives à la propriété intellectuelle.
+                </p>
+                <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  Toute reproduction ou exploitation non autorisée est strictement interdite.
+                </p>
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                  ARTICLE 12 – DONNÉES PERSONNELLES
+                </h2>
+                <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  Les données personnelles sont traitées conformément à la réglementation applicable, notamment le RGPD.
+                </p>
+                <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  Les modalités de collecte, de traitement et d'exercice des droits des utilisateurs sont détaillées dans la Politique de confidentialité accessible sur la plateforme.
+                </p>
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                  ARTICLE 13 – COOKIES
+                </h2>
+                <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  La plateforme utilise des cookies et technologies similaires afin d'améliorer l'expérience utilisateur.
+                </p>
+                <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  Les modalités de gestion des cookies sont précisées dans la Politique cookies.
+                </p>
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                  ARTICLE 14 – DISPONIBILITÉ DE LA PLATEFORME
+                </h2>
+                <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  La Société s'efforce d'assurer un accès continu à la plateforme, sans garantie d'absence d'interruptions, notamment pour maintenance, mises à jour ou incidents techniques.
+                </p>
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                  ARTICLE 15 – MODIFICATION DES CGU
+                </h2>
+                <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  La Société se réserve le droit de modifier à tout moment les présentes CGU.
+                </p>
+                <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  Les utilisateurs seront informés de toute modification substantielle.
+                </p>
+                <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  Les CGU applicables sont celles en vigueur au jour de l'utilisation de la plateforme.
+                </p>
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                  ARTICLE 16 – DROIT APPLICABLE ET JURIDICTION COMPÉTENTE
+                </h2>
+                <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  Les présentes CGU sont soumises au droit français.
+                </p>
+                <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                  Tout litige relatif à leur interprétation ou exécution relève de la compétence exclusive des tribunaux compétents du ressort de Nantes, sauf disposition légale impérative contraire.
+                </p>
+              </section>
+
+              {/* CGSR - Conditions Générales de Service et de Réservation */}
+              <div className="border-t border-gray-200 pt-8 mt-8">
+                <h2 className="text-[28px] mb-6" style={{ fontWeight: 600, color: '#222222', lineHeight: '1.2' }}>
+                  Conditions Générales de Service et de Réservation
+                </h2>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 1 – IDENTITÉ DE L'EXPLOITANT
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    La plateforme HOMIQIO est exploitée par :
+                  </p>
+                  <div className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <p style={{ fontWeight: 600 }}>WANDERLATE SASU</p>
+                    <p>Société par actions simplifiée unipersonnelle au capital de 250 000 €</p>
+                    <p>Siège social : Bureau 3, 2 place Jean V, 44000 Nantes, France</p>
+                    <p>RCS Nantes : 991 607 656</p>
+                    <p>TVA intracommunautaire : FR14991607656</p>
+                  </div>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    HOMIQIO est une marque commerciale exploitée par WANDERLATE SASU.
+                  </p>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 2 – OBJET ET CHAMP D'APPLICATION
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Les présentes Conditions Générales de Service et de Réservation (ci-après « CGSR ») régissent :
+                  </p>
+                  <ul className="mb-4 pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}>l'utilisation des services de réservation proposés par la plateforme HOMIQIO,</li>
+                    <li style={{ listStyleType: 'disc' }}>les relations entre les utilisateurs, les hébergeurs et WANDERLATE SASU,</li>
+                    <li style={{ listStyleType: 'disc' }}>toute réservation effectuée via la plateforme.</li>
+                  </ul>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Toute réservation implique l'acceptation pleine et entière des présentes CGSR.
+                  </p>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 3 – DÉFINITIONS
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Aux fins des présentes CGSR :
+                  </p>
+                  <ul className="pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}><strong>Plateforme :</strong> les services numériques HOMIQIO</li>
+                    <li style={{ listStyleType: 'disc' }}><strong>Utilisateur :</strong> toute personne utilisant la plateforme</li>
+                    <li style={{ listStyleType: 'disc' }}><strong>Client :</strong> utilisateur effectuant une réservation</li>
+                    <li style={{ listStyleType: 'disc' }}><strong>Hébergeur :</strong> professionnel ou particulier proposant un hébergement</li>
+                    <li style={{ listStyleType: 'disc' }}><strong>Réservation :</strong> contrat conclu entre le client et l'hébergeur via la plateforme</li>
+                    <li style={{ listStyleType: 'disc' }}><strong>Société :</strong> WANDERLATE SASU</li>
+                  </ul>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 4 – RÔLE DE LA PLATEFORME
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    HOMIQIO agit exclusivement en qualité de plateforme d'intermédiation et de réservation.
+                  </p>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    WANDERLATE SASU :
+                  </p>
+                  <ul className="pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}>n'est ni propriétaire, ni gestionnaire des hébergements,</li>
+                    <li style={{ listStyleType: 'disc' }}>n'intervient pas dans la fourniture matérielle des prestations,</li>
+                    <li style={{ listStyleType: 'disc' }}>n'est pas partie au contrat de séjour conclu entre le client et l'hébergeur.</li>
+                  </ul>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 5 – PROCESSUS DE RÉSERVATION
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Le processus de réservation comprend les étapes suivantes :
+                  </p>
+                  <ol className="mb-4 pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'decimal' }}>Sélection de l'hébergement</li>
+                    <li style={{ listStyleType: 'decimal' }}>Vérification des dates, conditions et prix</li>
+                    <li style={{ listStyleType: 'decimal' }}>Validation de la réservation</li>
+                    <li style={{ listStyleType: 'decimal' }}>Paiement en ligne</li>
+                    <li style={{ listStyleType: 'decimal' }}>Réception d'une confirmation électronique avec numéro de réservation</li>
+                  </ol>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    La réservation devient ferme et définitive après confirmation du paiement.
+                  </p>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 6 – PRIX ET CONDITIONS FINANCIÈRES
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Les prix affichés sont indiqués en euros, toutes taxes comprises, sauf mention contraire.
+                  </p>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Les prix comprennent :
+                  </p>
+                  <ul className="mb-4 pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}>le prix de l'hébergement fixé par l'hébergeur,</li>
+                    <li style={{ listStyleType: 'disc' }}>les frais de service applicables.</li>
+                  </ul>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Les taxes locales (ex. taxe de séjour) peuvent être exigibles directement par l'hébergeur.
+                  </p>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 7 – MODALITÉS DE PAIEMENT
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Le paiement est effectué en ligne via des prestataires de paiement sécurisés.
+                  </p>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    WANDERLATE SASU intervient en qualité de récepteur de paiement, pour le compte de la plateforme.
+                  </p>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Les moyens de paiement acceptés peuvent inclure :
+                  </p>
+                  <ul className="pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}>carte bancaire,</li>
+                    <li style={{ listStyleType: 'disc' }}>portefeuille électronique,</li>
+                    <li style={{ listStyleType: 'disc' }}>virement bancaire.</li>
+                  </ul>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 8 – FACTURATION ET JUSTIFICATIFS
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Après paiement, une facture électronique est générée et mise à disposition dans l'espace client.
+                  </p>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    La plateforme peut également délivrer :
+                  </p>
+                  <ul className="pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}>confirmation de réservation,</li>
+                    <li style={{ listStyleType: 'disc' }}>reçu de paiement,</li>
+                    <li style={{ listStyleType: 'disc' }}>attestation de réservation à usage administratif (ex. visa).</li>
+                  </ul>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 9 – CONDITIONS D'ANNULATION ET DE MODIFICATION
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Les conditions d'annulation et de modification sont définies par chaque hébergeur et précisées avant la validation de la réservation.
+                  </p>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Le client est tenu d'en prendre connaissance avant toute confirmation.
+                  </p>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 10 – ANNULATION PAR L'HÉBERGEUR
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    En cas d'annulation par l'hébergeur, le client est informé dans les meilleurs délais.
+                  </p>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    La plateforme ne saurait être tenue responsable des conséquences liées à cette annulation.
+                  </p>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 11 – ABSENCE, NON-PRÉSENTATION (NO-SHOW)
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    En cas de non-présentation du client à la date prévue, les conditions d'annulation de l'hébergeur s'appliquent.
+                  </p>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Aucun remboursement ne pourra être exigé en dehors des conditions prévues.
+                  </p>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 12 – OBLIGATIONS DU CLIENT
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Le client s'engage à :
+                  </p>
+                  <ul className="pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}>fournir des informations exactes,</li>
+                    <li style={{ listStyleType: 'disc' }}>respecter les règles de l'hébergement,</li>
+                    <li style={{ listStyleType: 'disc' }}>utiliser le logement de manière conforme.</li>
+                  </ul>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 13 – RESPONSABILITÉ ET LIMITATION
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    WANDERLATE SASU ne peut être tenue responsable :
+                  </p>
+                  <ul className="mb-4 pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}>des dommages survenus lors du séjour,</li>
+                    <li style={{ listStyleType: 'disc' }}>des manquements imputables à l'hébergeur,</li>
+                    <li style={{ listStyleType: 'disc' }}>des litiges entre client et hébergeur.</li>
+                  </ul>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    La responsabilité de la plateforme est strictement limitée à son rôle d'intermédiaire.
+                  </p>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 14 – FORCE MAJEURE
+                  </h3>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Aucune des parties ne pourra être tenue responsable en cas de force majeure au sens du droit français.
+                  </p>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 15 – SERVICE CLIENT
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Un service client est accessible via la plateforme HOMIQIO pour toute question relative à :
+                  </p>
+                  <ul className="pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}>la réservation,</li>
+                    <li style={{ listStyleType: 'disc' }}>la facturation,</li>
+                    <li style={{ listStyleType: 'disc' }}>l'utilisation des services.</li>
+                  </ul>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 16 – DONNÉES PERSONNELLES
+                  </h3>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Les données personnelles sont traitées conformément à la Politique de confidentialité accessible sur la plateforme.
+                  </p>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 17 – MODIFICATION DES CGSR
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    La Société se réserve le droit de modifier les présentes CGSR à tout moment.
+                  </p>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Les CGSR applicables sont celles en vigueur à la date de la réservation.
+                  </p>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 18 – DROIT APPLICABLE ET LITIGES
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Les présentes CGSR sont soumises au droit français.
+                  </p>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Tout litige relève de la compétence exclusive des tribunaux compétents du ressort de Nantes, sauf disposition impérative contraire.
+                  </p>
+                </section>
               </div>
 
-              {/* Main Content */}
-              <h2 className="text-xl mb-4" style={{ fontWeight: 600, color: '#222222' }}>
-                Conditions de service pour les utilisateurs en Europe
-              </h2>
+              {/* CSH - Conditions Spécifiques Hébergeurs */}
+              <div className="border-t border-gray-200 pt-8 mt-8">
+                <h2 className="text-[28px] mb-6" style={{ fontWeight: 600, color: '#222222', lineHeight: '1.2' }}>
+                  Conditions Spécifiques Hébergeurs
+                </h2>
 
-              <p className="text-base mb-6 leading-relaxed" style={{ color: '#222222' }}>
-                Veuillez noter qu'Airbnb ne s'engage ni ne s'oblige à utiliser un dispositif alternatif de résolution des litiges au sens de la directive 2013/11 UE afin de résoudre des litiges avec les consommateurs.
-              </p>
-
-              <p className="text-base mb-6 leading-relaxed" style={{ color: '#222222' }}>
-                <strong>L'article 25 des présentes Conditions contient un contrat d'arbitrage et de renonciation de recours collectif qui s'appliquent à toute demande d'indemnisation engagée contre Airbnb aux États-Unis. Veuillez les lire attentivement.</strong>
-              </p>
-
-              <p className="text-base mb-12 leading-relaxed" style={{ color: '#222222' }}>
-                Dernière mise à jour : 13 mai 2025
-              </p>
-
-              {/* Payment Information Sections */}
-              <div className="space-y-8 mb-12">
-                <div>
-                  <h3 className="text-base mb-3" style={{ fontWeight: 600, color: '#222222' }}>
-                    Partie contractante relative aux services de paiement destinés aux utilisateurs dont le lieu de résidence se trouve au Royaume-Uni, en Suisse ou en Russie :
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 1 – IDENTITÉ DE LA PLATEFORME
                   </h3>
-                  <div className="text-base leading-relaxed space-y-1" style={{ color: '#222222' }}>
-                    <p>Airbnb Payments UK Ltd.</p>
-                    <p>280 Bishopsgate</p>
-                    <p>Londres</p>
-                    <p>EC2M 4AG</p>
-                    <p>Royaume-Uni</p>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    La plateforme HOMIQIO est exploitée par :
+                  </p>
+                  <div className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <p style={{ fontWeight: 600 }}>WANDERLATE SASU</p>
+                    <p>Société par actions simplifiée unipersonnelle au capital de 250 000 €</p>
+                    <p>Siège social : Bureau 3, 2 place Jean V, 44000 Nantes, France</p>
+                    <p>RCS Nantes : 991 607 656</p>
+                    <p>TVA intracommunautaire : FR14991607656</p>
                   </div>
-                </div>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    HOMIQIO est une marque commerciale exploitée par WANDERLATE SASU.
+                  </p>
+                </section>
 
-                <div className="text-base leading-relaxed space-y-1" style={{ color: '#222222' }}>
-                  <p><strong>Numéro de l'entreprise :</strong> 09392688</p>
-                  <p><strong>Conseil d'administration :</strong> Quent Rickerby, Bart Rubin, David Coleman</p>
-                  <p>Airbnb Payments UK Ltd. est autorisé et régulé par l'Autorité de bonne conduite financière (Financial Conduct Authority) en tant qu'établissement de monnaie électronique sous la référence 900596.</p>
-                </div>
-
-                <div>
-                  <h3 className="text-base mb-3" style={{ fontWeight: 600, color: '#222222' }}>
-                    Partie contractante relative aux services de paiement destinés aux utilisateurs dont le lieu de résidence se trouve dans l'Espace économique européen :
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 2 – OBJET DES CONDITIONS SPÉCIFIQUES
                   </h3>
-                  <div className="text-base leading-relaxed space-y-1" style={{ color: '#222222' }}>
-                    <p>Airbnb Payments Luxembourg S.A.</p>
-                    <p>4, rue Henri Schnadt</p>
-                    <p>L-2530 Luxembourg</p>
-                    <p>Luxembourg</p>
-                  </div>
-                </div>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Les présentes Conditions Spécifiques Hébergeurs (ci-après « CSH ») ont pour objet de définir les modalités selon lesquelles les hébergeurs peuvent référencer, proposer et commercialiser leurs hébergements via la plateforme HOMIQIO.
+                  </p>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Elles complètent :
+                  </p>
+                  <ul className="pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}>les CGU,</li>
+                    <li style={{ listStyleType: 'disc' }}>les Conditions Générales de Service / Réservation,</li>
+                    <li style={{ listStyleType: 'disc' }}>et, le cas échéant, tout contrat spécifique conclu avec l'hébergeur.</li>
+                  </ul>
+                </section>
 
-                <div className="text-base leading-relaxed space-y-1" style={{ color: '#222222' }}>
-                  <p><strong>Numéro de l'entreprise :</strong> B230618</p>
-                  <p><strong>Conseil d'administration :</strong> Thomas Belousek, Marc Hemmerling, Bart Rubin, Amit Singh</p>
-                  <p>Airbnb Payments Luxembourg S.A. est autorisée et régulée par la Commission de Surveillance du Secteur Financier (« CSSF ») sous le numéro de référence Z21.</p>
-                </div>
-
-                <div>
-                  <h3 className="text-base mb-4" style={{ fontWeight: 600, color: '#222222' }}>
-                    Informations sur l'interlocuteur des autorités de l'UE dans le cadre du règlement sur les services numériques
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 3 – DÉFINITIONS
                   </h3>
-                  <p className="text-base leading-relaxed mb-6" style={{ color: '#222222' }}>
-                    Interlocuteur unique pour les autorités des États membres, la Commission européenne et le conseil d'administration conformément à l'article 11 du règlement :{' '}
-                    <a href="mailto:dsa-authorities@airbnb.com" className="underline">
-                      dsa-authorities@airbnb.com
-                    </a>
-                    . Veuillez vous assurer que les communications sont faites en anglais ou accompagnées d'une traduction en anglais.
-                  </p>
-                </div>
+                  <ul className="pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}><strong>Hébergeur :</strong> toute personne physique ou morale proposant un hébergement via la plateforme</li>
+                    <li style={{ listStyleType: 'disc' }}><strong>Hébergement :</strong> logement ou établissement touristique proposé à la réservation</li>
+                    <li style={{ listStyleType: 'disc' }}><strong>Plateforme :</strong> HOMIQIO</li>
+                    <li style={{ listStyleType: 'disc' }}><strong>Société :</strong> WANDERLATE SASU</li>
+                  </ul>
+                </section>
 
-                <div>
-                  <h3 className="text-base mb-4" style={{ fontWeight: 600, color: '#222222' }}>
-                    Informations sur le nombre mensuel moyen de destinataires actifs dans l'Union européenne :
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 4 – CONDITIONS D'ÉLIGIBILITÉ DES HÉBERGEURS
                   </h3>
-                  <p className="text-base leading-relaxed mb-6" style={{ color: '#222222' }}>
-                    En vertu de l'article 24, paragraphe 2, du règlement sur les services numériques, les plateformes en ligne sont tenues de publier des « informations sur le nombre mensuel moyen de destinataires actifs du service dans l'Union » avant le 17 février 2023, et tous les six mois par la suite.
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Pour référencer un hébergement, l'hébergeur déclare et garantit :
                   </p>
-                  <p className="text-base leading-relaxed mb-6" style={{ color: '#222222' }}>
-                    Conformément aux dispositions du règlement, y compris le Considérant 77, nous avons calculé que notre nombre mensuel moyen de destinataires actifs dans l'Union européenne pour la période du 1 févr. – 31 juil. 2025 s'élève à environ 41.7M.
+                  <ul className="mb-4 pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}>disposer de la pleine capacité juridique,</li>
+                    <li style={{ listStyleType: 'disc' }}>être légalement autorisé à proposer l'hébergement à la location,</li>
+                    <li style={{ listStyleType: 'disc' }}>être conforme aux réglementations locales (urbanisme, sécurité, hygiène, fiscalité),</li>
+                    <li style={{ listStyleType: 'disc' }}>fournir des informations exactes, sincères et à jour.</li>
+                  </ul>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    La Société se réserve le droit de refuser ou suspendre tout hébergement ne répondant pas à ces critères.
                   </p>
-                  <p className="text-base leading-relaxed" style={{ color: '#222222' }}>
-                    Nous continuerons à suivre toute évolution et publierons tous les six mois des informations sur le nombre mensuel moyen de destinataires actifs de notre service dans l'Union européenne, conformément à l'article 24, paragraphe 2, du règlement.
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 5 – CRÉATION ET GESTION DU COMPTE HÉBERGEUR
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    L'hébergeur crée un compte dédié et s'engage à :
                   </p>
-                </div>
+                  <ul className="mb-4 pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}>fournir des informations complètes et exactes,</li>
+                    <li style={{ listStyleType: 'disc' }}>maintenir ses données à jour,</li>
+                    <li style={{ listStyleType: 'disc' }}>préserver la confidentialité de ses identifiants.</li>
+                  </ul>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Toute utilisation frauduleuse pourra entraîner la suspension immédiate du compte.
+                  </p>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 6 – OBLIGATIONS DE L'HÉBERGEUR
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    L'hébergeur s'engage notamment à :
+                  </p>
+                  <ul className="pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}>décrire fidèlement l'hébergement (photos, équipements, capacité),</li>
+                    <li style={{ listStyleType: 'disc' }}>garantir la disponibilité aux dates proposées,</li>
+                    <li style={{ listStyleType: 'disc' }}>respecter les réservations confirmées,</li>
+                    <li style={{ listStyleType: 'disc' }}>accueillir les clients dans des conditions conformes aux descriptions,</li>
+                    <li style={{ listStyleType: 'disc' }}>respecter les lois et réglementations applicables.</li>
+                  </ul>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 7 – PRIX, DISPONIBILITÉS ET CONDITIONS
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    L'hébergeur est seul responsable :
+                  </p>
+                  <ul className="mb-4 pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}>des prix affichés,</li>
+                    <li style={{ listStyleType: 'disc' }}>des conditions d'annulation,</li>
+                    <li style={{ listStyleType: 'disc' }}>des règles applicables au séjour.</li>
+                  </ul>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Toute modification doit être mise à jour sur la plateforme dans les meilleurs délais.
+                  </p>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 8 – RÉSERVATIONS ET ANNULATIONS
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Toute réservation confirmée via la plateforme engage directement l'hébergeur.
+                  </p>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    En cas d'annulation par l'hébergeur hors cas de force majeure, la Société se réserve le droit :
+                  </p>
+                  <ul className="pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}>de suspendre le compte hébergeur,</li>
+                    <li style={{ listStyleType: 'disc' }}>d'imposer des pénalités contractuelles,</li>
+                    <li style={{ listStyleType: 'disc' }}>d'indemniser le client, le cas échéant.</li>
+                  </ul>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 9 – PAIEMENT ET COMMISSIONS
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Selon les modalités définies par la plateforme :
+                  </p>
+                  <ul className="mb-4 pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}>les paiements peuvent être encaissés par WANDERLATE SASU ou directement par l'hébergeur,</li>
+                    <li style={{ listStyleType: 'disc' }}>une commission ou des frais de service peuvent être appliqués.</li>
+                  </ul>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Les modalités financières sont précisées dans l'interface hébergeur ou dans un accord spécifique.
+                  </p>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 10 – OBLIGATIONS FISCALES ET SOCIALES
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    L'hébergeur est seul responsable :
+                  </p>
+                  <ul className="mb-4 pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}>de la déclaration de ses revenus,</li>
+                    <li style={{ listStyleType: 'disc' }}>du paiement des taxes applicables (TVA, taxe de séjour, impôts locaux).</li>
+                  </ul>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    La plateforme ne saurait être tenue responsable des obligations fiscales de l'hébergeur.
+                  </p>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 11 – RESPONSABILITÉ ET ASSURANCES
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    L'hébergeur est seul responsable :
+                  </p>
+                  <ul className="mb-4 pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}>des dommages causés aux clients,</li>
+                    <li style={{ listStyleType: 'disc' }}>de la sécurité des personnes et des biens,</li>
+                    <li style={{ listStyleType: 'disc' }}>de la conformité des installations.</li>
+                  </ul>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Il est recommandé à l'hébergeur de souscrire une assurance responsabilité civile adaptée.
+                  </p>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 12 – PROPRIÉTÉ INTELLECTUELLE ET LICENCE
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    L'hébergeur concède à WANDERLATE SASU une licence non exclusive lui permettant d'utiliser :
+                  </p>
+                  <ul className="mb-4 pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}>textes,</li>
+                    <li style={{ listStyleType: 'disc' }}>photos,</li>
+                    <li style={{ listStyleType: 'disc' }}>descriptions,</li>
+                  </ul>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    aux seules fins de diffusion et de promotion de l'hébergement sur la plateforme.
+                  </p>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 13 – CONFIDENTIALITÉ ET DONNÉES PERSONNELLES
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Les données personnelles sont traitées conformément à la Politique de confidentialité.
+                  </p>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    L'hébergeur s'engage à respecter le RGPD dans le cadre de l'exécution des réservations.
+                  </p>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 14 – SUSPENSION ET RÉSILIATION
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    La Société peut suspendre ou résilier le compte hébergeur en cas :
+                  </p>
+                  <ul className="pl-6" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    <li style={{ listStyleType: 'disc' }}>de non-respect des présentes CSH,</li>
+                    <li style={{ listStyleType: 'disc' }}>de litiges répétés avec les clients,</li>
+                    <li style={{ listStyleType: 'disc' }}>d'atteinte à l'image ou à la sécurité de la plateforme.</li>
+                  </ul>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 15 – MODIFICATION DES CONDITIONS
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    La Société se réserve le droit de modifier les présentes CSH à tout moment.
+                  </p>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Les conditions applicables sont celles en vigueur à la date d'utilisation de la plateforme par l'hébergeur.
+                  </p>
+                </section>
+
+                <section className="mb-8">
+                  <h3 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    ARTICLE 16 – DROIT APPLICABLE ET JURIDICTION
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Les présentes CSH sont soumises au droit français.
+                  </p>
+                  <p className="text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Tout litige relève de la compétence exclusive des tribunaux compétents du ressort de Nantes, sauf disposition impérative contraire.
+                  </p>
+                </section>
               </div>
             </div>
 
