@@ -13,7 +13,7 @@ import logo from "figma:asset/logo.png";
 interface HeaderProps {
   currentPage: "logements" | "experiences" | "services";
   onNavigate: (
-    page: "logements" | "experiences" | "services" | "messages",
+    page: "logements" | "experiences" | "services" | "messages" | "host-onboarding",
   ) => void;
   isScrolled: boolean;
   onSearch: (params: any) => void;
@@ -132,6 +132,12 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(
           <BecomeHostModal
             isOpen={showBecomeHostModal}
             onClose={() => setShowBecomeHostModal(false)}
+            onSelectOption={(option) => {
+              if (option === 'logement') {
+                onNavigate('host-onboarding');
+              }
+              // For other options, do nothing for now
+            }}
           />
         )}
 

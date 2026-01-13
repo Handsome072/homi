@@ -12,6 +12,7 @@ import { BookingRequest } from './pages/BookingRequest';
 import { SearchResults } from './pages/SearchResults';
 import { Messages } from './pages/Messages';
 import { ReservationDetailPage } from './pages/ReservationDetailPage';
+import { HostOnboarding } from './pages/HostOnboarding';
 import { AuthProvider } from './context/AuthContext';
 import {
   ClientSpaceLayout,
@@ -113,7 +114,8 @@ function AppLayout() {
       '/privacy',
       '/terms',
       '/how-it-works',
-      '/company-info'
+      '/company-info',
+      '/host-onboarding'
     ];
     return !hiddenPaths.some(path => location.pathname.startsWith(path));
   };
@@ -189,6 +191,10 @@ function AppLayout() {
         } />
         <Route path="/messages" element={
           <Messages onNavigate={(page) => navigate(`/${page === 'home' ? '' : page}`)} />
+        } />
+        {/* Host Onboarding */}
+        <Route path="/host-onboarding" element={
+          <HostOnboarding onNavigate={(page) => navigate(`/${page === 'logements' ? '' : page}`)} />
         } />
         {/* Legal Pages */}
         <Route path="/privacy" element={<PrivacyPolicy />} />
