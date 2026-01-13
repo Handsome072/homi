@@ -390,7 +390,7 @@ export function SearchResults() {
             {/* Logo */}
             <button
               onClick={() => navigate('/')}
-              className="flex items-center gap-1 flex-shrink-0 hover:opacity-80 transition-opacity duration-200 border-0"
+              className="flex items-center gap-1 flex-shrink-0 border-0"
             >
               <img
                 src={logo}
@@ -751,7 +751,7 @@ export function SearchResults() {
                   {/* Logo */}
                   <button
                     onClick={() => navigate('/')}
-                    className="flex items-center gap-1 flex-shrink-0 hover:opacity-80 transition-opacity duration-200 border-0"
+                    className="flex items-center gap-1 flex-shrink-0 border-0"
                   >
                     <img
                       src={logo}

@@ -51,7 +51,7 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(
               {/* Logo - Always visible */}
               <button
                 onClick={() => onNavigate("logements")}
-                className="flex items-center gap-1 flex-shrink-0 hover:opacity-80 transition-opacity duration-200 relative z-10 border-0"
+                className="flex items-center gap-1 flex-shrink-0 relative z-10 border-0"
               >
                 <img
                   src={logo}

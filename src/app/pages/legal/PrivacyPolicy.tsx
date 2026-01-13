@@ -19,7 +19,7 @@ export function PrivacyPolicy() {
             </button>
             <button
               onClick={() => navigate('/')}
-              className="flex items-center gap-1 hover:opacity-80 transition-opacity duration-200 border-0"
+              className="flex items-center gap-1 border-0"
             >
               <img
                 src={logo}

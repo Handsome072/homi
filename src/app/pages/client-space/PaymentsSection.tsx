@@ -33,7 +33,7 @@ export function PaymentsSection() {
             <p className="text-sm mb-6 text-black opacity-60">
               Suivez l'ensemble de vos paiements et remboursements.
             </p>
-            <button className="text-base underline font-semibold text-black">Gérer les paiements</button>
+            <button className="px-6 py-3 bg-black text-white rounded-lg text-base transition-colors hover:bg-gray-800 font-semibold">Gérer les paiements</button>
           </div>
 
           {/* Modes de paiement */}
