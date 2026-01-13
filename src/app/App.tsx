@@ -22,6 +22,12 @@ import {
   PaymentsSection,
   LanguagesSection,
 } from './pages/client-space';
+import {
+  PrivacyPolicy,
+  TermsAndConditions,
+  HowItWorks,
+  CompanyInfo,
+} from './pages/legal';
 
 // Scroll management hook
 function useScrollManagement() {
@@ -103,7 +109,11 @@ function AppLayout() {
       '/booking',
       '/search',
       '/client-space',
-      '/messages'
+      '/messages',
+      '/privacy',
+      '/terms',
+      '/how-it-works',
+      '/company-info'
     ];
     return !hiddenPaths.some(path => location.pathname.startsWith(path));
   };
@@ -180,6 +190,11 @@ function AppLayout() {
         <Route path="/messages" element={
           <Messages onNavigate={(page) => navigate(`/${page === 'home' ? '' : page}`)} />
         } />
+        {/* Legal Pages */}
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsAndConditions />} />
+        <Route path="/how-it-works" element={<HowItWorks />} />
+        <Route path="/company-info" element={<CompanyInfo />} />
       </Routes>
 
       {shouldShowFooter() && <Footer />}
