@@ -1,248 +1,272 @@
+import { Search, ChevronRight, ArrowUp } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
-import logo from 'figma:asset/logo.png';
+import { LegalFooter } from '../../components/LegalFooter';
 
 export function TermsAndConditions() {
   const navigate = useNavigate();
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="border-b border-gray-200 sticky top-0 bg-white z-50">
-        <div className="max-w-[1480px] mx-auto px-6 md:px-10 lg:px-20 py-5">
+      <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
+        <div className="px-6 lg:px-20 py-4">
           <div className="flex items-center justify-between">
-            <button
-              onClick={() => navigate(-1)}
-              className="p-2 hover:bg-gray-100 rounded-full transition-colors border-0"
-            >
-              <ArrowLeft className="w-5 h-5" />
-            </button>
+            {/* Logo */}
             <button
               onClick={() => navigate('/')}
-              className="flex items-center gap-1 border-0"
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
             >
-              <img
-                src={logo}
-                alt="HOMIQIO Logo"
-                className="w-[120px] h-auto border-0"
-              />
+              <svg
+                className="w-8 h-8"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="16" cy="16" r="14" stroke="#1E3A5F" strokeWidth="2" fill="none" />
+                <text x="16" y="21" textAnchor="middle" fontSize="16" fontWeight="600" fill="#1E3A5F">?</text>
+              </svg>
+              <span className="text-base" style={{ fontWeight: 600, color: '#222222' }}>
+                Centre d'aide
+              </span>
             </button>
-            <div className="w-9" />
+
+            {/* Search bar */}
+            <div className="hidden md:flex items-center flex-1 max-w-md mx-8">
+              <div className="relative w-full">
+                <input
+                  type="text"
+                  placeholder="Rechercher des guides pratiq..."
+                  className="w-full pl-4 pr-12 py-2.5 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]"
+                />
+                <button className="absolute right-1 top-1/2 -translate-y-1/2 w-9 h-9 bg-[#1E3A5F] rounded-full flex items-center justify-center">
+                  <Search className="w-4 h-4 text-white" />
+                </button>
+              </div>
+            </div>
+
+            {/* Right icons */}
+            <div className="flex items-center gap-3">
+              <button className="w-10 h-10 rounded-full hover:bg-gray-50 flex items-center justify-center transition-colors">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <circle cx="8" cy="8" r="7" stroke="#222222" strokeWidth="1.5" />
+                  <path d="M3 8H13M8 3C6.5 4.5 6 6 6 8C6 10 6.5 11.5 8 13M8 3C9.5 4.5 10 6 10 8C10 10 9.5 11.5 8 13" stroke="#222222" strokeWidth="1.5" />
+                </svg>
+              </button>
+              <button className="flex items-center gap-2 px-3 py-2 border border-gray-300 rounded-full hover:shadow-md transition-shadow">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M2 4H14M2 8H14M2 12H14" stroke="#222222" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="11" fill="#717171" />
+                  <path d="M12 2C14.21 2 16 3.79 16 6C16 8.21 14.21 10 12 10C9.79 10 8 8.21 8 6C8 3.79 9.79 2 12 2ZM12 22C7.03 22 3 19.42 3 16.25C3 13.08 7.03 10.5 12 10.5C16.97 10.5 21 13.08 21 16.25C21 19.42 16.97 22 12 22Z" fill="#FFF" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
-      {/* Content */}
-      <main className="max-w-[800px] mx-auto px-6 md:px-10 py-12">
-        <h1 className="text-3xl font-semibold text-[#222222] mb-8">
-          Conditions générales d'utilisation
-        </h1>
+      {/* Main content */}
+      <div className="px-6 lg:px-20 py-8">
+        <div className="max-w-7xl mx-auto">
+          {/* Breadcrumb */}
+          <nav className="flex items-center gap-2 text-sm mb-8" style={{ color: '#222222' }}>
+            <button onClick={() => navigate('/')} className="hover:underline">
+              Accueil
+            </button>
+            <ChevronRight className="w-4 h-4" style={{ color: '#717171' }} />
+            <button className="hover:underline">All Topics</button>
+            <ChevronRight className="w-4 h-4" style={{ color: '#717171' }} />
+            <button className="hover:underline">Conditions et dispositions juridiques</button>
+            <ChevronRight className="w-4 h-4" style={{ color: '#717171' }} />
+            <button className="hover:underline">Conditions générales</button>
+            <ChevronRight className="w-4 h-4" style={{ color: '#717171' }} />
+            <span style={{ color: '#717171' }}>Conditions de Service</span>
+          </nav>
 
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-[#222222] mb-4">
-            Article 1 – Identité de l'exploitant
-          </h2>
-          <p className="text-[#484848] leading-relaxed mb-4">
-            La plateforme HOMIQIO est exploitée par :
-          </p>
-          <div className="bg-gray-50 p-4 rounded-lg text-[#484848] text-sm mb-4">
-            <p className="font-semibold">WANDERLATE SASU</p>
-            <p>Société par actions simplifiée unipersonnelle au capital de 250 000 €</p>
-            <p>Siège social : Bureau 3, 2 place Jean V, 44000 Nantes, France</p>
-            <p>RCS Nantes : 991 607 656</p>
-            <p>TVA intracommunautaire : FR14991607656</p>
+          <div className="flex gap-12">
+            {/* Main content area */}
+            <div className="flex-1 max-w-3xl">
+              <p className="text-xs mb-3" style={{ fontWeight: 600, color: '#717171', textTransform: 'uppercase' }}>
+                Conditions et dispositions juridiques
+              </p>
+
+              <h1 className="text-[32px] mb-8" style={{ fontWeight: 600, color: '#222222', lineHeight: '1.2' }}>
+                Conditions de Service
+              </h1>
+
+              {/* Warning Box */}
+              <div className="mb-8 p-4 rounded-lg border border-[#F7E5D3] bg-[#FFF8F0]">
+                <div className="flex gap-3">
+                  <div className="flex-shrink-0 mt-1">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M8 1L15 14H1L8 1Z" fill="#B4690E" />
+                      <path d="M8 6V9M8 11V12" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                  </div>
+                  <div className="text-sm leading-relaxed" style={{ color: '#222222' }}>
+                    Si votre pays de résidence ou d'établissement se trouve dans l'Espace économique européen (« EEE »), en Suisse ou au Royaume-Uni, les{' '}
+                    <a href="#" className="underline">
+                      Conditions de service pour les utilisateurs européens
+                    </a>{' '}
+                    s'appliquent à vous.
+                    <br />
+                    Si votre pays de résidence ou d'établissement se trouve en dehors de l'EEE, de la Suisse, de l'Australie et du Royaume-Uni, les{' '}
+                    <a href="#" className="underline">
+                      Conditions de service pour les utilisateurs situés en dehors de l'EEE, du Royaume-Uni et de l'Australie
+                    </a>{' '}
+                    s'appliquent à vous.
+                    <br />
+                    Si votre pays de résidence ou d'établissement est l'Australie, les{' '}
+                    <a href="#" className="underline">
+                      Conditions de service pour les utilisateurs australiens
+                    </a>{' '}
+                    s'appliquent à vous.
+                  </div>
+                </div>
+              </div>
+
+              {/* Main Content */}
+              <h2 className="text-xl mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                Conditions de service pour les utilisateurs en Europe
+              </h2>
+
+              <p className="text-base mb-6 leading-relaxed" style={{ color: '#222222' }}>
+                Veuillez noter qu'Airbnb ne s'engage ni ne s'oblige à utiliser un dispositif alternatif de résolution des litiges au sens de la directive 2013/11 UE afin de résoudre des litiges avec les consommateurs.
+              </p>
+
+              <p className="text-base mb-6 leading-relaxed" style={{ color: '#222222' }}>
+                <strong>L'article 25 des présentes Conditions contient un contrat d'arbitrage et de renonciation de recours collectif qui s'appliquent à toute demande d'indemnisation engagée contre Airbnb aux États-Unis. Veuillez les lire attentivement.</strong>
+              </p>
+
+              <p className="text-base mb-12 leading-relaxed" style={{ color: '#222222' }}>
+                Dernière mise à jour : 13 mai 2025
+              </p>
+
+              {/* Payment Information Sections */}
+              <div className="space-y-8 mb-12">
+                <div>
+                  <h3 className="text-base mb-3" style={{ fontWeight: 600, color: '#222222' }}>
+                    Partie contractante relative aux services de paiement destinés aux utilisateurs dont le lieu de résidence se trouve au Royaume-Uni, en Suisse ou en Russie :
+                  </h3>
+                  <div className="text-base leading-relaxed space-y-1" style={{ color: '#222222' }}>
+                    <p>Airbnb Payments UK Ltd.</p>
+                    <p>280 Bishopsgate</p>
+                    <p>Londres</p>
+                    <p>EC2M 4AG</p>
+                    <p>Royaume-Uni</p>
+                  </div>
+                </div>
+
+                <div className="text-base leading-relaxed space-y-1" style={{ color: '#222222' }}>
+                  <p><strong>Numéro de l'entreprise :</strong> 09392688</p>
+                  <p><strong>Conseil d'administration :</strong> Quent Rickerby, Bart Rubin, David Coleman</p>
+                  <p>Airbnb Payments UK Ltd. est autorisé et régulé par l'Autorité de bonne conduite financière (Financial Conduct Authority) en tant qu'établissement de monnaie électronique sous la référence 900596.</p>
+                </div>
+
+                <div>
+                  <h3 className="text-base mb-3" style={{ fontWeight: 600, color: '#222222' }}>
+                    Partie contractante relative aux services de paiement destinés aux utilisateurs dont le lieu de résidence se trouve dans l'Espace économique européen :
+                  </h3>
+                  <div className="text-base leading-relaxed space-y-1" style={{ color: '#222222' }}>
+                    <p>Airbnb Payments Luxembourg S.A.</p>
+                    <p>4, rue Henri Schnadt</p>
+                    <p>L-2530 Luxembourg</p>
+                    <p>Luxembourg</p>
+                  </div>
+                </div>
+
+                <div className="text-base leading-relaxed space-y-1" style={{ color: '#222222' }}>
+                  <p><strong>Numéro de l'entreprise :</strong> B230618</p>
+                  <p><strong>Conseil d'administration :</strong> Thomas Belousek, Marc Hemmerling, Bart Rubin, Amit Singh</p>
+                  <p>Airbnb Payments Luxembourg S.A. est autorisée et régulée par la Commission de Surveillance du Secteur Financier (« CSSF ») sous le numéro de référence Z21.</p>
+                </div>
+
+                <div>
+                  <h3 className="text-base mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    Informations sur l'interlocuteur des autorités de l'UE dans le cadre du règlement sur les services numériques
+                  </h3>
+                  <p className="text-base leading-relaxed mb-6" style={{ color: '#222222' }}>
+                    Interlocuteur unique pour les autorités des États membres, la Commission européenne et le conseil d'administration conformément à l'article 11 du règlement :{' '}
+                    <a href="mailto:dsa-authorities@airbnb.com" className="underline">
+                      dsa-authorities@airbnb.com
+                    </a>
+                    . Veuillez vous assurer que les communications sont faites en anglais ou accompagnées d'une traduction en anglais.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-base mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                    Informations sur le nombre mensuel moyen de destinataires actifs dans l'Union européenne :
+                  </h3>
+                  <p className="text-base leading-relaxed mb-6" style={{ color: '#222222' }}>
+                    En vertu de l'article 24, paragraphe 2, du règlement sur les services numériques, les plateformes en ligne sont tenues de publier des « informations sur le nombre mensuel moyen de destinataires actifs du service dans l'Union » avant le 17 février 2023, et tous les six mois par la suite.
+                  </p>
+                  <p className="text-base leading-relaxed mb-6" style={{ color: '#222222' }}>
+                    Conformément aux dispositions du règlement, y compris le Considérant 77, nous avons calculé que notre nombre mensuel moyen de destinataires actifs dans l'Union européenne pour la période du 1 févr. – 31 juil. 2025 s'élève à environ 41.7M.
+                  </p>
+                  <p className="text-base leading-relaxed" style={{ color: '#222222' }}>
+                    Nous continuerons à suivre toute évolution et publierons tous les six mois des informations sur le nombre mensuel moyen de destinataires actifs de notre service dans l'Union européenne, conformément à l'article 24, paragraphe 2, du règlement.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Sidebar */}
+            <div className="hidden lg:block w-80 flex-shrink-0">
+              <div className="sticky top-24">
+                <div className="bg-gray-50 rounded-2xl p-6">
+                  <h3 className="text-xl mb-3" style={{ fontWeight: 600, color: '#222222' }}>
+                    Besoin de nous joindre ?
+                  </h3>
+                  <p className="text-base mb-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Commençons par quelques questions afin de mieux vous orienter.
+                  </p>
+                  <button className="w-full px-6 py-3 bg-white border border-gray-900 rounded-lg text-base hover:bg-gray-50 transition-colors" style={{ fontWeight: 600, color: '#222222' }}>
+                    Contactez-nous
+                  </button>
+                  <p className="text-sm mt-4" style={{ color: '#222222', lineHeight: '1.6' }}>
+                    Vous pouvez également nous{' '}
+                    <a href="#" className="underline hover:text-gray-600">
+                      envoyer vos remarques
+                    </a>
+                    .
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          <p className="text-[#484848] leading-relaxed">
-            HOMIQIO est une marque commerciale exploitée par WANDERLATE SASU.
-          </p>
-        </section>
+        </div>
+      </div>
 
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-[#222222] mb-4">
-            Article 2 – Objet des CGU
-          </h2>
-          <p className="text-[#484848] leading-relaxed mb-4">
-            Les présentes Conditions Générales d'Utilisation ont pour objet de définir les modalités et conditions d'accès, de navigation et d'utilisation de la plateforme HOMIQIO.
-          </p>
-          <p className="text-[#484848] leading-relaxed">
-            Toute utilisation de la plateforme implique l'acceptation pleine, entière et sans réserve des présentes CGU par l'utilisateur.
-          </p>
-        </section>
+      <LegalFooter activePage="terms" />
 
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-[#222222] mb-4">
-            Article 3 – Définitions
-          </h2>
-          <p className="text-[#484848] leading-relaxed mb-4">
-            Aux fins des présentes CGU, les termes suivants ont la signification ci-dessous :
-          </p>
-          <ul className="list-disc list-inside text-[#484848] space-y-2 ml-4">
-            <li><strong>Plateforme :</strong> le site internet, l'application mobile et les services numériques HOMIQIO</li>
-            <li><strong>Utilisateur :</strong> toute personne accédant à la plateforme</li>
-            <li><strong>Client :</strong> utilisateur effectuant une réservation</li>
-            <li><strong>Hébergeur :</strong> professionnel ou particulier proposant un hébergement via la plateforme</li>
-            <li><strong>Compte :</strong> espace personnel créé par l'utilisateur</li>
-            <li><strong>Société :</strong> WANDERLATE SASU</li>
-          </ul>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-[#222222] mb-4">
-            Article 4 – Accès à la plateforme
-          </h2>
-          <p className="text-[#484848] leading-relaxed mb-4">
-            L'accès à la plateforme est gratuit. Certaines fonctionnalités, notamment la réservation d'hébergements, nécessitent la création d'un compte utilisateur et la fourniture d'informations exactes, à jour et complètes.
-          </p>
-          <p className="text-[#484848] leading-relaxed">
-            La Société se réserve le droit de refuser l'accès à tout utilisateur ne respectant pas les présentes CGU.
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-[#222222] mb-4">
-            Article 5 – Création et gestion du compte
-          </h2>
-          <p className="text-[#484848] leading-relaxed mb-4">
-            L'utilisateur est responsable :
-          </p>
-          <ul className="list-disc list-inside text-[#484848] space-y-2 ml-4 mb-4">
-            <li>de l'exactitude des informations fournies,</li>
-            <li>de la confidentialité de ses identifiants,</li>
-            <li>de toute activité effectuée via son compte.</li>
-          </ul>
-          <p className="text-[#484848] leading-relaxed">
-            Toute utilisation frauduleuse ou non autorisée devra être signalée sans délai à la Société.
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-[#222222] mb-4">
-            Article 6 – Description des services
-          </h2>
-          <p className="text-[#484848] leading-relaxed mb-4">
-            HOMIQIO est une plateforme de réservation en ligne permettant la mise en relation entre des utilisateurs et des hébergeurs. La Société agit exclusivement en qualité d'intermédiaire technique et commercial.
-          </p>
-          <p className="text-[#484848] leading-relaxed mb-4">
-            La Société :
-          </p>
-          <ul className="list-disc list-inside text-[#484848] space-y-2 ml-4">
-            <li>n'est pas propriétaire des hébergements,</li>
-            <li>n'exploite pas les établissements proposés,</li>
-            <li>n'intervient pas dans l'exécution matérielle des séjours.</li>
-          </ul>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-[#222222] mb-4">
-            Article 7 – Rôle et limitation de responsabilité
-          </h2>
-          <p className="text-[#484848] leading-relaxed mb-4">
-            La responsabilité de WANDERLATE SASU est strictement limitée à son rôle de plateforme. La Société ne saurait être tenue responsable :
-          </p>
-          <ul className="list-disc list-inside text-[#484848] space-y-2 ml-4 mb-4">
-            <li>de la qualité, conformité ou sécurité des hébergements,</li>
-            <li>des annulations, modifications ou litiges imputables aux hébergeurs,</li>
-            <li>des dommages directs ou indirects subis lors du séjour.</li>
-          </ul>
-          <p className="text-[#484848] leading-relaxed">
-            Tout litige relatif à l'hébergement concerne exclusivement le client et l'hébergeur.
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-[#222222] mb-4">
-            Article 8 – Processus de réservation
-          </h2>
-          <p className="text-[#484848] leading-relaxed">
-            Les modalités de réservation, de paiement, d'annulation et de remboursement sont définies dans les Conditions Générales de Réservation, accessibles sur la plateforme et acceptées lors de la réservation.
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-[#222222] mb-4">
-            Article 9 – Comportement des utilisateurs
-          </h2>
-          <p className="text-[#484848] leading-relaxed mb-4">
-            L'utilisateur s'engage à :
-          </p>
-          <ul className="list-disc list-inside text-[#484848] space-y-2 ml-4 mb-4">
-            <li>utiliser la plateforme de manière loyale et conforme à la loi,</li>
-            <li>ne pas porter atteinte aux droits de la Société ou de tiers,</li>
-            <li>ne pas utiliser la plateforme à des fins frauduleuses ou illicites.</li>
-          </ul>
-          <p className="text-[#484848] leading-relaxed">
-            Tout manquement pourra entraîner la suspension ou la suppression du compte.
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-[#222222] mb-4">
-            Article 10 – Suspension et résiliation du compte
-          </h2>
-          <p className="text-[#484848] leading-relaxed mb-4">
-            La Société se réserve le droit de suspendre ou résilier un compte utilisateur, sans préavis, en cas :
-          </p>
-          <ul className="list-disc list-inside text-[#484848] space-y-2 ml-4">
-            <li>de violation des CGU,</li>
-            <li>de fraude avérée ou suspectée,</li>
-            <li>d'atteinte à la sécurité ou à l'image de la plateforme.</li>
-          </ul>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-[#222222] mb-4">
-            Article 11 – Propriété intellectuelle
-          </h2>
-          <p className="text-[#484848] leading-relaxed">
-            L'ensemble des éléments composant la plateforme HOMIQIO (textes, marques, logos, interfaces, bases de données, architecture, code) est protégé par les lois relatives à la propriété intellectuelle. Toute reproduction ou exploitation non autorisée est strictement interdite.
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-[#222222] mb-4">
-            Article 12 – Données personnelles
-          </h2>
-          <p className="text-[#484848] leading-relaxed">
-            Les données personnelles sont traitées conformément à la réglementation applicable, notamment le RGPD. Les modalités de collecte, de traitement et d'exercice des droits des utilisateurs sont détaillées dans la Politique de confidentialité accessible sur la plateforme.
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-[#222222] mb-4">
-            Article 13 – Cookies
-          </h2>
-          <p className="text-[#484848] leading-relaxed">
-            La plateforme utilise des cookies et technologies similaires afin d'améliorer l'expérience utilisateur. Les modalités de gestion des cookies sont précisées dans la Politique cookies.
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-[#222222] mb-4">
-            Article 14 – Disponibilité de la plateforme
-          </h2>
-          <p className="text-[#484848] leading-relaxed">
-            La Société s'efforce d'assurer un accès continu à la plateforme, sans garantie d'absence d'interruptions, notamment pour maintenance, mises à jour ou incidents techniques.
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-[#222222] mb-4">
-            Article 15 – Modification des CGU
-          </h2>
-          <p className="text-[#484848] leading-relaxed">
-            La Société se réserve le droit de modifier à tout moment les présentes CGU. Les utilisateurs seront informés de toute modification substantielle. Les CGU applicables sont celles en vigueur au jour de l'utilisation de la plateforme.
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold text-[#222222] mb-4">
-            Article 16 – Droit applicable et juridiction compétente
-          </h2>
-          <p className="text-[#484848] leading-relaxed">
-            Les présentes CGU sont soumises au droit français. Tout litige relatif à leur interprétation ou exécution relève de la compétence exclusive des tribunaux compétents du ressort de Nantes, sauf disposition légale impérative contraire.
-          </p>
-        </section>
-      </main>
+      {/* Scroll to top button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 px-5 py-3 bg-gray-900 text-white rounded-full text-sm shadow-lg hover:bg-gray-800 transition-all flex items-center gap-2 z-50"
+          style={{ fontWeight: 600 }}
+        >
+          <ArrowUp className="w-4 h-4" />
+          Retour en haut de la page
+        </button>
+      )}
     </div>
   );
 }

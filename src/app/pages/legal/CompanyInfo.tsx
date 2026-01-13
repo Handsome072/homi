@@ -1,223 +1,248 @@
+import { Search, ArrowUp } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, MapPin, Mail, Globe } from 'lucide-react';
-import logo from 'figma:asset/logo.png';
+import { LegalFooter } from '../../components/LegalFooter';
 
 export function CompanyInfo() {
   const navigate = useNavigate();
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="border-b border-gray-200 sticky top-0 bg-white z-50">
-        <div className="max-w-[1480px] mx-auto px-6 md:px-10 lg:px-20 py-5">
+      <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
+        <div className="px-6 lg:px-20 py-4">
           <div className="flex items-center justify-between">
-            <button
-              onClick={() => navigate(-1)}
-              className="p-2 hover:bg-gray-100 rounded-full transition-colors border-0"
-            >
-              <ArrowLeft className="w-5 h-5" />
-            </button>
+            {/* Logo */}
             <button
               onClick={() => navigate('/')}
-              className="flex items-center gap-1 border-0"
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
             >
-              <img
-                src={logo}
-                alt="HOMIQIO Logo"
-                className="w-[120px] h-auto border-0"
-              />
+              <svg
+                className="w-8 h-8"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="16" cy="16" r="14" stroke="#1E3A5F" strokeWidth="2" fill="none" />
+                <text x="16" y="21" textAnchor="middle" fontSize="16" fontWeight="600" fill="#1E3A5F">?</text>
+              </svg>
+              <span className="text-base" style={{ fontWeight: 600, color: '#222222' }}>
+                Centre d'aide
+              </span>
             </button>
-            <div className="w-9" />
+
+            {/* Search bar */}
+            <div className="hidden md:flex items-center flex-1 max-w-md mx-8">
+              <div className="relative w-full">
+                <input
+                  type="text"
+                  placeholder="Rechercher des guides pratiq..."
+                  className="w-full pl-4 pr-12 py-2.5 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]"
+                />
+                <button className="absolute right-1 top-1/2 -translate-y-1/2 w-9 h-9 bg-[#1E3A5F] rounded-full flex items-center justify-center">
+                  <Search className="w-4 h-4 text-white" />
+                </button>
+              </div>
+            </div>
+
+            {/* Right icons */}
+            <div className="flex items-center gap-3">
+              <button className="w-10 h-10 rounded-full hover:bg-gray-50 flex items-center justify-center transition-colors">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <circle cx="8" cy="8" r="7" stroke="#222222" strokeWidth="1.5" />
+                  <path d="M3 8H13M8 3C6.5 4.5 6 6 6 8C6 10 6.5 11.5 8 13M8 3C9.5 4.5 10 6 10 8C10 10 9.5 11.5 8 13" stroke="#222222" strokeWidth="1.5" />
+                </svg>
+              </button>
+              <button className="flex items-center gap-2 px-3 py-2 border border-gray-300 rounded-full hover:shadow-md transition-shadow">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M2 4H14M2 8H14M2 12H14" stroke="#222222" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="11" fill="#717171" />
+                  <path d="M12 2C14.21 2 16 3.79 16 6C16 8.21 14.21 10 12 10C9.79 10 8 8.21 8 6C8 3.79 9.79 2 12 2ZM12 22C7.03 22 3 19.42 3 16.25C3 13.08 7.03 10.5 12 10.5C16.97 10.5 21 13.08 21 16.25C21 19.42 16.97 22 12 22Z" fill="#FFF" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
-      {/* Content */}
-      <main className="max-w-[800px] mx-auto px-6 md:px-10 py-12">
-        <h1 className="text-3xl font-semibold text-[#222222] mb-4">
-          Mentions légales
-        </h1>
-        <p className="text-[#484848] mb-8">
-          Conformément aux dispositions de la loi n°2004-575 du 21 juin 2004 pour la confiance
-          dans l'économie numérique (LCEN), il est précisé aux utilisateurs du site HOMIQIO
-          l'identité des différents intervenants dans le cadre de sa réalisation et de son exploitation.
-        </p>
+      {/* Main content */}
+      <div className="px-6 lg:px-20 py-12">
+        <div className="max-w-[800px] mx-auto">
+          <h1 className="text-[32px] mb-10" style={{ fontWeight: 600, color: '#222222', lineHeight: '1.3' }}>
+            Mentions légales
+          </h1>
 
-        {/* Site Editor */}
-        <section className="mb-12">
-          <h2 className="text-xl font-semibold text-[#222222] mb-6">
-            1. Éditeur du site
-          </h2>
-          <div className="bg-gradient-to-r from-[#5EC6D8]/10 to-transparent rounded-2xl p-8">
-            <img
-              src={logo}
-              alt="HOMIQIO Logo"
-              className="w-[180px] h-auto border-0 mb-6"
-            />
-            <p className="text-[#484848] leading-relaxed mb-4">
-              Le site HOMIQIO est édité et exploité par :
-            </p>
-            <div className="bg-white/50 p-4 rounded-lg">
-              <p className="font-semibold text-[#222222]">WANDERLATE SASU</p>
-              <p className="text-[#484848]">Société par actions simplifiée unipersonnelle au capital de 250 000 €</p>
-              <p className="text-[#484848]">Siège social : Bureau 3, 2 place Jean V, 44000 Nantes, France</p>
-              <p className="text-[#484848]">RCS Nantes : 991 607 656</p>
-              <p className="text-[#484848]">SIREN : 991 607 656</p>
-              <p className="text-[#484848]">TVA intracommunautaire : FR14991607656</p>
-            </div>
-            <p className="text-[#484848] mt-4 italic">
-              HOMIQIO est une marque commerciale exploitée par WANDERLATE SASU.
-            </p>
-          </div>
-        </section>
+          {/* Content sections */}
+          <div className="space-y-6 text-base" style={{ color: '#222222', lineHeight: '1.6' }}>
+            {/* Section 1 */}
+            <section>
+              <p className="mb-4" style={{ fontWeight: 600 }}>
+                Fournisseur du site web et interlocuteur unique des destinataires du service conformément à l'article 12 du DSA :
+              </p>
+              <p className="mb-4">HOMIQIO Ireland UC, private unlimited company</p>
 
-        {/* Site Hosting */}
-        <section className="mb-12">
-          <h2 className="text-xl font-semibold text-[#222222] mb-6">
-            2. Hébergement du site
-          </h2>
-          <div className="border border-gray-200 rounded-xl p-6">
-            <p className="text-[#484848] mb-4">Le site est hébergé par :</p>
-            <p className="font-semibold text-[#222222]">o2switch</p>
-            <p className="text-[#484848]">Chemin des Pardiaux, 63000 Clermont-Ferrand, France</p>
-            <p className="text-[#484848]">Téléphone : 04 44 44 60 40 (assistance technique)</p>
-            <p className="text-[#484848]">
-              Email : <a href="mailto:support@o2switch.fr" className="text-[#5EC6D8] hover:underline">support@o2switch.fr</a> (support technique)
-            </p>
-          </div>
-        </section>
-
-        {/* Platform Purpose */}
-        <section className="mb-12">
-          <h2 className="text-xl font-semibold text-[#222222] mb-6">
-            3. Objet de la plateforme
-          </h2>
-          <p className="text-[#484848] leading-relaxed mb-4">
-            HOMIQIO est une plateforme de réservation en ligne permettant la mise en relation
-            entre des utilisateurs et des hébergeurs professionnels ou particuliers pour la
-            réservation d'hébergements touristiques.
-          </p>
-          <p className="text-[#484848] leading-relaxed italic">
-            HOMIQIO intervient exclusivement en qualité de plateforme intermédiaire de réservation
-            et n'est ni propriétaire, ni exploitant des hébergements proposés, sauf mention contraire explicite.
-          </p>
-        </section>
-
-        {/* Liability */}
-        <section className="mb-12">
-          <h2 className="text-xl font-semibold text-[#222222] mb-6">
-            4. Responsabilité
-          </h2>
-          <p className="text-[#484848] leading-relaxed mb-4">
-            WANDERLATE SASU, exploitant de la plateforme HOMIQIO, s'efforce d'assurer l'exactitude
-            et la mise à jour des informations diffusées sur le site. Toutefois, elle ne saurait être tenue responsable :
-          </p>
-          <ul className="list-disc list-inside text-[#484848] space-y-2 ml-4 mb-4">
-            <li>des erreurs, omissions ou inexactitudes des contenus fournis par les hébergeurs,</li>
-            <li>des indisponibilités temporaires du site,</li>
-            <li>de l'exécution ou de la qualité des prestations fournies par les hébergeurs.</li>
-          </ul>
-          <p className="text-[#484848] leading-relaxed text-sm">
-            La responsabilité de WANDERLATE SASU est strictement limitée à son rôle d'intermédiaire
-            technique et commercial.
-          </p>
-        </section>
-
-        {/* Intellectual Property */}
-        <section className="mb-12">
-          <h2 className="text-xl font-semibold text-[#222222] mb-6">
-            5. Propriété intellectuelle
-          </h2>
-          <p className="text-[#484848] leading-relaxed">
-            L'ensemble des éléments constituant le site HOMIQIO (textes, graphismes, logos, marques,
-            interfaces, bases de données, structure générale) est protégé par le droit de la propriété
-            intellectuelle. Toute reproduction, représentation, modification ou exploitation, totale ou
-            partielle, sans autorisation écrite préalable de WANDERLATE SASU, est strictement interdite.
-          </p>
-        </section>
-
-        {/* Personal Data */}
-        <section className="mb-12">
-          <h2 className="text-xl font-semibold text-[#222222] mb-6">
-            6. Données personnelles
-          </h2>
-          <p className="text-[#484848] leading-relaxed mb-4">
-            Les données personnelles collectées via la plateforme HOMIQIO sont traitées conformément
-            à la réglementation en vigueur, notamment le Règlement Général sur la Protection des Données (RGPD).
-          </p>
-          <p className="text-[#484848] leading-relaxed mb-4">
-            Les utilisateurs disposent d'un droit d'accès, de rectification, d'effacement, de limitation
-            et d'opposition concernant leurs données personnelles.
-          </p>
-          <p className="text-[#484848] leading-relaxed">
-            Toute demande peut être adressée via la plateforme ou à l'adresse :
-            <a href="mailto:contact@homiqio.com" className="text-[#5EC6D8] hover:underline ml-1">contact@homiqio.com</a>
-          </p>
-        </section>
-
-        {/* Cookies */}
-        <section className="mb-12">
-          <h2 className="text-xl font-semibold text-[#222222] mb-6">
-            7. Cookies
-          </h2>
-          <p className="text-[#484848] leading-relaxed">
-            Le site HOMIQIO utilise des cookies et technologies similaires afin d'améliorer l'expérience
-            utilisateur, mesurer l'audience et sécuriser les services. L'utilisateur peut paramétrer ses
-            préférences en matière de cookies à tout moment via les outils mis à disposition sur le site.
-          </p>
-        </section>
-
-        {/* Applicable Law */}
-        <section className="mb-12">
-          <h2 className="text-xl font-semibold text-[#222222] mb-6">
-            8. Droit applicable
-          </h2>
-          <p className="text-[#484848] leading-relaxed">
-            Les présentes mentions légales sont soumises au droit français. Tout litige relatif à
-            l'utilisation du site relève de la compétence exclusive des tribunaux français
-            territorialement compétents.
-          </p>
-        </section>
-
-        {/* Contact */}
-        <section>
-          <h2 className="text-xl font-semibold text-[#222222] mb-6">
-            Contact
-          </h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="flex items-start gap-4 p-6 border border-gray-200 rounded-xl">
-              <MapPin className="w-5 h-5 text-[#5EC6D8] flex-shrink-0 mt-0.5" />
-              <div>
-                <h3 className="font-semibold text-[#222222] mb-1">Siège social</h3>
-                <p className="text-[#484848] text-sm">
-                  Bureau 3, 2 place Jean V<br />
-                  44000 Nantes, France
-                </p>
+              <div className="mb-4">
+                <p style={{ fontWeight: 600 }}>Siège social :</p>
+                <p>8 Hanover Quay</p>
+                <p>Dublin 2, D02 W5P2</p>
+                <p>Irlande</p>
               </div>
-            </div>
 
-            <div className="flex items-start gap-4 p-6 border border-gray-200 rounded-xl">
-              <Mail className="w-5 h-5 text-[#5EC6D8] flex-shrink-0 mt-0.5" />
-              <div>
-                <h3 className="font-semibold text-[#222222] mb-1">Email</h3>
-                <a href="mailto:contact@homiqio.com" className="text-[#5EC6D8] hover:underline text-sm">
-                  contact@homiqio.com
+              <p className="mb-2">
+                <strong>Numéro de TVA intracommunautaire :</strong> IE9827384L
+              </p>
+              <p className="mb-2">
+                <strong>Numéro d'immatriculation :</strong> (Registre du commerce irlandais) IE 511825
+              </p>
+              <p className="mb-2">
+                <strong>Capital social :</strong> il n'existe pas d'équivalent à la notion du droit français de « capital social » en droit des sociétés irlandais.
+              </p>
+              <p className="mb-4">
+                <strong>Conseil d'administration :</strong> Killian Pattwell, Andrea Finnegan, Richard Lombard
+              </p>
+            </section>
+
+            {/* Section 2 */}
+            <section>
+              <p style={{ fontWeight: 600 }}>Nous contacter :</p>
+              <p className="mb-1">
+                <strong>Adresse e-mail :</strong>{' '}
+                <a href="mailto:terms@homiqio.com" className="text-[#10B981] underline hover:opacity-80">
+                  terms@homiqio.com
                 </a>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4 p-6 border border-gray-200 rounded-xl">
-              <Globe className="w-5 h-5 text-[#5EC6D8] flex-shrink-0 mt-0.5" />
-              <div>
-                <h3 className="font-semibold text-[#222222] mb-1">Site web</h3>
-                <a href="https://www.homiqio.com" className="text-[#5EC6D8] hover:underline text-sm">
-                  www.homiqio.com
+              </p>
+              <p className="mb-4">
+                <strong>Assistance HOMIQIO :</strong>{' '}
+                <a href="https://www.homiqio.fr/help/contact_us" className="text-[#10B981] underline hover:opacity-80">
+                  https://www.homiqio.fr/help/contact_us
                 </a>
+              </p>
+
+              <p className="mb-4">
+                HOMIQIO Ireland UC agit en qualité d'intermédiaire technique et n'intervient pas dans le choix des contenus mis en ligne par ses utilisateurs. Plus d'informations dans nos{' '}
+                <button onClick={() => navigate('/terms')} className="text-[#10B981] underline hover:opacity-80">
+                  Conditions de service
+                </button>
+              </p>
+
+              <p className="mb-4">
+                <strong>Prestataire technique (hébergeur du site web) :</strong> HOMIQIO utilise les services cloud d'Amazon Web Services pour héberger son site web. Le siège social d'Amazon Web Services est situé à l'adresse suivante : Amazon Web Services, Inc, 410 Terry Avenue North Seattle, WA 98109-5210, États-Unis.
+              </p>
+
+              <p className="mb-6">
+                Veuillez noter qu'HOMIQIO Ireland UC ne s'engage pas à passer par un dispositif alternatif de résolution des litiges avec les consommateurs, et n'est pas tenu de le faire.
+              </p>
+            </section>
+
+            {/* Section 3 */}
+            <section className="pt-6 border-t border-gray-200">
+              <p className="mb-4" style={{ fontWeight: 600 }}>
+                Partie contractante relative aux services de paiement destinés aux utilisateurs dont le lieu de résidence se trouve au Royaume-Uni, en Suisse ou en Russie :
+              </p>
+              <div className="mb-4">
+                <p>HOMIQIO Payments UK Ltd.</p>
+                <p>280 Bishopsgate</p>
+                <p>Londres</p>
+                <p>EC2M 4AG</p>
+                <p>Royaume-Uni</p>
               </div>
-            </div>
+
+              <p className="mb-2">
+                <strong>Numéro de l'entreprise :</strong> 09392688
+              </p>
+              <p className="mb-4">
+                <strong>Conseil d'administration :</strong> Quent Rickerby, Bart Rubin, David Coleman
+              </p>
+              <p className="mb-6">
+                HOMIQIO Payments UK Ltd. est autorisé et régulé par l'Autorité de bonne conduite financière (Financial Conduct Authority) en tant qu'établissement de monnaie électronique sous la référence 900596.
+              </p>
+            </section>
+
+            {/* Section 4 */}
+            <section className="pt-6 border-t border-gray-200">
+              <p className="mb-4" style={{ fontWeight: 600 }}>
+                Partie contractante relative aux services de paiement destinés aux utilisateurs dont le lieu de résidence se trouve dans l'Espace économique européen :
+              </p>
+              <div className="mb-4">
+                <p>HOMIQIO Payments Luxembourg S.A.</p>
+                <p>4, rue Henri Schnadt</p>
+                <p>L-2530 Luxembourg</p>
+                <p>Luxembourg</p>
+              </div>
+
+              <p className="mb-2">
+                <strong>Numéro de l'entreprise :</strong> B230618
+              </p>
+              <p className="mb-4">
+                <strong>Conseil d'administration :</strong> Thomas Belousek, Marc Hemmerling, Bart Rubin, Amit Singh
+              </p>
+              <p className="mb-6">
+                HOMIQIO Payments Luxembourg S.A. est autorisée et régulée par la Commission de Surveillance du Secteur Financier (« CSSF ») sous le numéro de référence Z21.
+              </p>
+            </section>
+
+            {/* Section 5 */}
+            <section className="pt-6 border-t border-gray-200">
+              <h2 className="text-lg mb-4" style={{ fontWeight: 600 }}>
+                Informations sur l'interlocuteur des autorités de l'UE dans le cadre du règlement sur les services numériques
+              </h2>
+              <p className="mb-6">
+                Interlocuteur unique pour les autorités des États membres, la Commission européenne et le conseil d'administration conformément à l'article 11 du règlement :{' '}
+                <a href="mailto:dsa-authorities@homiqio.com" className="text-[#10B981] underline hover:opacity-80">
+                  dsa-authorities@homiqio.com
+                </a>
+                . Veuillez vous assurer que les communications sont faites en anglais ou accompagnées d'une traduction en anglais.
+              </p>
+            </section>
+
+            {/* Section 6 */}
+            <section className="pt-6 border-t border-gray-200">
+              <h2 className="text-lg mb-4" style={{ fontWeight: 600 }}>
+                Informations sur le nombre mensuel moyen de destinataires actifs dans l'Union européenne :
+              </h2>
+              <p className="mb-4">
+                En vertu de l'article 24, paragraphe 2, du règlement sur les services numériques, les plateformes en ligne sont tenues de publier des « informations sur le nombre mensuel moyen de destinataires actifs du service dans l'Union » avant le 17 février 2023, et tous les six mois par la suite.
+              </p>
+              <p className="mb-4">
+                Conformément aux dispositions du règlement, y compris le Considérant 77, nous avons calculé que notre nombre mensuel moyen de destinataires actifs dans l'Union européenne pour la période du 1 févr. – 31 juil. 2025 s'élève à environ 41.7M.
+              </p>
+              <p>
+                Nous continuerons à suivre toute évolution et publierons tous les six mois des informations sur le nombre mensuel moyen de destinataires actifs de notre service dans l'Union européenne, conformément à l'article 24, paragraphe 2, du règlement.
+              </p>
+            </section>
           </div>
-        </section>
-      </main>
+        </div>
+      </div>
+
+      <LegalFooter activePage="company-info" />
+
+      {/* Scroll to top button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 px-5 py-3 bg-gray-900 text-white rounded-lg text-sm shadow-lg hover:bg-gray-800 transition-all flex items-center gap-2 z-50"
+          style={{ fontWeight: 600 }}
+        >
+          <ArrowUp className="w-4 h-4" />
+          Retour en haut de la page
+        </button>
+      )}
     </div>
   );
 }
