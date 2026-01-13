@@ -3,7 +3,6 @@ import { useState, useRef, useEffect } from "react";
 import { ExperienceDestinationPicker } from "./ExperienceDestinationPicker";
 import { ExperienceDatePicker } from "./ExperienceDatePicker";
 import { ExperienceGuestsPicker } from "./ExperienceGuestsPicker";
-import backgroundImage from 'figma:asset/ea9a43f19f699f5eeca472b649d75293c416f15e.png';
 
 export function ExperienceSearchBar() {
   const [showDestinations, setShowDestinations] =
@@ -56,15 +55,7 @@ export function ExperienceSearchBar() {
   };
 
   return (
-    <div 
-      className="relative"
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
-    >
+    <div className="relative bg-white">
       <div className="px-4 sm:px-6 lg:px-20 py-6">
         <div
           className="max-w-5xl mx-auto relative"

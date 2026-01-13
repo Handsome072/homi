@@ -3,7 +3,6 @@ import { useState, useRef, useEffect } from 'react';
 import { ServiceDestinationPicker } from './ServiceDestinationPicker';
 import { ServiceDatePicker } from './ServiceDatePicker';
 import { ServiceTypePicker } from './ServiceTypePicker';
-import backgroundImage from 'figma:asset/ea9a43f19f699f5eeca472b649d75293c416f15e.png';
 
 export function ServiceSearchBar() {
   const [activeDropdown, setActiveDropdown] = useState<'destination' | 'dates' | 'service' | null>(null);
@@ -40,15 +39,7 @@ export function ServiceSearchBar() {
   };
 
   return (
-    <div 
-      className="relative"
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
-    >
+    <div className="relative bg-white">
       <div className="px-4 sm:px-6 lg:px-20 py-6">
         <div className="max-w-5xl mx-auto relative" ref={searchBarRef}>
           <div 

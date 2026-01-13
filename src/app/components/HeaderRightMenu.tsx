@@ -33,15 +33,8 @@ export function HeaderRightMenu({
       >
         Devenir hôte
       </button>
-      
-      {user ? (
-        <button
-          className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white cursor-pointer hover:bg-gray-800 transition-all duration-200"
-          style={{ fontWeight: 600 }}
-        >
-          {user.name.charAt(0).toUpperCase()}
-        </button>
-      ) : (
+
+      {!user && (
         <button
           className="p-3 bg-gray-100 rounded-full cursor-pointer hover:bg-gray-200 transition-all duration-200"
           onClick={() => setShowLanguageModal(true)}
@@ -49,7 +42,7 @@ export function HeaderRightMenu({
           <Globe className="w-4 h-4" />
         </button>
       )}
-      
+
       <div className="relative">
         <button
           className="flex items-center gap-2 border border-gray-300 rounded-full p-1.5 pr-3 hover:shadow-md transition-all duration-200 cursor-pointer bg-white"

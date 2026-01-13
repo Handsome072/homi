@@ -580,16 +580,16 @@ export function ClientSpace({ onNavigate }: ClientSpaceProps = {}) {
     <>
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="border-b border-gray-200 px-6 lg:px-20 py-4 flex items-center justify-between">
+      <header className="border-b border-gray-200 px-6 lg:px-20 py-4 flex items-center justify-between bg-white">
         {/* Logo */}
         <button
           onClick={() => onNavigate?.('logements')}
-          className="flex items-center gap-1 flex-shrink-0 hover:opacity-80 transition-opacity duration-200"
+          className="flex items-center gap-1 flex-shrink-0 hover:opacity-80 transition-opacity duration-200 border-0"
         >
           <img
             src={logo}
             alt="HOMIQIO Logo"
-            className="w-[150px] h-auto"
+            className="w-[150px] h-auto border-0"
           />
         </button>
 
