@@ -1,9 +1,0 @@
-{
-  "app": {
-    "[project]/app/(legal)/privacy/page": [],
-    "[project]/app/(main)/page": []
-  },
-  "appUsingSizeAdjust": false,
-  "pages": {},
-  "pagesUsingSizeAdjust": false
-}

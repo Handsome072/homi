@@ -1,8 +1,0 @@
-{
-  "pages": {},
-  "app": {
-    "[project]/app/(legal)/company-info/page": []
-  },
-  "appUsingSizeAdjust": false,
-  "pagesUsingSizeAdjust": false
-}
