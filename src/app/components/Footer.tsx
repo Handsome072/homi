@@ -1,5 +1,5 @@
 import { Globe } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 export function Footer() {
   return (
@@ -187,19 +187,19 @@ export function Footer() {
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 text-sm text-[#222222]">
               <span>© 2026 HOMIQIO, Inc.</span>
               <span className="hidden md:inline">·</span>
-              <Link to="/privacy" className="hover:underline">
+              <Link href="/privacy" className="hover:underline">
                 Confidentialité
               </Link>
               <span className="hidden md:inline">·</span>
-              <Link to="/terms" className="hover:underline">
+              <Link href="/terms" className="hover:underline">
                 Conditions générales
               </Link>
               <span className="hidden md:inline">·</span>
-              <Link to="/how-it-works" className="hover:underline">
+              <Link href="/how-it-works" className="hover:underline">
                 Fonctionnement du site
               </Link>
               <span className="hidden md:inline">·</span>
-              <Link to="/company-info" className="hover:underline">
+              <Link href="/company-info" className="hover:underline">
                 Infos sur l'entreprise
               </Link>
             </div>
@@ -227,7 +227,9 @@ export function Footer() {
               {/* Social Icons */}
               <div className="flex items-center gap-4">
                 <a
-                  href="#"
+                  href="https://web.facebook.com/Homiqio/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hover:opacity-70 transition-opacity"
                   aria-label="Facebook"
                 >
@@ -240,9 +242,11 @@ export function Footer() {
                   </svg>
                 </a>
                 <a
-                  href="#"
+                  href="https://x.com/WithHomiqio"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hover:opacity-70 transition-opacity"
-                  aria-label="Twitter"
+                  aria-label="X (Twitter)"
                 >
                   <svg
                     className="w-[18px] h-[18px]"
@@ -253,7 +257,9 @@ export function Footer() {
                   </svg>
                 </a>
                 <a
-                  href="#"
+                  href="https://www.instagram.com/homiqio/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hover:opacity-70 transition-opacity"
                   aria-label="Instagram"
                 >
