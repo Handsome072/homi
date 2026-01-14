@@ -1,5 +1,4 @@
 import { Globe } from "lucide-react";
-import Link from "next/link";
 
 export function Footer() {
   return (
@@ -187,21 +186,21 @@ export function Footer() {
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 text-sm text-[#222222]">
               <span>© 2026 HOMIQIO, Inc.</span>
               <span className="hidden md:inline">·</span>
-              <Link href="/privacy" className="hover:underline">
+              <a href="/privacy" className="hover:underline">
                 Confidentialité
-              </Link>
+              </a>
               <span className="hidden md:inline">·</span>
-              <Link href="/terms" className="hover:underline">
+              <a href="/terms" className="hover:underline">
                 Conditions générales
-              </Link>
+              </a>
               <span className="hidden md:inline">·</span>
-              <Link href="/how-it-works" className="hover:underline">
+              <a href="/how-it-works" className="hover:underline">
                 Fonctionnement du site
-              </Link>
+              </a>
               <span className="hidden md:inline">·</span>
-              <Link href="/company-info" className="hover:underline">
+              <a href="/company-info" className="hover:underline">
                 Infos sur l'entreprise
-              </Link>
+              </a>
             </div>
 
             {/* Right - Language, Currency & Social */}
