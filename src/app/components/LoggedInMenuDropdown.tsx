@@ -12,9 +12,11 @@ interface LoggedInMenuDropdownProps {
   onLanguageClick?: () => void;
   onClientSpaceClick?: () => void;
   onMessagesClick?: () => void;
+  isHost?: boolean;
+  onAnnoncesClick?: () => void;
 }
 
-export function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLanguageClick, onClientSpaceClick, onMessagesClick }: LoggedInMenuDropdownProps) {
+export function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLanguageClick, onClientSpaceClick, onMessagesClick, isHost, onAnnoncesClick }: LoggedInMenuDropdownProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { logout } = useAuth();
 
@@ -134,27 +136,53 @@ export function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLan
       {/* Divider */}
       <div className="w-[240px] h-px bg-gray-200 my-2 mx-auto"></div>
 
-      {/* Devenir hôte avec illustration */}
-      <button
-        className="w-full px-4 py-3 hover:bg-gray-50 transition-colors text-left"
-        onClick={onBecomeHostClick}
-      >
-        <div className="flex items-start justify-between gap-3 px-4">
-          <div className="flex-1">
-            <div className="text-sm mb-1" style={{ fontWeight: 600 }}>
-              Devenir hôte
+      {/* Devenir hôte / Gérer mes annonces */}
+      {isHost ? (
+        <button
+          className="w-full px-4 py-3 hover:bg-gray-50 transition-colors text-left"
+          onClick={() => {
+            onAnnoncesClick?.();
+            onClose();
+          }}
+        >
+          <div className="flex items-start justify-between gap-3 px-4">
+            <div className="flex-1">
+              <div className="text-sm mb-1" style={{ fontWeight: 600 }}>
+                Gérer mes annonces
+              </div>
+              <div className="text-xs text-gray-600 leading-relaxed">
+                Accédez à votre espace hôte pour gérer vos annonces.
+              </div>
             </div>
-            <div className="text-xs text-gray-600 leading-relaxed">
-              Devenir hôte et gagner des revenus supplémentaires, c'est facile.
-            </div>
+            <img
+              src={hostIllustration}
+              alt="Illustration hôte"
+              className="w-12 h-12 object-contain flex-shrink-0"
+            />
           </div>
-          <img
-            src={hostIllustration}
-            alt="Illustration hôte"
-            className="w-12 h-12 object-contain flex-shrink-0"
-          />
-        </div>
-      </button>
+        </button>
+      ) : (
+        <button
+          className="w-full px-4 py-3 hover:bg-gray-50 transition-colors text-left"
+          onClick={onBecomeHostClick}
+        >
+          <div className="flex items-start justify-between gap-3 px-4">
+            <div className="flex-1">
+              <div className="text-sm mb-1" style={{ fontWeight: 600 }}>
+                Devenir hôte
+              </div>
+              <div className="text-xs text-gray-600 leading-relaxed">
+                Devenir hôte et gagner des revenus supplémentaires, c'est facile.
+              </div>
+            </div>
+            <img
+              src={hostIllustration}
+              alt="Illustration hôte"
+              className="w-12 h-12 object-contain flex-shrink-0"
+            />
+          </div>
+        </button>
+      )}
 
       {/* Divider */}
       <div className="w-[240px] h-px bg-gray-200 my-2 mx-auto"></div>

@@ -15,15 +15,16 @@ const logo = '/logo.png';
 interface HeaderProps {
   currentPage: "logements" | "experiences" | "services";
   onNavigate: (
-    page: "logements" | "experiences" | "services" | "messages" | "host-onboarding",
+    page: "logements" | "experiences" | "services" | "messages" | "host-onboarding" | "annonces",
   ) => void;
   isScrolled: boolean;
   onSearch: (params: any) => void;
   onClientSpaceClick?: () => void;
+  isHost?: boolean;
 }
 
 export const Header = forwardRef<HTMLElement, HeaderProps>(
-  ({ currentPage, onNavigate, isScrolled, onSearch, onClientSpaceClick }, ref) => {
+  ({ currentPage, onNavigate, isScrolled, onSearch, onClientSpaceClick, isHost }, ref) => {
     const [showSearchOverlay, setShowSearchOverlay] =
       useState(false);
     const [showLanguageModal, setShowLanguageModal] =
@@ -104,6 +105,8 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(
                 setShowAuthModal={setShowAuthModal}
                 onClientSpaceClick={onClientSpaceClick}
                 onMessagesClick={() => onNavigate('messages')}
+                isHost={isHost}
+                onAnnoncesClick={() => onNavigate('annonces')}
               />
             </div>
           </div>

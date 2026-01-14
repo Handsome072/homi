@@ -1,3 +1,5 @@
 {
-  "/(legal)/privacy/page": "app/(legal)/privacy/page.js"
+  "/(legal)/privacy/page": "app/(legal)/privacy/page.js",
+  "/(main)/host-onboarding/page": "app/(main)/host-onboarding/page.js",
+  "/(main)/page": "app/(main)/page.js"
 }

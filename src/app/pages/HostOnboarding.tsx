@@ -1,11 +1,15 @@
 import { useState } from 'react';
 
+type OnboardingStep = 'intro' | 'step1' | 'property-type' | 'space-type' | 'location' | 'confirm-address' | 'pin-location' | 'guest-info' | 'step2-intro' | 'amenities' | 'photos' | 'photo-upload' | 'photo-review' | 'title' | 'highlights' | 'description' | 'step3-intro' | 'reservation-settings' | 'pricing' | 'weekend-pricing' | 'discounts' | 'security' | 'final-details' | 'verification-points';
+
 interface HostOnboardingProps {
-  onNavigate: (page: string) => void;
+  onNavigate: (page: string, data?: Record<string, unknown>) => void;
+  initialStep?: OnboardingStep;
+  onCompleteOnboarding?: () => void;
 }
 
-export function HostOnboarding({ onNavigate }: HostOnboardingProps) {
-  const [currentStep, setCurrentStep] = useState<'intro' | 'step1' | 'property-type' | 'space-type' | 'location' | 'confirm-address' | 'pin-location' | 'guest-info' | 'step2-intro' | 'amenities' | 'photos' | 'photo-upload'>('intro');
+export function HostOnboarding({ onNavigate, initialStep = 'intro', onCompleteOnboarding }: HostOnboardingProps) {
+  const [currentStep, setCurrentStep] = useState<OnboardingStep>(initialStep);
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const [selectedSpaceType, setSelectedSpaceType] = useState<string | null>(null);
   const [address, setAddress] = useState('');
@@ -23,12 +27,92 @@ export function HostOnboarding({ onNavigate }: HostOnboardingProps) {
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
   const [uploadedPhotos, setUploadedPhotos] = useState<string[]>([]);
   const [showPhotoUploadModal, setShowPhotoUploadModal] = useState(false);
+  const [tempPhotos, setTempPhotos] = useState<string[]>([]);
+  const [listingTitle, setListingTitle] = useState('');
+  const [selectedHighlights, setSelectedHighlights] = useState<string[]>([]);
+  const [listingDescription, setListingDescription] = useState('');
+  const [reservationMode, setReservationMode] = useState<'manual' | 'instant' | null>(null);
+  const [basePrice, setBasePrice] = useState(26);
+  const [weekendSupplement, setWeekendSupplement] = useState(1);
+  const [selectedDiscounts, setSelectedDiscounts] = useState<string[]>([]);
+  const [securityFeatures, setSecurityFeatures] = useState<string[]>([]);
+  const [addressCountry, setAddressCountry] = useState('Madagascar');
+  const [addressStreet, setAddressStreet] = useState('');
+  const [addressApartment, setAddressApartment] = useState('');
+  const [addressCity, setAddressCity] = useState('');
+  const [addressPostalCode, setAddressPostalCode] = useState('');
+  const [legalEntity, setLegalEntity] = useState<'yes' | 'no' | null>(null);
+  const [showConfirmationPopup, setShowConfirmationPopup] = useState(false);
 
   const toggleAmenity = (amenity: string) => {
     if (selectedAmenities.includes(amenity)) {
       setSelectedAmenities(selectedAmenities.filter(a => a !== amenity));
     } else {
       setSelectedAmenities([...selectedAmenities, amenity]);
+    }
+  };
+
+  const handlePhotoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (!files) return;
+
+    const newPhotos: string[] = [];
+    let processed = 0;
+
+    Array.from(files).forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (e.target?.result) {
+          newPhotos.push(e.target.result as string);
+          processed++;
+
+          if (processed === files.length) {
+            setTempPhotos([...tempPhotos, ...newPhotos]);
+          }
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const removeTempPhoto = (index: number) => {
+    setTempPhotos(tempPhotos.filter((_, i) => i !== index));
+  };
+
+  const importPhotos = () => {
+    setUploadedPhotos([...uploadedPhotos, ...tempPhotos]);
+    setTempPhotos([]);
+    setShowPhotoUploadModal(false);
+    if (uploadedPhotos.length + tempPhotos.length >= 5) {
+      setCurrentStep('photo-review');
+    }
+  };
+
+  const removeUploadedPhoto = (index: number) => {
+    setUploadedPhotos(uploadedPhotos.filter((_, i) => i !== index));
+  };
+
+  const toggleHighlight = (highlight: string) => {
+    if (selectedHighlights.includes(highlight)) {
+      setSelectedHighlights(selectedHighlights.filter(h => h !== highlight));
+    } else if (selectedHighlights.length < 2) {
+      setSelectedHighlights([...selectedHighlights, highlight]);
+    }
+  };
+
+  const toggleDiscount = (discount: string) => {
+    if (selectedDiscounts.includes(discount)) {
+      setSelectedDiscounts(selectedDiscounts.filter(d => d !== discount));
+    } else {
+      setSelectedDiscounts([...selectedDiscounts, discount]);
+    }
+  };
+
+  const toggleSecurityFeature = (feature: string) => {
+    if (securityFeatures.includes(feature)) {
+      setSecurityFeatures(securityFeatures.filter(f => f !== feature));
+    } else {
+      setSecurityFeatures([...securityFeatures, feature]);
     }
   };
 
@@ -1189,6 +1273,12 @@ export function HostOnboarding({ onNavigate }: HostOnboardingProps) {
 
   // Photos - "Ajoutez quelques photos"
   if (currentStep === 'photos') {
+    // Auto-redirect to photo-review if we have photos
+    if (uploadedPhotos.length >= 5) {
+      setCurrentStep('photo-review');
+      return null;
+    }
+
     return (
       <div className="min-h-screen bg-white">
         {/* Header */}
@@ -1202,7 +1292,7 @@ export function HostOnboarding({ onNavigate }: HostOnboardingProps) {
             <button className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors" style={{ fontWeight: 600, color: '#222222' }}>
               Des questions ?
             </button>
-            <button 
+            <button
               onClick={() => onNavigate('logements')}
               className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors border border-gray-300"
               style={{ fontWeight: 600, color: '#222222' }}
@@ -1223,22 +1313,50 @@ export function HostOnboarding({ onNavigate }: HostOnboardingProps) {
 
           {/* Photo Upload Area */}
           <div className="relative w-full max-w-2xl mx-auto">
-            <button
-              onClick={() => setShowPhotoUploadModal(true)}
-              className="w-full h-96 border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center hover:border-gray-400 transition-colors bg-gray-50"
-            >
+            <label className="w-full h-96 border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center hover:border-gray-400 transition-colors bg-gray-50 cursor-pointer">
+              <input
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={handlePhotoUpload}
+                className="hidden"
+              />
               <div className="mb-6">
-                <img 
-                  src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=200&h=200&fit=crop" 
-                  alt="Camera"
-                  className="w-32 h-32 object-contain opacity-60"
-                />
+                <svg className="w-32 h-32 opacity-60" viewBox="0 0 24 24" fill="none" stroke="#222222" strokeWidth="1">
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <circle cx="8.5" cy="8.5" r="1.5" />
+                  <path d="M21 15l-5-5L5 21" />
+                </svg>
               </div>
               <div className="px-8 py-3 rounded-lg text-sm border border-gray-900 bg-white hover:bg-gray-50 transition-colors" style={{ fontWeight: 600, color: '#222222' }}>
                 Ajoutez des photos
               </div>
-            </button>
+            </label>
           </div>
+
+          {/* Uploaded Photos Preview */}
+          {uploadedPhotos.length > 0 && (
+            <div className="mt-8">
+              <p className="text-sm mb-4" style={{ color: '#717171' }}>
+                {uploadedPhotos.length} photo{uploadedPhotos.length > 1 ? 's' : ''} ajoutée{uploadedPhotos.length > 1 ? 's' : ''} ({5 - uploadedPhotos.length} restante{5 - uploadedPhotos.length > 1 ? 's' : ''})
+              </p>
+              <div className="grid grid-cols-5 gap-4">
+                {uploadedPhotos.map((photo, index) => (
+                  <div key={index} className="relative aspect-square rounded-lg overflow-hidden">
+                    <img src={photo} alt={`Photo ${index + 1}`} className="w-full h-full object-cover" />
+                    <button
+                      onClick={() => removeUploadedPhoto(index)}
+                      className="absolute top-2 right-2 w-6 h-6 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-gray-100"
+                    >
+                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="#222222" strokeWidth="2">
+                        <path d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Footer */}
@@ -1252,6 +1370,7 @@ export function HostOnboarding({ onNavigate }: HostOnboardingProps) {
           </button>
           <button
             disabled={uploadedPhotos.length < 5}
+            onClick={() => uploadedPhotos.length >= 5 && setCurrentStep('photo-review')}
             className={`px-8 py-3 text-white rounded-lg text-base transition-opacity ${
               uploadedPhotos.length >= 5 ? 'hover:opacity-90' : 'opacity-40 cursor-not-allowed'
             }`}
@@ -1260,72 +1379,1107 @@ export function HostOnboarding({ onNavigate }: HostOnboardingProps) {
             Suivant
           </button>
         </div>
+      </div>
+    );
+  }
 
-        {/* Photo Upload Modal */}
-        {showPhotoUploadModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setShowPhotoUploadModal(false)}>
-            <div className="bg-white rounded-xl p-6 max-w-2xl w-full mx-4" onClick={(e) => e.stopPropagation()}>
-              {/* Modal Header */}
-              <div className="flex items-center justify-between mb-6">
-                <button onClick={() => setShowPhotoUploadModal(false)} className="hover:opacity-70">
-                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#222222" strokeWidth="2">
+  // Photo Review - "Est voilà ! Est-ce que tout semble en ordre ?"
+  if (currentStep === 'photo-review') {
+    return (
+      <div className="min-h-screen bg-white">
+        {/* Header */}
+        <div className="sticky top-0 bg-white border-b border-gray-200 px-8 py-6 flex items-center justify-between z-10">
+          <button onClick={() => onNavigate('logements')} className="hover:opacity-70 transition-opacity">
+            <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none">
+              <path d="M16 1.5C11.5 1.5 7.5 4 5.5 7.5C3.5 11 3 15 4.5 19C6 23 9.5 26.5 13 28.5C14 29 15 29.5 16 29.5C17 29.5 18 29 19 28.5C22.5 26.5 26 23 27.5 19C29 15 28.5 11 26.5 7.5C24.5 4 20.5 1.5 16 1.5ZM16 20C13.8 20 12 18.2 12 16C12 13.8 13.8 12 16 12C18.2 12 20 13.8 20 16C20 18.2 18.2 20 16 20Z" fill="#222222" />
+            </svg>
+          </button>
+          <div className="flex gap-3">
+            <button className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors" style={{ fontWeight: 600, color: '#222222' }}>
+              Des questions ?
+            </button>
+            <button
+              onClick={() => onNavigate('logements')}
+              className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors border border-gray-300"
+              style={{ fontWeight: 600, color: '#222222' }}
+            >
+              Enregistrer et quitter
+            </button>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="max-w-4xl mx-auto px-8 py-16">
+          <h1 className="text-3xl mb-2" style={{ fontWeight: 600, color: '#222222', lineHeight: '1.2' }}>
+            Et voilà ! Est-ce que tout semble en ordre ?
+          </h1>
+          <p className="text-base mb-8" style={{ color: '#717171' }}>
+            Faites glisser les photos pour les réorganiser.
+          </p>
+
+          {/* Photo Grid */}
+          <div className="grid grid-cols-2 gap-4 mb-24">
+            {uploadedPhotos.map((photo, index) => (
+              <div key={index} className={`relative rounded-xl overflow-hidden ${index === 0 ? 'col-span-2 aspect-video' : 'aspect-square'}`}>
+                <img src={photo} alt={`Photo ${index + 1}`} className="w-full h-full object-cover" />
+                {index === 0 && (
+                  <div className="absolute top-4 left-4 px-3 py-1 bg-white rounded-full text-sm" style={{ fontWeight: 600, color: '#222222' }}>
+                    Photo de couverture
+                  </div>
+                )}
+                <button
+                  onClick={() => removeUploadedPhoto(index)}
+                  className="absolute top-4 right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-gray-100"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="#222222" strokeWidth="2">
                     <path d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
-                <h2 className="text-base" style={{ fontWeight: 600, color: '#222222' }}>
-                  Ajoutez des photos
-                </h2>
-                <button className="hover:opacity-70">
-                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#222222" strokeWidth="2">
-                    <path d="M12 5v14m7-7H5" />
-                  </svg>
-                </button>
               </div>
+            ))}
+          </div>
+        </div>
 
-              <p className="text-xs text-center mb-6" style={{ color: '#717171' }}>
-                Aucune sélection actuelle
-              </p>
+        {/* Footer */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-8 py-6 flex items-center justify-between">
+          <button
+            onClick={() => setCurrentStep('photos')}
+            className="px-6 py-3 text-base hover:bg-gray-50 rounded-lg transition-colors underline"
+            style={{ fontWeight: 600, color: '#222222' }}
+          >
+            Retour
+          </button>
+          <button
+            onClick={() => setCurrentStep('title')}
+            className="px-8 py-3 text-white rounded-lg text-base hover:opacity-90 transition-opacity"
+            style={{ fontWeight: 600, backgroundColor: '#222222' }}
+          >
+            Suivant
+          </button>
+        </div>
+      </div>
+    );
+  }
 
-              {/* Upload Area */}
-              <div className="border-2 border-dashed border-gray-300 rounded-xl p-12 flex flex-col items-center justify-center bg-gray-50 mb-6">
-                <div className="mb-4">
-                  <svg className="w-16 h-16" viewBox="0 0 24 24" fill="none" stroke="#222222" strokeWidth="1.5">
-                    <rect x="3" y="3" width="18" height="18" rx="2" />
-                    <circle cx="8.5" cy="8.5" r="1.5" />
-                    <path d="M21 15l-5-5L5 21" />
-                  </svg>
+  // Title - "À présent, donnez un titre à votre annonce"
+  if (currentStep === 'title') {
+    return (
+      <div className="min-h-screen bg-white">
+        {/* Header */}
+        <div className="sticky top-0 bg-white border-b border-gray-200 px-8 py-6 flex items-center justify-between z-10">
+          <button onClick={() => onNavigate('logements')} className="hover:opacity-70 transition-opacity">
+            <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none">
+              <path d="M16 1.5C11.5 1.5 7.5 4 5.5 7.5C3.5 11 3 15 4.5 19C6 23 9.5 26.5 13 28.5C14 29 15 29.5 16 29.5C17 29.5 18 29 19 28.5C22.5 26.5 26 23 27.5 19C29 15 28.5 11 26.5 7.5C24.5 4 20.5 1.5 16 1.5ZM16 20C13.8 20 12 18.2 12 16C12 13.8 13.8 12 16 12C18.2 12 20 13.8 20 16C20 18.2 18.2 20 16 20Z" fill="#222222" />
+            </svg>
+          </button>
+          <div className="flex gap-3">
+            <button className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors" style={{ fontWeight: 600, color: '#222222' }}>
+              Des questions ?
+            </button>
+            <button
+              onClick={() => onNavigate('logements')}
+              className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors border border-gray-300"
+              style={{ fontWeight: 600, color: '#222222' }}
+            >
+              Enregistrer et quitter
+            </button>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="max-w-2xl mx-auto px-8 py-16">
+          <h1 className="text-3xl mb-2" style={{ fontWeight: 600, color: '#222222', lineHeight: '1.2' }}>
+            À présent, donnez un titre à votre annonce
+          </h1>
+          <p className="text-base mb-8" style={{ color: '#717171' }}>
+            Les titres courts sont généralement les plus efficaces. Ne vous inquiétez pas, vous pourrez toujours le modifier plus tard.
+          </p>
+
+          <textarea
+            value={listingTitle}
+            onChange={(e) => setListingTitle(e.target.value.slice(0, 32))}
+            placeholder="Maison hôte calme"
+            className="w-full h-40 p-4 border border-gray-300 rounded-xl text-lg resize-none focus:outline-none focus:border-gray-900"
+            style={{ fontWeight: 500, color: '#222222' }}
+          />
+          <p className="text-sm mt-2" style={{ color: '#717171' }}>
+            {listingTitle.length}/32
+          </p>
+        </div>
+
+        {/* Footer */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-8 py-6 flex items-center justify-between">
+          <button
+            onClick={() => setCurrentStep('photo-review')}
+            className="px-6 py-3 text-base hover:bg-gray-50 rounded-lg transition-colors underline"
+            style={{ fontWeight: 600, color: '#222222' }}
+          >
+            Retour
+          </button>
+          <button
+            onClick={() => setCurrentStep('highlights')}
+            className="px-8 py-3 text-white rounded-lg text-base hover:opacity-90 transition-opacity"
+            style={{ fontWeight: 600, backgroundColor: '#222222' }}
+          >
+            Suivant
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Highlights - "Passons maintenant à la description de votre logement"
+  if (currentStep === 'highlights') {
+    const highlights = [
+      { id: 'peaceful', label: 'Paisible', icon: '🏛️' },
+      { id: 'unique', label: 'Unique', icon: '🌟' },
+      { id: 'family', label: 'Adapté aux familles', icon: '👨‍👩‍👧‍👦' },
+      { id: 'elegant', label: 'Élégant', icon: '🏛️' },
+      { id: 'central', label: 'Emplacement central', icon: '📍' },
+      { id: 'spacious', label: 'Spacieux', icon: '🏠' },
+    ];
+
+    return (
+      <div className="min-h-screen bg-white">
+        {/* Header */}
+        <div className="sticky top-0 bg-white border-b border-gray-200 px-8 py-6 flex items-center justify-between z-10">
+          <button onClick={() => onNavigate('logements')} className="hover:opacity-70 transition-opacity">
+            <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none">
+              <path d="M16 1.5C11.5 1.5 7.5 4 5.5 7.5C3.5 11 3 15 4.5 19C6 23 9.5 26.5 13 28.5C14 29 15 29.5 16 29.5C17 29.5 18 29 19 28.5C22.5 26.5 26 23 27.5 19C29 15 28.5 11 26.5 7.5C24.5 4 20.5 1.5 16 1.5ZM16 20C13.8 20 12 18.2 12 16C12 13.8 13.8 12 16 12C18.2 12 20 13.8 20 16C20 18.2 18.2 20 16 20Z" fill="#222222" />
+            </svg>
+          </button>
+          <div className="flex gap-3">
+            <button className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors" style={{ fontWeight: 600, color: '#222222' }}>
+              Des questions ?
+            </button>
+            <button
+              onClick={() => onNavigate('logements')}
+              className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors border border-gray-300"
+              style={{ fontWeight: 600, color: '#222222' }}
+            >
+              Enregistrer et quitter
+            </button>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="max-w-2xl mx-auto px-8 py-16">
+          <h1 className="text-3xl mb-2" style={{ fontWeight: 600, color: '#222222', lineHeight: '1.2' }}>
+            Passons maintenant à la description de votre logement
+          </h1>
+          <p className="text-base mb-8" style={{ color: '#717171' }}>
+            Choisissez jusqu'à 2 points forts pour mettre en valeur ce qui rend votre logement unique.
+          </p>
+
+          <div className="grid grid-cols-2 gap-4 mb-24">
+            {highlights.map((highlight) => (
+              <button
+                key={highlight.id}
+                onClick={() => toggleHighlight(highlight.id)}
+                className={`p-6 rounded-xl border-2 transition-all hover:border-gray-900 text-left ${
+                  selectedHighlights.includes(highlight.id)
+                    ? 'border-gray-900 bg-gray-50'
+                    : 'border-gray-300 bg-white'
+                }`}
+              >
+                <div className="text-2xl mb-2">{highlight.icon}</div>
+                <div className="text-sm" style={{ fontWeight: 600, color: '#222222' }}>
+                  {highlight.label}
                 </div>
-                <h3 className="text-base mb-2" style={{ fontWeight: 600, color: '#222222' }}>
-                  Glissez-déposez un fichier
-                </h3>
-                <p className="text-sm mb-4" style={{ color: '#717171' }}>
-                  ou recherchez des photos
-                </p>
-                <button className="px-6 py-3 rounded-lg text-sm bg-black text-white hover:opacity-90 transition-opacity" style={{ fontWeight: 600 }}>
-                  Parcourir
-                </button>
-              </div>
+              </button>
+            ))}
+          </div>
+        </div>
 
-              {/* Modal Footer */}
-              <div className="flex items-center justify-between">
+        {/* Footer */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-8 py-6 flex items-center justify-between">
+          <button
+            onClick={() => setCurrentStep('title')}
+            className="px-6 py-3 text-base hover:bg-gray-50 rounded-lg transition-colors underline"
+            style={{ fontWeight: 600, color: '#222222' }}
+          >
+            Retour
+          </button>
+          <button
+            onClick={() => setCurrentStep('description')}
+            className="px-8 py-3 text-white rounded-lg text-base hover:opacity-90 transition-opacity"
+            style={{ fontWeight: 600, backgroundColor: '#222222' }}
+          >
+            Suivant
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Description - "Créez votre description"
+  if (currentStep === 'description') {
+    return (
+      <div className="min-h-screen bg-white">
+        {/* Header */}
+        <div className="sticky top-0 bg-white border-b border-gray-200 px-8 py-6 flex items-center justify-between z-10">
+          <button onClick={() => onNavigate('logements')} className="hover:opacity-70 transition-opacity">
+            <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none">
+              <path d="M16 1.5C11.5 1.5 7.5 4 5.5 7.5C3.5 11 3 15 4.5 19C6 23 9.5 26.5 13 28.5C14 29 15 29.5 16 29.5C17 29.5 18 29 19 28.5C22.5 26.5 26 23 27.5 19C29 15 28.5 11 26.5 7.5C24.5 4 20.5 1.5 16 1.5ZM16 20C13.8 20 12 18.2 12 16C12 13.8 13.8 12 16 12C18.2 12 20 13.8 20 16C20 18.2 18.2 20 16 20Z" fill="#222222" />
+            </svg>
+          </button>
+          <div className="flex gap-3">
+            <button className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors" style={{ fontWeight: 600, color: '#222222' }}>
+              Des questions ?
+            </button>
+            <button
+              onClick={() => onNavigate('logements')}
+              className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors border border-gray-300"
+              style={{ fontWeight: 600, color: '#222222' }}
+            >
+              Enregistrer et quitter
+            </button>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="max-w-2xl mx-auto px-8 py-16">
+          <h1 className="text-3xl mb-2" style={{ fontWeight: 600, color: '#222222', lineHeight: '1.2' }}>
+            Créez votre description
+          </h1>
+          <p className="text-base mb-8" style={{ color: '#717171' }}>
+            Décrivez les points forts de votre logement, le quartier et ce qui le rend unique.
+          </p>
+
+          <textarea
+            value={listingDescription}
+            onChange={(e) => setListingDescription(e.target.value.slice(0, 500))}
+            placeholder="Décrivez votre logement..."
+            className="w-full h-64 p-4 border border-gray-300 rounded-xl text-base resize-none focus:outline-none focus:border-gray-900"
+            style={{ color: '#222222' }}
+          />
+          <p className="text-sm mt-2" style={{ color: '#717171' }}>
+            {listingDescription.length}/500
+          </p>
+        </div>
+
+        {/* Footer */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-8 py-6 flex items-center justify-between">
+          <button
+            onClick={() => setCurrentStep('highlights')}
+            className="px-6 py-3 text-base hover:bg-gray-50 rounded-lg transition-colors underline"
+            style={{ fontWeight: 600, color: '#222222' }}
+          >
+            Retour
+          </button>
+          <button
+            onClick={() => setCurrentStep('step3-intro')}
+            className="px-8 py-3 text-white rounded-lg text-base hover:opacity-90 transition-opacity"
+            style={{ fontWeight: 600, backgroundColor: '#222222' }}
+          >
+            Suivant
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Step 3 Intro - "Terminez et publiez"
+  if (currentStep === 'step3-intro') {
+    return (
+      <div className="min-h-screen bg-white flex flex-col">
+        {/* Header */}
+        <div className="sticky top-0 bg-white border-b border-gray-200 px-8 py-6 flex items-center justify-between z-10">
+          <button onClick={() => onNavigate('logements')} className="hover:opacity-70 transition-opacity">
+            <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none">
+              <path d="M16 1.5C11.5 1.5 7.5 4 5.5 7.5C3.5 11 3 15 4.5 19C6 23 9.5 26.5 13 28.5C14 29 15 29.5 16 29.5C17 29.5 18 29 19 28.5C22.5 26.5 26 23 27.5 19C29 15 28.5 11 26.5 7.5C24.5 4 20.5 1.5 16 1.5ZM16 20C13.8 20 12 18.2 12 16C12 13.8 13.8 12 16 12C18.2 12 20 13.8 20 16C20 18.2 18.2 20 16 20Z" fill="#222222" />
+            </svg>
+          </button>
+          <div className="flex gap-3">
+            <button className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors" style={{ fontWeight: 600, color: '#222222' }}>
+              Des questions ?
+            </button>
+            <button
+              onClick={() => onNavigate('logements')}
+              className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors border border-gray-300"
+              style={{ fontWeight: 600, color: '#222222' }}
+            >
+              Enregistrer et quitter
+            </button>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 flex">
+          <div className="flex-1 flex items-center justify-center px-12 py-16">
+            <div className="max-w-lg">
+              <p className="text-sm mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                Étape 3
+              </p>
+              <h1 className="text-5xl mb-6" style={{ fontWeight: 600, color: '#222222', lineHeight: '1.1' }}>
+                Terminez et publiez
+              </h1>
+              <p className="text-lg" style={{ color: '#222222', lineHeight: '1.6' }}>
+                Enfin, vous allez choisir vos paramètres de réservation, définir votre tarification et publier votre annonce.
+              </p>
+            </div>
+          </div>
+          <div className="flex-1 flex items-center justify-center px-12 py-16 bg-gradient-to-br from-gray-50 to-white">
+            <div className="w-full max-w-md">
+              <img
+                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=600&fit=crop"
+                alt="Publier"
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="bg-white border-t border-gray-200 px-8 py-6 flex items-center justify-between">
+          <button
+            onClick={() => setCurrentStep('description')}
+            className="px-6 py-3 text-base hover:bg-gray-50 rounded-lg transition-colors underline"
+            style={{ fontWeight: 600, color: '#222222' }}
+          >
+            Retour
+          </button>
+          <button
+            onClick={() => setCurrentStep('reservation-settings')}
+            className="px-8 py-3 text-white rounded-lg text-base hover:opacity-90 transition-opacity"
+            style={{ fontWeight: 600, backgroundColor: '#222222' }}
+          >
+            Suivant
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Reservation Settings - "Choisissez vos paramètres de réservation"
+  if (currentStep === 'reservation-settings') {
+    return (
+      <div className="min-h-screen bg-white">
+        {/* Header */}
+        <div className="sticky top-0 bg-white border-b border-gray-200 px-8 py-6 flex items-center justify-between z-10">
+          <button onClick={() => onNavigate('logements')} className="hover:opacity-70 transition-opacity">
+            <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none">
+              <path d="M16 1.5C11.5 1.5 7.5 4 5.5 7.5C3.5 11 3 15 4.5 19C6 23 9.5 26.5 13 28.5C14 29 15 29.5 16 29.5C17 29.5 18 29 19 28.5C22.5 26.5 26 23 27.5 19C29 15 28.5 11 26.5 7.5C24.5 4 20.5 1.5 16 1.5ZM16 20C13.8 20 12 18.2 12 16C12 13.8 13.8 12 16 12C18.2 12 20 13.8 20 16C20 18.2 18.2 20 16 20Z" fill="#222222" />
+            </svg>
+          </button>
+          <div className="flex gap-3">
+            <button className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors" style={{ fontWeight: 600, color: '#222222' }}>
+              Des questions ?
+            </button>
+            <button
+              onClick={() => onNavigate('logements')}
+              className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors border border-gray-300"
+              style={{ fontWeight: 600, color: '#222222' }}
+            >
+              Enregistrer et quitter
+            </button>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="max-w-2xl mx-auto px-8 py-16">
+          <h1 className="text-3xl mb-8" style={{ fontWeight: 600, color: '#222222', lineHeight: '1.2' }}>
+            Choisissez vos paramètres de réservation
+          </h1>
+
+          <div className="space-y-4 mb-24">
+            <button
+              onClick={() => setReservationMode('manual')}
+              className={`w-full p-6 rounded-xl border-2 transition-all hover:border-gray-900 text-left ${
+                reservationMode === 'manual' ? 'border-gray-900 bg-gray-50' : 'border-gray-300 bg-white'
+              }`}
+            >
+              <div className="flex items-start justify-between">
+                <div>
+                  <h3 className="text-base mb-2" style={{ fontWeight: 600, color: '#222222' }}>
+                    Approuver ou refuser les demandes
+                  </h3>
+                  <p className="text-sm" style={{ color: '#717171' }}>
+                    Les voyageurs doivent demander à réserver et vous pouvez accepter ou refuser.
+                  </p>
+                </div>
+                <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+                  reservationMode === 'manual' ? 'border-gray-900' : 'border-gray-300'
+                }`}>
+                  {reservationMode === 'manual' && <div className="w-3 h-3 rounded-full bg-gray-900" />}
+                </div>
+              </div>
+            </button>
+
+            <button
+              onClick={() => setReservationMode('instant')}
+              className={`w-full p-6 rounded-xl border-2 transition-all hover:border-gray-900 text-left ${
+                reservationMode === 'instant' ? 'border-gray-900 bg-gray-50' : 'border-gray-300 bg-white'
+              }`}
+            >
+              <div className="flex items-start justify-between">
+                <div>
+                  <h3 className="text-base mb-2" style={{ fontWeight: 600, color: '#222222' }}>
+                    Utiliser la Réservation instantanée
+                  </h3>
+                  <p className="text-sm" style={{ color: '#717171' }}>
+                    Les voyageurs peuvent réserver automatiquement.
+                  </p>
+                </div>
+                <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+                  reservationMode === 'instant' ? 'border-gray-900' : 'border-gray-300'
+                }`}>
+                  {reservationMode === 'instant' && <div className="w-3 h-3 rounded-full bg-gray-900" />}
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-8 py-6 flex items-center justify-between">
+          <button
+            onClick={() => setCurrentStep('step3-intro')}
+            className="px-6 py-3 text-base hover:bg-gray-50 rounded-lg transition-colors underline"
+            style={{ fontWeight: 600, color: '#222222' }}
+          >
+            Retour
+          </button>
+          <button
+            disabled={!reservationMode}
+            onClick={() => reservationMode && setCurrentStep('pricing')}
+            className={`px-8 py-3 text-white rounded-lg text-base transition-opacity ${
+              reservationMode ? 'hover:opacity-90' : 'opacity-40 cursor-not-allowed'
+            }`}
+            style={{ fontWeight: 600, backgroundColor: reservationMode ? '#222222' : '#E5E5E5', color: reservationMode ? '#FFFFFF' : '#B0B0B0' }}
+          >
+            Suivant
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Pricing - "À présent, définissez un prix de base"
+  if (currentStep === 'pricing') {
+    return (
+      <div className="min-h-screen bg-white">
+        {/* Header */}
+        <div className="sticky top-0 bg-white border-b border-gray-200 px-8 py-6 flex items-center justify-between z-10">
+          <button onClick={() => onNavigate('logements')} className="hover:opacity-70 transition-opacity">
+            <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none">
+              <path d="M16 1.5C11.5 1.5 7.5 4 5.5 7.5C3.5 11 3 15 4.5 19C6 23 9.5 26.5 13 28.5C14 29 15 29.5 16 29.5C17 29.5 18 29 19 28.5C22.5 26.5 26 23 27.5 19C29 15 28.5 11 26.5 7.5C24.5 4 20.5 1.5 16 1.5ZM16 20C13.8 20 12 18.2 12 16C12 13.8 13.8 12 16 12C18.2 12 20 13.8 20 16C20 18.2 18.2 20 16 20Z" fill="#222222" />
+            </svg>
+          </button>
+          <div className="flex gap-3">
+            <button className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors" style={{ fontWeight: 600, color: '#222222' }}>
+              Des questions ?
+            </button>
+            <button
+              onClick={() => onNavigate('logements')}
+              className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors border border-gray-300"
+              style={{ fontWeight: 600, color: '#222222' }}
+            >
+              Enregistrer et quitter
+            </button>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="max-w-2xl mx-auto px-8 py-16">
+          <h1 className="text-3xl mb-2" style={{ fontWeight: 600, color: '#222222', lineHeight: '1.2' }}>
+            À présent, définissez un prix de base
+          </h1>
+          <p className="text-base mb-12" style={{ color: '#717171' }}>
+            Vous pouvez le modifier à tout moment.
+          </p>
+
+          <div className="flex items-center justify-center mb-8">
+            <button
+              onClick={() => setBasePrice(Math.max(1, basePrice - 1))}
+              className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:border-gray-900 transition-colors"
+            >
+              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#222222" strokeWidth="2">
+                <path d="M5 12h14" />
+              </svg>
+            </button>
+            <div className="mx-8 text-center">
+              <div className="text-6xl" style={{ fontWeight: 600, color: '#222222' }}>
+                €{basePrice}
+              </div>
+              <p className="text-sm mt-2" style={{ color: '#717171' }}>par nuit</p>
+            </div>
+            <button
+              onClick={() => setBasePrice(basePrice + 1)}
+              className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:border-gray-900 transition-colors"
+            >
+              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#222222" strokeWidth="2">
+                <path d="M12 5v14m7-7H5" />
+              </svg>
+            </button>
+          </div>
+
+          <div className="text-center">
+            <p className="text-sm" style={{ color: '#717171' }}>
+              Prix similaires dans votre région : €20 - €35
+            </p>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-8 py-6 flex items-center justify-between">
+          <button
+            onClick={() => setCurrentStep('reservation-settings')}
+            className="px-6 py-3 text-base hover:bg-gray-50 rounded-lg transition-colors underline"
+            style={{ fontWeight: 600, color: '#222222' }}
+          >
+            Retour
+          </button>
+          <button
+            onClick={() => setCurrentStep('weekend-pricing')}
+            className="px-8 py-3 text-white rounded-lg text-base hover:opacity-90 transition-opacity"
+            style={{ fontWeight: 600, backgroundColor: '#222222' }}
+          >
+            Suivant
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Weekend Pricing - "Fixez un tarif week-end"
+  if (currentStep === 'weekend-pricing') {
+    const weekendPrice = Math.round(basePrice * (1 + weekendSupplement / 100));
+
+    return (
+      <div className="min-h-screen bg-white">
+        {/* Header */}
+        <div className="sticky top-0 bg-white border-b border-gray-200 px-8 py-6 flex items-center justify-between z-10">
+          <button onClick={() => onNavigate('logements')} className="hover:opacity-70 transition-opacity">
+            <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none">
+              <path d="M16 1.5C11.5 1.5 7.5 4 5.5 7.5C3.5 11 3 15 4.5 19C6 23 9.5 26.5 13 28.5C14 29 15 29.5 16 29.5C17 29.5 18 29 19 28.5C22.5 26.5 26 23 27.5 19C29 15 28.5 11 26.5 7.5C24.5 4 20.5 1.5 16 1.5ZM16 20C13.8 20 12 18.2 12 16C12 13.8 13.8 12 16 12C18.2 12 20 13.8 20 16C20 18.2 18.2 20 16 20Z" fill="#222222" />
+            </svg>
+          </button>
+          <div className="flex gap-3">
+            <button className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors" style={{ fontWeight: 600, color: '#222222' }}>
+              Des questions ?
+            </button>
+            <button
+              onClick={() => onNavigate('logements')}
+              className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors border border-gray-300"
+              style={{ fontWeight: 600, color: '#222222' }}
+            >
+              Enregistrer et quitter
+            </button>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="max-w-2xl mx-auto px-8 py-16">
+          <h1 className="text-3xl mb-2" style={{ fontWeight: 600, color: '#222222', lineHeight: '1.2' }}>
+            Fixez un tarif week-end
+          </h1>
+          <p className="text-base mb-12" style={{ color: '#717171' }}>
+            Ajoutez un supplément pour les nuits du vendredi et du samedi.
+          </p>
+
+          <div className="flex items-center justify-center mb-8">
+            <button
+              onClick={() => setWeekendSupplement(Math.max(0, weekendSupplement - 1))}
+              className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:border-gray-900 transition-colors"
+            >
+              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#222222" strokeWidth="2">
+                <path d="M5 12h14" />
+              </svg>
+            </button>
+            <div className="mx-8 text-center">
+              <div className="text-6xl" style={{ fontWeight: 600, color: '#222222' }}>
+                +{weekendSupplement}%
+              </div>
+              <p className="text-sm mt-2" style={{ color: '#717171' }}>€{weekendPrice} par nuit le week-end</p>
+            </div>
+            <button
+              onClick={() => setWeekendSupplement(weekendSupplement + 1)}
+              className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:border-gray-900 transition-colors"
+            >
+              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#222222" strokeWidth="2">
+                <path d="M12 5v14m7-7H5" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-8 py-6 flex items-center justify-between">
+          <button
+            onClick={() => setCurrentStep('pricing')}
+            className="px-6 py-3 text-base hover:bg-gray-50 rounded-lg transition-colors underline"
+            style={{ fontWeight: 600, color: '#222222' }}
+          >
+            Retour
+          </button>
+          <button
+            onClick={() => setCurrentStep('discounts')}
+            className="px-8 py-3 text-white rounded-lg text-base hover:opacity-90 transition-opacity"
+            style={{ fontWeight: 600, backgroundColor: '#222222' }}
+          >
+            Suivant
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Discounts - "Ajoutez des réductions"
+  if (currentStep === 'discounts') {
+    const discountOptions = [
+      { id: 'new-listing', percentage: '20%', title: 'Promotion Nouvelles annonces', description: 'Proposez une réduction de 20 % sur vos 3 premières réservations' },
+      { id: 'last-minute', percentage: '4%', title: 'Réduction pour réservations de dernière minute', description: 'Pour les séjours réservés 14 jours ou moins avant l\'arrivée' },
+      { id: 'weekly', percentage: '10%', title: 'Réduction à la semaine', description: 'Pour les séjours de 7 nuits ou plus' },
+      { id: 'monthly', percentage: '20%', title: 'Réduction au mois', description: 'Pour les séjours de 28 nuits ou plus' },
+    ];
+
+    return (
+      <div className="min-h-screen bg-white">
+        {/* Header */}
+        <div className="sticky top-0 bg-white border-b border-gray-200 px-8 py-6 flex items-center justify-between z-10">
+          <button onClick={() => onNavigate('logements')} className="hover:opacity-70 transition-opacity">
+            <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none">
+              <path d="M16 1.5C11.5 1.5 7.5 4 5.5 7.5C3.5 11 3 15 4.5 19C6 23 9.5 26.5 13 28.5C14 29 15 29.5 16 29.5C17 29.5 18 29 19 28.5C22.5 26.5 26 23 27.5 19C29 15 28.5 11 26.5 7.5C24.5 4 20.5 1.5 16 1.5ZM16 20C13.8 20 12 18.2 12 16C12 13.8 13.8 12 16 12C18.2 12 20 13.8 20 16C20 18.2 18.2 20 16 20Z" fill="#222222" />
+            </svg>
+          </button>
+          <div className="flex gap-3">
+            <button className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors" style={{ fontWeight: 600, color: '#222222' }}>
+              Des questions ?
+            </button>
+            <button
+              onClick={() => onNavigate('logements')}
+              className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors border border-gray-300"
+              style={{ fontWeight: 600, color: '#222222' }}
+            >
+              Enregistrer et quitter
+            </button>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="max-w-2xl mx-auto px-8 py-16">
+          <h1 className="text-3xl mb-2" style={{ fontWeight: 600, color: '#222222', lineHeight: '1.2' }}>
+            Ajoutez des réductions
+          </h1>
+          <p className="text-base mb-8" style={{ color: '#717171' }}>
+            Aidez votre annonce à se démarquer et à attirer des voyageurs avec des réductions.
+          </p>
+
+          <div className="space-y-4 mb-24">
+            {discountOptions.map((discount) => (
+              <button
+                key={discount.id}
+                onClick={() => toggleDiscount(discount.id)}
+                className={`w-full p-6 rounded-xl border-2 transition-all hover:border-gray-900 text-left ${
+                  selectedDiscounts.includes(discount.id) ? 'border-gray-900 bg-gray-50' : 'border-gray-300 bg-white'
+                }`}
+              >
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="text-lg" style={{ fontWeight: 600, color: '#222222' }}>{discount.percentage}</span>
+                      <h3 className="text-base" style={{ fontWeight: 600, color: '#222222' }}>{discount.title}</h3>
+                    </div>
+                    <p className="text-sm" style={{ color: '#717171' }}>{discount.description}</p>
+                  </div>
+                  <div className={`w-6 h-6 rounded border-2 flex items-center justify-center ${
+                    selectedDiscounts.includes(discount.id) ? 'border-gray-900 bg-gray-900' : 'border-gray-300'
+                  }`}>
+                    {selectedDiscounts.includes(discount.id) && (
+                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
+                        <path d="M5 12l5 5L20 7" />
+                      </svg>
+                    )}
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-8 py-6 flex items-center justify-between">
+          <button
+            onClick={() => setCurrentStep('weekend-pricing')}
+            className="px-6 py-3 text-base hover:bg-gray-50 rounded-lg transition-colors underline"
+            style={{ fontWeight: 600, color: '#222222' }}
+          >
+            Retour
+          </button>
+          <button
+            onClick={() => setCurrentStep('security')}
+            className="px-8 py-3 text-white rounded-lg text-base hover:opacity-90 transition-opacity"
+            style={{ fontWeight: 600, backgroundColor: '#222222' }}
+          >
+            Suivant
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Security - "Indiquez les informations liées à la sécurité"
+  if (currentStep === 'security') {
+    const securityOptions = [
+      { id: 'camera-exterior', label: 'Présence d\'une caméra de surveillance à l\'extérieur' },
+      { id: 'noise-detector', label: 'Présence d\'un sonomètre' },
+      { id: 'weapons', label: 'Présence d\'une ou plusieurs armes dans le logement' },
+    ];
+
+    return (
+      <div className="min-h-screen bg-white">
+        {/* Header */}
+        <div className="sticky top-0 bg-white border-b border-gray-200 px-8 py-6 flex items-center justify-between z-10">
+          <button onClick={() => onNavigate('logements')} className="hover:opacity-70 transition-opacity">
+            <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none">
+              <path d="M16 1.5C11.5 1.5 7.5 4 5.5 7.5C3.5 11 3 15 4.5 19C6 23 9.5 26.5 13 28.5C14 29 15 29.5 16 29.5C17 29.5 18 29 19 28.5C22.5 26.5 26 23 27.5 19C29 15 28.5 11 26.5 7.5C24.5 4 20.5 1.5 16 1.5ZM16 20C13.8 20 12 18.2 12 16C12 13.8 13.8 12 16 12C18.2 12 20 13.8 20 16C20 18.2 18.2 20 16 20Z" fill="#222222" />
+            </svg>
+          </button>
+          <div className="flex gap-3">
+            <button className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors" style={{ fontWeight: 600, color: '#222222' }}>
+              Des questions ?
+            </button>
+            <button
+              onClick={() => onNavigate('logements')}
+              className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors border border-gray-300"
+              style={{ fontWeight: 600, color: '#222222' }}
+            >
+              Enregistrer et quitter
+            </button>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="max-w-2xl mx-auto px-8 py-16">
+          <h1 className="text-3xl mb-2" style={{ fontWeight: 600, color: '#222222', lineHeight: '1.2' }}>
+            Indiquez les informations liées à la sécurité
+          </h1>
+          <p className="text-base mb-8" style={{ color: '#717171' }}>
+            Sélectionnez tout ce qui s'applique à votre logement.
+          </p>
+
+          <div className="space-y-4 mb-24">
+            {securityOptions.map((option) => (
+              <button
+                key={option.id}
+                onClick={() => toggleSecurityFeature(option.id)}
+                className={`w-full p-6 rounded-xl border-2 transition-all hover:border-gray-900 text-left ${
+                  securityFeatures.includes(option.id) ? 'border-gray-900 bg-gray-50' : 'border-gray-300 bg-white'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-base" style={{ fontWeight: 500, color: '#222222' }}>{option.label}</span>
+                  <div className={`w-6 h-6 rounded border-2 flex items-center justify-center ${
+                    securityFeatures.includes(option.id) ? 'border-gray-900 bg-gray-900' : 'border-gray-300'
+                  }`}>
+                    {securityFeatures.includes(option.id) && (
+                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
+                        <path d="M5 12l5 5L20 7" />
+                      </svg>
+                    )}
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-8 py-6 flex items-center justify-between">
+          <button
+            onClick={() => setCurrentStep('discounts')}
+            className="px-6 py-3 text-base hover:bg-gray-50 rounded-lg transition-colors underline"
+            style={{ fontWeight: 600, color: '#222222' }}
+          >
+            Retour
+          </button>
+          <button
+            onClick={() => setCurrentStep('final-details')}
+            className="px-8 py-3 text-white rounded-lg text-base hover:opacity-90 transition-opacity"
+            style={{ fontWeight: 600, backgroundColor: '#222222' }}
+          >
+            Suivant
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Final Details - "Ajoutez quelques dernières informations"
+  if (currentStep === 'final-details') {
+    const isFormValid = addressStreet.trim() !== '' && addressCity.trim() !== '' && legalEntity !== null;
+
+    return (
+      <div className="min-h-screen bg-white flex flex-col">
+        {/* Header */}
+        <div className="sticky top-0 bg-white border-b border-gray-200 px-8 py-6 flex items-center justify-between z-10">
+          <button onClick={() => onNavigate('logements')} className="hover:opacity-70 transition-opacity">
+            <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none">
+              <path d="M16 1.5C11.5 1.5 7.5 4 5.5 7.5C3.5 11 3 15 4.5 19C6 23 9.5 26.5 13 28.5C14 29 15 29.5 16 29.5C17 29.5 18 29 19 28.5C22.5 26.5 26 23 27.5 19C29 15 28.5 11 26.5 7.5C24.5 4 20.5 1.5 16 1.5ZM16 20C13.8 20 12 18.2 12 16C12 13.8 13.8 12 16 12C18.2 12 20 13.8 20 16C20 18.2 18.2 20 16 20Z" fill="#222222" />
+            </svg>
+          </button>
+          <div className="flex gap-3">
+            <button className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors" style={{ fontWeight: 600, color: '#222222' }}>
+              Des questions ?
+            </button>
+            <button
+              onClick={() => onNavigate('logements')}
+              className="px-4 py-2 text-sm hover:bg-gray-50 rounded-full transition-colors border border-gray-300"
+              style={{ fontWeight: 600, color: '#222222' }}
+            >
+              Enregistrer et quitter
+            </button>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto px-8 py-16">
+          <div className="max-w-2xl mx-auto">
+            <h1 className="text-3xl mb-8" style={{ fontWeight: 600, color: '#222222', lineHeight: '1.2' }}>
+              Ajoutez quelques dernières informations
+            </h1>
+
+            {/* Address Section */}
+            <div className="mb-8">
+              <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                Adresse de facturation
+              </h2>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm mb-2" style={{ color: '#717171' }}>Pays/région</label>
+                  <select
+                    value={addressCountry}
+                    onChange={(e) => setAddressCountry(e.target.value)}
+                    className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:border-gray-900"
+                  >
+                    <option value="Madagascar">Madagascar</option>
+                    <option value="France">France</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm mb-2" style={{ color: '#717171' }}>Adresse</label>
+                  <input
+                    type="text"
+                    value={addressStreet}
+                    onChange={(e) => setAddressStreet(e.target.value)}
+                    placeholder="Numéro et nom de rue"
+                    className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:border-gray-900"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    value={addressApartment}
+                    onChange={(e) => setAddressApartment(e.target.value)}
+                    placeholder="Appartement, suite, etc. (facultatif)"
+                    className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:border-gray-900"
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <input
+                      type="text"
+                      value={addressCity}
+                      onChange={(e) => setAddressCity(e.target.value)}
+                      placeholder="Ville"
+                      className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:border-gray-900"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      value={addressPostalCode}
+                      onChange={(e) => setAddressPostalCode(e.target.value)}
+                      placeholder="Code postal"
+                      className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:border-gray-900"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Legal Entity Section */}
+            <div className="mb-24">
+              <h2 className="text-lg mb-4" style={{ fontWeight: 600, color: '#222222' }}>
+                Êtes-vous une entité juridique ?
+              </h2>
+              <div className="space-y-4">
                 <button
-                  onClick={() => setShowPhotoUploadModal(false)}
-                  className="text-sm hover:underline"
-                  style={{ color: '#222222', fontWeight: 600 }}
+                  onClick={() => setLegalEntity('yes')}
+                  className={`w-full p-4 rounded-xl border-2 transition-all hover:border-gray-900 text-left ${
+                    legalEntity === 'yes' ? 'border-gray-900 bg-gray-50' : 'border-gray-300 bg-white'
+                  }`}
                 >
-                  Terminé
+                  <div className="flex items-center justify-between">
+                    <span className="text-base" style={{ fontWeight: 500, color: '#222222' }}>Oui</span>
+                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+                      legalEntity === 'yes' ? 'border-gray-900' : 'border-gray-300'
+                    }`}>
+                      {legalEntity === 'yes' && <div className="w-3 h-3 rounded-full bg-gray-900" />}
+                    </div>
+                  </div>
                 </button>
                 <button
-                  disabled
-                  className="px-6 py-3 rounded-lg text-sm opacity-40 cursor-not-allowed"
-                  style={{ fontWeight: 600, backgroundColor: '#E5E5E5', color: '#B0B0B0' }}
+                  onClick={() => setLegalEntity('no')}
+                  className={`w-full p-4 rounded-xl border-2 transition-all hover:border-gray-900 text-left ${
+                    legalEntity === 'no' ? 'border-gray-900 bg-gray-50' : 'border-gray-300 bg-white'
+                  }`}
                 >
-                  Ajouter les
+                  <div className="flex items-center justify-between">
+                    <span className="text-base" style={{ fontWeight: 500, color: '#222222' }}>Non</span>
+                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+                      legalEntity === 'no' ? 'border-gray-900' : 'border-gray-300'
+                    }`}>
+                      {legalEntity === 'no' && <div className="w-3 h-3 rounded-full bg-gray-900" />}
+                    </div>
+                  </div>
                 </button>
               </div>
             </div>
           </div>
-        )}
+        </div>
+
+        {/* Footer */}
+        <div className="bg-white border-t border-gray-200 px-8 py-6 flex items-center justify-between">
+          <button
+            onClick={() => setCurrentStep('security')}
+            className="px-6 py-3 text-base hover:bg-gray-50 rounded-lg transition-colors underline"
+            style={{ fontWeight: 600, color: '#222222' }}
+          >
+            Retour
+          </button>
+          <button
+            disabled={!isFormValid}
+            onClick={() => isFormValid && setCurrentStep('verification-points')}
+            className={`px-8 py-3 text-white rounded-lg text-base transition-opacity ${
+              isFormValid ? 'hover:opacity-90' : 'opacity-40 cursor-not-allowed'
+            }`}
+            style={{ fontWeight: 600, backgroundColor: isFormValid ? '#222222' : '#E5E5E5', color: isFormValid ? '#FFFFFF' : '#B0B0B0' }}
+          >
+            Suivant
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Verification Points - "Points importants à vérifier"
+  if (currentStep === 'verification-points') {
+    return (
+      <div className="min-h-screen bg-white flex flex-col">
+        {/* Header */}
+        <div className="sticky top-0 bg-white border-b border-gray-200 px-8 py-6 flex items-center justify-between z-10">
+          <button onClick={() => onNavigate('logements')} className="hover:opacity-70 transition-opacity">
+            <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none">
+              <path d="M16 1.5C11.5 1.5 7.5 4 5.5 7.5C3.5 11 3 15 4.5 19C6 23 9.5 26.5 13 28.5C14 29 15 29.5 16 29.5C17 29.5 18 29 19 28.5C22.5 26.5 26 23 27.5 19C29 15 28.5 11 26.5 7.5C24.5 4 20.5 1.5 16 1.5ZM16 20C13.8 20 12 18.2 12 16C12 13.8 13.8 12 16 12C18.2 12 20 13.8 20 16C20 18.2 18.2 20 16 20Z" fill="#222222" />
+            </svg>
+          </button>
+          <div className="flex gap-3">
+            <button className="text-sm hover:bg-gray-50 rounded-full transition-colors" style={{ fontWeight: 600, color: '#222222' }}>
+              Passer en mode voyageur
+            </button>
+            <button className="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-white" style={{ fontWeight: 600 }}>
+              M
+            </button>
+            <button className="p-2 hover:bg-gray-50 rounded-full transition-colors">
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#222222" strokeWidth="2">
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 px-8 py-12">
+          <div className="max-w-4xl mx-auto flex gap-12">
+            {/* Left side - Verification items */}
+            <div className="flex-1">
+              <h1 className="text-3xl mb-8" style={{ fontWeight: 600, color: '#222222' }}>
+                Points importants à vérifier
+              </h1>
+
+              <div className="space-y-6">
+                {/* Item 1 - Identity */}
+                <button
+                  onClick={() => onNavigate('identity-verification')}
+                  className="w-full p-6 border border-gray-300 rounded-xl hover:border-gray-900 transition-all text-left group"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-base mb-2" style={{ fontWeight: 600, color: '#222222' }}>
+                        Procédez à la vérification de votre identité
+                      </h3>
+                      <p className="text-sm mb-1" style={{ color: '#717171' }}>
+                        Nous récupérerons des informations pour vérifier votre identité.
+                      </p>
+                      <button className="text-sm underline hover:opacity-70" style={{ fontWeight: 600, color: '#222222' }}>
+                        Obligatoire
+                      </button>
+                    </div>
+                    <svg className="w-6 h-6 flex-shrink-0 ml-4" viewBox="0 0 24 24" fill="none" stroke="#222222" strokeWidth="2">
+                      <path d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </button>
+
+                {/* Item 2 - Phone */}
+                <button
+                  onClick={() => onNavigate('phone-verification')}
+                  className="w-full p-6 border border-gray-300 rounded-xl hover:border-gray-900 transition-all text-left group"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-base mb-2" style={{ fontWeight: 600, color: '#222222' }}>
+                        Confirmez votre numéro de téléphone
+                      </h3>
+                      <p className="text-sm mb-1" style={{ color: '#717171' }}>
+                        Nous vous appellerons ou vous enverrons un SMS pour confirmer votre numéro. Les frais standards s'appliquent.
+                      </p>
+                      <button className="text-sm underline hover:opacity-70" style={{ fontWeight: 600, color: '#222222' }}>
+                        Obligatoire
+                      </button>
+                    </div>
+                    <svg className="w-6 h-6 flex-shrink-0 ml-4" viewBox="0 0 24 24" fill="none" stroke="#222222" strokeWidth="2">
+                      <path d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            {/* Right side - Listing preview */}
+            <div className="w-80 flex-shrink-0">
+              <div className="sticky top-24">
+                <div className="rounded-xl overflow-hidden shadow-lg border border-gray-200">
+                  {uploadedPhotos.length > 0 ? (
+                    <img
+                      src={uploadedPhotos[0]}
+                      alt={listingTitle || 'Maison hôte calme'}
+                      className="w-full h-48 object-cover"
+                    />
+                  ) : (
+                    <img
+                      src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=300&fit=crop"
+                      alt="Maison hôte calme"
+                      className="w-full h-48 object-cover"
+                    />
+                  )}
+                  <div className="p-4">
+                    <h3 className="text-base mb-1" style={{ fontWeight: 600, color: '#222222' }}>
+                      {listingTitle || 'Maison hôte calme'}
+                    </h3>
+                    <p className="text-sm" style={{ color: '#717171' }}>
+                      {addressCity || 'Votre ville'}, {addressCountry}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

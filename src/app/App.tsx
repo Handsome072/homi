@@ -14,6 +14,7 @@ import { Messages } from './pages/Messages';
 import { ReservationDetailPage } from './pages/ReservationDetailPage';
 import { HostOnboarding } from './pages/HostOnboarding';
 import { AuthProvider } from './context/AuthContext';
+import { getListingData, setHostStatus } from './utils/listingStorage';
 import {
   ClientSpaceLayout,
   ReservationsSection,
@@ -94,6 +95,18 @@ function AppLayout() {
   const scrollListenerEnabled = useScrollManagement();
   const isScrolled = useScrollState(scrollListenerEnabled);
 
+  // Host status management
+  const [isHost, setIsHost] = useState(() => {
+    const listingData = getListingData();
+    return listingData.isHost;
+  });
+
+  const handleCompleteOnboarding = () => {
+    setHostStatus(true);
+    setIsHost(true);
+    navigate('/');
+  };
+
   // Determine current page from location
   const getCurrentPage = (): 'logements' | 'experiences' | 'services' => {
     if (location.pathname.startsWith('/experiences')) return 'experiences';
@@ -147,6 +160,7 @@ function AppLayout() {
           isScrolled={isScrolled}
           onSearch={handleSearch}
           onClientSpaceClick={() => navigate('/client-space')}
+          isHost={isHost}
         />
       )}
 
@@ -194,7 +208,10 @@ function AppLayout() {
         } />
         {/* Host Onboarding */}
         <Route path="/host-onboarding" element={
-          <HostOnboarding onNavigate={(page) => navigate(`/${page === 'logements' ? '' : page}`)} />
+          <HostOnboarding
+            onNavigate={(page) => navigate(`/${page === 'logements' ? '' : page}`)}
+            onCompleteOnboarding={handleCompleteOnboarding}
+          />
         } />
         {/* Legal Pages */}
         <Route path="/privacy" element={<PrivacyPolicy />} />

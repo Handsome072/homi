@@ -1,6 +1,8 @@
 {
   "app": {
-    "[project]/app/(legal)/privacy/page": []
+    "[project]/app/(legal)/privacy/page": [],
+    "[project]/app/(main)/host-onboarding/page": [],
+    "[project]/app/(main)/page": []
   },
   "appUsingSizeAdjust": false,
   "pages": {},

@@ -5332,6 +5332,7 @@ var _s = __turbopack_context__.k.signature();
 function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
     _s();
     const modalRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const [selectedOption, setSelectedOption] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "BecomeHostModal.useEffect": ()=>{
             if (!isOpen) return;
@@ -5353,10 +5354,23 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
         isOpen,
         onClose
     ]);
+    // Reset selection when modal closes
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "BecomeHostModal.useEffect": ()=>{
+            if (!isOpen) {
+                setSelectedOption(null);
+            }
+        }
+    }["BecomeHostModal.useEffect"], [
+        isOpen
+    ]);
     if (!isOpen) return null;
     const handleOptionClick = (option)=>{
-        if (onSelectOption) {
-            onSelectOption(option);
+        setSelectedOption(option);
+    };
+    const handleNextClick = ()=>{
+        if (selectedOption && onSelectOption) {
+            onSelectOption(selectedOption);
         }
         onClose();
     };
@@ -5368,7 +5382,7 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                 className: "absolute inset-0 bg-black/50"
             }, void 0, false, {
                 fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                lineNumber: 51,
+                lineNumber: 63,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5386,12 +5400,12 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                             className: "w-4 h-4"
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                            lineNumber: 65,
+                            lineNumber: 77,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                        lineNumber: 61,
+                        lineNumber: 73,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5405,7 +5419,7 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                                 children: "Que souhaitez-vous proposer ?"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                lineNumber: 71,
+                                lineNumber: 83,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5413,7 +5427,7 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                         onClick: ()=>handleOptionClick("logement"),
-                                        className: "flex flex-col items-center justify-center p-8 border-2 border-gray-200 rounded-xl cursor-pointer",
+                                        className: `flex flex-col items-center justify-center p-8 border-2 rounded-xl cursor-pointer transition-all ${selectedOption === 'logement' ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-400'}`,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "mb-6",
@@ -5432,7 +5446,7 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                                                             fill: "#E8E8E8"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                            lineNumber: 94,
+                                                            lineNumber: 108,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("rect", {
@@ -5443,7 +5457,7 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                                                             fill: "#B8B8B8"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                            lineNumber: 101,
+                                                            lineNumber: 115,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("polygon", {
@@ -5451,7 +5465,7 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                                                             fill: "#6B6B6B"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                            lineNumber: 108,
+                                                            lineNumber: 122,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("rect", {
@@ -5462,7 +5476,7 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                                                             fill: "#1E3A5F"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                            lineNumber: 112,
+                                                            lineNumber: 126,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
@@ -5472,18 +5486,18 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                                                             fill: "#7EDFE1"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                            lineNumber: 119,
+                                                            lineNumber: 133,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                    lineNumber: 86,
+                                                    lineNumber: 100,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                lineNumber: 85,
+                                                lineNumber: 99,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5494,18 +5508,18 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                                                 children: "Logement"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                lineNumber: 127,
+                                                lineNumber: 141,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                        lineNumber: 81,
+                                        lineNumber: 93,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                         onClick: ()=>handleOptionClick("experience"),
-                                        className: "flex flex-col items-center justify-center p-8 border-2 border-gray-200 rounded-xl cursor-pointer",
+                                        className: `flex flex-col items-center justify-center p-8 border-2 rounded-xl cursor-pointer transition-all ${selectedOption === 'experience' ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-400'}`,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "mb-6",
@@ -5524,7 +5538,7 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                                                             fill: "#1E3A5F"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                            lineNumber: 149,
+                                                            lineNumber: 165,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
@@ -5532,7 +5546,7 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                                                             fill: "#8B4513"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                            lineNumber: 156,
+                                                            lineNumber: 172,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("rect", {
@@ -5545,7 +5559,7 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                                                             strokeWidth: "1"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                            lineNumber: 160,
+                                                            lineNumber: 176,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("line", {
@@ -5557,7 +5571,7 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                                                             strokeWidth: "1.5"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                            lineNumber: 169,
+                                                            lineNumber: 185,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("line", {
@@ -5569,7 +5583,7 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                                                             strokeWidth: "1.5"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                            lineNumber: 177,
+                                                            lineNumber: 193,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("line", {
@@ -5581,18 +5595,18 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                                                             strokeWidth: "1"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                            lineNumber: 185,
+                                                            lineNumber: 201,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                    lineNumber: 141,
+                                                    lineNumber: 157,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                lineNumber: 140,
+                                                lineNumber: 156,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5603,18 +5617,18 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                                                 children: "Expérience"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                lineNumber: 195,
+                                                lineNumber: 211,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                        lineNumber: 136,
+                                        lineNumber: 150,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                         onClick: ()=>handleOptionClick("service"),
-                                        className: "flex flex-col items-center justify-center p-8 border-2 border-gray-200 rounded-xl cursor-pointer group",
+                                        className: `flex flex-col items-center justify-center p-8 border-2 rounded-xl cursor-pointer transition-all ${selectedOption === 'service' ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-400'}`,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "mb-6",
@@ -5633,7 +5647,7 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                                                             strokeLinecap: "round"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                            lineNumber: 217,
+                                                            lineNumber: 235,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("line", {
@@ -5646,7 +5660,7 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                                                             strokeLinecap: "round"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                            lineNumber: 224,
+                                                            lineNumber: 242,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
@@ -5656,18 +5670,18 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                                                             fill: "#1E3A5F"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                            lineNumber: 233,
+                                                            lineNumber: 251,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                    lineNumber: 209,
+                                                    lineNumber: 227,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                lineNumber: 208,
+                                                lineNumber: 226,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5678,67 +5692,68 @@ function BecomeHostModal({ isOpen, onClose, onSelectOption }) {
                                                 children: "Service"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                                lineNumber: 241,
+                                                lineNumber: 259,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                        lineNumber: 204,
+                                        lineNumber: 220,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                lineNumber: 79,
+                                lineNumber: 91,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "border absolute bottom-0 right-0 w-full",
+                                className: "border-t border-gray-200 absolute bottom-0 right-0 w-full bg-white",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "flex justify-end pt-6 pb-4 px-6 ",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                        onClick: onClose,
-                                        className: "px-6 py-3 bg-gray-900 text-white rounded-lg text-sm",
+                                        onClick: handleNextClick,
+                                        disabled: !selectedOption,
+                                        className: `px-6 py-3 rounded-lg text-sm transition-opacity ${selectedOption ? 'bg-gray-900 text-white hover:opacity-90' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`,
                                         style: {
                                             fontWeight: 600
                                         },
                                         children: "Suivant"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                        lineNumber: 253,
+                                        lineNumber: 271,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                    lineNumber: 252,
+                                    lineNumber: 270,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                                lineNumber: 250,
+                                lineNumber: 268,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                        lineNumber: 69,
+                        lineNumber: 81,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-                lineNumber: 54,
+                lineNumber: 66,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/BecomeHostModal.tsx",
-        lineNumber: 46,
+        lineNumber: 58,
         columnNumber: 5
     }, this);
 }
-_s(BecomeHostModal, "iXNJws+mDn9J+ZcpHudMXHGV85c=");
+_s(BecomeHostModal, "RP+EHilK45aIYVCamGUtWAYAP0k=");
 _c = BecomeHostModal;
 var _c;
 __turbopack_context__.k.register(_c, "BecomeHostModal");
@@ -7287,7 +7302,7 @@ var _s = __turbopack_context__.k.signature();
 ;
 // Host illustration - works for both Vite (public/) and Next.js (public/)
 const hostIllustration = '/host-illustration.png';
-function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLanguageClick, onClientSpaceClick, onMessagesClick }) {
+function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLanguageClick, onClientSpaceClick, onMessagesClick, isHost, onAnnoncesClick }) {
     _s();
     const dropdownRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const { logout } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$context$2f$AuthContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuth"])();
@@ -7355,7 +7370,7 @@ function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLanguageCl
       `
             }, void 0, false, {
                 fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                lineNumber: 63,
+                lineNumber: 65,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7368,7 +7383,7 @@ function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLanguageCl
                                 className: "w-5 h-5 text-gray-700"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                                lineNumber: 82,
+                                lineNumber: 84,
                                 columnNumber: 9
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -7379,13 +7394,13 @@ function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLanguageCl
                                 children: "Favoris"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                                lineNumber: 83,
+                                lineNumber: 85,
                                 columnNumber: 9
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                        lineNumber: 81,
+                        lineNumber: 83,
                         columnNumber: 7
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -7403,12 +7418,12 @@ function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLanguageCl
                                     d: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                                    lineNumber: 89,
+                                    lineNumber: 91,
                                     columnNumber: 11
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                                lineNumber: 88,
+                                lineNumber: 90,
                                 columnNumber: 9
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -7419,13 +7434,13 @@ function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLanguageCl
                                 children: "Voyages"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                                lineNumber: 91,
+                                lineNumber: 93,
                                 columnNumber: 9
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                        lineNumber: 87,
+                        lineNumber: 89,
                         columnNumber: 7
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -7439,7 +7454,7 @@ function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLanguageCl
                                 className: "w-5 h-5 text-gray-700"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                                lineNumber: 102,
+                                lineNumber: 104,
                                 columnNumber: 9
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -7450,13 +7465,13 @@ function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLanguageCl
                                 children: "Messages"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                                lineNumber: 103,
+                                lineNumber: 105,
                                 columnNumber: 9
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                        lineNumber: 95,
+                        lineNumber: 97,
                         columnNumber: 7
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -7470,7 +7485,7 @@ function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLanguageCl
                                 className: "w-5 h-5 text-gray-700"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                                lineNumber: 114,
+                                lineNumber: 116,
                                 columnNumber: 9
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -7481,20 +7496,20 @@ function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLanguageCl
                                 children: "Espace client"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                                lineNumber: 115,
+                                lineNumber: 117,
                                 columnNumber: 9
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                        lineNumber: 107,
+                        lineNumber: 109,
                         columnNumber: 7
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "w-[240px] h-px bg-gray-200 my-2 mx-auto"
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                        lineNumber: 119,
+                        lineNumber: 121,
                         columnNumber: 7
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -7505,7 +7520,7 @@ function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLanguageCl
                                 className: "w-5 h-5 text-gray-700"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                                lineNumber: 124,
+                                lineNumber: 126,
                                 columnNumber: 9
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -7513,13 +7528,13 @@ function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLanguageCl
                                 children: "Langues et devise"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                                lineNumber: 125,
+                                lineNumber: 127,
                                 columnNumber: 9
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                        lineNumber: 123,
+                        lineNumber: 125,
                         columnNumber: 7
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -7529,7 +7544,7 @@ function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLanguageCl
                                 className: "w-5 h-5 text-gray-700"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                                lineNumber: 130,
+                                lineNumber: 132,
                                 columnNumber: 9
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -7537,23 +7552,79 @@ function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLanguageCl
                                 children: "Centre d'aide"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                                lineNumber: 131,
+                                lineNumber: 133,
                                 columnNumber: 9
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                        lineNumber: 129,
+                        lineNumber: 131,
                         columnNumber: 7
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "w-[240px] h-px bg-gray-200 my-2 mx-auto"
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                        lineNumber: 135,
+                        lineNumber: 137,
                         columnNumber: 7
                     }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                    isHost ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                        className: "w-full px-4 py-3 hover:bg-gray-50 transition-colors text-left",
+                        onClick: ()=>{
+                            onAnnoncesClick?.();
+                            onClose();
+                        },
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "flex items-start justify-between gap-3 px-4",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "flex-1",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "text-sm mb-1",
+                                            style: {
+                                                fontWeight: 600
+                                            },
+                                            children: "Gérer mes annonces"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
+                                            lineNumber: 150,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "text-xs text-gray-600 leading-relaxed",
+                                            children: "Accédez à votre espace hôte pour gérer vos annonces."
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
+                                            lineNumber: 153,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
+                                    lineNumber: 149,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                    src: hostIllustration,
+                                    alt: "Illustration hôte",
+                                    className: "w-12 h-12 object-contain flex-shrink-0"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
+                                    lineNumber: 157,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
+                            lineNumber: 148,
+                            columnNumber: 11
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
+                        lineNumber: 141,
+                        columnNumber: 9
+                    }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         className: "w-full px-4 py-3 hover:bg-gray-50 transition-colors text-left",
                         onClick: onBecomeHostClick,
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7570,22 +7641,22 @@ function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLanguageCl
                                             children: "Devenir hôte"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                                            lineNumber: 144,
-                                            columnNumber: 13
+                                            lineNumber: 171,
+                                            columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "text-xs text-gray-600 leading-relaxed",
                                             children: "Devenir hôte et gagner des revenus supplémentaires, c'est facile."
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                                            lineNumber: 147,
-                                            columnNumber: 13
+                                            lineNumber: 174,
+                                            columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                                    lineNumber: 143,
-                                    columnNumber: 11
+                                    lineNumber: 170,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                                     src: hostIllustration,
@@ -7593,25 +7664,25 @@ function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLanguageCl
                                     className: "w-12 h-12 object-contain flex-shrink-0"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                                    lineNumber: 151,
-                                    columnNumber: 11
+                                    lineNumber: 178,
+                                    columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                            lineNumber: 142,
-                            columnNumber: 9
+                            lineNumber: 169,
+                            columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                        lineNumber: 138,
-                        columnNumber: 7
+                        lineNumber: 165,
+                        columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "w-[240px] h-px bg-gray-200 my-2 mx-auto"
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                        lineNumber: 160,
+                        lineNumber: 188,
                         columnNumber: 7
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -7622,24 +7693,24 @@ function LoggedInMenuDropdown({ isOpen, onClose, onBecomeHostClick, onLanguageCl
                             children: "Déconnexion"
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                            lineNumber: 167,
+                            lineNumber: 195,
                             columnNumber: 9
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                        lineNumber: 163,
+                        lineNumber: 191,
                         columnNumber: 7
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-                lineNumber: 79,
+                lineNumber: 81,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/LoggedInMenuDropdown.tsx",
-        lineNumber: 53,
+        lineNumber: 55,
         columnNumber: 5
     }, this);
 }
@@ -7675,7 +7746,7 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-function HeaderRightMenu({ showMenuDropdown, setShowMenuDropdown, setShowLanguageModal, setShowBecomeHostModal, setShowAuthModal, onClientSpaceClick, onMessagesClick }) {
+function HeaderRightMenu({ showMenuDropdown, setShowMenuDropdown, setShowLanguageModal, setShowBecomeHostModal, setShowAuthModal, onClientSpaceClick, onMessagesClick, isHost, onAnnoncesClick }) {
     _s();
     const { user } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$context$2f$AuthContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuth"])();
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7686,11 +7757,17 @@ function HeaderRightMenu({ showMenuDropdown, setShowMenuDropdown, setShowLanguag
                 style: {
                     fontWeight: 600
                 },
-                onClick: ()=>setShowBecomeHostModal(true),
-                children: "Devenir hôte"
+                onClick: ()=>{
+                    if (isHost && onAnnoncesClick) {
+                        onAnnoncesClick();
+                    } else {
+                        setShowBecomeHostModal(true);
+                    }
+                },
+                children: isHost ? 'Mode hôte' : 'Devenir hôte'
             }, void 0, false, {
                 fileName: "[project]/src/app/components/HeaderRightMenu.tsx",
-                lineNumber: 29,
+                lineNumber: 33,
                 columnNumber: 7
             }, this),
             !user && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -7700,12 +7777,12 @@ function HeaderRightMenu({ showMenuDropdown, setShowMenuDropdown, setShowLanguag
                     className: "w-4 h-4"
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/HeaderRightMenu.tsx",
-                    lineNumber: 42,
+                    lineNumber: 52,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/HeaderRightMenu.tsx",
-                lineNumber: 38,
+                lineNumber: 48,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7719,7 +7796,7 @@ function HeaderRightMenu({ showMenuDropdown, setShowMenuDropdown, setShowLanguag
                                 className: "w-4 h-4 ml-1"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/HeaderRightMenu.tsx",
-                                lineNumber: 51,
+                                lineNumber: 61,
                                 columnNumber: 11
                             }, this),
                             user ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7730,7 +7807,7 @@ function HeaderRightMenu({ showMenuDropdown, setShowMenuDropdown, setShowLanguag
                                 children: user.name.charAt(0).toUpperCase()
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/HeaderRightMenu.tsx",
-                                lineNumber: 53,
+                                lineNumber: 63,
                                 columnNumber: 13
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "w-8 h-8 rounded-full bg-gray-500 flex items-center justify-center",
@@ -7738,18 +7815,18 @@ function HeaderRightMenu({ showMenuDropdown, setShowMenuDropdown, setShowLanguag
                                     className: "w-5 h-5 text-white"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/HeaderRightMenu.tsx",
-                                    lineNumber: 61,
+                                    lineNumber: 71,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/HeaderRightMenu.tsx",
-                                lineNumber: 60,
+                                lineNumber: 70,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/HeaderRightMenu.tsx",
-                        lineNumber: 47,
+                        lineNumber: 57,
                         columnNumber: 9
                     }, this),
                     user ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$LoggedInMenuDropdown$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["LoggedInMenuDropdown"], {
@@ -7764,10 +7841,12 @@ function HeaderRightMenu({ showMenuDropdown, setShowMenuDropdown, setShowLanguag
                             setShowLanguageModal(true);
                         },
                         onClientSpaceClick: onClientSpaceClick,
-                        onMessagesClick: onMessagesClick
+                        onMessagesClick: onMessagesClick,
+                        isHost: isHost,
+                        onAnnoncesClick: onAnnoncesClick
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/HeaderRightMenu.tsx",
-                        lineNumber: 68,
+                        lineNumber: 78,
                         columnNumber: 11
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$MenuDropdown$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["MenuDropdown"], {
                         isOpen: showMenuDropdown,
@@ -7775,26 +7854,22 @@ function HeaderRightMenu({ showMenuDropdown, setShowMenuDropdown, setShowLanguag
                         onAuthClick: ()=>{
                             setShowMenuDropdown(false);
                             setShowAuthModal(true);
-                        },
-                        onBecomeHostClick: ()=>{
-                            setShowMenuDropdown(false);
-                            setShowBecomeHostModal(true);
                         }
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/HeaderRightMenu.tsx",
-                        lineNumber: 83,
+                        lineNumber: 95,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/HeaderRightMenu.tsx",
-                lineNumber: 46,
+                lineNumber: 56,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/HeaderRightMenu.tsx",
-        lineNumber: 28,
+        lineNumber: 32,
         columnNumber: 5
     }, this);
 }
@@ -7840,7 +7915,7 @@ var _s = __turbopack_context__.k.signature();
 ;
 // Logo path - works for both Vite (public/) and Next.js (public/)
 const logo = '/logo.png';
-const Header = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])(_c = _s(({ currentPage, onNavigate, isScrolled, onSearch, onClientSpaceClick }, ref)=>{
+const Header = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])(_c = _s(({ currentPage, onNavigate, isScrolled, onSearch, onClientSpaceClick, isHost }, ref)=>{
     _s();
     const [showSearchOverlay, setShowSearchOverlay] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [showLanguageModal, setShowLanguageModal] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
@@ -7873,12 +7948,12 @@ const Header = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5
                                     className: "w-[150px] h-auto border-0"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/Header.tsx",
-                                    lineNumber: 58,
+                                    lineNumber: 59,
                                     columnNumber: 17
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/Header.tsx",
-                                lineNumber: 54,
+                                lineNumber: 55,
                                 columnNumber: 15
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7895,12 +7970,12 @@ const Header = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5
                                             MenuDropdownComponent: null
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/components/Header.tsx",
-                                            lineNumber: 73,
+                                            lineNumber: 74,
                                             columnNumber: 19
                                         }, ("TURBOPACK compile-time value", void 0))
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/components/Header.tsx",
-                                        lineNumber: 68,
+                                        lineNumber: 69,
                                         columnNumber: 17
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7912,23 +7987,23 @@ const Header = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5
                                                 onOpen: ()=>setShowSearchOverlay(true)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/components/Header.tsx",
-                                                lineNumber: 90,
+                                                lineNumber: 91,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0))
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/components/Header.tsx",
-                                            lineNumber: 89,
+                                            lineNumber: 90,
                                             columnNumber: 19
                                         }, ("TURBOPACK compile-time value", void 0))
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/components/Header.tsx",
-                                        lineNumber: 84,
+                                        lineNumber: 85,
                                         columnNumber: 17
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/components/Header.tsx",
-                                lineNumber: 66,
+                                lineNumber: 67,
                                 columnNumber: 15
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$HeaderRightMenu$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HeaderRightMenu"], {
@@ -7938,26 +8013,28 @@ const Header = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5
                                 setShowBecomeHostModal: setShowBecomeHostModal,
                                 setShowAuthModal: setShowAuthModal,
                                 onClientSpaceClick: onClientSpaceClick,
-                                onMessagesClick: ()=>onNavigate('messages')
+                                onMessagesClick: ()=>onNavigate('messages'),
+                                isHost: isHost,
+                                onAnnoncesClick: ()=>onNavigate('annonces')
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/Header.tsx",
-                                lineNumber: 99,
+                                lineNumber: 100,
                                 columnNumber: 15
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/Header.tsx",
-                        lineNumber: 52,
+                        lineNumber: 53,
                         columnNumber: 13
                     }, ("TURBOPACK compile-time value", void 0))
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/Header.tsx",
-                    lineNumber: 51,
+                    lineNumber: 52,
                     columnNumber: 11
                 }, ("TURBOPACK compile-time value", void 0))
             }, void 0, false, {
                 fileName: "[project]/src/app/components/Header.tsx",
-                lineNumber: 47,
+                lineNumber: 48,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0)),
             showSearchOverlay && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$SearchOverlay$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SearchOverlay"], {
@@ -7969,7 +8046,7 @@ const Header = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5
                 onSearch: onSearch
             }, void 0, false, {
                 fileName: "[project]/src/app/components/Header.tsx",
-                lineNumber: 114,
+                lineNumber: 117,
                 columnNumber: 11
             }, ("TURBOPACK compile-time value", void 0)),
             showLanguageModal && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$LanguageModal$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["LanguageModal"], {
@@ -7977,7 +8054,7 @@ const Header = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5
                 onClose: ()=>setShowLanguageModal(false)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/Header.tsx",
-                lineNumber: 126,
+                lineNumber: 129,
                 columnNumber: 11
             }, ("TURBOPACK compile-time value", void 0)),
             showBecomeHostModal && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$BecomeHostModal$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BecomeHostModal"], {
@@ -7991,7 +8068,7 @@ const Header = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5
                 }
             }, void 0, false, {
                 fileName: "[project]/src/app/components/Header.tsx",
-                lineNumber: 134,
+                lineNumber: 137,
                 columnNumber: 11
             }, ("TURBOPACK compile-time value", void 0)),
             showAuthModal && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$AuthModal$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AuthModal"], {
@@ -7999,7 +8076,7 @@ const Header = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5
                 onClose: ()=>setShowAuthModal(false)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/Header.tsx",
-                lineNumber: 148,
+                lineNumber: 151,
                 columnNumber: 11
             }, ("TURBOPACK compile-time value", void 0))
         ]

@@ -11,6 +11,8 @@ interface HeaderRightMenuProps {
   setShowAuthModal: (show: boolean) => void;
   onClientSpaceClick?: () => void;
   onMessagesClick?: () => void;
+  isHost?: boolean;
+  onAnnoncesClick?: () => void;
 }
 
 export function HeaderRightMenu({
@@ -21,6 +23,8 @@ export function HeaderRightMenu({
   setShowAuthModal,
   onClientSpaceClick,
   onMessagesClick,
+  isHost,
+  onAnnoncesClick,
 }: HeaderRightMenuProps) {
   const { user } = useAuth();
 
@@ -29,9 +33,15 @@ export function HeaderRightMenu({
       <button
         className="hidden md:block px-4 py-3 hover:bg-gray-100 rounded-full transition-all duration-200 text-sm"
         style={{ fontWeight: 600 }}
-        onClick={() => setShowBecomeHostModal(true)}
+        onClick={() => {
+          if (isHost && onAnnoncesClick) {
+            onAnnoncesClick();
+          } else {
+            setShowBecomeHostModal(true);
+          }
+        }}
       >
-        Devenir hôte
+        {isHost ? 'Mode hôte' : 'Devenir hôte'}
       </button>
 
       {!user && (
@@ -78,6 +88,8 @@ export function HeaderRightMenu({
             }}
             onClientSpaceClick={onClientSpaceClick}
             onMessagesClick={onMessagesClick}
+            isHost={isHost}
+            onAnnoncesClick={onAnnoncesClick}
           />
         ) : (
           <MenuDropdown
@@ -86,10 +98,6 @@ export function HeaderRightMenu({
             onAuthClick={() => {
               setShowMenuDropdown(false);
               setShowAuthModal(true);
-            }}
-            onBecomeHostClick={() => {
-              setShowMenuDropdown(false);
-              setShowBecomeHostModal(true);
             }}
           />
         )}
