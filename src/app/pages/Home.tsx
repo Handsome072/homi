@@ -21,7 +21,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "250 € pour 2 nuits",
       rating: 4.95,
-      badge: 'favorite' as const
+      badge: 'Coup de coeur' as const
     },
     {
       image: "https://images.unsplash.com/photo-1638454668466-e8dbd5462f20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBhcGFydG1lbnQlMjBpbnRlcmlvcnxlbnwxfHx8fDE3Njc1MzY5NTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -30,7 +30,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "180 € pour 2 nuits",
       rating: 4.88,
-      badge: 'favorite' as const
+      badge: 'Coup de coeur' as const
     },
     {
       image: "https://images.unsplash.com/photo-1593696140826-c58b021acf8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBob3VzZSUyMGludGVyaW9yfGVufDF8fHx8MTc2NzU5OTA1OHww&ixlib=rb-4.1.0&q=80&w=1080",
@@ -39,7 +39,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "320 € pour 2 nuits",
       rating: 5.0,
-      badge: 'favorite' as const
+      badge: 'Coup de coeur' as const
     },
     {
       image: "https://images.unsplash.com/photo-1610343958761-ca16e472130e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcGFydG1lbnQlMjBjaXR5JTIwdmlld3xlbnwxfHx8fDE3Njc2MjEwNTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -48,7 +48,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "210 € pour 2 nuits",
       rating: 4.92,
-      badge: 'favorite' as const
+      badge: 'Coup de coeur' as const
     }
   ];
 
@@ -61,7 +61,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "197 € pour 2 nuits",
       rating: 4.93,
-      badge: 'favorite' as const
+      badge: 'Coup de coeur' as const
     },
     {
       image: "https://images.unsplash.com/photo-1667153653404-11bc88130b5d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3p5JTIwYmVkcm9vbSUyMGhvdGVsfGVufDF8fHx8MTc2NzYxNjkyNnww&ixlib=rb-4.1.0&q=80&w=1080",
@@ -70,7 +70,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "180 € pour 2 nuits",
       rating: 4.92,
-      badge: 'favorite' as const
+      badge: 'Coup de coeur' as const
     },
     {
       image: "https://images.unsplash.com/photo-1638454668466-e8dbd5462f20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBhcGFydG1lbnQlMjBpbnRlcmlvcnxlbnwxfHx8fDE3Njc1MzY5NTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -79,7 +79,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "18 € pour 2 nuits",
       rating: 4.96,
-      badge: 'favorite' as const
+      badge: 'Coup de coeur' as const
     },
     {
       image: "https://images.unsplash.com/photo-1765775635143-6462630748ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBob3RlbCUyMHJvb218ZW58MXx8fHwxNzY3NTEwODU4fDA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -88,7 +88,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "168 € pour 2 nuits",
       rating: 4.96,
-      badge: 'favorite' as const
+      badge: 'Coup de coeur' as const
     },
     {
       image: "https://images.unsplash.com/photo-1610343958761-ca16e472130e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcGFydG1lbnQlMjBjaXR5JTIwdmlld3xlbnwxfHx8fDE3Njc2MjEwNTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -97,7 +97,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "148 € pour 2 nuits",
       rating: 4.90,
-      badge: 'favorite' as const
+      badge: 'Coup de coeur' as const
     },
     {
       image: "https://images.unsplash.com/photo-1593696140826-c58b021acf8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBob3VzZSUyMGludGVyaW9yfGVufDF8fHx8MTc2NzU5OTA1OHww&ixlib=rb-4.1.0&q=80&w=1080",
@@ -106,7 +106,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "160 € pour 2 nuits",
       rating: 5.0,
-      badge: 'favorite' as const
+      badge: 'Coup de coeur' as const
     },
     {
       image: "https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBob3RlbCUyMGxvYmJ5fGVufDF8fHx8MTc2NzYwMTQyOXww&ixlib=rb-4.1.0&q=80&w=1080",
@@ -115,7 +115,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "160 € pour 2 nuits",
       rating: 4.92,
-      badge: 'favorite' as const
+      badge: 'Coup de coeur' as const
     }
   ];
 
@@ -128,7 +128,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "",
       rating: 4.75,
-      badge: 'favorite' as const
+      badge: 'Coup de coeur' as const
     },
     {
       image: "https://images.unsplash.com/photo-1632228526522-cdbb7fac12dc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWRyaWQlMjBob3RlbCUyMGludGVyaW9yfGVufDF8fHx8MTc2NzgwNjczN3ww&ixlib=rb-4.1.0&q=80&w=1080",
@@ -137,7 +137,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "",
       rating: 4.78,
-      badge: 'favorite' as const
+      badge: 'Coup de coeur' as const
     },
     {
       image: "https://images.unsplash.com/photo-1600790298410-fa81c74d9732?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWRyaWQlMjBob3RlbCUyMHBvb2x8ZW58MXx8fHwxNzY3ODA2NzM4fDA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -146,7 +146,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "",
       rating: 5.0,
-      badge: 'favorite' as const
+      badge: 'Coup de coeur' as const
     },
     {
       image: "https://images.unsplash.com/photo-1737807478452-260777e0505d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWRyaWQlMjBob3RlbCUyMGx1eHVyeXxlbnwxfHx8fDE3Njc4MDY3Mzh8MA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -155,7 +155,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "",
       rating: 5.0,
-      badge: 'favorite' as const
+      badge: 'Coup de coeur' as const
     },
     {
       image: "https://images.unsplash.com/photo-1760354527031-869c0315d7c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWRyaWQlMjBob3RlbCUyMGJvdXRpcXVlfGVufDF8fHx8MTc2Nzc5NTU3OXww&ixlib=rb-4.1.0&q=80&w=1080",
@@ -164,7 +164,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "",
       rating: 4.89,
-      badge: 'favorite' as const
+      badge: 'Coup de coeur' as const
     },
     {
       image: "https://images.unsplash.com/photo-1632228526522-cdbb7fac12dc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWRyaWQlMjBob3RlbCUyMGludGVyaW9yfGVufDF8fHx8MTc2NzgwNjczN3ww&ixlib=rb-4.1.0&q=80&w=1080",
@@ -173,7 +173,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "",
       rating: 4.77,
-      badge: 'favorite' as const
+      badge: 'Coup de coeur' as const
     },
     {
       image: "https://images.unsplash.com/photo-1600790298410-fa81c74d9732?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWRyaWQlMjBob3RlbCUyMHBvb2x8ZW58MXx8fHwxNzY3ODA2NzM4fDA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -182,7 +182,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "",
       rating: 4.95,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     }
   ];
 
@@ -195,7 +195,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "99 € pour 2 nuits",
       rating: 4.9,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1650533966999-c07a71fd9146?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsb25kb24lMjBob3RlbCUyMHJvb218ZW58MXx8fHwxNzY3Nzk1NTgxfDA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -204,7 +204,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "116 € pour 2 nuits",
       rating: 5.0,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1604701145698-2b38c3e20124?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsb25kb24lMjBtb2Rlcm4lMjBhcGFydG1lbnR8ZW58MXx8fHwxNzY3Nzk1NTgxfDA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -213,7 +213,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "178 € pour 2 nuits",
       rating: 4.9,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1595848463742-764e6b5c11d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsb25kb24lMjBhcGFydG1lbnQlMjBiZWRyb29tfGVufDF8fHx8MTc2Nzc5NTU4MXww&ixlib=rb-4.1.0&q=80&w=1080",
@@ -222,7 +222,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "203 € pour 2 nuits",
       rating: 4.89,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1650533966999-c07a71fd9146?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsb25kb24lMjBob3RlbCUyMHJvb218ZW58MXx8fHwxNzY3Nzk1NTgxfDA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -231,7 +231,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "95 € pour 2 nuits",
       rating: 4.9,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1604701145698-2b38c3e20124?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsb25kb24lMjBtb2Rlcm4lMjBhcGFydG1lbnR8ZW58MXx8fHwxNzY3Nzk1NTgxfDA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -240,7 +240,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "164 € pour 2 nuits",
       rating: 4.84,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1595848463742-764e6b5c11d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsb25kb24lMjBhcGFydG1lbnQlMjBiZWRyb29tfGVufDF8fHx8MTc2Nzc5NTU4MXww&ixlib=rb-4.1.0&q=80&w=1080",
@@ -249,7 +249,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "133 € pour 2 nuits",
       rating: 5.0,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     }
   ];
 
@@ -262,7 +262,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "78 € pour 2 nuits",
       rating: 5.0,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1594873604892-b599f847e859?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -271,7 +271,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "154 € pour 2 nuits",
       rating: 4.91,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1638454668466-e8dbd5462f20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -280,7 +280,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "299 € pour 2 nuits",
       rating: 4.88,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1614622350812-96b09c78af77?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -289,7 +289,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "94 € pour 2 nuits",
       rating: 4.59,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1760259905231-2ccbddb7d147?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -298,7 +298,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "130 € pour 2 nuits",
       rating: 4.92,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1594873604892-b599f847e859?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -307,7 +307,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "92 € pour 2 nuits",
       rating: 4.88,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1646662521253-5b9253b1a207?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -316,7 +316,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "79 € pour 2 nuits",
       rating: 4.9,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     }
   ];
 
@@ -329,7 +329,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "221 € pour 2 nuits",
       rating: 4.9,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1594873604892-b599f847e859?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -338,7 +338,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "208 € pour 2 nuits",
       rating: 4.86,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1638454668466-e8dbd5462f20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -347,7 +347,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "193 € pour 2 nuits",
       rating: 4.91,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1614622350812-96b09c78af77?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -356,7 +356,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "193 € pour 2 nuits",
       rating: 4.91,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1760259905231-2ccbddb7d147?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -365,7 +365,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "137 € pour 2 nuits",
       rating: 5.0,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1646662521253-5b9253b1a207?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -374,7 +374,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "176 € pour 2 nuits",
       rating: 4.89,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1594873604892-b599f847e859?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -383,7 +383,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "171 € pour 2 nuits",
       rating: 4.9,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     }
   ];
 
@@ -396,7 +396,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "104 € pour 2 nuits",
       rating: 4.74,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1543273519-e0fe02a0757e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -405,7 +405,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "44 € pour 2 nuits",
       rating: 4.77,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1570136608985-36fdcec5b7da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -414,7 +414,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "40 € pour 2 nuits",
       rating: 4.93,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1600790298410-fa81c74d9732?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -423,7 +423,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "42 € pour 2 nuits",
       rating: 4.5,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1680601531588-1944422d1bd2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -432,7 +432,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "95 € pour 2 nuits",
       rating: 4.88,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1632228526522-cdbb7fac12dc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -441,7 +441,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "48 € pour 2 nuits",
       rating: 4.91,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1760354527031-869c0315d7c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -450,7 +450,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "130 € pour 2 nuits",
       rating: 4.75,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     }
   ];
 
@@ -463,7 +463,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "110 € pour 2 nuits",
       rating: 4.88,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1658077306197-a848d26c6e0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -472,7 +472,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "128 € pour 2 nuits",
       rating: 4.78,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1702014859878-5d4743176d28?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -481,7 +481,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "96 € pour 2 nuits",
       rating: 4.86,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1600790298410-fa81c74d9732?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -490,7 +490,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "60 € pour 2 nuits",
       rating: 4.5,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1702014859878-5d4743176d28?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -499,7 +499,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "78 € pour 2 nuits",
       rating: 4.75,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1729755033606-251c462a8bbf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -508,7 +508,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "146 € pour 2 nuits",
       rating: 4.89,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1658077306197-a848d26c6e0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -517,7 +517,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "114 € pour 2 nuits",
       rating: 4.86,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     }
   ];
 
@@ -530,7 +530,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "154 € pour 2 nuits",
       rating: 4.98,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1718260872589-189e127a99b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -539,7 +539,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "344 € pour 3 nuits",
       rating: 4.94,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1631176999981-75e49ff7d38c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -548,7 +548,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "159 € pour 3 nuits",
       rating: 5.0,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1663756915301-2ba688e078cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -557,7 +557,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "374 € pour 7 nuits",
       rating: 4.56,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1639751907353-3629fc00d2b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -566,7 +566,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "194 € pour 2 nuits",
       rating: 5.0,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1702014861736-d62834317c5e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -575,7 +575,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "123 € pour 2 nuits",
       rating: 4.8,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1536494126589-29fadf0d7e3c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -584,7 +584,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "168 € pour 2 nuits",
       rating: 4.99,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     }
   ];
 
@@ -597,7 +597,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "121 € pour 2 nuits",
       rating: 4.84,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1663756915301-2ba688e078cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -606,7 +606,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "98 € pour 2 nuits",
       rating: 4.9,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1639751907353-3629fc00d2b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -615,7 +615,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "148 € pour 2 nuits",
       rating: 4.83,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1702014861736-d62834317c5e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -624,7 +624,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "68 € pour 2 nuits",
       rating: 4.83,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1638454668466-e8dbd5462f20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -633,7 +633,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "106 € pour 2 nuits",
       rating: 4.52,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1614622350812-96b09c78af77?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -642,7 +642,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "87 € pour 2 nuits",
       rating: 5.0,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1719849448528-bf30db61d3a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -651,7 +651,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "98 € pour 2 nuits",
       rating: 4.88,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     }
   ];
 
@@ -664,7 +664,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "190 € pour 2 nuits",
       rating: 4.83,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1560448076-957f79776e95?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -673,7 +673,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "164 € pour 2 nuits",
       rating: 4.75,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1600813547757-39c40da12c8d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -682,7 +682,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "168 € pour 2 nuits",
       rating: 4.88,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1663756915301-2ba688e078cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -691,7 +691,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "114 € pour 2 nuits",
       rating: 4.92,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1639751907353-3629fc00d2b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -700,7 +700,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "114 € pour 2 nuits",
       rating: 4.83,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1693478075635-bf2742c3ea09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -709,7 +709,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "164 € pour 2 nuits",
       rating: 4.83,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1560448076-957f79776e95?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -718,7 +718,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "194 € pour 2 nuits",
       rating: 4.92,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     }
   ];
 
@@ -731,7 +731,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "112 € pour 2 nuits",
       rating: 5.0,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1654161975362-a1dbab6ba37d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -740,7 +740,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "64 € pour 2 nuits",
       rating: 4.89,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1701445952131-eaab0a82fb08?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -749,7 +749,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "82 € pour 2 nuits",
       rating: 4.86,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1549387025-c6b3d88e0ccb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -758,7 +758,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "16 € pour 2 nuits",
       rating: 4.9,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1654161975362-a1dbab6ba37d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -767,7 +767,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "70 € pour 2 nuits",
       rating: 4.9,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1701445952131-eaab0a82fb08?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -776,7 +776,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "90 € pour 2 nuits",
       rating: 4.93,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     },
     {
       image: "https://images.unsplash.com/photo-1549387025-c6b3d88e0ccb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
@@ -785,7 +785,7 @@ export function Home({ isScrolled, onPropertyClick, onSearch }: HomeProps) {
       date: "",
       price: "27 € pour 2 nuits",
       rating: 4.9,
-      badge: 'travelers-choice' as const
+      badge: 'Populaire' as const
     }
   ];
 

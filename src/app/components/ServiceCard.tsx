@@ -4,7 +4,7 @@ import { useState } from 'react';
 interface ServiceCardProps {
   id?: string;
   image: string;
-  badge?: 'Populaire';
+  badge?: 'Coup de coeur' | 'Originals' | 'Populaire' | 'Nouveau';
   title: string;
   host: string;
   price: string;
@@ -54,9 +54,14 @@ export function ServiceCard({
           />
         </button>
 
-        {/* Badge Populaire */}
+        {/* Badge */}
         {badge && (
-          <div className="absolute top-3 left-3 bg-white px-3 py-1 rounded-md shadow-sm">
+          <div className="absolute top-3 left-3 bg-white px-3 py-1 rounded-md shadow-sm flex items-center gap-1.5">
+            {badge === 'Originals' && (
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 2L9.5 6.5L14 8L9.5 9.5L8 14L6.5 9.5L2 8L6.5 6.5L8 2Z" fill="#00A99D"/>
+              </svg>
+            )}
             <span className="text-xs" style={{ fontWeight: 600 }}>{badge}</span>
           </div>
         )}

@@ -2,7 +2,9 @@ import { Share, Heart } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Header } from '../components/Header';
-import hostImage from 'figma:asset/e3976b1bc92d8f8d8ca826b101f4aad1cab84db6.png';
+
+// Host image path - works for both Vite (public/) and Next.js (public/)
+const hostImage = '/host-image.png';
 
 export function ServiceDetails() {
   const navigate = useNavigate();

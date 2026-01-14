@@ -9,7 +9,7 @@ interface PropertyCardProps {
   date: string;
   price: string;
   rating: number;
-  badge?: 'favorite' | 'new';
+  badge?: 'Coup de coeur' | 'Originals' | 'Populaire' | 'Nouveau';
   guests?: string;
   beds?: string;
   onClick?: (id?: string) => void;
@@ -58,10 +58,15 @@ export function PropertyCard({
           />
         </button>
         {badge && (
-          <div className="absolute top-3 left-3 bg-white px-3 py-1 rounded-full shadow-sm">
-            <span className="text-xs" style={{ fontWeight: 600 }}>
-              {badge === 'favorite' ? 'Coup de cœur' : 'NOUVEAU'}
-            </span>
+          <div className={`absolute top-3 left-3 px-3 py-1 rounded-full shadow-sm flex items-center gap-1.5 ${
+            badge === 'Originals' ? 'bg-white' : 'bg-white'
+          }`}>
+            {badge === 'Originals' && (
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 2L9.5 6.5L14 8L9.5 9.5L8 14L6.5 9.5L2 8L6.5 6.5L8 2Z" fill="#00A99D"/>
+              </svg>
+            )}
+            <span className="text-xs" style={{ fontWeight: 600 }}>{badge}</span>
           </div>
         )}
       </div>

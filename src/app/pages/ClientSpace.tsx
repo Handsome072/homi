@@ -6,7 +6,9 @@ import { HeaderRightMenu } from '../components/HeaderRightMenu';
 import { LanguageModal } from '../components/LanguageModal';
 import { BecomeHostModal } from '../components/BecomeHostModal';
 import { AuthModal } from '../components/AuthModal';
-import logo from 'figma:asset/logo.png';
+
+// Logo path - works for both Vite (public/) and Next.js (public/)
+const logo = '/logo.png';
 
 interface ClientSpaceProps {
   onNavigate?: (page: 'logements' | 'messages' | 'client-space') => void;

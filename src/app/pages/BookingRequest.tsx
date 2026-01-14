@@ -1,7 +1,9 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Star, Calendar, Users, Minus, Plus } from 'lucide-react';
-import logo from 'figma:asset/logo.png';
+
+// Logo path - works for both Vite (public/) and Next.js (public/)
+const logo = '/logo.png';
 
 interface BookingData {
   title: string;

@@ -7,12 +7,14 @@ import { HeaderRightMenu } from '../components/HeaderRightMenu';
 import { BecomeHostModal } from '../components/BecomeHostModal';
 import { LanguageModal } from '../components/LanguageModal';
 import { AuthModal } from '../components/AuthModal';
-import logo from 'figma:asset/logo.png';
+
+// Logo path - works for both Vite (public/) and Next.js (public/)
+const logo = '/logo.png';
 
 interface Property {
   id: number;
   images: string[];
-  badge?: 'Superhost' | 'Coup de coeur voyage';
+  badge?: 'Coup de coeur' | 'Originals' | 'Populaire' | 'Nouveau';
   title: string;
   rating: number;
   reviews: number;
@@ -49,7 +51,7 @@ const properties: Property[] = [
       'https://images.unsplash.com/photo-1594904578869-c011783103c7?w=800',
       'https://images.unsplash.com/photo-1633505765486-e404bbbec654?w=800',
     ],
-    badge: 'Superhost',
+    badge: 'Populaire',
     title: 'Appartement · Khet...',
     rating: 4.92,
     reviews: 36,
@@ -66,7 +68,7 @@ const properties: Property[] = [
       'https://images.unsplash.com/photo-1638454668466-e8dbd5462f20?w=800',
       'https://images.unsplash.com/photo-1654506012740-09321c969dc2?w=800',
     ],
-    badge: 'Coup de coeur voyage',
+    badge: 'Coup de coeur',
     title: 'Appartement en rés...',
     rating: 4.91,
     reviews: 32,
@@ -83,7 +85,7 @@ const properties: Property[] = [
       'https://images.unsplash.com/photo-1633505765486-e404bbbec654?w=800',
       'https://images.unsplash.com/photo-1578266848416-c291bc0b2940?w=800',
     ],
-    badge: 'Coup de coeur voyage',
+    badge: 'Coup de coeur',
     title: 'Appartement · Huai...',
     rating: 5.0,
     reviews: 8,
@@ -118,7 +120,7 @@ const properties: Property[] = [
       'https://images.unsplash.com/photo-1638454668466-e8dbd5462f20?w=800',
       'https://images.unsplash.com/photo-1654506012740-09321c969dc2?w=800',
     ],
-    badge: 'Superhost',
+    badge: 'Originals',
     title: 'Appartement · Khet...',
     rating: 5.0,
     reviews: 5,
@@ -168,7 +170,7 @@ const properties: Property[] = [
       'https://images.unsplash.com/photo-1633505765486-e404bbbec654?w=800',
       'https://images.unsplash.com/photo-1638454668466-e8dbd5462f20?w=800',
     ],
-    badge: 'Coup de coeur voyage',
+    badge: 'Nouveau',
     title: 'Appartement · Khlon...',
     rating: 4.67,
     reviews: 3,

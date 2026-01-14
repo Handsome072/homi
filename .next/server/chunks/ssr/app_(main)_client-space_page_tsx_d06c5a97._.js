@@ -1,0 +1,3 @@
+module.exports=[62280,a=>{"use strict";var b=a.i(87924),c=a.i(72131),d=a.i(50944);function e(){let a=(0,d.useRouter)();return(0,c.useEffect)(()=>{a.replace("/client-space/reservations")},[a]),(0,b.jsx)("div",{className:"flex items-center justify-center py-12",children:(0,b.jsx)("p",{className:"text-gray-500",children:"Redirection..."})})}a.s(["default",()=>e])}];
+
+//# sourceMappingURL=app_%28main%29_client-space_page_tsx_d06c5a97._.js.map

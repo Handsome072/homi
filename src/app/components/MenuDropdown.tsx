@@ -1,6 +1,8 @@
 import { HelpCircle } from 'lucide-react';
 import { useEffect, useRef } from 'react';
-import hostIllustration from 'figma:asset/38ec71431adff7f609dab055e5554ab5c0ee6be7.png';
+
+// Host illustration - works for both Vite (public/) and Next.js (public/)
+const hostIllustration = '/host-illustration.png';
 
 interface MenuDropdownProps {
   isOpen: boolean;

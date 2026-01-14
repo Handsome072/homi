@@ -8,7 +8,9 @@ import { BecomeHostModal } from "./BecomeHostModal";
 import { AuthModal } from "./AuthModal";
 import { HeaderRightMenu } from "./HeaderRightMenu";
 import { useAuth } from "../context/AuthContext";
-import logo from "figma:asset/logo.png";
+
+// Logo path - works for both Vite (public/) and Next.js (public/)
+const logo = '/logo.png';
 
 interface HeaderProps {
   currentPage: "logements" | "experiences" | "services";

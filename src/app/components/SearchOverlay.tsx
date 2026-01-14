@@ -83,9 +83,9 @@ export function SearchOverlay({
         <div className="bg-white">
           {currentPage === "logements" && <SearchBar onSearch={onSearch} />}
           {currentPage === "experiences" && (
-            <ExperienceSearchBar onSearch={onSearch} />
+            <ExperienceSearchBar />
           )}
-          {currentPage === "services" && <ServiceSearchBar onSearch={onSearch} />}
+          {currentPage === "services" && <ServiceSearchBar />}
         </div>
       </div>
 
